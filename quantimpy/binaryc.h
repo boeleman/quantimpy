@@ -26,3 +26,6 @@ void wPixel3D(int x, int y, int z, unsigned short* image, int dim1, int dim2, un
 
 void bin2D(int LOW, int value1, int value2, unsigned short* image, int dim0, int dim1);
 void bin3D(int LOW, int value1, int value2, unsigned short* image, int dim0, int dim1, int dim2);
+
+int cErodeCirc2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int rad, int mode);
+int cErodeCirc3D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, int dim2, double res0, double res1, double res2, int rad, int mode);

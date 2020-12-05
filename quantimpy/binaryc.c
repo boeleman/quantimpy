@@ -120,13 +120,13 @@ unsigned short* erodeMirCond2D(unsigned short* image, unsigned short* cond, int 
     unsigned short* mirImage;
 
     se = getCircElement(step, res0, res1);
-    
+
     dim2 = dim0+2*se[0];
     dim3 = dim1+2*se[1];
 
     outImage = (unsigned short *)malloc(dim0*dim1*sizeof(unsigned short));
     mirImage = (unsigned short *)malloc(dim2*dim3*sizeof(unsigned short));
-    
+
     for (i=0; i < dim0*dim1; i++) {
         outImage[i] = image[i];
     }
@@ -206,7 +206,7 @@ unsigned short* erodeMirCond3D(unsigned short* image, unsigned short* cond, int 
         for (y = 0; y < dim1; y++)
             for (x = 0; x < dim0; x++)
                 if (rPixel3D(x,y,z,cond,dim1,dim2) == USHRT_MAX)
-                    if(!fast || isNeigh3D(x, y, z, cond, dim0, dim1, dim2)) {
+                    if (!fast || isNeigh3D(x, y, z, cond, dim0, dim1, dim2)) {
                         count=0;
                         for (Z = -se[2]; Z <= se[2]; Z++)
                             for (Y = -se[1]; Y <= se[1]; Y++)
@@ -443,4 +443,117 @@ void bin3D(int LOW, int value1, int value2, unsigned short* image, int dim0, int
 
 // }}}
 /******************************************************************************/
+// {{{ cErodeCirc
 
+int cErodeCirc2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int rad, int mode) {
+    int x, y, X, Y, XX, YY, Xx, Yy, i;
+    int dim2, dim3;
+    unsigned long count;
+	char* se;
+    unsigned short* mirImage;
+
+    se = getCircElement(rad, res0, res1);
+
+    dim2 = dim0+2*se[0];
+    dim3 = dim1+2*se[1];
+
+    mirImage = (unsigned short *)malloc(dim2*dim3*sizeof(unsigned short));
+
+    for (i=0; i < dim0*dim1; i++) {
+        outImage[i] = image[i];
+    }
+
+    for (y = 0; y < dim3; y++)
+        for (x = 0; x < dim2; x++) {
+            XX = abs(x - rad); YY = abs(y - rad);
+	        Xx = XX/dim0; Yy = YY/dim1; 
+	        X  = XX - 2*(XX - dim0 + 1)*Xx; 
+	    	Y  = YY - 2*(YY - dim1 + 1)*Yy; 
+      	    wPixel2D(x,y,mirImage,dim3,rPixel2D(X,Y,image,dim1));
+    }
+
+    for (y = 0; y < dim1; y++)
+        for (x = 0; x < dim0; x++)
+            if (rPixel2D(x,y,image,dim1) == mode*USHRT_MAX) {
+                count=0;
+                for (Y = -se[1]; Y <= se[1]; Y++)
+                    for (X = -se[0]; X <= se[0]; X++) {
+                        if (rPixel2D(x+X+se[0],y+Y+se[1],mirImage,dim3) != mode*USHRT_MAX && *(se+2+count/8) & 1<<count%8) {
+                            if (mode) {
+                                wPixel2D(x,y,outImage,dim1,0);
+                                X = Y = dim0;
+                            }
+                            else {
+                                wPixel2D(x,y,outImage,dim1,USHRT_MAX);
+                                X = Y = dim0;
+                            }
+                        }
+                        count++;
+                }
+    }
+    
+    free(se);
+    free(mirImage);
+	
+    return 0;
+}  
+
+/******************************************************************************/
+
+int cErodeCirc3D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, int dim2, double res0, double res1, double res2, int rad, int mode) {
+	int x, y, z, X, Y, Z, XX, YY, ZZ, Xx, Yy, Zz, i;
+    int dim3, dim4, dim5;
+	unsigned long count;
+	char* se;
+    unsigned short* mirImage;
+
+    se = getSphereElement(rad, res0, res1, res2);
+    
+    dim3 = dim0+2*se[0];
+    dim4 = dim1+2*se[1];
+    dim5 = dim2+2*se[2];
+
+    mirImage = (unsigned short *)malloc(dim3*dim4*dim5*sizeof(unsigned short));
+    
+    for (i=0; i < dim0*dim1*dim2; i++) {
+        outImage[i] = image[i];
+    }
+
+    for (z = 0; z < dim5; z++)
+        for (y = 0; y < dim4; y++)
+            for (x = 0; x < dim3; x++) {
+	    	    XX = abs(x - rad); YY = abs(y - rad); ZZ = abs(z - rad);
+	    		Xx = XX/dim0; Yy = YY/dim1; Zz = ZZ/dim2; 
+	    		X  = XX - 2*(XX - dim0 + 1)*Xx; 
+	    		Y  = YY - 2*(YY - dim1 + 1)*Yy; 
+	    		Z  = ZZ - 2*(ZZ - dim2 + 1)*Zz;     
+                wPixel3D(x,y,z,mirImage,dim4,dim5,rPixel3D(X,Y,Z,image,dim1,dim2));
+    }
+
+    for (z = 0; z < dim2; z++)
+        for (y = 0; y < dim1; y++)
+            for (x = 0; x < dim0; x++)
+                if (rPixel3D(x,y,z,image,dim1,dim2) == mode*USHRT_MAX) {
+		            count=0;
+		            for (Z = -se[2]; Z <= se[2]; Z++)
+		                for (Y = -se[1]; Y <= se[1]; Y++)
+		                    for (X = -se[0]; X <= se[0]; X++) {
+                                if (rPixel3D(x+X+se[0],y+Y+se[1],z+Z+se[2],mirImage,dim4,dim5) != mode*USHRT_MAX && *(se+3+count/8) & 1<<count%8) {
+                                    if (mode) {
+                                        wPixel3D(x,y,z,outImage,dim1,dim2,0);
+                                        X = Y = Z = dim0;
+                                    }
+                                    else {
+                                        wPixel3D(x,y,z,outImage,dim1,dim2,USHRT_MAX);
+                                        X = Y = Z = dim0;
+                                    }
+                                }
+                                count++;
+		            }
+    }		
+
+    return 0;
+}  
+
+// }}}
+/******************************************************************************/

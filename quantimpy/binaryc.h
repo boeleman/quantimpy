@@ -5,17 +5,23 @@
 
 /******************************************************************************/
 
+int cGetDistMap2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1          , double res0, double res1             , int mode);
+int cGetDistMap3D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, int dim2, double res0, double res1, double res2, int mode);
+
+
+int cErodeDist2D(unsigned short* image, unsigned short* erosion, int dim0, int dim1          , int dist, double res0, double res1             );
+int cErodeDist3D(unsigned short* image, unsigned short* erosion, int dim0, int dim1, int dim2, int dist, double res0, double res1, double res2);
+
+int cDilateDist2D(unsigned short* image, unsigned short* dilation, int dim0, int dim1          , int dist, double res0, double res1             );
+int cDilateDist3D(unsigned short* image, unsigned short* dilation, int dim0, int dim1, int dim2, int dist, double res0, double res1, double res2);
+
+
+
 int cGetDistOpenMap2D(unsigned short* image, unsigned short* distance, unsigned short* opened, int dim0, int dim1, double res0, double res1, int gval, int gstep);
 int cGetDistOpenMap3D(unsigned short* image, unsigned short* distance, unsigned short* opened, int dim0, int dim1, int dim2, double res0, double res1, double res2, int gval, int gstep);
 
 int cErodeCirc2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int rad, int mode);
 int cErodeCirc3D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, int dim2, double res0, double res1, double res2, int rad, int mode);
-
-int cErodeDist2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int rad, int mode);
-int cErodeDist3D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, int dim2, double res0, double res1, double res2, int rad, int mode);
-
-int cGetDistMap2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int gstep, int mode);
-int cGetDistMap3D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, int dim2, double res0, double res1, double res2, int gstep, int mode);
 
 /******************************************************************************/
 

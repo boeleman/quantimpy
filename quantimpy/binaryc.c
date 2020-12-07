@@ -10,6 +10,58 @@ static int neigh26y[26] = {-1,-1,-1,0,0,0,1,1,1,-1,-1,-1,0,0,1,1,1,-1,-1,-1,0,0,
 static int neigh26z[26] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1};
 
 /******************************************************************************/
+// {{{ cErodeDist
+
+int cErodeDist2D(unsigned short* image, unsigned short* erosion, int dim0, int dim1, int dist, double res0, double res1) {
+    int status;
+
+    status = cGetDistMap2D(image, erosion, dim0, dim1, res0, res1, 1);
+
+    bin2D((unsigned short)(dist), 0, USHRT_MAX, erosion, dim0, dim1);
+
+    return 0;
+}
+
+/******************************************************************************/
+
+int cErodeDist3D(unsigned short* image, unsigned short* erosion, int dim0, int dim1, int dim2, int dist, double res0, double res1, double res2) {
+    int status;
+
+    status = cGetDistMap3D(image, erosion, dim0, dim1, dim2, res0, res1, res2, 1);
+
+    bin3D((unsigned short)(dist), 0, USHRT_MAX, erosion, dim0, dim1, dim2);
+
+    return 0;
+}
+
+// }}}
+/******************************************************************************/
+// {{{ cDilateDist
+
+int cDilateDist2D(unsigned short* image, unsigned short* dilation, int dim0, int dim1, int dist, double res0, double res1) {
+    int status;
+
+    status = cGetDistMap2D(image, dilation, dim0, dim1, res0, res1, 0);
+
+    bin2D(USHRT_MAX-(unsigned short)(dist), 0, USHRT_MAX, dilation, dim0, dim1);
+
+    return 0;
+}
+
+/******************************************************************************/
+
+int cDilateDist3D(unsigned short* image, unsigned short* dilation, int dim0, int dim1, int dim2, int dist, double res0, double res1, double res2) {
+    int status;
+
+    status = cGetDistMap3D(image, dilation, dim0, dim1, dim2, res0, res1, res2, 0);
+
+    bin3D(USHRT_MAX-(unsigned short)(dist), 0, USHRT_MAX, dilation, dim0, dim1, dim2);
+
+    return 0;
+}
+
+// }}}
+/******************************************************************************/
 // {{{ cGetDistOpenMap
 
 int cGetDistOpenMap2D(unsigned short* image, unsigned short* distance, unsigned short* opened, int dim0, int dim1, double res0, double res1, int gval, int gstep) {
@@ -557,45 +609,9 @@ int cErodeCirc3D(unsigned short* image, unsigned short* outImage, int dim0, int 
 
 // }}}
 /******************************************************************************/
-// {{{ cErodeDist
-
-int cErodeDist2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int rad, int mode) {
-    int status;
-
-    status = cGetDistMap2D(image, outImage, dim0, dim1, res0, res1, 1, mode);
-
-    if (mode) {
-        bin2D((unsigned short)(rad), 0, USHRT_MAX, outImage, dim0, dim1);
-    }
-    else {
-        bin2D(USHRT_MAX-(unsigned short)(rad), 0, USHRT_MAX, outImage, dim0, dim1);
-    }
-
-    return status;
-}
-
-/******************************************************************************/
-
-int cErodeDist3D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, int dim2, double res0, double res1, double res2, int rad, int mode) {
-    int status;
-
-    status = cGetDistMap3D(image, outImage, dim0, dim1, dim2, res0, res1, res2, 1, mode);
-
-    if (mode) {
-        bin3D((unsigned short)(rad), 0, USHRT_MAX, outImage, dim0, dim1, dim2);
-    }
-    else {
-        bin3D(USHRT_MAX-(unsigned short)(rad), 0, USHRT_MAX, outImage, dim0, dim1, dim2);
-    }
-
-    return status;
-}
-
-// }}}
-/******************************************************************************/
 // {{{ cGetDistMap
 
-int cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim1, double res0, double res1, int gstep, int mode) {
+int cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim1, double res0, double res1, int mode) {
     int x, y;
 	int dist; 
     unsigned int distsq;
@@ -659,7 +675,7 @@ int cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int
 	
 	for (x = 0; x < dim0; x++)
         for (y = 0; y < dim1; y++) {
-            matrix2[x+y*dim0] = (unsigned int)floor(gstep*sqrt(matrix2[x+y*dim0]));
+            matrix2[x+y*dim0] = (unsigned int)floor(sqrt(matrix2[x+y*dim0]));
             if (mode) {
                 if (rPixel2D(x,y,image,dim1) == 0) {
                     wPixel2D(x,y,distance,dim1,0);
@@ -686,7 +702,7 @@ int cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int
 
 /******************************************************************************/
 
-int cGetDistMap3D(unsigned short* image, unsigned short* distance, int dim0, int dim1, int dim2, double res0, double res1, double res2, int gstep, int mode) {
+int cGetDistMap3D(unsigned short* image, unsigned short* distance, int dim0, int dim1, int dim2, double res0, double res1, double res2, int mode) {
     int x, y, z;
 	int dist; 
     unsigned int distsq;
@@ -790,7 +806,7 @@ int cGetDistMap3D(unsigned short* image, unsigned short* distance, int dim0, int
 	for (x = 0; x < dim0; x++)
 		for (y = 0; y < dim1; y++)
 			for (z = 0; z < dim2; z++) {
-			    matrix1[x+y*dim0+z*dim1*dim0] = (unsigned int)floor(gstep*sqrt(matrix1[x+y*dim0+z*dim1*dim0]));
+			    matrix1[x+y*dim0+z*dim1*dim0] = (unsigned int)floor(sqrt(matrix1[x+y*dim0+z*dim1*dim0]));
                 if (mode) {
                     if (rPixel3D(x,y,z,image,dim1,dim2) == 0) {
                         wPixel3D(x,y,z,distance,dim1,dim2,0);

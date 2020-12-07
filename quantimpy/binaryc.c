@@ -560,13 +560,10 @@ int cErodeCirc3D(unsigned short* image, unsigned short* outImage, int dim0, int 
 // {{{ cErodeDist
 
 int cErodeDist2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int rad, int mode) {
+int status
 
-//int cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim1, double res0, double res1, int gstep) {
-//	image_cc *distmap, *outim, *outimbtd;
-//
-//	if(im->ndim==2)  distmap = newb2GetDistMap(im,GSTEP);
-//	else             distmap = newb3GetDistMap(im,GSTEP);
-//
+//status = cGetDistMap2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int rad, int mode);
+
 //	if(!mode)    Bin(distmap,32768-int(dist*GSTEP)-1);
 //	else         Bin(distmap,32768+int(dist*GSTEP)-1);
 //	outim=	gry16to8(distmap);
@@ -622,7 +619,7 @@ int cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int
 // Initialise for maximum distance.
 	for (x = 0; x < dim0; x++)
         for (y = 0; y < dim1; y++)
-            matrix1[x+y*dim0] = matrix2[x+y*dim0] = UINT_MAX;
+            matrix1[x+y*dim0] = matrix2[x+y*dim0] = INT_MAX;
 	
 // Look for minimum distance between phases.
 	for (y = 0; y < dim1; y++) {
@@ -673,11 +670,21 @@ int cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int
 	for (x = 0; x < dim0; x++)
         for (y = 0; y < dim1; y++) {
             matrix2[x+y*dim0] = (unsigned int)floor(gstep*sqrt(matrix2[x+y*dim0]));
-            if (!rPixel2D(x,y,image,dim1)) {
-                wPixel2D(x,y,distance,dim1,0);
+            if (mode) {
+                if (rPixel2D(x,y,image,dim1) == 0) {
+                    wPixel2D(x,y,distance,dim1,0);
+                }
+                else {
+                    wPixel2D(x,y,distance,dim1,(unsigned short)(matrix2[x+y*dim0]));
+                }
             }
             else {
-                wPixel2D(x,y,distance,dim1,(unsigned short)(matrix2[x+y*dim0]));
+                if (rPixel2D(x,y,image,dim1) == USHRT_MAX) {
+                    wPixel2D(x,y,distance,dim1,USHRT_MAX);
+                }
+                else {
+                    wPixel2D(x,y,distance,dim1,USHRT_MAX-(unsigned short)(matrix2[x+y*dim0]));
+                }
             }
     }
 
@@ -704,7 +711,7 @@ int cGetDistMap3D(unsigned short* image, unsigned short* distance, int dim0, int
 	for (x = 0; x < dim0; x++)
         for (y = 0; y < dim1; y++)
 			for (z = 0; z < dim2; z++)
-				matrix1[x+y*dim0+z*dim1*dim0] = matrix2[x+y*dim0+z*dim1*dim0] = UINT_MAX;
+				matrix1[x+y*dim0+z*dim1*dim0] = matrix2[x+y*dim0+z*dim1*dim0] = INT_MAX;
 	
 // Look for minimum distance between phases.
 	for (y = 0; y < dim1; y++)
@@ -794,11 +801,21 @@ int cGetDistMap3D(unsigned short* image, unsigned short* distance, int dim0, int
 		for (y = 0; y < dim1; y++)
 			for (z = 0; z < dim2; z++) {
 			    matrix1[x+y*dim0+z*dim1*dim0] = (unsigned int)floor(gstep*sqrt(matrix1[x+y*dim0+z*dim1*dim0]));
-				if (!rPixel3D(x,y,z,image,dim1,dim2)) {
-				    wPixel3D(x,y,z,distance,dim1,dim2,0);
+                if (mode) {
+                    if (rPixel3D(x,y,z,image,dim1,dim2) == 0) {
+                        wPixel3D(x,y,z,distance,dim1,dim2,0);
+                    }
+                    else {
+                        wPixel3D(x,y,z,distance,dim1,dim2,(unsigned short)(matrix1[x+y*dim0+z*dim1*dim0]));
+                    }
                 }
                 else {
-				    wPixel3D(x,y,z,distance,dim1,dim2,(unsigned short)(matrix1[x+y*dim0+z*dim1*dim0]));
+                    if (rPixel3D(x,y,z,image,dim1,dim2) == USHRT_MAX) {
+                        wPixel3D(x,y,z,distance,dim1,dim2,USHRT_MAX);
+                    }
+                    else {
+                        wPixel3D(x,y,z,distance,dim1,dim2,USHRT_MAX-(unsigned short)(matrix1[x+y*dim0+z*dim1*dim0]));
+                    }
                 }
     }
 

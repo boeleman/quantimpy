@@ -76,7 +76,7 @@ int cGetDistOpenMap3D(unsigned short* image, unsigned short* distance, unsigned 
 
     while (count) {
         count = 0;
-        printf("\r erosion step : %d \n",step);
+        printf("\r erosion step : %d \n", step);
         dilat = erodeMirCond3D(image, distance, dim0, dim1, dim2, res0, res1, res2, step, 1, 1);
         for (x = 0; x < dim0; x++)
             for (y = 0; y < dim1; y++)
@@ -554,6 +554,258 @@ int cErodeCirc3D(unsigned short* image, unsigned short* outImage, int dim0, int 
 
     return 0;
 }  
+
+// }}}
+/******************************************************************************/
+// {{{ cErodeDist
+
+int cErodeDist2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int rad, int mode) {
+
+//	image_cc *distmap, *outim, *outimbtd;
+//
+//	if(im->ndim==2)  distmap = newb2GetDistMap(im,GSTEP);
+//	else             distmap = newb3GetDistMap(im,GSTEP);
+//
+//	if(!mode)    Bin(distmap,32768-int(dist*GSTEP)-1);
+//	else         Bin(distmap,32768+int(dist*GSTEP)-1);
+//	outim=	gry16to8(distmap);
+//	DeleteImage(distmap);
+//	if(im->ndim==3){ 
+//		outimbtd=Ddd2Btd(outim); 
+//		DeleteImage(outim);
+//		return outimbtd;
+//	}
+//	else   return outim;
+
+    return 0;
+}
+
+/******************************************************************************/
+
+int cErodeDist3D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, int dim2, double res0, double res1, double res2, int rad, int mode) {
+
+//	image_cc *distmap, *outim, *outimbtd;
+//
+//	if(im->ndim==2)  distmap = newb2GetDistMap(im,GSTEP);
+//	else             distmap = newb3GetDistMap(im,GSTEP);
+//
+//	if(!mode)    Bin(distmap,32768-int(dist*GSTEP)-1);
+//	else         Bin(distmap,32768+int(dist*GSTEP)-1);
+//	outim=	gry16to8(distmap);
+//	DeleteImage(distmap);
+//	if(im->ndim==3){ 
+//		outimbtd=Ddd2Btd(outim); 
+//		DeleteImage(outim);
+//		return outimbtd;
+//	}
+//	else   return outim;
+
+    return 0;
+}
+
+// }}}
+/******************************************************************************/
+// {{{ cGetDistMap
+
+int cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim1, double res0, double res1, int gstep) {
+    int x, y;
+	int dist; 
+    unsigned int distsq;
+	unsigned int* matrix1;
+	unsigned int* matrix2;
+    double fact;
+
+	matrix1 = (unsigned int*)malloc(dim0*dim1*sizeof(unsigned int));
+	matrix2 = (unsigned int*)malloc(dim0*dim1*sizeof(unsigned int));
+
+// Initialise for maximum distance.
+	for (x = 0; x < dim0; x++)
+        for (y = 0; y < dim1; y++)
+            matrix1[x+y*dim0] = matrix2[x+y*dim0] = UINT_MAX;
+	
+// Look for minimum distance between phases.
+	for (y = 0; y < dim1; y++) {
+        for (dist = 1; dist < dim0; dist++) {
+            distsq = (unsigned int)dist*dist;
+            for (x = 0; x < dim0 - dist; x++) {
+                if (rPixel2D(x,y,image,dim1) != rPixel2D(x+dist,y,image,dim1)) {
+                    if (matrix1[x+y*dim0] > distsq) {
+                        matrix1[x+y*dim0] = distsq;
+                    }
+                    if (matrix1[x+dist+y*dim0] > distsq) {
+                        matrix1[x+dist+y*dim0] = distsq;
+                    }
+                }
+            }
+        }
+    }
+
+	fact = res1/res0;
+	fact *= fact;
+
+    for (x = 0; x < dim0; x++) {
+        for (dist = 0; dist < dim1; dist++) {
+            distsq = (unsigned int)((double)(dist*dist)*fact);
+            for (y = 0; y < dim1 - dist; y++) {
+                if (rPixel2D(x,y,image,dim1) != rPixel2D(x,y+dist,image,dim1)) {
+// Look for minimum distance between phases
+					if (matrix2[x+y*dim0] > distsq) {
+                        matrix2[x+y*dim0] = distsq;
+                    }
+					if (matrix2[x+(dist+y)*dim0] > distsq) {
+                        matrix2[x+(dist+y)*dim0] = distsq;
+                    }
+                } 
+// Minimum in two directions
+                else {
+                    if (matrix2[x+y*dim0] > distsq+matrix1[x+(dist+y)*dim0]) {
+                        matrix2[x+y*dim0] = distsq+matrix1[x+(dist+y)*dim0];
+                    }
+					if (matrix2[x+(dist+y)*dim0] > distsq+matrix1[x+y*dim0]) {
+                        matrix2[x+(dist+y)*dim0] = distsq+matrix1[x+y*dim0];
+                    }
+                }
+            }
+        }
+    }
+	
+	for (x = 0; x < dim0; x++)
+        for (y = 0; y < dim1; y++) {
+            matrix2[x+y*dim0] = (unsigned int)floor(gstep*sqrt(matrix2[x+y*dim0]));
+            if (!rPixel2D(x,y,image,dim1)) {
+                wPixel2D(x,y,distance,dim1,0);
+            }
+            else {
+                wPixel2D(x,y,distance,dim1,(unsigned short)(matrix2[x+y*dim0]));
+            }
+    }
+
+    free(matrix1);
+    free(matrix2);
+
+    return 0;
+}
+
+/******************************************************************************/
+
+int cGetDistMap3D(unsigned short* image, unsigned short* distance, int dim0, int dim1, int dim2, double res0, double res1, double res2, int gstep) {
+    int x, y, z;
+	int dist; 
+    unsigned int distsq;
+	unsigned int* matrix1;
+	unsigned int* matrix2;
+    double fact;
+
+	matrix1 = (unsigned int*)malloc(dim0*dim1*dim2*sizeof(unsigned int));
+	matrix2 = (unsigned int*)malloc(dim0*dim1*dim2*sizeof(unsigned int));
+
+// Initialise for maximum distance.
+	for (x = 0; x < dim0; x++)
+        for (y = 0; y < dim1; y++)
+			for (z = 0; z < dim2; z++)
+				matrix1[x+y*dim0+z*dim1*dim0] = matrix2[x+y*dim0+z*dim1*dim0] = UINT_MAX;
+	
+// Look for minimum distance between phases.
+	for (y = 0; y < dim1; y++)
+		for (z = 0; z < dim2; z++) {
+			for (dist = 1; dist < dim0; dist++) {
+				distsq = (unsigned int)dist*dist;
+				for (x = 0; x < dim0-dist; x++) {
+					if (rPixel3D(x,y,z,image,dim1,dim2) != rPixel3D(x+dist,y,z,image,dim1,dim2)) {
+						if (matrix1[x+y*dim0+z*dim1*dim0] > distsq) {
+							matrix1[x+y*dim0+z*dim1*dim0] = distsq;
+						}
+						if (matrix1[x+dist+y*dim0+z*dim1*dim0] > distsq) {
+							matrix1[x+dist+y*dim0+z*dim1*dim0] = distsq;
+						}	
+					}
+				}
+			}
+		}
+
+	fact = res1/res0;
+	fact *=fact;
+
+	for (x = 0; x < dim0; x++)
+		for (z = 0; z < dim2; z++) {
+			for (dist = 0; dist < dim1; dist++) {
+				distsq = (unsigned int)((double)(dist*dist)*fact);
+				for (y = 0; y < dim1 - dist; y++) {
+					if (rPixel3D(x,y,z,image,dim1,dim2) != rPixel3D(x,y+dist,z,image,dim1,dim2)) {
+// Look for minimum distance between phases
+			            if (matrix2[x+y*dim0+z*dim1*dim0] > distsq) {
+							matrix2[x+y*dim0+z*dim1*dim0] = distsq;
+						}
+						if (matrix2[x+(dist+y)*dim0+z*dim1*dim0] > distsq) {
+							matrix2[x+(dist+y)*dim0+z*dim1*dim0] = distsq;
+						}
+					}
+// Minimum in two directions
+                    else {
+                        if (matrix2[x+y*dim0+z*dim1*dim0] > distsq+matrix1[x+(dist+y)*dim0+z*dim1*dim0]){
+							matrix2[x+y*dim0+z*dim1*dim0] = distsq+matrix1[x+(dist+y)*dim0+z*dim1*dim0];
+						}
+						if (matrix2[x+(dist+y)*dim0+z*dim1*dim0] > distsq+matrix1[x+y*dim0+z*dim1*dim0]){
+							matrix2[x+(dist+y)*dim0+z*dim1*dim0] = distsq+matrix1[x+y*dim0+z*dim1*dim0];
+						}
+					}
+				}
+			}
+		}
+	for (x = 0; x < dim0; x++)
+		for(y = 0;y < dim1; y++)
+			for (z = 0; z < dim2; z++)
+				matrix1[x+y*dim0+z*dim1*dim0] = UINT_MAX;
+
+	fact = res2/res0;
+	fact *=fact;
+
+	for (x = 0; x < dim0; x++)
+		for (y = 0; y < dim1; y++) {
+			for (dist = 0; dist < dim2; dist++) {
+				distsq = (unsigned int)((double)(dist*dist)*fact);
+				for (z = 0; z < dim2 - dist; z++) {
+					if (rPixel3D(x,y,z,image,dim1,dim2) != rPixel3D(x,y,z+dist,image,dim1,dim2)) {
+						if (matrix1[x+y*dim0+z*dim1*dim0] > distsq) {
+							matrix1[x+y*dim0+z*dim1*dim0] = distsq;
+							
+						}
+						if (matrix1[x+y*dim0+(dist+z)*dim1*dim0] > distsq) {
+							matrix1[x+y*dim0+(dist+z)*dim1*dim0] = distsq;
+							
+						}	
+					}
+                    else {
+						if (matrix1[x+y*dim0+z*dim1*dim0] > distsq+matrix2[x+y*dim0+(dist+z)*dim1*dim0]){
+							matrix1[x+y*dim0+z*dim1*dim0] = distsq+matrix2[x+y*dim0+(dist+z)*dim1*dim0];
+						}
+						if (matrix1[x+y*dim0+(dist+z)*dim1*dim0] > distsq+matrix2[x+y*dim0+z*dim1*dim0]){
+							matrix1[x+y*dim0+(dist+z)*dim1*dim0] = distsq+matrix2[x+y*dim0+z*dim1*dim0];
+								
+						}
+					}
+					
+				}
+			}
+    }
+
+	for (x = 0; x < dim0; x++)
+		for (y = 0; y < dim1; y++)
+			for (z = 0; z < dim2; z++) {
+			    matrix1[x+y*dim0+z*dim1*dim0] = (unsigned int)floor(gstep*sqrt(matrix1[x+y*dim0+z*dim1*dim0]));
+				if (!rPixel3D(x,y,z,image,dim1,dim2)) {
+				    wPixel3D(x,y,z,distance,dim1,dim2,0);
+                }
+                else {
+				    wPixel3D(x,y,z,distance,dim1,dim2,(unsigned short)(matrix1[x+y*dim0+z*dim1*dim0]));
+                }
+    }
+
+	free(matrix1);
+	free(matrix2);
+
+    return 0;
+}
 
 // }}}
 /******************************************************************************/

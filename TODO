@@ -1,1 +1,4 @@
 Function getCircElement is currently 8-bit. This function needs to be converted to 16-bit
+Function getSphereElement is currently 8-bit. This function needs to be converted to 16-bit
+
+Should res be the last optional parameter?

@@ -4,6 +4,192 @@ cimport numpy as np
 np.import_array()
 
 ################################################################################
+# {{{ GetDistMap
+
+cpdef GetDistMap(np.ndarray image, res=None, int gstep=1):
+
+    if (image.dtype == 'bool'):
+        image = image.astype(np.uint16)*np.iinfo(np.uint16).max
+    else:
+        raise ValueError('Input image needs to be binary (data type bool)')
+    
+    if (image.ndim == 2):
+# Set default resolution (length/voxel)
+        if (res is None):
+            res0 = 1.0
+            res1 = 1.0
+        else:
+            res  = res.astype(np.double)
+            res0 = res[0]
+            res1 = res[1]
+
+        return GetDistMap2D(image, res0, res1, gstep)
+    elif (image.ndim == 3):
+# Set default resolution (length/voxel)
+        if (res is None):
+            res0 = 1.0
+            res1 = 1.0
+            res2 = 1.0
+        else:
+            res  = res.astype(np.double)
+            res0 = res[0]
+            res1 = res[1]
+            res2 = res[2]
+
+        return GetDistMap3D(image, res0, res1, res2, gstep)
+    else:
+        raise ValueError('Can only handle 2D or 3D images')
+
+################################################################################
+
+cdef extern from "binaryc.h":
+    bint cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim1, double res0, double res1, int gstep)
+
+################################################################################
+
+def GetDistMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1, int gstep):
+    
+    image = np.ascontiguousarray(image)
+
+    cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(image,dtype=np.uint16)
+    
+    status = cGetDistMap2D(
+        &image[0,0],
+        &distance[0,0],
+        image.shape[0],
+        image.shape[1],
+        res0,
+        res1,
+        gstep,
+    )
+
+    assert status == 0
+    return distance
+
+################################################################################
+
+cdef extern from "binaryc.h":
+    bint cGetDistMap3D(unsigned short* image, unsigned short* distance, int dim0, int dim1, int dim2, double res0, double res1, double res2, int gstep)
+
+################################################################################
+
+def GetDistMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2, int gstep):
+    
+    image = np.ascontiguousarray(image)
+
+    cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(image,dtype=np.uint16)
+    
+    status = cGetDistMap3D(
+        &image[0,0,0],
+        &distance[0,0,0],
+        image.shape[0],
+        image.shape[1],
+        image.shape[2],
+        res0,
+        res1,
+        res2,
+        gstep,
+    )
+
+    assert status == 0
+    return distance
+
+# }}}
+################################################################################
+# {{{ ErodeDist
+
+cpdef ErodeDist(np.ndarray image, res=None, int rad=10, int mode=1):
+
+    if (image.dtype == 'bool'):
+        image = image.astype(np.uint16)*np.iinfo(np.uint16).max
+    else:
+        raise ValueError('Input image needs to be binary (data type bool)')
+    
+    if (image.ndim == 2):
+# Set default resolution (length/voxel)
+        if (res is None):
+            res0 = 1.0
+            res1 = 1.0
+        else:
+            res  = res.astype(np.double)
+            res0 = res[0]
+            res1 = res[1]
+
+        return ErodeDist2D(image, res0, res1, rad, mode)
+    elif (image.ndim == 3):
+# Set default resolution (length/voxel)
+        if (res is None):
+            res0 = 1.0
+            res1 = 1.0
+            res2 = 1.0
+        else:
+            res  = res.astype(np.double)
+            res0 = res[0]
+            res1 = res[1]
+            res2 = res[2]
+
+        return ErodeDist3D(image, res0, res1, res2, rad, mode)
+    else:
+        raise ValueError('Can only handle 2D or 3D images')
+
+################################################################################
+
+cdef extern from "binaryc.h":
+    bint cErodeDist2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int rad, int mode)
+
+################################################################################
+
+def ErodeDist2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1, int rad, int mode):
+    
+    image = np.ascontiguousarray(image)
+
+    cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] outImage = np.empty_like(image,dtype=np.uint16)
+    
+    status = cErodeDist2D(
+        &image[0,0],
+        &outImage[0,0],
+        image.shape[0],
+        image.shape[1],
+        res0,
+        res1,
+        rad,
+        mode,
+    )
+
+    assert status == 0
+    return outImage.astype(np.bool) 
+
+################################################################################
+
+cdef extern from "binaryc.h":
+    bint cErodeDist3D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, int dim2, double res0, double res1, double res2, int rad, int mode)
+
+################################################################################
+
+def ErodeDist3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2, int rad, int mode):
+    
+    image = np.ascontiguousarray(image)
+
+    cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] outImage = np.empty_like(image,dtype=np.uint16)
+    
+    status = cErodeDist3D(
+        &image[0,0,0],
+        &outImage[0,0,0],
+        image.shape[0],
+        image.shape[1],
+        image.shape[2],
+        res0,
+        res1,
+        res2,
+        rad,
+        mode,
+    )
+
+    assert status == 0
+    return outImage.astype(np.bool) 
+
+# }}}
+################################################################################
 # {{{ ErodeCirc
 
 cpdef ErodeCirc(np.ndarray image, res=None, int rad=10, int mode=1):

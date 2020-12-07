@@ -410,14 +410,14 @@ void wPixel3D(int x, int y, int z, unsigned short* image, int dim1, int dim2, un
 /******************************************************************************/
 // {{{ bin
 
-void bin2D(int LOW, int value1, int value2, unsigned short* image, int dim0, int dim1) {
+void bin2D(int low, int value1, int value2, unsigned short* image, int dim0, int dim1) {
     int x, y, val;
 
     val = value2>USHRT_MAX? -1 : value2;
 
     for (y = 0; y < dim1; y++)
         for (x = 0; x < dim0; x++) {
-            if (rPixel2D(x, y, image, dim1) <= LOW)
+            if (rPixel2D(x, y, image, dim1) <= low)
                 wPixel2D(x, y, image, dim1, value1);
             else if (val != -1)
                 wPixel2D(x, y, image, dim1, val);
@@ -426,7 +426,7 @@ void bin2D(int LOW, int value1, int value2, unsigned short* image, int dim0, int
 
 /******************************************************************************/
 
-void bin3D(int LOW, int value1, int value2, unsigned short* image, int dim0, int dim1, int dim2) {
+void bin3D(int low, int value1, int value2, unsigned short* image, int dim0, int dim1, int dim2) {
     int x, y, z, val;
 
     val = value2>USHRT_MAX? -1 : value2;
@@ -434,7 +434,7 @@ void bin3D(int LOW, int value1, int value2, unsigned short* image, int dim0, int
     for (z = 0; z < dim2; z++)
         for (y = 0; y < dim1; y++)
             for (x = 0; x < dim0; x++) {
-                if (rPixel3D(x, y, z, image, dim1, dim2) <= LOW)
+                if (rPixel3D(x, y, z, image, dim1, dim2) <= low)
                     wPixel3D(x, y, z, image, dim1, dim2, value1);
                 else if (val != -1)
                     wPixel3D(x, y, z, image, dim1, dim2, val);
@@ -560,45 +560,35 @@ int cErodeCirc3D(unsigned short* image, unsigned short* outImage, int dim0, int 
 // {{{ cErodeDist
 
 int cErodeDist2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int rad, int mode) {
-int status
+    int status;
 
-//status = cGetDistMap2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int rad, int mode);
+    status = cGetDistMap2D(image, outImage, dim0, dim1, res0, res1, 1, mode);
 
-//	if(!mode)    Bin(distmap,32768-int(dist*GSTEP)-1);
-//	else         Bin(distmap,32768+int(dist*GSTEP)-1);
-//	outim=	gry16to8(distmap);
-//	DeleteImage(distmap);
-//	if(im->ndim==3){ 
-//		outimbtd=Ddd2Btd(outim); 
-//		DeleteImage(outim);
-//		return outimbtd;
-//	}
-//	else   return outim;
+    if (mode) {
+        bin2D((unsigned short)(rad), 0, USHRT_MAX, outImage, dim0, dim1);
+    }
+    else {
+        bin2D(USHRT_MAX-(unsigned short)(rad), 0, USHRT_MAX, outImage, dim0, dim1);
+    }
 
-    return 0;
+    return status;
 }
 
 /******************************************************************************/
 
 int cErodeDist3D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, int dim2, double res0, double res1, double res2, int rad, int mode) {
+    int status;
 
-//	image_cc *distmap, *outim, *outimbtd;
-//
-//	if(im->ndim==2)  distmap = newb2GetDistMap(im,GSTEP);
-//	else             distmap = newb3GetDistMap(im,GSTEP);
-//
-//	if(!mode)    Bin(distmap,32768-int(dist*GSTEP)-1);
-//	else         Bin(distmap,32768+int(dist*GSTEP)-1);
-//	outim=	gry16to8(distmap);
-//	DeleteImage(distmap);
-//	if(im->ndim==3){ 
-//		outimbtd=Ddd2Btd(outim); 
-//		DeleteImage(outim);
-//		return outimbtd;
-//	}
-//	else   return outim;
+    status = cGetDistMap3D(image, outImage, dim0, dim1, dim2, res0, res1, res2, 1, mode);
 
-    return 0;
+    if (mode) {
+        bin3D((unsigned short)(rad), 0, USHRT_MAX, outImage, dim0, dim1, dim2);
+    }
+    else {
+        bin3D(USHRT_MAX-(unsigned short)(rad), 0, USHRT_MAX, outImage, dim0, dim1, dim2);
+    }
+
+    return status;
 }
 
 // }}}

@@ -561,6 +561,7 @@ int cErodeCirc3D(unsigned short* image, unsigned short* outImage, int dim0, int 
 
 int cErodeDist2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int rad, int mode) {
 
+//int cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim1, double res0, double res1, int gstep) {
 //	image_cc *distmap, *outim, *outimbtd;
 //
 //	if(im->ndim==2)  distmap = newb2GetDistMap(im,GSTEP);
@@ -607,7 +608,7 @@ int cErodeDist3D(unsigned short* image, unsigned short* outImage, int dim0, int 
 /******************************************************************************/
 // {{{ cGetDistMap
 
-int cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim1, double res0, double res1, int gstep) {
+int cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim1, double res0, double res1, int gstep, int mode) {
     int x, y;
 	int dist; 
     unsigned int distsq;
@@ -688,7 +689,7 @@ int cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int
 
 /******************************************************************************/
 
-int cGetDistMap3D(unsigned short* image, unsigned short* distance, int dim0, int dim1, int dim2, double res0, double res1, double res2, int gstep) {
+int cGetDistMap3D(unsigned short* image, unsigned short* distance, int dim0, int dim1, int dim2, double res0, double res1, double res2, int gstep, int mode) {
     int x, y, z;
 	int dist; 
     unsigned int distsq;

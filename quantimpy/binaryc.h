@@ -14,8 +14,8 @@ int cErodeCirc3D(unsigned short* image, unsigned short* outImage, int dim0, int 
 int cErodeDist2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int rad, int mode);
 int cErodeDist3D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, int dim2, double res0, double res1, double res2, int rad, int mode);
 
-int cGetDistMap2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int gstep);
-int cGetDistMap3D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, int dim2, double res0, double res1, double res2, int gstep);
+int cGetDistMap2D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, double res0, double res1, int gstep, int mode);
+int cGetDistMap3D(unsigned short* image, unsigned short* outImage, int dim0, int dim1, int dim2, double res0, double res1, double res2, int gstep, int mode);
 
 /******************************************************************************/
 

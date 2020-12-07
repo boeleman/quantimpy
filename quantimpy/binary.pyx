@@ -6,7 +6,7 @@ np.import_array()
 ################################################################################
 # {{{ GetDistMap
 
-cpdef GetDistMap(np.ndarray image, res=None, int gstep=1):
+cpdef GetDistMap(np.ndarray image, res=None, int gstep=1, int mode=1):
 
     if (image.dtype == 'bool'):
         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -23,7 +23,7 @@ cpdef GetDistMap(np.ndarray image, res=None, int gstep=1):
             res0 = res[0]
             res1 = res[1]
 
-        return GetDistMap2D(image, res0, res1, gstep)
+        return GetDistMap2D(image, res0, res1, gstep, mode)
     elif (image.ndim == 3):
 # Set default resolution (length/voxel)
         if (res is None):
@@ -36,18 +36,18 @@ cpdef GetDistMap(np.ndarray image, res=None, int gstep=1):
             res1 = res[1]
             res2 = res[2]
 
-        return GetDistMap3D(image, res0, res1, res2, gstep)
+        return GetDistMap3D(image, res0, res1, res2, gstep, mode)
     else:
         raise ValueError('Can only handle 2D or 3D images')
 
 ################################################################################
 
 cdef extern from "binaryc.h":
-    bint cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim1, double res0, double res1, int gstep)
+    bint cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim1, double res0, double res1, int gstep, int mode)
 
 ################################################################################
 
-def GetDistMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1, int gstep):
+def GetDistMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1, int gstep, int mode):
     
     image = np.ascontiguousarray(image)
 
@@ -61,6 +61,7 @@ def GetDistMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, d
         res0,
         res1,
         gstep,
+        mode,
     )
 
     assert status == 0
@@ -69,11 +70,11 @@ def GetDistMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, d
 ################################################################################
 
 cdef extern from "binaryc.h":
-    bint cGetDistMap3D(unsigned short* image, unsigned short* distance, int dim0, int dim1, int dim2, double res0, double res1, double res2, int gstep)
+    bint cGetDistMap3D(unsigned short* image, unsigned short* distance, int dim0, int dim1, int dim2, double res0, double res1, double res2, int gstep, int mode)
 
 ################################################################################
 
-def GetDistMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2, int gstep):
+def GetDistMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2, int gstep, int mode):
     
     image = np.ascontiguousarray(image)
 
@@ -89,6 +90,7 @@ def GetDistMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, d
         res1,
         res2,
         gstep,
+        mode,
     )
 
     assert status == 0

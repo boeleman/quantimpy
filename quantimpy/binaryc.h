@@ -15,6 +15,8 @@ int cErodeDist3D(unsigned short* image, unsigned short* erosion, int dim0, int d
 int cDilateDist2D(unsigned short* image, unsigned short* dilation, int dim0, int dim1          , int dist, double res0, double res1             );
 int cDilateDist3D(unsigned short* image, unsigned short* dilation, int dim0, int dim1, int dim2, int dist, double res0, double res1, double res2);
 
+int cOpenMapDist2D(unsigned short* erosion, unsigned short* opening, int dim0, int dim1          , double res0, double res1             );
+int cOpenMapDist3D(unsigned short* erosion, unsigned short* opening, int dim0, int dim1, int dim2, double res0, double res1, double res2);
 
 
 int cGetDistOpenMap2D(unsigned short* image, unsigned short* distance, unsigned short* opened, int dim0, int dim1, double res0, double res1, int gval, int gstep);

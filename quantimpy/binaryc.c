@@ -5,9 +5,9 @@ static int neigh8x[8] = {-1,-1, 0, 1,1,1,0,-1};
 static int neigh8y[8] = { 0,-1,-1,-1,0,1,1, 1};
 
 /* 26 Neighbours starting at left the central pixel */
-static int neigh26x[26] = {-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1};
-static int neigh26y[26] = {-1,-1,-1,0,0,0,1,1,1,-1,-1,-1,0,0,1,1,1,-1,-1,-1,0,0,0,1,1,1};
-static int neigh26z[26] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1};
+static int neigh26x[26] = {-1, 0, 1,-1, 0, 1,-1, 0, 1,-1, 0, 1,-1,1,-1,0,1,-1, 0, 1,-1,0,1,-1,0,1};
+static int neigh26y[26] = {-1,-1,-1, 0, 0, 0, 1, 1, 1,-1,-1,-1, 0,0, 1,1,1,-1,-1,-1, 0,0,0, 1,1,1};
+static int neigh26z[26] = {-1,-1,-1,-1,-1,-1,-1,-1,-1, 0, 0, 0, 0,0, 0,0,0, 1, 1, 1, 1,1,1, 1,1,1};
 
 /******************************************************************************/
 // {{{ cErodeDist
@@ -17,7 +17,7 @@ int cErodeDist2D(unsigned short* image, unsigned short* erosion, int dim0, int d
 
     status = cGetDistMap2D(image, erosion, dim0, dim1, res0, res1, 1);
 
-    bin2D((unsigned short)(dist), 0, USHRT_MAX, erosion, dim0, dim1);
+    bin2D(dist, 0, USHRT_MAX, erosion, dim0, dim1);
 
     return 0;
 }
@@ -29,7 +29,7 @@ int cErodeDist3D(unsigned short* image, unsigned short* erosion, int dim0, int d
 
     status = cGetDistMap3D(image, erosion, dim0, dim1, dim2, res0, res1, res2, 1);
 
-    bin3D((unsigned short)(dist), 0, USHRT_MAX, erosion, dim0, dim1, dim2);
+    bin3D(dist, 0, USHRT_MAX, erosion, dim0, dim1, dim2);
 
     return 0;
 }
@@ -43,7 +43,7 @@ int cDilateDist2D(unsigned short* image, unsigned short* dilation, int dim0, int
 
     status = cGetDistMap2D(image, dilation, dim0, dim1, res0, res1, 0);
 
-    bin2D(USHRT_MAX-(unsigned short)(dist), 0, USHRT_MAX, dilation, dim0, dim1);
+    bin2D(USHRT_MAX-dist-1, 0, USHRT_MAX, dilation, dim0, dim1);
 
     return 0;
 }
@@ -55,7 +55,100 @@ int cDilateDist3D(unsigned short* image, unsigned short* dilation, int dim0, int
 
     status = cGetDistMap3D(image, dilation, dim0, dim1, dim2, res0, res1, res2, 0);
 
-    bin3D(USHRT_MAX-(unsigned short)(dist), 0, USHRT_MAX, dilation, dim0, dim1, dim2);
+    bin3D(USHRT_MAX-dist-1, 0, USHRT_MAX, dilation, dim0, dim1, dim2);
+
+    return 0;
+}
+
+// }}}
+/******************************************************************************/
+// {{{ cOpenMapDist
+
+int cOpenMapDist2D(unsigned short* erosion, unsigned short* opening, int dim0, int dim1, double res0, double res1) {
+    int x, y, i;
+    int step;
+    unsigned long count;
+    unsigned short* image; 
+
+    count = 1;
+    step  = 1;
+    
+    image = (unsigned short *)malloc(dim0*dim1*sizeof(unsigned short));
+
+    for (i = 0; i < dim0*dim1; i++) {
+        opening[i] = erosion[i];
+        image[i]   = erosion[i];
+    }
+
+    while (count) {
+        count = 0;
+        printf("\r Dilation step : %d \n",step);
+
+        for (i = 0; i < dim0*dim1; i++) {
+            image[i]   = erosion[i];
+        }
+
+        bin2D(step, 0, USHRT_MAX, image, dim0, dim1);
+        
+        cDilateDist2D(image, image, dim0, dim1, step, res0, res1);
+        
+        for (y = 0; y < dim1; y++)
+            for (x = 0; x < dim0; x++)
+                if (rPixel2D(x, y, erosion, dim1) != USHRT_MAX && rPixel2D(x, y, image, dim1) != 0) {
+                    wPixel2D(x, y, opening, dim1, step);
+                    count++;
+        }
+
+        step++;
+    }
+
+    free(image);
+
+    return 0;
+}
+
+/******************************************************************************/
+
+int cOpenMapDist3D(unsigned short* erosion, unsigned short* opening, int dim0, int dim1, int dim2, double res0, double res1, double res2) {
+    int x, y, z, i;
+    int step;
+    unsigned long count;
+    unsigned short* image; 
+
+    count = 1;
+    step  = 1;
+    
+    image = (unsigned short *)malloc(dim0*dim1*dim2*sizeof(unsigned short));
+
+    for (i = 0; i < dim0*dim1*dim2; i++) {
+        opening[i] = erosion[i];
+        image[i]   = erosion[i];
+    }
+
+    while (count) {
+        count = 0;
+        printf("\r Dilation step : %d \n",step);
+
+        for (i = 0; i < dim0*dim1*dim2; i++) {
+            image[i] = erosion[i];
+        }
+
+        bin3D(step, 0, USHRT_MAX, image, dim0, dim1, dim2);
+        
+        cDilateDist3D(image, image, dim0, dim1, dim2, step, res0, res1, res2);
+        
+        for (z = 0; z < dim2; z++)
+            for (y = 0; y < dim1; y++)
+                for (x = 0; x < dim0; x++)
+                    if (rPixel3D(x,y,z,erosion,dim1,dim2) != USHRT_MAX && rPixel3D(x,y,z,image,dim1,dim2) != 0) {
+                        wPixel3D(x,y,z,opening,dim1,dim2, step);
+                        count++;
+        }
+
+        step++;
+    }
+
+    free(image);
 
     return 0;
 }
@@ -675,7 +768,7 @@ int cGetDistMap2D(unsigned short* image, unsigned short* distance, int dim0, int
 	
 	for (x = 0; x < dim0; x++)
         for (y = 0; y < dim1; y++) {
-            matrix2[x+y*dim0] = (unsigned int)floor(sqrt(matrix2[x+y*dim0]));
+            matrix2[x+y*dim0] = (unsigned int)ceil(sqrt(matrix2[x+y*dim0]));
             if (mode) {
                 if (rPixel2D(x,y,image,dim1) == 0) {
                     wPixel2D(x,y,distance,dim1,0);
@@ -806,7 +899,7 @@ int cGetDistMap3D(unsigned short* image, unsigned short* distance, int dim0, int
 	for (x = 0; x < dim0; x++)
 		for (y = 0; y < dim1; y++)
 			for (z = 0; z < dim2; z++) {
-			    matrix1[x+y*dim0+z*dim1*dim0] = (unsigned int)floor(sqrt(matrix1[x+y*dim0+z*dim1*dim0]));
+			    matrix1[x+y*dim0+z*dim1*dim0] = (unsigned int)ceil(sqrt(matrix1[x+y*dim0+z*dim1*dim0]));
                 if (mode) {
                     if (rPixel3D(x,y,z,image,dim1,dim2) == 0) {
                         wPixel3D(x,y,z,distance,dim1,dim2,0);

@@ -12,10 +12,10 @@ int cFunctionals2D(unsigned short* image, int dim0, int dim1, double res0, doubl
 
     h = quant2D(image, dim0, dim1);
 
-    *area   = norm * areaDens(h);
-    *length = norm * lengthDens(h,res0,res1);
-    *euler4 = norm * euler4Dens(h,res0,res1);
-    *euler8 = norm * euler8Dens(h,res0,res1);
+    *area   = norm * areaDens2D(h);
+    *length = norm * lengDens2D(h,res0,res1);
+    *euler4 = norm * eul4Dens2D(h,res0,res1);
+    *euler8 = norm * eul8Dens2D(h,res0,res1);
 
     free(h);
 
@@ -32,13 +32,199 @@ int cFunctionals3D(unsigned short* image, int dim0, int dim1, int dim2, double r
 	
     h = quant3D(image, dim0, dim1, dim2);
 
-    *volume    = norm * volumeDens(h);
-    *surface   = norm * surfaceDens(h, res0, res1, res2);
-    *curvature = norm * curvatureDens(h, res0, res1, res2);
-    *euler6    = norm * euler6Dens(h, res0, res1, res2);
-    *euler26   = norm * euler26Dens(h, res0, res1, res2);
+    *volume    = norm * voluDens3D(h);
+    *surface   = norm * surfDens3D(h, res0, res1, res2);
+    *curvature = norm * curvDens3D(h, res0, res1, res2);
+    *euler6    = norm * eul6Dens3D(h, res0, res1, res2);
+    *euler26   = norm * eu26Dens3D(h, res0, res1, res2);
 
     free(h);
+
+    return 0;
+}
+
+// }}}
+/******************************************************************************/
+// {{{ cFunctionsOpen
+
+int cFunctionsOpen2D(unsigned short* opening, int dim0, int dim1, double res0, double res1, double* dist, double* area, double* length, double* euler4, double* euler8) {
+    int i, j, k;
+    double norm;
+    long int* h;
+    unsigned short* image; 
+    unsigned short min, max;
+    
+    image = (unsigned short *)malloc(dim0*dim1*sizeof(unsigned short));
+        
+    min = USHRT_MAX;
+    max = 0;
+
+    for (k = 0; k < dim0*dim1; k++) {
+        if (min > opening[k]) min = opening[k];
+        if (max < opening[k]) max = opening[k];
+    }
+
+    norm = (double)(dim0-1)/dim0 * (dim1-1)/dim1;
+
+    for (i = 0, j = min; j < max; i++, j++) {
+        printf("\r Functions step : %d \n",i);
+        
+        for (k = 0; k < dim0*dim1; k++) {
+            image[k] = opening[k];
+        }
+        
+        bin2D(j, 0, USHRT_MAX, image, dim0, dim1);
+
+        h = quant2D(image, dim0, dim1);
+
+        dist[i]   = (double)(i);
+        area[i]   = norm * areaDens2D(h);
+        length[i] = norm * lengDens2D(h,res0,res1);
+        euler4[i] = norm * eul4Dens2D(h,res0,res1);
+        euler8[i] = norm * eul8Dens2D(h,res0,res1);
+    }
+        
+    free(h);
+    free(image);
+
+    return 0;
+}
+
+/******************************************************************************/
+
+int cFunctionsOpen3D(unsigned short* opening, int dim0, int dim1, int dim2, double res0, double res1, double res2, double* dist, double* volume, double* surface, double* curvature, double* euler6, double* euler26) {
+    int i, j, k;
+    double norm;
+    long int* h;
+    unsigned short* image; 
+    unsigned short min, max;
+    
+    image = (unsigned short *)malloc(dim0*dim1*dim2*sizeof(unsigned short));
+        
+    min = USHRT_MAX;
+    max = 0;
+
+    for (k = 0; k < dim0*dim1*dim2; k++) {
+        if (min > opening[k]) min = opening[k];
+        if (max < opening[k]) max = opening[k];
+    }
+
+    norm = (double)(dim0-1)/dim0 * (dim1-1)/dim1 * (dim2-1)/dim2;
+
+    for (i = 0, j = min; j < max; i++, j++) {
+        printf("\r Functions step : %d \n",i);
+        
+        for (k = 0; k < dim0*dim1*dim2; k++) {
+            image[k] = opening[k];
+        }
+        
+        bin3D(j, 0, USHRT_MAX, image, dim0, dim1, dim2);
+
+        h = quant3D(image, dim0, dim1, dim2);
+
+        dist[i]      = (double)(i);
+        volume[i]    = norm * voluDens3D(h);
+        surface[i]   = norm * surfDens3D(h, res0, res1, res2);
+        curvature[i] = norm * curvDens3D(h, res0, res1, res2);
+        euler6[i]    = norm * eul6Dens3D(h, res0, res1, res2);
+        euler26[i]   = norm * eu26Dens3D(h, res0, res1, res2);
+    }
+
+    free(h);
+    free(image);
+
+    return 0;
+}
+
+// }}}
+/******************************************************************************/
+// {{{ cFunctionsClose
+
+int cFunctionsClose2D(unsigned short* closing, int dim0, int dim1, double res0, double res1, double* dist, double* area, double* length, double* euler4, double* euler8) {
+    int i, j, k;
+    double norm;
+    long int* h;
+    unsigned short* image; 
+    unsigned short min, max;
+    
+    image = (unsigned short *)malloc(dim0*dim1*sizeof(unsigned short));
+        
+    min = USHRT_MAX;
+    max = 0;
+
+    for (k = 0; k < dim0*dim1; k++) {
+        if (min > closing[k]) min = closing[k];
+        if (max < closing[k]) max = closing[k];
+    }
+
+    norm = (double)(dim0-1)/dim0 * (dim1-1)/dim1;
+
+    for (i = 0, j = max-1; j > min-1; i++, j--) {
+        printf("\r Functions step : %d \n",i+1);
+        
+        for (k = 0; k < dim0*dim1; k++) {
+            image[k] = closing[k];
+        }
+        
+        bin2D(j, 0, USHRT_MAX, image, dim0, dim1);
+
+        h = quant2D(image, dim0, dim1);
+
+        dist[i]   = (double)(i+1.0);
+        area[i]   = norm * areaDens2D(h);
+        length[i] = norm * lengDens2D(h,res0,res1);
+        euler4[i] = norm * eul4Dens2D(h,res0,res1);
+        euler8[i] = norm * eul8Dens2D(h,res0,res1);
+    }
+        
+    free(h);
+    free(image);
+
+    return 0;
+}
+
+/******************************************************************************/
+
+int cFunctionsClose3D(unsigned short* closing, int dim0, int dim1, int dim2, double res0, double res1, double res2, double* dist, double* volume, double* surface, double* curvature, double* euler6, double* euler26) {
+    int i, j, k;
+    double norm;
+    long int* h;
+    unsigned short* image; 
+    unsigned short min, max;
+    
+    image = (unsigned short *)malloc(dim0*dim1*dim2*sizeof(unsigned short));
+        
+    min = USHRT_MAX;
+    max = 0;
+
+    for (k = 0; k < dim0*dim1*dim2; k++) {
+        if (min > closing[k]) min = closing[k];
+        if (max < closing[k]) max = closing[k];
+    }
+
+    norm = (double)(dim0-1)/dim0 * (dim1-1)/dim1 * (dim2-1)/dim2;
+
+    for (i = 0, j = max-1; j > min-1; i++, j--) {
+        printf("\r Functions step : %d \n",i+1);
+        
+        for (k = 0; k < dim0*dim1*dim2; k++) {
+            image[k] = closing[k];
+        }
+        
+        bin3D(j, 0, USHRT_MAX, image, dim0, dim1, dim2);
+
+        h = quant3D(image, dim0, dim1, dim2);
+
+        dist[i]      = (double)(i+1.0);
+        volume[i]    = norm * voluDens3D(h);
+        surface[i]   = norm * surfDens3D(h, res0, res1, res2);
+        curvature[i] = norm * curvDens3D(h, res0, res1, res2);
+        euler6[i]    = norm * eul6Dens3D(h, res0, res1, res2);
+        euler26[i]   = norm * eu26Dens3D(h, res0, res1, res2);
+    }
+
+    free(h);
+    free(image);
 
     return 0;
 }
@@ -103,9 +289,9 @@ long int* quant3D(unsigned short* image, int dim0, int dim1, int dim2) {
 
 // }}}
 /******************************************************************************/
-// {{{ areaDens
+// {{{ areaDens2D
 
-double areaDens(long int *h) {
+double areaDens2D(long int *h) {
     int i;
 	unsigned long int iChi = 0, iVol = 0;
  
@@ -120,9 +306,9 @@ double areaDens(long int *h) {
 
 // }}}
 /******************************************************************************/
-// {{{ lengthDens
+// {{{ lengDens2D
 
-double lengthDens(long int *h, double res0, double res1) {
+double lengDens2D(long int *h, double res0, double res1) {
 	unsigned int i, l;
 	long int  numpix=0, ii;
 	double II=0, LI=0, w[4], r[4];
@@ -132,8 +318,8 @@ double lengthDens(long int *h, double res0, double res1) {
 	r[1] = res1;
 	r[2] = r[3] = sqrt(r[0]*r[0] + r[1]*r[1]);
 
-	w[0] = atan(res0/res1)/M_PI;
-	w[1] = atan(res1/res0)/M_PI;
+	w[0] = atan(res1/res0)/M_PI;
+	w[1] = atan(res0/res1)/M_PI;
 	w[2] = w[3] = (1 - w[0] - w[1])/2;
 
 	for (l = 0; l < 16; l++) numpix += h[l];
@@ -154,9 +340,41 @@ double lengthDens(long int *h, double res0, double res1) {
 
 // }}}
 /******************************************************************************/
-// {{{ volumeDens
+// {{{ euleDens2D
 
-double volumeDens(long int *h) {
+double eul4Dens2D(long int *h, double res0, double res1) {
+	int i;
+	long int iChi = 0, iVol = 0;
+	int iu[16] = {0, 1, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, 0};
+ 
+ 	for (i = 0; i < 16; i++) {
+		iChi += iu[i]*h[i];
+		iVol += h[i];
+	}
+
+ 	return (double)iChi/((double)iVol*res0*res1);
+}
+
+/******************************************************************************/
+
+double eul8Dens2D(long int *h, double res0, double res1) {
+	int i;
+	long int iChi = 0, iVol = 0;
+	int iu[16] = {0, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, -1, 0};
+ 
+ 	for(i = 0; i < 16; i++) {
+		iChi += iu[i]*h[i];
+		iVol += h[i];
+	}
+
+    return (double)iChi/((double)iVol*res0*res1);
+}
+
+// }}}
+/******************************************************************************/
+// {{{ voluDens3D
+
+double voluDens3D(long int *h) {
 	int i;
 	unsigned long int iChi = 0, iVol = 0;
 
@@ -171,12 +389,12 @@ double volumeDens(long int *h) {
 
 // }}}
 /******************************************************************************/
-// {{{ surfaceDens
+// {{{ surfDens3D
 
-double surfaceDens(long int *h, double res0, double res1, double res2) {
+double surfDens3D(long int *h, double res0, double res1, double res2) {
     int i, l;
 	unsigned long sv, le=0;
-	double wi[13], r[13], Sv, Lv, *Delta, *weight;	
+	double wi[13], r[13], Sv, Lv, *Delta, *weight;
 	int kl[13][2] = {{1,2},{1,4},{1,16},{1,8},{2,4},{1,32},{2,16},{1,64},{4,16},{1,128},{2,64},{4,32},{8,16}};
 
 	Delta  = (double *)malloc(3*sizeof(double)); 
@@ -222,9 +440,9 @@ double surfaceDens(long int *h, double res0, double res1, double res2) {
 
 // }}}
 /******************************************************************************/
-// {{{ curvatureDens
+// {{{ curvDens3D
 
-double curvatureDens(long int *h, double res0, double res1, double res2) {
+double curvDens3D(long int *h, double res0, double res1, double res2) {
 /* Mean curvature in 3D is related to the 2D-Euler number on a 2D section plane.
  * Within a 2x2x2 cube 13 different planes can be defined (see lang+99). The
  * results for the different planes are weighted by the sin of the plane to the
@@ -247,9 +465,11 @@ double curvatureDens(long int *h, double res0, double res1, double res2) {
 	r[0] = Delta[0] = res0; 
 	r[1] = Delta[1] = res1; 
 	r[2] = Delta[2] = res2;
+
 	r01 = sqrt(r[0]*r[0] + r[1]*r[1]);
 	r02 = sqrt(r[0]*r[0] + r[2]*r[2]);
 	r12 = sqrt(r[1]*r[1] + r[2]*r[2]);
+
 	s = (r01 + r02 + r12)/2;	
 
 	a[0] = r[0]*r[1]; a[1] = r[0]*r[2]; a[2] = r[1]*r[2];
@@ -269,66 +489,37 @@ double curvatureDens(long int *h, double res0, double res1, double res2) {
 	wi[8]  = weight[4]; wi[9] = weight[6]; wi[10] = weight[6]; wi[11] = weight[6];
 	wi[12] = weight[6];
 
+/* When resolution is anisotropic this code returns a slightly different answer
+ * depending on the axis of the anisotropy. This could be a small bug */ 
 
 	for (l = 0; l < 256; l++) {
 	    iVol += h[l];
 		for (i = 0; i < 9; i++)
 		    for (k = 0; k < 4; k++)
                 mc += (double)h[l]*wi[i]/(4*a[i])
-			        * ((l==(l|kr[i][k])) * (0==(l&kr[i][(k+1)%4]))
-			                             * (0==(l&kr[i][(k+2)%4]))
-                                         * (0==(l&kr[i][(k+3)%4]))
-			        -  (l==(l|kr[i][k])) * (l==(l|kr[i][(k+1)%4]))
-                                         * (l==(l|kr[i][(k+2)%4]))
-                                         * (0==(l&kr[i][(k+3)%4])));
+			        * (
+                        (l==(l|kr[i][k])) * (0==(l&kr[i][(k+1)%4])) * (0==(l&kr[i][(k+2)%4])) * (0==(l&kr[i][(k+3)%4]))
+			          - (l==(l|kr[i][k])) * (l==(l|kr[i][(k+1)%4])) * (l==(l|kr[i][(k+2)%4])) * (0==(l&kr[i][(k+3)%4]))
+                      );
 		for (i = 9; i < 13; i++)
             for (k = 0; k < 3; k++)
                 mc += (double)h[l]*wi[i]/(3*a[i])
-			        * ((l==(l|kt[i-9][k])) * (0==(l&kt[i-9][(k+1)%3]))
-			                               * (0==(l&kt[i-9][(k+2)%3]))
-                    -  (l==(l|kt[i-5][k])) * (l==(l|kt[i-5][(k+1)%3]))
-			                               * (0==(l&kt[i-5][(k+2)%3])));
+			        * (
+                         (l==(l|kt[i-9][k])) * (0==(l&kt[i-9][(k+1)%3])) * (0==(l&kt[i-9][(k+2)%3]))
+                      -  (l==(l|kt[i-5][k])) * (l==(l|kt[i-5][(k+1)%3])) * (0==(l&kt[i-5][(k+2)%3]))
+                      );
     }
 
-//	return (double)4*M_PI*mc/(double)(iVol*res0*res1*res2);
-    return (double)4*M_PI*mc/(double)(iVol);
+//    return (double)4*M_PI*mc/(double)(iVol);
+// Normalize to return radius of a sphere
+    return (double)mc/(double)(iVol);
 }
 
 // }}}
 /******************************************************************************/
-// {{{ eulerDens
+// {{{ euleDens3D
 
-double euler4Dens(long int *h, double res0, double res1) {
-	int i;
-	long int iChi = 0, iVol = 0;
-	int iu[16] = {0, 1, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, 0};
- 
- 	for (i = 0; i < 16; i++) {
-		iChi += iu[i]*h[i];
-		iVol += h[i];
-	}
-
- 	return (double)iChi/((double)iVol*res0*res1);
-}
-
-/******************************************************************************/
-
-double euler8Dens(long int *h, double res0, double res1) {
-	int i;
-	long int iChi = 0, iVol = 0;
-	int iu[16] = {0, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, -1, 0};
- 
- 	for(i = 0; i < 16; i++) {
-		iChi += iu[i]*h[i];
-		iVol += h[i];
-	}
-
-    return (double)iChi/((double)iVol*res0*res1);
-}
-
-/******************************************************************************/
-
-double euler6Dens(long int *h, double res0, double res1, double res2) {
+double eul6Dens3D(long int *h, double res0, double res1, double res2) {
     unsigned int i, p;
 	long int iChi = 0, iVol = 0, hi[256];
 	int iu[256] = {
@@ -366,7 +557,7 @@ double euler6Dens(long int *h, double res0, double res1, double res2) {
 
 /******************************************************************************/
 
-double euler26Dens(long int *h, double res0, double res1, double res2) {
+double eu26Dens3D(long int *h, double res0, double res1, double res2) {
 	int i;
 	long int iChi = 0, iVol = 0;
 	int iu[256] = {
@@ -519,6 +710,7 @@ void weights(double *Delta,double *weight) {
     } 
     
     weight[6] = (1-2*(weight[0]+weight[1]+weight[2])-4*(weight[3]+weight[4]+weight[5]))/8; 
+
 } 
 
 // }}}    

@@ -19,4 +19,5 @@ setup(
     version='0.1',
     ext_modules=cythonize(extensions, language_level=3),
     packages=find_packages(),
+    include_dirs=[numpy.get_include()],
 )

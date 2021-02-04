@@ -1,12 +1,16 @@
+"""
+Test
+"""
+
 import numpy as np
 cimport numpy as np
 
 np.import_array()
 
-################################################################################
+###############################################################################
 # {{{ Erode
 
-cpdef Erode(np.ndarray image, int dist, res=None):
+cpdef Erode(np.ndarray image, int dist, res = None):
 
     if (image.dtype == 'bool'):
         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -19,7 +23,7 @@ cpdef Erode(np.ndarray image, int dist, res=None):
             res0 = 1.0
             res1 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
 
@@ -31,7 +35,7 @@ cpdef Erode(np.ndarray image, int dist, res=None):
             res1 = 1.0
             res2 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
             res2 = res[2]
@@ -40,18 +44,28 @@ cpdef Erode(np.ndarray image, int dist, res=None):
     else:
         raise ValueError('Can only handle 2D or 3D images')
 
-################################################################################
 
 cdef extern from "morphologyc.h":
-    bint cErode2D(unsigned short* image, unsigned short* erosion, int dim0, int dim1, int dist, double res0, double res1)
+    bint cErode2D(
+        unsigned short* image, 
+        unsigned short* erosion, 
+        int dim0, 
+        int dim1, 
+        int dist, 
+        double res0, 
+        double res1)
 
-################################################################################
 
-def Erode2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, int dist, double res0, double res1):
+def Erode2D(
+        np.ndarray[np.uint16_t, ndim=2, mode="c"] image, 
+        int dist, 
+        double res0, 
+        double res1):
     
     image = np.ascontiguousarray(image)
 
-    cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion = np.empty_like(image,dtype=np.uint16)
+    cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion = np.empty_like(
+        image,dtype=np.uint16)
     
     status = cErode2D(
         &image[0,0],
@@ -66,18 +80,31 @@ def Erode2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, int dist, double re
     assert status == 0
     return erosion.astype(np.bool) 
 
-################################################################################
 
 cdef extern from "morphologyc.h":
-    bint cErode3D(unsigned short* image, unsigned short* erosion, int dim0, int dim1, int dim2, int dist, double res0, double res1, double res2)
+    bint cErode3D(
+        unsigned short* image, 
+        unsigned short* erosion, 
+        int dim0, 
+        int dim1, 
+        int dim2, 
+        int dist, 
+        double res0, 
+        double res1, 
+        double res2)
 
-################################################################################
 
-def Erode3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, int dist, double res0, double res1, double res2):
+def Erode3D(
+        np.ndarray[np.uint16_t, ndim=3, mode="c"] image, 
+        int dist, 
+        double res0, 
+        double res1, 
+        double res2):
     
     image = np.ascontiguousarray(image)
 
-    cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion = np.empty_like(image,dtype=np.uint16)
+    cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion = np.empty_like(
+        image,dtype=np.uint16)
     
     status = cErode3D(
         &image[0,0,0],
@@ -88,17 +115,16 @@ def Erode3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, int dist, double re
         dist,
         res0,
         res1,
-        res2,
-    )
+        res2)
 
     assert status == 0
     return erosion.astype(np.bool) 
 
 # }}}
-################################################################################
+###############################################################################
 # {{{ Dilate
 
-cpdef Dilate(np.ndarray image, int dist, res=None):
+cpdef Dilate(np.ndarray image, int dist, res = None):
 
     if (image.dtype == 'bool'):
         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -111,7 +137,7 @@ cpdef Dilate(np.ndarray image, int dist, res=None):
             res0 = 1.0
             res1 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
 
@@ -123,7 +149,7 @@ cpdef Dilate(np.ndarray image, int dist, res=None):
             res1 = 1.0
             res2 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
             res2 = res[2]
@@ -132,18 +158,28 @@ cpdef Dilate(np.ndarray image, int dist, res=None):
     else:
         raise ValueError('Can only handle 2D or 3D images')
 
-################################################################################
 
 cdef extern from "morphologyc.h":
-    bint cDilate2D(unsigned short* image, unsigned short* dilation, int dim0, int dim1, int dist, double res0, double res1)
+    bint cDilate2D(
+        unsigned short* image, 
+        unsigned short* dilation, 
+        int dim0, 
+        int dim1, 
+        int dist, 
+        double res0, 
+        double res1)
 
-################################################################################
 
-def Dilate2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, int dist, double res0, double res1):
+def Dilate2D(
+        np.ndarray[np.uint16_t, ndim=2, mode="c"] image, 
+        int dist, 
+        double res0, 
+        double res1):
     
     image = np.ascontiguousarray(image)
 
-    cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation = np.empty_like(image,dtype=np.uint16)
+    cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation = np.empty_like(
+        image,dtype=np.uint16)
     
     status = cDilate2D(
         &image[0,0],
@@ -152,24 +188,36 @@ def Dilate2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, int dist, double r
         image.shape[1],
         dist,
         res0,
-        res1,
-    )
+        res1)
 
     assert status == 0
     return dilation.astype(np.bool) 
 
-################################################################################
 
 cdef extern from "morphologyc.h":
-    bint cDilate3D(unsigned short* image, unsigned short* dilation, int dim0, int dim1, int dim2, int dist, double res0, double res1, double res2)
+    bint cDilate3D(
+        unsigned short* image, 
+        unsigned short* dilation, 
+        int dim0, 
+        int dim1, 
+        int dim2, 
+        int dist, 
+        double res0, 
+        double res1, 
+        double res2)
 
-################################################################################
 
-def Dilate3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, int dist, double res0, double res1, double res2):
+def Dilate3D(
+        np.ndarray[np.uint16_t, ndim=3, mode="c"] image, 
+        int dist, 
+        double res0, 
+        double res1, 
+        double res2):
     
     image = np.ascontiguousarray(image)
 
-    cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation = np.empty_like(image,dtype=np.uint16)
+    cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation = np.empty_like(
+        image,dtype=np.uint16)
     
     status = cDilate3D(
         &image[0,0,0],
@@ -180,17 +228,16 @@ def Dilate3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, int dist, double r
         dist,
         res0,
         res1,
-        res2,
-    )
+        res2)
 
     assert status == 0
     return dilation.astype(np.bool) 
 
 # }}}
-################################################################################
+###############################################################################
 # {{{ Open
 
-cpdef Open(np.ndarray erosion, int dist, res=None):
+cpdef Open(np.ndarray erosion, int dist, res = None):
 
     if (erosion.dtype == 'bool'):
         erosion = erosion.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -203,7 +250,7 @@ cpdef Open(np.ndarray erosion, int dist, res=None):
             res0 = 1.0
             res1 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
 
@@ -215,7 +262,7 @@ cpdef Open(np.ndarray erosion, int dist, res=None):
             res1 = 1.0
             res2 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
             res2 = res[2]
@@ -225,10 +272,10 @@ cpdef Open(np.ndarray erosion, int dist, res=None):
         raise ValueError('Can only handle 2D or 3D images')
 
 # }}}
-################################################################################
+###############################################################################
 # {{{ Close
 
-cpdef Close(np.ndarray dilation, int dist, res=None):
+cpdef Close(np.ndarray dilation, int dist, res = None):
 
     if (dilation.dtype == 'bool'):
         dilation = dilation.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -241,7 +288,7 @@ cpdef Close(np.ndarray dilation, int dist, res=None):
             res0 = 1.0
             res1 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
 
@@ -253,7 +300,7 @@ cpdef Close(np.ndarray dilation, int dist, res=None):
             res1 = 1.0
             res2 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
             res2 = res[2]
@@ -263,10 +310,10 @@ cpdef Close(np.ndarray dilation, int dist, res=None):
         raise ValueError('Can only handle 2D or 3D images')
 
 # }}}
-################################################################################
+###############################################################################
 # {{{ ErodeMap
 
-cpdef ErodeMap(np.ndarray image, res=None):
+cpdef ErodeMap(np.ndarray image, res = None):
 
     if (image.dtype == 'bool'):
         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -279,7 +326,7 @@ cpdef ErodeMap(np.ndarray image, res=None):
             res0 = 1.0
             res1 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
 
@@ -291,7 +338,7 @@ cpdef ErodeMap(np.ndarray image, res=None):
             res1 = 1.0
             res2 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
             res2 = res[2]
@@ -300,18 +347,27 @@ cpdef ErodeMap(np.ndarray image, res=None):
     else:
         raise ValueError('Can only handle 2D or 3D images')
 
-################################################################################
 
 cdef extern from "morphologyc.h":
-    bint cGetMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim1, double res0, double res1, int mode)
+    bint cGetMap2D(
+        unsigned short* image, 
+        unsigned short* distance, 
+        int dim0, 
+        int dim1, 
+        double res0, 
+        double res1, 
+        int mode)
 
-################################################################################
 
-def ErodeMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1):
+def ErodeMap2D(
+        np.ndarray[np.uint16_t, ndim=2, mode="c"] image, 
+        double res0, 
+        double res1):
     
     image = np.ascontiguousarray(image)
 
-    cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(image,dtype=np.uint16)
+    cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(
+        image,dtype=np.uint16)
     
     status = cGetMap2D(
         &image[0,0],
@@ -320,24 +376,35 @@ def ErodeMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, dou
         image.shape[1],
         res0,
         res1,
-        1,
-    )
+        1)
 
     assert status == 0
     return distance
 
-################################################################################
 
 cdef extern from "morphologyc.h":
-    bint cGetMap3D(unsigned short* image, unsigned short* distance, int dim0, int dim1, int dim2, double res0, double res1, double res2, int mode)
+    bint cGetMap3D(
+        unsigned short* image, 
+        unsigned short* distance, 
+        int dim0, 
+        int dim1, 
+        int dim2, 
+        double res0, 
+        double res1, 
+        double res2, 
+        int mode)
 
-################################################################################
 
-def ErodeMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2):
+def ErodeMap3D(
+        np.ndarray[np.uint16_t, ndim=3, mode="c"] image, 
+        double res0, 
+        double res1, 
+        double res2):
     
     image = np.ascontiguousarray(image)
 
-    cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(image,dtype=np.uint16)
+    cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(
+        image,dtype=np.uint16)
     
     status = cGetMap3D(
         &image[0,0,0],
@@ -348,17 +415,16 @@ def ErodeMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, dou
         res0,
         res1,
         res2,
-        1,
-    )
+        1)
 
     assert status == 0
     return distance
 
 # }}}
-################################################################################
+###############################################################################
 # {{{ DilateMap
 
-cpdef DilateMap(np.ndarray image, res=None):
+cpdef DilateMap(np.ndarray image, res = None):
 
     if (image.dtype == 'bool'):
         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -371,7 +437,7 @@ cpdef DilateMap(np.ndarray image, res=None):
             res0 = 1.0
             res1 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
 
@@ -383,7 +449,7 @@ cpdef DilateMap(np.ndarray image, res=None):
             res1 = 1.0
             res2 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
             res2 = res[2]
@@ -392,13 +458,16 @@ cpdef DilateMap(np.ndarray image, res=None):
     else:
         raise ValueError('Can only handle 2D or 3D images')
 
-################################################################################
 
-def DilateMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1):
+def DilateMap2D(
+        np.ndarray[np.uint16_t, ndim=2, mode="c"] image, 
+        double res0, 
+        double res1):
     
     image = np.ascontiguousarray(image)
 
-    cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(image,dtype=np.uint16)
+    cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(
+        image,dtype=np.uint16)
     
     status = cGetMap2D(
         &image[0,0],
@@ -413,13 +482,17 @@ def DilateMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, do
     assert status == 0
     return distance
 
-################################################################################
 
-def DilateMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2):
+def DilateMap3D(
+        np.ndarray[np.uint16_t, ndim=3, mode="c"] image, 
+        double res0, 
+        double res1, 
+        double res2):
     
     image = np.ascontiguousarray(image)
 
-    cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(image,dtype=np.uint16)
+    cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(
+        image,dtype=np.uint16)
     
     status = cGetMap3D(
         &image[0,0,0],
@@ -437,10 +510,10 @@ def DilateMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, do
     return distance
 
 # }}}
-################################################################################
+###############################################################################
 # {{{ OpenMap
 
-cpdef OpenMap(np.ndarray erosion, res=None):
+cpdef OpenMap(np.ndarray erosion, res = None):
 
     if not (erosion.dtype == 'uint16'):
         raise ValueError('Input image needs to be data type uint16')
@@ -451,7 +524,7 @@ cpdef OpenMap(np.ndarray erosion, res=None):
             res0 = 1.0
             res1 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
 
@@ -463,7 +536,7 @@ cpdef OpenMap(np.ndarray erosion, res=None):
             res1 = 1.0
             res2 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
             res2 = res[2]
@@ -472,18 +545,26 @@ cpdef OpenMap(np.ndarray erosion, res=None):
     else:
         raise ValueError('Can only handle 2D or 3D images')
 
-################################################################################
 
 cdef extern from "morphologyc.h":
-    bint cOpenMap2D(unsigned short* erosion, unsigned short* opening, int dim0, int dim1, double res0, double res1)
+    bint cOpenMap2D(
+        unsigned short* erosion, 
+        unsigned short* opening, 
+        int dim0, 
+        int dim1, 
+        double res0, 
+        double res1)
 
-################################################################################
 
-def OpenMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion, double res0, double res1):
+def OpenMap2D(
+        np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion, 
+        double res0, 
+        double res1):
     
     erosion = np.ascontiguousarray(erosion)
 
-    cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] opening = np.empty_like(erosion,dtype=np.uint16)
+    cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] opening = np.empty_like(
+        erosion,dtype=np.uint16)
     
     status = cOpenMap2D(
         &erosion[0,0],
@@ -497,18 +578,29 @@ def OpenMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion, double res0, do
     assert status == 0
     return opening
 
-################################################################################
 
 cdef extern from "morphologyc.h":
-    bint cOpenMap3D(unsigned short* erosion, unsigned short* opening, int dim0, int dim1, int dim2, double res0, double res1, double res2)
+    bint cOpenMap3D(
+        unsigned short* erosion, 
+        unsigned short* opening, 
+        int dim0, 
+        int dim1, 
+        int dim2, 
+        double res0, 
+        double res1, 
+        double res2)
 
-################################################################################
 
-def OpenMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion, double res0, double res1, double res2):
+def OpenMap3D(
+        np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion, 
+        double res0, 
+        double res1, 
+        double res2):
     
     erosion = np.ascontiguousarray(erosion)
 
-    cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] opening = np.empty_like(erosion,dtype=np.uint16)
+    cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] opening = np.empty_like(
+        erosion,dtype=np.uint16)
     
     status = cOpenMap3D(
         &erosion[0,0,0],
@@ -525,10 +617,10 @@ def OpenMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion, double res0, do
     return opening
 
 # }}}
-################################################################################
+###############################################################################
 # {{{ CloseMap
 
-cpdef CloseMap(np.ndarray dilation, res=None):
+cpdef CloseMap(np.ndarray dilation, res = None):
 
     if not (dilation.dtype == 'uint16'):
         raise ValueError('Input image needs to be data type uint16')
@@ -539,7 +631,7 @@ cpdef CloseMap(np.ndarray dilation, res=None):
             res0 = 1.0
             res1 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
 
@@ -551,7 +643,7 @@ cpdef CloseMap(np.ndarray dilation, res=None):
             res1 = 1.0
             res2 = 1.0
         else:
-            res  = res.astype(np.double)
+            res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
             res2 = res[2]
@@ -560,18 +652,26 @@ cpdef CloseMap(np.ndarray dilation, res=None):
     else:
         raise ValueError('Can only handle 2D or 3D images')
 
-################################################################################
 
 cdef extern from "morphologyc.h":
-    bint cCloseMap2D(unsigned short* dilation, unsigned short* closing, int dim0, int dim1, double res0, double res1)
+    bint cCloseMap2D(
+        unsigned short* dilation, 
+        unsigned short* closing, 
+        int dim0, 
+        int dim1, 
+        double res0, 
+        double res1)
 
-################################################################################
 
-def CloseMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation, double res0, double res1):
+def CloseMap2D(
+        np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation, 
+        double res0, 
+        double res1):
     
     dilation = np.ascontiguousarray(dilation)
 
-    cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] closing = np.empty_like(dilation,dtype=np.uint16)
+    cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] closing = np.empty_like(
+        dilation,dtype=np.uint16)
     
     status = cCloseMap2D(
         &dilation[0,0],
@@ -585,18 +685,29 @@ def CloseMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation, double res0, 
     assert status == 0
     return closing
 
-################################################################################
 
 cdef extern from "morphologyc.h":
-    bint cCloseMap3D(unsigned short* dilation, unsigned short* closing, int dim0, int dim1, int dim2, double res0, double res1, double res2)
+    bint cCloseMap3D(
+        unsigned short* dilation, 
+        unsigned short* closing, 
+        int dim0, 
+        int dim1, 
+        int dim2, 
+        double res0, 
+        double res1, 
+        double res2)
 
-################################################################################
 
-def CloseMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation, double res0, double res1, double res2):
+def CloseMap3D(
+        np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation, 
+        double res0, 
+        double res1, 
+        double res2):
     
     dilation = np.ascontiguousarray(dilation)
 
-    cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] closing = np.empty_like(dilation,dtype=np.uint16)
+    cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] closing = np.empty_like(
+        dilation,dtype=np.uint16)
     
     status = cCloseMap3D(
         &dilation[0,0,0],
@@ -613,4 +724,4 @@ def CloseMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation, double res0, 
     return closing
 
 # }}}
-################################################################################
+###############################################################################

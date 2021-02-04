@@ -2,6 +2,7 @@
 from setuptools import setup, find_packages
 from setuptools.extension import Extension
 from Cython.Build import cythonize
+import numpy as np
 
 extensions = [
     Extension(
@@ -16,8 +17,22 @@ extensions = [
 
 setup(
     name='quantimpy',
-    version='0.1',
+    version='0.1.0',
+    description='This package performs morphological operations and can compute the Minkowski functionals and functions',
+    url='https://github.com/boeleman/quantimpy',
+    author='Arnout Boelens',
+    author_email='boelens@stanford.edu',
+    install_requires=[
+        'numpy',
+    ],
     ext_modules=cythonize(extensions, language_level=3),
     packages=find_packages(),
-    include_dirs=[numpy.get_include()],
+    include_dirs=[np.get_include()],
+
+    classifiers=[
+        'Development Status :: 2 - Pre-Alpha',
+        'Intended Audience :: Science/Research',
+        'Operating System :: POSIX :: Linux',
+        'Programming Language :: Python :: 3',
+    ],
 )

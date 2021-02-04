@@ -12,6 +12,7 @@
         "name": "quantimpy.morphology",
         "sources": [
             "quantimpy/morphology.pyx",
+            "quantimpy/quantimpyc.c",
             "quantimpy/morphologyc.c"
         ]
     },
@@ -628,6 +629,9 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include <stdio.h>
 #include "numpy/arrayobject.h"
 #include "numpy/ufuncobject.h"
+
+    /* NumPy API declarations from "numpy/__init__.pxd" */
+    
 #include "morphologyc.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -900,7 +904,7 @@ typedef struct {
 } __Pyx_BufFmt_Context;
 
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":775
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":689
  * # in Cython to enable them only on the right systems.
  * 
  * ctypedef npy_int8       int8_t             # <<<<<<<<<<<<<<
@@ -909,7 +913,7 @@ typedef struct {
  */
 typedef npy_int8 __pyx_t_5numpy_int8_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":776
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":690
  * 
  * ctypedef npy_int8       int8_t
  * ctypedef npy_int16      int16_t             # <<<<<<<<<<<<<<
@@ -918,7 +922,7 @@ typedef npy_int8 __pyx_t_5numpy_int8_t;
  */
 typedef npy_int16 __pyx_t_5numpy_int16_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":777
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":691
  * ctypedef npy_int8       int8_t
  * ctypedef npy_int16      int16_t
  * ctypedef npy_int32      int32_t             # <<<<<<<<<<<<<<
@@ -927,7 +931,7 @@ typedef npy_int16 __pyx_t_5numpy_int16_t;
  */
 typedef npy_int32 __pyx_t_5numpy_int32_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":778
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":692
  * ctypedef npy_int16      int16_t
  * ctypedef npy_int32      int32_t
  * ctypedef npy_int64      int64_t             # <<<<<<<<<<<<<<
@@ -936,7 +940,7 @@ typedef npy_int32 __pyx_t_5numpy_int32_t;
  */
 typedef npy_int64 __pyx_t_5numpy_int64_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":782
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":696
  * #ctypedef npy_int128     int128_t
  * 
  * ctypedef npy_uint8      uint8_t             # <<<<<<<<<<<<<<
@@ -945,7 +949,7 @@ typedef npy_int64 __pyx_t_5numpy_int64_t;
  */
 typedef npy_uint8 __pyx_t_5numpy_uint8_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":783
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":697
  * 
  * ctypedef npy_uint8      uint8_t
  * ctypedef npy_uint16     uint16_t             # <<<<<<<<<<<<<<
@@ -954,7 +958,7 @@ typedef npy_uint8 __pyx_t_5numpy_uint8_t;
  */
 typedef npy_uint16 __pyx_t_5numpy_uint16_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":784
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":698
  * ctypedef npy_uint8      uint8_t
  * ctypedef npy_uint16     uint16_t
  * ctypedef npy_uint32     uint32_t             # <<<<<<<<<<<<<<
@@ -963,7 +967,7 @@ typedef npy_uint16 __pyx_t_5numpy_uint16_t;
  */
 typedef npy_uint32 __pyx_t_5numpy_uint32_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":785
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":699
  * ctypedef npy_uint16     uint16_t
  * ctypedef npy_uint32     uint32_t
  * ctypedef npy_uint64     uint64_t             # <<<<<<<<<<<<<<
@@ -972,7 +976,7 @@ typedef npy_uint32 __pyx_t_5numpy_uint32_t;
  */
 typedef npy_uint64 __pyx_t_5numpy_uint64_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":789
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":703
  * #ctypedef npy_uint128    uint128_t
  * 
  * ctypedef npy_float32    float32_t             # <<<<<<<<<<<<<<
@@ -981,7 +985,7 @@ typedef npy_uint64 __pyx_t_5numpy_uint64_t;
  */
 typedef npy_float32 __pyx_t_5numpy_float32_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":790
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":704
  * 
  * ctypedef npy_float32    float32_t
  * ctypedef npy_float64    float64_t             # <<<<<<<<<<<<<<
@@ -990,7 +994,7 @@ typedef npy_float32 __pyx_t_5numpy_float32_t;
  */
 typedef npy_float64 __pyx_t_5numpy_float64_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":799
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":713
  * # The int types are mapped a bit surprising --
  * # numpy.int corresponds to 'l' and numpy.long to 'q'
  * ctypedef npy_long       int_t             # <<<<<<<<<<<<<<
@@ -999,7 +1003,7 @@ typedef npy_float64 __pyx_t_5numpy_float64_t;
  */
 typedef npy_long __pyx_t_5numpy_int_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":800
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":714
  * # numpy.int corresponds to 'l' and numpy.long to 'q'
  * ctypedef npy_long       int_t
  * ctypedef npy_longlong   long_t             # <<<<<<<<<<<<<<
@@ -1008,7 +1012,7 @@ typedef npy_long __pyx_t_5numpy_int_t;
  */
 typedef npy_longlong __pyx_t_5numpy_long_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":801
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":715
  * ctypedef npy_long       int_t
  * ctypedef npy_longlong   long_t
  * ctypedef npy_longlong   longlong_t             # <<<<<<<<<<<<<<
@@ -1017,7 +1021,7 @@ typedef npy_longlong __pyx_t_5numpy_long_t;
  */
 typedef npy_longlong __pyx_t_5numpy_longlong_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":803
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":717
  * ctypedef npy_longlong   longlong_t
  * 
  * ctypedef npy_ulong      uint_t             # <<<<<<<<<<<<<<
@@ -1026,7 +1030,7 @@ typedef npy_longlong __pyx_t_5numpy_longlong_t;
  */
 typedef npy_ulong __pyx_t_5numpy_uint_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":804
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":718
  * 
  * ctypedef npy_ulong      uint_t
  * ctypedef npy_ulonglong  ulong_t             # <<<<<<<<<<<<<<
@@ -1035,7 +1039,7 @@ typedef npy_ulong __pyx_t_5numpy_uint_t;
  */
 typedef npy_ulonglong __pyx_t_5numpy_ulong_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":805
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":719
  * ctypedef npy_ulong      uint_t
  * ctypedef npy_ulonglong  ulong_t
  * ctypedef npy_ulonglong  ulonglong_t             # <<<<<<<<<<<<<<
@@ -1044,7 +1048,7 @@ typedef npy_ulonglong __pyx_t_5numpy_ulong_t;
  */
 typedef npy_ulonglong __pyx_t_5numpy_ulonglong_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":807
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":721
  * ctypedef npy_ulonglong  ulonglong_t
  * 
  * ctypedef npy_intp       intp_t             # <<<<<<<<<<<<<<
@@ -1053,7 +1057,7 @@ typedef npy_ulonglong __pyx_t_5numpy_ulonglong_t;
  */
 typedef npy_intp __pyx_t_5numpy_intp_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":808
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":722
  * 
  * ctypedef npy_intp       intp_t
  * ctypedef npy_uintp      uintp_t             # <<<<<<<<<<<<<<
@@ -1062,7 +1066,7 @@ typedef npy_intp __pyx_t_5numpy_intp_t;
  */
 typedef npy_uintp __pyx_t_5numpy_uintp_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":810
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":724
  * ctypedef npy_uintp      uintp_t
  * 
  * ctypedef npy_double     float_t             # <<<<<<<<<<<<<<
@@ -1071,7 +1075,7 @@ typedef npy_uintp __pyx_t_5numpy_uintp_t;
  */
 typedef npy_double __pyx_t_5numpy_float_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":811
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":725
  * 
  * ctypedef npy_double     float_t
  * ctypedef npy_double     double_t             # <<<<<<<<<<<<<<
@@ -1080,7 +1084,7 @@ typedef npy_double __pyx_t_5numpy_float_t;
  */
 typedef npy_double __pyx_t_5numpy_double_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":812
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":726
  * ctypedef npy_double     float_t
  * ctypedef npy_double     double_t
  * ctypedef npy_longdouble longdouble_t             # <<<<<<<<<<<<<<
@@ -1115,7 +1119,7 @@ static CYTHON_INLINE __pyx_t_double_complex __pyx_t_double_complex_from_parts(do
 
 /*--- Type declarations ---*/
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":814
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":728
  * ctypedef npy_longdouble longdouble_t
  * 
  * ctypedef npy_cfloat      cfloat_t             # <<<<<<<<<<<<<<
@@ -1124,7 +1128,7 @@ static CYTHON_INLINE __pyx_t_double_complex __pyx_t_double_complex_from_parts(do
  */
 typedef npy_cfloat __pyx_t_5numpy_cfloat_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":815
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":729
  * 
  * ctypedef npy_cfloat      cfloat_t
  * ctypedef npy_cdouble     cdouble_t             # <<<<<<<<<<<<<<
@@ -1133,7 +1137,7 @@ typedef npy_cfloat __pyx_t_5numpy_cfloat_t;
  */
 typedef npy_cdouble __pyx_t_5numpy_cdouble_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":816
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":730
  * ctypedef npy_cfloat      cfloat_t
  * ctypedef npy_cdouble     cdouble_t
  * ctypedef npy_clongdouble clongdouble_t             # <<<<<<<<<<<<<<
@@ -1142,7 +1146,7 @@ typedef npy_cdouble __pyx_t_5numpy_cdouble_t;
  */
 typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":818
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":732
  * ctypedef npy_clongdouble clongdouble_t
  * 
  * ctypedef npy_cdouble     complex_t             # <<<<<<<<<<<<<<
@@ -1162,7 +1166,7 @@ struct __pyx_opt_args_9quantimpy_10morphology_CloseMap;
 /* "quantimpy/morphology.pyx":9
  * # {{{ Erode
  * 
- * cpdef Erode(np.ndarray image, int dist, res=None):             # <<<<<<<<<<<<<<
+ * cpdef Erode(np.ndarray image, int dist, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (image.dtype == 'bool'):
  */
@@ -1171,10 +1175,10 @@ struct __pyx_opt_args_9quantimpy_10morphology_Erode {
   PyObject *res;
 };
 
-/* "quantimpy/morphology.pyx":101
+/* "quantimpy/morphology.pyx":123
  * # {{{ Dilate
  * 
- * cpdef Dilate(np.ndarray image, int dist, res=None):             # <<<<<<<<<<<<<<
+ * cpdef Dilate(np.ndarray image, int dist, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (image.dtype == 'bool'):
  */
@@ -1183,10 +1187,10 @@ struct __pyx_opt_args_9quantimpy_10morphology_Dilate {
   PyObject *res;
 };
 
-/* "quantimpy/morphology.pyx":193
+/* "quantimpy/morphology.pyx":236
  * # {{{ Open
  * 
- * cpdef Open(np.ndarray erosion, int dist, res=None):             # <<<<<<<<<<<<<<
+ * cpdef Open(np.ndarray erosion, int dist, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (erosion.dtype == 'bool'):
  */
@@ -1195,10 +1199,10 @@ struct __pyx_opt_args_9quantimpy_10morphology_Open {
   PyObject *res;
 };
 
-/* "quantimpy/morphology.pyx":231
+/* "quantimpy/morphology.pyx":274
  * # {{{ Close
  * 
- * cpdef Close(np.ndarray dilation, int dist, res=None):             # <<<<<<<<<<<<<<
+ * cpdef Close(np.ndarray dilation, int dist, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (dilation.dtype == 'bool'):
  */
@@ -1207,10 +1211,10 @@ struct __pyx_opt_args_9quantimpy_10morphology_Close {
   PyObject *res;
 };
 
-/* "quantimpy/morphology.pyx":269
+/* "quantimpy/morphology.pyx":312
  * # {{{ ErodeMap
  * 
- * cpdef ErodeMap(np.ndarray image, res=None):             # <<<<<<<<<<<<<<
+ * cpdef ErodeMap(np.ndarray image, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (image.dtype == 'bool'):
  */
@@ -1219,10 +1223,10 @@ struct __pyx_opt_args_9quantimpy_10morphology_ErodeMap {
   PyObject *res;
 };
 
-/* "quantimpy/morphology.pyx":361
+/* "quantimpy/morphology.pyx":423
  * # {{{ DilateMap
  * 
- * cpdef DilateMap(np.ndarray image, res=None):             # <<<<<<<<<<<<<<
+ * cpdef DilateMap(np.ndarray image, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (image.dtype == 'bool'):
  */
@@ -1231,10 +1235,10 @@ struct __pyx_opt_args_9quantimpy_10morphology_DilateMap {
   PyObject *res;
 };
 
-/* "quantimpy/morphology.pyx":443
+/* "quantimpy/morphology.pyx":512
  * # {{{ OpenMap
  * 
- * cpdef OpenMap(np.ndarray erosion, res=None):             # <<<<<<<<<<<<<<
+ * cpdef OpenMap(np.ndarray erosion, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if not (erosion.dtype == 'uint16'):
  */
@@ -1243,10 +1247,10 @@ struct __pyx_opt_args_9quantimpy_10morphology_OpenMap {
   PyObject *res;
 };
 
-/* "quantimpy/morphology.pyx":531
+/* "quantimpy/morphology.pyx":619
  * # {{{ CloseMap
  * 
- * cpdef CloseMap(np.ndarray dilation, res=None):             # <<<<<<<<<<<<<<
+ * cpdef CloseMap(np.ndarray dilation, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if not (dilation.dtype == 'uint16'):
  */
@@ -1544,26 +1548,6 @@ static void __Pyx_RaiseBufferIndexError(int axis);
 
 #define __Pyx_BufPtrCContig2d(type, buf, i0, s0, i1, s1) ((type)((char*)buf + i0 * s0) + i1)
 #define __Pyx_BufPtrCContig3d(type, buf, i0, s0, i1, s1, i2, s2) ((type)((char*)buf + i0 * s0 + i1 * s1) + i2)
-/* DictGetItem.proto */
-#if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
-static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key);
-#define __Pyx_PyObject_Dict_GetItem(obj, name)\
-    (likely(PyDict_CheckExact(obj)) ?\
-     __Pyx_PyDict_GetItem(obj, name) : PyObject_GetItem(obj, name))
-#else
-#define __Pyx_PyDict_GetItem(d, key) PyObject_GetItem(d, key)
-#define __Pyx_PyObject_Dict_GetItem(obj, name)  PyObject_GetItem(obj, name)
-#endif
-
-/* RaiseTooManyValuesToUnpack.proto */
-static CYTHON_INLINE void __Pyx_RaiseTooManyValuesError(Py_ssize_t expected);
-
-/* RaiseNeedMoreValuesToUnpack.proto */
-static CYTHON_INLINE void __Pyx_RaiseNeedMoreValuesError(Py_ssize_t index);
-
-/* RaiseNoneIterError.proto */
-static CYTHON_INLINE void __Pyx_RaiseNoneNotIterableError(void);
-
 /* GetTopmostException.proto */
 #if CYTHON_USE_EXC_INFO_STACK
 static _PyErr_StackItem * __Pyx_PyErr_GetTopmostException(PyThreadState *tstate);
@@ -1763,9 +1747,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
     #endif
 #endif
 
-/* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum__NPY_TYPES(enum NPY_TYPES value);
-
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
@@ -1819,7 +1800,6 @@ static PyTypeObject *__pyx_ptype_5numpy_flatiter = 0;
 static PyTypeObject *__pyx_ptype_5numpy_broadcast = 0;
 static PyTypeObject *__pyx_ptype_5numpy_ndarray = 0;
 static PyTypeObject *__pyx_ptype_5numpy_ufunc = 0;
-static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *, char *, char *, int *); /*proto*/
 static CYTHON_INLINE int __pyx_f_5numpy_import_array(void); /*proto*/
 
 /* Module declarations from 'quantimpy.morphology' */
@@ -1838,8 +1818,6 @@ int __pyx_module_is_main_quantimpy__morphology = 0;
 
 /* Implementation of 'quantimpy.morphology' */
 static PyObject *__pyx_builtin_ValueError;
-static PyObject *__pyx_builtin_range;
-static PyObject *__pyx_builtin_RuntimeError;
 static PyObject *__pyx_builtin_ImportError;
 static const char __pyx_k_np[] = "np";
 static const char __pyx_k_max[] = "max";
@@ -1856,7 +1834,6 @@ static const char __pyx_k_dtype[] = "dtype";
 static const char __pyx_k_iinfo[] = "iinfo";
 static const char __pyx_k_image[] = "image";
 static const char __pyx_k_numpy[] = "numpy";
-static const char __pyx_k_range[] = "range";
 static const char __pyx_k_astype[] = "astype";
 static const char __pyx_k_double[] = "double";
 static const char __pyx_k_import[] = "__import__";
@@ -1882,23 +1859,16 @@ static const char __pyx_k_empty_like[] = "empty_like";
 static const char __pyx_k_DilateMap2D[] = "DilateMap2D";
 static const char __pyx_k_DilateMap3D[] = "DilateMap3D";
 static const char __pyx_k_ImportError[] = "ImportError";
-static const char __pyx_k_RuntimeError[] = "RuntimeError";
 static const char __pyx_k_ascontiguousarray[] = "ascontiguousarray";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_quantimpy_morphology[] = "quantimpy.morphology";
 static const char __pyx_k_quantimpy_morphology_pyx[] = "quantimpy/morphology.pyx";
-static const char __pyx_k_ndarray_is_not_C_contiguous[] = "ndarray is not C contiguous";
 static const char __pyx_k_Can_only_handle_2D_or_3D_images[] = "Can only handle 2D or 3D images";
 static const char __pyx_k_numpy_core_multiarray_failed_to[] = "numpy.core.multiarray failed to import";
-static const char __pyx_k_unknown_dtype_code_in_numpy_pxd[] = "unknown dtype code in numpy.pxd (%d)";
-static const char __pyx_k_Format_string_allocated_too_shor[] = "Format string allocated too short, see comment in numpy.pxd";
 static const char __pyx_k_Input_image_needs_to_be_binary_d[] = "Input image needs to be binary (data type bool)";
 static const char __pyx_k_Input_image_needs_to_be_data_typ[] = "Input image needs to be data type uint16";
 static const char __pyx_k_Input_images_need_to_be_binary_d[] = "Input images need to be binary (data type bool)";
-static const char __pyx_k_Non_native_byte_order_not_suppor[] = "Non-native byte order not supported";
-static const char __pyx_k_ndarray_is_not_Fortran_contiguou[] = "ndarray is not Fortran contiguous";
 static const char __pyx_k_numpy_core_umath_failed_to_impor[] = "numpy.core.umath failed to import";
-static const char __pyx_k_Format_string_allocated_too_shor_2[] = "Format string allocated too short.";
 static PyObject *__pyx_kp_u_Can_only_handle_2D_or_3D_images;
 static PyObject *__pyx_n_s_CloseMap2D;
 static PyObject *__pyx_n_s_CloseMap3D;
@@ -1910,16 +1880,12 @@ static PyObject *__pyx_n_s_Erode2D;
 static PyObject *__pyx_n_s_Erode3D;
 static PyObject *__pyx_n_s_ErodeMap2D;
 static PyObject *__pyx_n_s_ErodeMap3D;
-static PyObject *__pyx_kp_u_Format_string_allocated_too_shor;
-static PyObject *__pyx_kp_u_Format_string_allocated_too_shor_2;
 static PyObject *__pyx_n_s_ImportError;
 static PyObject *__pyx_kp_u_Input_image_needs_to_be_binary_d;
 static PyObject *__pyx_kp_u_Input_image_needs_to_be_data_typ;
 static PyObject *__pyx_kp_u_Input_images_need_to_be_binary_d;
-static PyObject *__pyx_kp_u_Non_native_byte_order_not_suppor;
 static PyObject *__pyx_n_s_OpenMap2D;
 static PyObject *__pyx_n_s_OpenMap3D;
-static PyObject *__pyx_n_s_RuntimeError;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_ascontiguousarray;
 static PyObject *__pyx_n_s_astype;
@@ -1940,8 +1906,6 @@ static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_max;
 static PyObject *__pyx_n_s_name;
-static PyObject *__pyx_kp_u_ndarray_is_not_C_contiguous;
-static PyObject *__pyx_kp_u_ndarray_is_not_Fortran_contiguou;
 static PyObject *__pyx_n_s_np;
 static PyObject *__pyx_n_s_numpy;
 static PyObject *__pyx_kp_u_numpy_core_multiarray_failed_to;
@@ -1949,7 +1913,6 @@ static PyObject *__pyx_kp_u_numpy_core_umath_failed_to_impor;
 static PyObject *__pyx_n_s_opening;
 static PyObject *__pyx_n_s_quantimpy_morphology;
 static PyObject *__pyx_kp_s_quantimpy_morphology_pyx;
-static PyObject *__pyx_n_s_range;
 static PyObject *__pyx_n_s_res;
 static PyObject *__pyx_n_s_res0;
 static PyObject *__pyx_n_s_res1;
@@ -1958,7 +1921,6 @@ static PyObject *__pyx_n_s_status;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_uint16;
 static PyObject *__pyx_n_u_uint16;
-static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
 static PyObject *__pyx_pf_9quantimpy_10morphology_Erode(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_image, int __pyx_v_dist, PyObject *__pyx_v_res); /* proto */
 static PyObject *__pyx_pf_9quantimpy_10morphology_2Erode2D(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_image, int __pyx_v_dist, double __pyx_v_res0, double __pyx_v_res1); /* proto */
 static PyObject *__pyx_pf_9quantimpy_10morphology_4Erode3D(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_image, int __pyx_v_dist, double __pyx_v_res0, double __pyx_v_res1, double __pyx_v_res2); /* proto */
@@ -1979,8 +1941,6 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_32OpenMap3D(CYTHON_UNUSED PyOb
 static PyObject *__pyx_pf_9quantimpy_10morphology_34CloseMap(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_dilation, PyObject *__pyx_v_res); /* proto */
 static PyObject *__pyx_pf_9quantimpy_10morphology_36CloseMap2D(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_dilation, double __pyx_v_res0, double __pyx_v_res1); /* proto */
 static PyObject *__pyx_pf_9quantimpy_10morphology_38CloseMap3D(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_dilation, double __pyx_v_res0, double __pyx_v_res1, double __pyx_v_res2); /* proto */
-static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
-static void __pyx_pf_5numpy_7ndarray_2__releasebuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info); /* proto */
 static PyObject *__pyx_float_1_0;
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
@@ -1989,40 +1949,35 @@ static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__5;
 static PyObject *__pyx_tuple__6;
 static PyObject *__pyx_tuple__7;
-static PyObject *__pyx_tuple__8;
 static PyObject *__pyx_tuple__9;
-static PyObject *__pyx_tuple__10;
 static PyObject *__pyx_tuple__11;
-static PyObject *__pyx_tuple__12;
-static PyObject *__pyx_tuple__14;
-static PyObject *__pyx_tuple__16;
-static PyObject *__pyx_tuple__18;
-static PyObject *__pyx_tuple__20;
-static PyObject *__pyx_tuple__22;
-static PyObject *__pyx_tuple__24;
-static PyObject *__pyx_tuple__26;
-static PyObject *__pyx_tuple__28;
-static PyObject *__pyx_tuple__30;
-static PyObject *__pyx_tuple__32;
-static PyObject *__pyx_tuple__34;
-static PyObject *__pyx_codeobj__13;
-static PyObject *__pyx_codeobj__15;
-static PyObject *__pyx_codeobj__17;
-static PyObject *__pyx_codeobj__19;
-static PyObject *__pyx_codeobj__21;
-static PyObject *__pyx_codeobj__23;
-static PyObject *__pyx_codeobj__25;
-static PyObject *__pyx_codeobj__27;
-static PyObject *__pyx_codeobj__29;
-static PyObject *__pyx_codeobj__31;
-static PyObject *__pyx_codeobj__33;
-static PyObject *__pyx_codeobj__35;
+static PyObject *__pyx_tuple__13;
+static PyObject *__pyx_tuple__15;
+static PyObject *__pyx_tuple__17;
+static PyObject *__pyx_tuple__19;
+static PyObject *__pyx_tuple__21;
+static PyObject *__pyx_tuple__23;
+static PyObject *__pyx_tuple__25;
+static PyObject *__pyx_tuple__27;
+static PyObject *__pyx_tuple__29;
+static PyObject *__pyx_codeobj__8;
+static PyObject *__pyx_codeobj__10;
+static PyObject *__pyx_codeobj__12;
+static PyObject *__pyx_codeobj__14;
+static PyObject *__pyx_codeobj__16;
+static PyObject *__pyx_codeobj__18;
+static PyObject *__pyx_codeobj__20;
+static PyObject *__pyx_codeobj__22;
+static PyObject *__pyx_codeobj__24;
+static PyObject *__pyx_codeobj__26;
+static PyObject *__pyx_codeobj__28;
+static PyObject *__pyx_codeobj__30;
 /* Late includes */
 
 /* "quantimpy/morphology.pyx":9
  * # {{{ Erode
  * 
- * cpdef Erode(np.ndarray image, int dist, res=None):             # <<<<<<<<<<<<<<
+ * cpdef Erode(np.ndarray image, int dist, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (image.dtype == 'bool'):
  */
@@ -2056,7 +2011,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Erode(PyArrayObject *__pyx_v_im
   __Pyx_INCREF(__pyx_v_res);
 
   /* "quantimpy/morphology.pyx":11
- * cpdef Erode(np.ndarray image, int dist, res=None):
+ * cpdef Erode(np.ndarray image, int dist, res = None):
  * 
  *     if (image.dtype == 'bool'):             # <<<<<<<<<<<<<<
  *         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -2136,7 +2091,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Erode(PyArrayObject *__pyx_v_im
     __pyx_t_3 = 0;
 
     /* "quantimpy/morphology.pyx":11
- * cpdef Erode(np.ndarray image, int dist, res=None):
+ * cpdef Erode(np.ndarray image, int dist, res = None):
  * 
  *     if (image.dtype == 'bool'):             # <<<<<<<<<<<<<<
  *         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -2197,7 +2152,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Erode(PyArrayObject *__pyx_v_im
  *             res0 = 1.0
  *             res1 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res1 = __pyx_float_1_0;
@@ -2215,7 +2170,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Erode(PyArrayObject *__pyx_v_im
     /* "quantimpy/morphology.pyx":22
  *             res1 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
@@ -2248,7 +2203,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Erode(PyArrayObject *__pyx_v_im
 
       /* "quantimpy/morphology.pyx":23
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  * 
@@ -2259,7 +2214,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Erode(PyArrayObject *__pyx_v_im
       __pyx_t_3 = 0;
 
       /* "quantimpy/morphology.pyx":24
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  * 
@@ -2387,7 +2342,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Erode(PyArrayObject *__pyx_v_im
  *             res1 = 1.0
  *             res2 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res2 = __pyx_float_1_0;
@@ -2405,7 +2360,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Erode(PyArrayObject *__pyx_v_im
     /* "quantimpy/morphology.pyx":34
  *             res2 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
@@ -2438,7 +2393,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Erode(PyArrayObject *__pyx_v_im
 
       /* "quantimpy/morphology.pyx":35
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  *             res2 = res[2]
@@ -2449,7 +2404,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Erode(PyArrayObject *__pyx_v_im
       __pyx_t_3 = 0;
 
       /* "quantimpy/morphology.pyx":36
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  *             res2 = res[2]
@@ -2561,7 +2516,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Erode(PyArrayObject *__pyx_v_im
  *     else:
  *         raise ValueError('Can only handle 2D or 3D images')             # <<<<<<<<<<<<<<
  * 
- * ################################################################################
+ * 
  */
     __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
@@ -2574,7 +2529,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Erode(PyArrayObject *__pyx_v_im
   /* "quantimpy/morphology.pyx":9
  * # {{{ Erode
  * 
- * cpdef Erode(np.ndarray image, int dist, res=None):             # <<<<<<<<<<<<<<
+ * cpdef Erode(np.ndarray image, int dist, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (image.dtype == 'bool'):
  */
@@ -2712,12 +2667,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_Erode(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":50
- * ################################################################################
+/* "quantimpy/morphology.pyx":55
  * 
- * def Erode2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, int dist, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def Erode2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         int dist,
  */
 
 /* Python wrapper */
@@ -2761,23 +2716,23 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_3Erode2D(PyObject *__pyx_self,
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Erode2D", 1, 4, 4, 1); __PYX_ERR(0, 50, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Erode2D", 1, 4, 4, 1); __PYX_ERR(0, 55, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res0)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Erode2D", 1, 4, 4, 2); __PYX_ERR(0, 50, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Erode2D", 1, 4, 4, 2); __PYX_ERR(0, 55, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Erode2D", 1, 4, 4, 3); __PYX_ERR(0, 50, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Erode2D", 1, 4, 4, 3); __PYX_ERR(0, 55, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Erode2D") < 0)) __PYX_ERR(0, 50, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Erode2D") < 0)) __PYX_ERR(0, 55, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -2788,19 +2743,19 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_3Erode2D(PyObject *__pyx_self,
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
     __pyx_v_image = ((PyArrayObject *)values[0]);
-    __pyx_v_dist = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_dist == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 50, __pyx_L3_error)
-    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 50, __pyx_L3_error)
-    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 50, __pyx_L3_error)
+    __pyx_v_dist = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_dist == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 57, __pyx_L3_error)
+    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 58, __pyx_L3_error)
+    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 59, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("Erode2D", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 50, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("Erode2D", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 55, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.Erode2D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 50, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 56, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_2Erode2D(__pyx_self, __pyx_v_image, __pyx_v_dist, __pyx_v_res0, __pyx_v_res1);
 
   /* function exit code */
@@ -2851,20 +2806,20 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_2Erode2D(CYTHON_UNUSED PyObjec
   __pyx_pybuffernd_image.rcbuffer = &__pyx_pybuffer_image;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 50, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 55, __pyx_L1_error)
   }
   __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1];
 
-  /* "quantimpy/morphology.pyx":52
- * def Erode2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, int dist, double res0, double res1):
+  /* "quantimpy/morphology.pyx":61
+ *         double res1):
  * 
  *     image = np.ascontiguousarray(image)             # <<<<<<<<<<<<<<
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion = np.empty_like(image,dtype=np.uint16)
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion = np.empty_like(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -2879,10 +2834,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_2Erode2D(CYTHON_UNUSED PyObjec
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, ((PyObject *)__pyx_v_image)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_image));
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 61, __pyx_L1_error)
   __pyx_t_4 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -2899,50 +2854,66 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_2Erode2D(CYTHON_UNUSED PyObjec
       __pyx_t_6 = __pyx_t_7 = __pyx_t_8 = 0;
     }
     __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1];
-    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 52, __pyx_L1_error)
+    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 61, __pyx_L1_error)
   }
   __pyx_t_4 = 0;
   __Pyx_DECREF_SET(__pyx_v_image, ((PyArrayObject *)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":54
+  /* "quantimpy/morphology.pyx":63
  *     image = np.ascontiguousarray(image)
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion = np.empty_like(image,dtype=np.uint16)             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "quantimpy/morphology.pyx":64
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion = np.empty_like(
+ *         image,dtype=np.uint16)             # <<<<<<<<<<<<<<
  * 
  *     status = cErode2D(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 54, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject *)__pyx_v_image));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_image));
   PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_image));
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 54, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 54, __pyx_L1_error)
+
+  /* "quantimpy/morphology.pyx":63
+ *     image = np.ascontiguousarray(image)
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 54, __pyx_L1_error)
+  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 63, __pyx_L1_error)
   __pyx_t_11 = ((PyArrayObject *)__pyx_t_10);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_erosion.rcbuffer->pybuffer, (PyObject*)__pyx_t_11, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) {
       __pyx_v_erosion = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_erosion.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 54, __pyx_L1_error)
+      __PYX_ERR(0, 63, __pyx_L1_error)
     } else {__pyx_pybuffernd_erosion.diminfo[0].strides = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_erosion.diminfo[0].shape = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_erosion.diminfo[1].strides = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_erosion.diminfo[1].shape = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.shape[1];
     }
   }
@@ -2950,7 +2921,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_2Erode2D(CYTHON_UNUSED PyObjec
   __pyx_v_erosion = ((PyArrayObject *)__pyx_t_10);
   __pyx_t_10 = 0;
 
-  /* "quantimpy/morphology.pyx":57
+  /* "quantimpy/morphology.pyx":67
  * 
  *     status = cErode2D(
  *         &image[0,0],             # <<<<<<<<<<<<<<
@@ -2970,10 +2941,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_2Erode2D(CYTHON_UNUSED PyObjec
   } else if (unlikely(__pyx_t_13 >= __pyx_pybuffernd_image.diminfo[1].shape)) __pyx_t_5 = 1;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 57, __pyx_L1_error)
+    __PYX_ERR(0, 67, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":58
+  /* "quantimpy/morphology.pyx":68
  *     status = cErode2D(
  *         &image[0,0],
  *         &erosion[0,0],             # <<<<<<<<<<<<<<
@@ -2993,11 +2964,11 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_2Erode2D(CYTHON_UNUSED PyObjec
   } else if (unlikely(__pyx_t_15 >= __pyx_pybuffernd_erosion.diminfo[1].shape)) __pyx_t_5 = 1;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 58, __pyx_L1_error)
+    __PYX_ERR(0, 68, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":56
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion = np.empty_like(image,dtype=np.uint16)
+  /* "quantimpy/morphology.pyx":66
+ *         image,dtype=np.uint16)
  * 
  *     status = cErode2D(             # <<<<<<<<<<<<<<
  *         &image[0,0],
@@ -3005,7 +2976,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_2Erode2D(CYTHON_UNUSED PyObjec
  */
   __pyx_v_status = cErode2D((&(*__Pyx_BufPtrCContig2d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_image.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_image.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_image.diminfo[1].strides))), (&(*__Pyx_BufPtrCContig2d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_erosion.rcbuffer->pybuffer.buf, __pyx_t_14, __pyx_pybuffernd_erosion.diminfo[0].strides, __pyx_t_15, __pyx_pybuffernd_erosion.diminfo[1].strides))), (__pyx_v_image->dimensions[0]), (__pyx_v_image->dimensions[1]), __pyx_v_dist, __pyx_v_res0, __pyx_v_res1);
 
-  /* "quantimpy/morphology.pyx":66
+  /* "quantimpy/morphology.pyx":76
  *     )
  * 
  *     assert status == 0             # <<<<<<<<<<<<<<
@@ -3016,24 +2987,24 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_2Erode2D(CYTHON_UNUSED PyObjec
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_status == 0) != 0))) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 66, __pyx_L1_error)
+      __PYX_ERR(0, 76, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "quantimpy/morphology.pyx":67
+  /* "quantimpy/morphology.pyx":77
  * 
  *     assert status == 0
  *     return erosion.astype(np.bool)             # <<<<<<<<<<<<<<
  * 
- * ################################################################################
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_erosion), __pyx_n_s_astype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_erosion), __pyx_n_s_astype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_bool); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_bool); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -3049,19 +3020,19 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_2Erode2D(CYTHON_UNUSED PyObjec
   __pyx_t_10 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_1, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 67, __pyx_L1_error)
+  if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_10;
   __pyx_t_10 = 0;
   goto __pyx_L0;
 
-  /* "quantimpy/morphology.pyx":50
- * ################################################################################
+  /* "quantimpy/morphology.pyx":55
  * 
- * def Erode2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, int dist, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def Erode2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         int dist,
  */
 
   /* function exit code */
@@ -3092,12 +3063,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_2Erode2D(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":76
- * ################################################################################
+/* "quantimpy/morphology.pyx":93
  * 
- * def Erode3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, int dist, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def Erode3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         int dist,
  */
 
 /* Python wrapper */
@@ -3144,29 +3115,29 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_5Erode3D(PyObject *__pyx_self,
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Erode3D", 1, 5, 5, 1); __PYX_ERR(0, 76, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Erode3D", 1, 5, 5, 1); __PYX_ERR(0, 93, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res0)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Erode3D", 1, 5, 5, 2); __PYX_ERR(0, 76, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Erode3D", 1, 5, 5, 2); __PYX_ERR(0, 93, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Erode3D", 1, 5, 5, 3); __PYX_ERR(0, 76, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Erode3D", 1, 5, 5, 3); __PYX_ERR(0, 93, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Erode3D", 1, 5, 5, 4); __PYX_ERR(0, 76, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Erode3D", 1, 5, 5, 4); __PYX_ERR(0, 93, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Erode3D") < 0)) __PYX_ERR(0, 76, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Erode3D") < 0)) __PYX_ERR(0, 93, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 5) {
       goto __pyx_L5_argtuple_error;
@@ -3178,20 +3149,20 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_5Erode3D(PyObject *__pyx_self,
       values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
     }
     __pyx_v_image = ((PyArrayObject *)values[0]);
-    __pyx_v_dist = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_dist == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 76, __pyx_L3_error)
-    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 76, __pyx_L3_error)
-    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 76, __pyx_L3_error)
-    __pyx_v_res2 = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_res2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 76, __pyx_L3_error)
+    __pyx_v_dist = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_dist == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 95, __pyx_L3_error)
+    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L3_error)
+    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 97, __pyx_L3_error)
+    __pyx_v_res2 = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_res2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("Erode3D", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 76, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("Erode3D", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 93, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.Erode3D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 76, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 94, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_4Erode3D(__pyx_self, __pyx_v_image, __pyx_v_dist, __pyx_v_res0, __pyx_v_res1, __pyx_v_res2);
 
   /* function exit code */
@@ -3244,20 +3215,20 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_4Erode3D(CYTHON_UNUSED PyObjec
   __pyx_pybuffernd_image.rcbuffer = &__pyx_pybuffer_image;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 76, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 93, __pyx_L1_error)
   }
   __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_image.diminfo[2].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_image.diminfo[2].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[2];
 
-  /* "quantimpy/morphology.pyx":78
- * def Erode3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, int dist, double res0, double res1, double res2):
+  /* "quantimpy/morphology.pyx":100
+ *         double res2):
  * 
  *     image = np.ascontiguousarray(image)             # <<<<<<<<<<<<<<
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion = np.empty_like(image,dtype=np.uint16)
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion = np.empty_like(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 78, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 78, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -3272,10 +3243,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_4Erode3D(CYTHON_UNUSED PyObjec
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, ((PyObject *)__pyx_v_image)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_image));
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 78, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 78, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 100, __pyx_L1_error)
   __pyx_t_4 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -3292,50 +3263,66 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_4Erode3D(CYTHON_UNUSED PyObjec
       __pyx_t_6 = __pyx_t_7 = __pyx_t_8 = 0;
     }
     __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_image.diminfo[2].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_image.diminfo[2].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[2];
-    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 78, __pyx_L1_error)
+    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 100, __pyx_L1_error)
   }
   __pyx_t_4 = 0;
   __Pyx_DECREF_SET(__pyx_v_image, ((PyArrayObject *)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":80
+  /* "quantimpy/morphology.pyx":102
  *     image = np.ascontiguousarray(image)
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion = np.empty_like(image,dtype=np.uint16)             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "quantimpy/morphology.pyx":103
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion = np.empty_like(
+ *         image,dtype=np.uint16)             # <<<<<<<<<<<<<<
  * 
  *     status = cErode3D(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 80, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject *)__pyx_v_image));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_image));
   PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_image));
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 80, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 80, __pyx_L1_error)
+
+  /* "quantimpy/morphology.pyx":102
+ *     image = np.ascontiguousarray(image)
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 80, __pyx_L1_error)
+  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 102, __pyx_L1_error)
   __pyx_t_11 = ((PyArrayObject *)__pyx_t_10);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_erosion.rcbuffer->pybuffer, (PyObject*)__pyx_t_11, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) {
       __pyx_v_erosion = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_erosion.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 80, __pyx_L1_error)
+      __PYX_ERR(0, 102, __pyx_L1_error)
     } else {__pyx_pybuffernd_erosion.diminfo[0].strides = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_erosion.diminfo[0].shape = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_erosion.diminfo[1].strides = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_erosion.diminfo[1].shape = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_erosion.diminfo[2].strides = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_erosion.diminfo[2].shape = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.shape[2];
     }
   }
@@ -3343,7 +3330,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_4Erode3D(CYTHON_UNUSED PyObjec
   __pyx_v_erosion = ((PyArrayObject *)__pyx_t_10);
   __pyx_t_10 = 0;
 
-  /* "quantimpy/morphology.pyx":83
+  /* "quantimpy/morphology.pyx":106
  * 
  *     status = cErode3D(
  *         &image[0,0,0],             # <<<<<<<<<<<<<<
@@ -3368,10 +3355,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_4Erode3D(CYTHON_UNUSED PyObjec
   } else if (unlikely(__pyx_t_14 >= __pyx_pybuffernd_image.diminfo[2].shape)) __pyx_t_5 = 2;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 83, __pyx_L1_error)
+    __PYX_ERR(0, 106, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":84
+  /* "quantimpy/morphology.pyx":107
  *     status = cErode3D(
  *         &image[0,0,0],
  *         &erosion[0,0,0],             # <<<<<<<<<<<<<<
@@ -3396,11 +3383,11 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_4Erode3D(CYTHON_UNUSED PyObjec
   } else if (unlikely(__pyx_t_17 >= __pyx_pybuffernd_erosion.diminfo[2].shape)) __pyx_t_5 = 2;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 84, __pyx_L1_error)
+    __PYX_ERR(0, 107, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":82
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion = np.empty_like(image,dtype=np.uint16)
+  /* "quantimpy/morphology.pyx":105
+ *         image,dtype=np.uint16)
  * 
  *     status = cErode3D(             # <<<<<<<<<<<<<<
  *         &image[0,0,0],
@@ -3408,8 +3395,8 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_4Erode3D(CYTHON_UNUSED PyObjec
  */
   __pyx_v_status = cErode3D((&(*__Pyx_BufPtrCContig3d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_image.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_image.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_image.diminfo[1].strides, __pyx_t_14, __pyx_pybuffernd_image.diminfo[2].strides))), (&(*__Pyx_BufPtrCContig3d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_erosion.rcbuffer->pybuffer.buf, __pyx_t_15, __pyx_pybuffernd_erosion.diminfo[0].strides, __pyx_t_16, __pyx_pybuffernd_erosion.diminfo[1].strides, __pyx_t_17, __pyx_pybuffernd_erosion.diminfo[2].strides))), (__pyx_v_image->dimensions[0]), (__pyx_v_image->dimensions[1]), (__pyx_v_image->dimensions[2]), __pyx_v_dist, __pyx_v_res0, __pyx_v_res1, __pyx_v_res2);
 
-  /* "quantimpy/morphology.pyx":94
- *     )
+  /* "quantimpy/morphology.pyx":116
+ *         res2)
  * 
  *     assert status == 0             # <<<<<<<<<<<<<<
  *     return erosion.astype(np.bool)
@@ -3419,12 +3406,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_4Erode3D(CYTHON_UNUSED PyObjec
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_status == 0) != 0))) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 94, __pyx_L1_error)
+      __PYX_ERR(0, 116, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "quantimpy/morphology.pyx":95
+  /* "quantimpy/morphology.pyx":117
  * 
  *     assert status == 0
  *     return erosion.astype(np.bool)             # <<<<<<<<<<<<<<
@@ -3432,11 +3419,11 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_4Erode3D(CYTHON_UNUSED PyObjec
  * # }}}
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_erosion), __pyx_n_s_astype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_erosion), __pyx_n_s_astype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_bool); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_bool); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -3452,19 +3439,19 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_4Erode3D(CYTHON_UNUSED PyObjec
   __pyx_t_10 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_1, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 95, __pyx_L1_error)
+  if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_10;
   __pyx_t_10 = 0;
   goto __pyx_L0;
 
-  /* "quantimpy/morphology.pyx":76
- * ################################################################################
+  /* "quantimpy/morphology.pyx":93
  * 
- * def Erode3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, int dist, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def Erode3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         int dist,
  */
 
   /* function exit code */
@@ -3495,10 +3482,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_4Erode3D(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":101
+/* "quantimpy/morphology.pyx":123
  * # {{{ Dilate
  * 
- * cpdef Dilate(np.ndarray image, int dist, res=None):             # <<<<<<<<<<<<<<
+ * cpdef Dilate(np.ndarray image, int dist, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (image.dtype == 'bool'):
  */
@@ -3531,31 +3518,31 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
   __Pyx_INCREF((PyObject *)__pyx_v_image);
   __Pyx_INCREF(__pyx_v_res);
 
-  /* "quantimpy/morphology.pyx":103
- * cpdef Dilate(np.ndarray image, int dist, res=None):
+  /* "quantimpy/morphology.pyx":125
+ * cpdef Dilate(np.ndarray image, int dist, res = None):
  * 
  *     if (image.dtype == 'bool'):             # <<<<<<<<<<<<<<
  *         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
  *     else:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_image), __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_image), __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_bool, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_bool, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (likely(__pyx_t_2)) {
 
-    /* "quantimpy/morphology.pyx":104
+    /* "quantimpy/morphology.pyx":126
  * 
  *     if (image.dtype == 'bool'):
  *         image = image.astype(np.uint16)*np.iinfo(np.uint16).max             # <<<<<<<<<<<<<<
  *     else:
  *         raise ValueError('Input image needs to be binary (data type bool)')
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_image), __pyx_n_s_astype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_image), __pyx_n_s_astype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_uint16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_uint16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -3571,17 +3558,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_iinfo); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_iinfo); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_uint16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_uint16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -3597,22 +3584,22 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
     __pyx_t_3 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 104, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_max); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_max); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 104, __pyx_L1_error)
+    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_DECREF_SET(__pyx_v_image, ((PyArrayObject *)__pyx_t_3));
     __pyx_t_3 = 0;
 
-    /* "quantimpy/morphology.pyx":103
- * cpdef Dilate(np.ndarray image, int dist, res=None):
+    /* "quantimpy/morphology.pyx":125
+ * cpdef Dilate(np.ndarray image, int dist, res = None):
  * 
  *     if (image.dtype == 'bool'):             # <<<<<<<<<<<<<<
  *         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -3621,7 +3608,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
     goto __pyx_L3;
   }
 
-  /* "quantimpy/morphology.pyx":106
+  /* "quantimpy/morphology.pyx":128
  *         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
  *     else:
  *         raise ValueError('Input image needs to be binary (data type bool)')             # <<<<<<<<<<<<<<
@@ -3629,15 +3616,15 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
  *     if (image.ndim == 2):
  */
   /*else*/ {
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 106, __pyx_L1_error)
+    __PYX_ERR(0, 128, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "quantimpy/morphology.pyx":108
+  /* "quantimpy/morphology.pyx":130
  *         raise ValueError('Input image needs to be binary (data type bool)')
  * 
  *     if (image.ndim == 2):             # <<<<<<<<<<<<<<
@@ -3647,7 +3634,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
   switch (__pyx_v_image->nd) {
     case 2:
 
-    /* "quantimpy/morphology.pyx":110
+    /* "quantimpy/morphology.pyx":132
  *     if (image.ndim == 2):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -3658,7 +3645,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
     __pyx_t_7 = (__pyx_t_2 != 0);
     if (__pyx_t_7) {
 
-      /* "quantimpy/morphology.pyx":111
+      /* "quantimpy/morphology.pyx":133
  * # Set default resolution (length/voxel)
  *         if (res is None):
  *             res0 = 1.0             # <<<<<<<<<<<<<<
@@ -3668,17 +3655,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res0 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":112
+      /* "quantimpy/morphology.pyx":134
  *         if (res is None):
  *             res0 = 1.0
  *             res1 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res1 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":110
+      /* "quantimpy/morphology.pyx":132
  *     if (image.ndim == 2):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -3688,19 +3675,19 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
       goto __pyx_L4;
     }
 
-    /* "quantimpy/morphology.pyx":114
+    /* "quantimpy/morphology.pyx":136
  *             res1 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
     /*else*/ {
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 114, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 136, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 114, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 136, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_1 = NULL;
@@ -3716,39 +3703,39 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
       __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_1, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 114, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 136, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF_SET(__pyx_v_res, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":115
+      /* "quantimpy/morphology.pyx":137
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  * 
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 115, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 137, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res0 = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":116
- *             res  = res.astype(np.double)
+      /* "quantimpy/morphology.pyx":138
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  * 
  *         return Dilate2D(image, dist, res0, res1)
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 116, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 138, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res1 = __pyx_t_3;
       __pyx_t_3 = 0;
     }
     __pyx_L4:;
 
-    /* "quantimpy/morphology.pyx":118
+    /* "quantimpy/morphology.pyx":140
  *             res1 = res[1]
  * 
  *         return Dilate2D(image, dist, res0, res1)             # <<<<<<<<<<<<<<
@@ -3756,9 +3743,9 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
  * # Set default resolution (length/voxel)
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Dilate2D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 118, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Dilate2D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 140, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_dist); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 118, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_dist); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 140, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_1 = NULL;
     __pyx_t_8 = 0;
@@ -3775,7 +3762,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[5] = {__pyx_t_1, ((PyObject *)__pyx_v_image), __pyx_t_6, __pyx_v_res0, __pyx_v_res1};
-      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 118, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 140, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -3784,14 +3771,14 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[5] = {__pyx_t_1, ((PyObject *)__pyx_v_image), __pyx_t_6, __pyx_v_res0, __pyx_v_res1};
-      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 118, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 140, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else
     #endif
     {
-      __pyx_t_5 = PyTuple_New(4+__pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 118, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(4+__pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 140, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       if (__pyx_t_1) {
         __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -3808,7 +3795,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
       __Pyx_GIVEREF(__pyx_v_res1);
       PyTuple_SET_ITEM(__pyx_t_5, 3+__pyx_t_8, __pyx_v_res1);
       __pyx_t_6 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 118, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 140, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
@@ -3817,7 +3804,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "quantimpy/morphology.pyx":108
+    /* "quantimpy/morphology.pyx":130
  *         raise ValueError('Input image needs to be binary (data type bool)')
  * 
  *     if (image.ndim == 2):             # <<<<<<<<<<<<<<
@@ -3827,7 +3814,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
     break;
     case 3:
 
-    /* "quantimpy/morphology.pyx":121
+    /* "quantimpy/morphology.pyx":143
  *     elif (image.ndim == 3):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -3838,7 +3825,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
     __pyx_t_2 = (__pyx_t_7 != 0);
     if (__pyx_t_2) {
 
-      /* "quantimpy/morphology.pyx":122
+      /* "quantimpy/morphology.pyx":144
  * # Set default resolution (length/voxel)
  *         if (res is None):
  *             res0 = 1.0             # <<<<<<<<<<<<<<
@@ -3848,7 +3835,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res0 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":123
+      /* "quantimpy/morphology.pyx":145
  *         if (res is None):
  *             res0 = 1.0
  *             res1 = 1.0             # <<<<<<<<<<<<<<
@@ -3858,17 +3845,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res1 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":124
+      /* "quantimpy/morphology.pyx":146
  *             res0 = 1.0
  *             res1 = 1.0
  *             res2 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res2 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":121
+      /* "quantimpy/morphology.pyx":143
  *     elif (image.ndim == 3):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -3878,19 +3865,19 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
       goto __pyx_L5;
     }
 
-    /* "quantimpy/morphology.pyx":126
+    /* "quantimpy/morphology.pyx":148
  *             res2 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
     /*else*/ {
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 126, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 148, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 148, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 126, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 148, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_5 = NULL;
@@ -3906,51 +3893,51 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
       __pyx_t_3 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 148, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF_SET(__pyx_v_res, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":127
+      /* "quantimpy/morphology.pyx":149
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  *             res2 = res[2]
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res0 = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":128
- *             res  = res.astype(np.double)
+      /* "quantimpy/morphology.pyx":150
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  *             res2 = res[2]
  * 
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res1 = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":129
+      /* "quantimpy/morphology.pyx":151
  *             res0 = res[0]
  *             res1 = res[1]
  *             res2 = res[2]             # <<<<<<<<<<<<<<
  * 
  *         return Dilate3D(image, dist, res0, res1, res2)
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 129, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 151, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res2 = __pyx_t_3;
       __pyx_t_3 = 0;
     }
     __pyx_L5:;
 
-    /* "quantimpy/morphology.pyx":131
+    /* "quantimpy/morphology.pyx":153
  *             res2 = res[2]
  * 
  *         return Dilate3D(image, dist, res0, res1, res2)             # <<<<<<<<<<<<<<
@@ -3958,9 +3945,9 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
  *         raise ValueError('Can only handle 2D or 3D images')
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Dilate3D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Dilate3D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 153, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_dist); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_dist); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 153, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_5 = NULL;
     __pyx_t_8 = 0;
@@ -3977,7 +3964,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[6] = {__pyx_t_5, ((PyObject *)__pyx_v_image), __pyx_t_6, __pyx_v_res0, __pyx_v_res1, __pyx_v_res2};
-      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 5+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 131, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 5+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 153, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -3986,14 +3973,14 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[6] = {__pyx_t_5, ((PyObject *)__pyx_v_image), __pyx_t_6, __pyx_v_res0, __pyx_v_res1, __pyx_v_res2};
-      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 5+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 131, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 5+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 153, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else
     #endif
     {
-      __pyx_t_1 = PyTuple_New(5+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 131, __pyx_L1_error)
+      __pyx_t_1 = PyTuple_New(5+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 153, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (__pyx_t_5) {
         __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -4013,7 +4000,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
       __Pyx_GIVEREF(__pyx_v_res2);
       PyTuple_SET_ITEM(__pyx_t_1, 4+__pyx_t_8, __pyx_v_res2);
       __pyx_t_6 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 131, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 153, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
@@ -4022,7 +4009,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "quantimpy/morphology.pyx":119
+    /* "quantimpy/morphology.pyx":141
  * 
  *         return Dilate2D(image, dist, res0, res1)
  *     elif (image.ndim == 3):             # <<<<<<<<<<<<<<
@@ -4032,25 +4019,25 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Dilate(PyArrayObject *__pyx_v_i
     break;
     default:
 
-    /* "quantimpy/morphology.pyx":133
+    /* "quantimpy/morphology.pyx":155
  *         return Dilate3D(image, dist, res0, res1, res2)
  *     else:
  *         raise ValueError('Can only handle 2D or 3D images')             # <<<<<<<<<<<<<<
  * 
- * ################################################################################
+ * 
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 133, __pyx_L1_error)
+    __PYX_ERR(0, 155, __pyx_L1_error)
     break;
   }
 
-  /* "quantimpy/morphology.pyx":101
+  /* "quantimpy/morphology.pyx":123
  * # {{{ Dilate
  * 
- * cpdef Dilate(np.ndarray image, int dist, res=None):             # <<<<<<<<<<<<<<
+ * cpdef Dilate(np.ndarray image, int dist, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (image.dtype == 'bool'):
  */
@@ -4113,7 +4100,7 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_7Dilate(PyObject *__pyx_self, 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Dilate", 0, 2, 3, 1); __PYX_ERR(0, 101, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Dilate", 0, 2, 3, 1); __PYX_ERR(0, 123, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -4123,7 +4110,7 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_7Dilate(PyObject *__pyx_self, 
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Dilate") < 0)) __PYX_ERR(0, 101, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Dilate") < 0)) __PYX_ERR(0, 123, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -4136,18 +4123,18 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_7Dilate(PyObject *__pyx_self, 
       }
     }
     __pyx_v_image = ((PyArrayObject *)values[0]);
-    __pyx_v_dist = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_dist == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 101, __pyx_L3_error)
+    __pyx_v_dist = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_dist == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 123, __pyx_L3_error)
     __pyx_v_res = values[2];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("Dilate", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 101, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("Dilate", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 123, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.Dilate", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 101, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 123, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_6Dilate(__pyx_self, __pyx_v_image, __pyx_v_dist, __pyx_v_res);
 
   /* function exit code */
@@ -4171,7 +4158,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_6Dilate(CYTHON_UNUSED PyObject
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.res = __pyx_v_res;
-  __pyx_t_1 = __pyx_f_9quantimpy_10morphology_Dilate(__pyx_v_image, __pyx_v_dist, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9quantimpy_10morphology_Dilate(__pyx_v_image, __pyx_v_dist, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4188,12 +4175,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_6Dilate(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":142
- * ################################################################################
+/* "quantimpy/morphology.pyx":169
  * 
- * def Dilate2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, int dist, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def Dilate2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         int dist,
  */
 
 /* Python wrapper */
@@ -4237,23 +4224,23 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_9Dilate2D(PyObject *__pyx_self
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Dilate2D", 1, 4, 4, 1); __PYX_ERR(0, 142, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Dilate2D", 1, 4, 4, 1); __PYX_ERR(0, 169, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res0)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Dilate2D", 1, 4, 4, 2); __PYX_ERR(0, 142, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Dilate2D", 1, 4, 4, 2); __PYX_ERR(0, 169, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Dilate2D", 1, 4, 4, 3); __PYX_ERR(0, 142, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Dilate2D", 1, 4, 4, 3); __PYX_ERR(0, 169, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Dilate2D") < 0)) __PYX_ERR(0, 142, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Dilate2D") < 0)) __PYX_ERR(0, 169, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -4264,19 +4251,19 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_9Dilate2D(PyObject *__pyx_self
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
     __pyx_v_image = ((PyArrayObject *)values[0]);
-    __pyx_v_dist = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_dist == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 142, __pyx_L3_error)
-    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 142, __pyx_L3_error)
-    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 142, __pyx_L3_error)
+    __pyx_v_dist = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_dist == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 171, __pyx_L3_error)
+    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 172, __pyx_L3_error)
+    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 173, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("Dilate2D", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 142, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("Dilate2D", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 169, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.Dilate2D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 142, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 170, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_8Dilate2D(__pyx_self, __pyx_v_image, __pyx_v_dist, __pyx_v_res0, __pyx_v_res1);
 
   /* function exit code */
@@ -4327,20 +4314,20 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_8Dilate2D(CYTHON_UNUSED PyObje
   __pyx_pybuffernd_image.rcbuffer = &__pyx_pybuffer_image;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 142, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 169, __pyx_L1_error)
   }
   __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1];
 
-  /* "quantimpy/morphology.pyx":144
- * def Dilate2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, int dist, double res0, double res1):
+  /* "quantimpy/morphology.pyx":175
+ *         double res1):
  * 
  *     image = np.ascontiguousarray(image)             # <<<<<<<<<<<<<<
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation = np.empty_like(image,dtype=np.uint16)
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation = np.empty_like(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 144, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 144, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -4355,10 +4342,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_8Dilate2D(CYTHON_UNUSED PyObje
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, ((PyObject *)__pyx_v_image)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_image));
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 144, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 144, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 175, __pyx_L1_error)
   __pyx_t_4 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -4375,50 +4362,66 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_8Dilate2D(CYTHON_UNUSED PyObje
       __pyx_t_6 = __pyx_t_7 = __pyx_t_8 = 0;
     }
     __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1];
-    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 144, __pyx_L1_error)
+    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 175, __pyx_L1_error)
   }
   __pyx_t_4 = 0;
   __Pyx_DECREF_SET(__pyx_v_image, ((PyArrayObject *)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":146
+  /* "quantimpy/morphology.pyx":177
  *     image = np.ascontiguousarray(image)
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation = np.empty_like(image,dtype=np.uint16)             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "quantimpy/morphology.pyx":178
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation = np.empty_like(
+ *         image,dtype=np.uint16)             # <<<<<<<<<<<<<<
  * 
  *     status = cDilate2D(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject *)__pyx_v_image));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_image));
   PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_image));
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 178, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 178, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 178, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 146, __pyx_L1_error)
+
+  /* "quantimpy/morphology.pyx":177
+ *     image = np.ascontiguousarray(image)
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 146, __pyx_L1_error)
+  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 177, __pyx_L1_error)
   __pyx_t_11 = ((PyArrayObject *)__pyx_t_10);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_dilation.rcbuffer->pybuffer, (PyObject*)__pyx_t_11, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) {
       __pyx_v_dilation = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_dilation.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 146, __pyx_L1_error)
+      __PYX_ERR(0, 177, __pyx_L1_error)
     } else {__pyx_pybuffernd_dilation.diminfo[0].strides = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_dilation.diminfo[0].shape = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_dilation.diminfo[1].strides = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_dilation.diminfo[1].shape = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.shape[1];
     }
   }
@@ -4426,7 +4429,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_8Dilate2D(CYTHON_UNUSED PyObje
   __pyx_v_dilation = ((PyArrayObject *)__pyx_t_10);
   __pyx_t_10 = 0;
 
-  /* "quantimpy/morphology.pyx":149
+  /* "quantimpy/morphology.pyx":181
  * 
  *     status = cDilate2D(
  *         &image[0,0],             # <<<<<<<<<<<<<<
@@ -4446,10 +4449,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_8Dilate2D(CYTHON_UNUSED PyObje
   } else if (unlikely(__pyx_t_13 >= __pyx_pybuffernd_image.diminfo[1].shape)) __pyx_t_5 = 1;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 149, __pyx_L1_error)
+    __PYX_ERR(0, 181, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":150
+  /* "quantimpy/morphology.pyx":182
  *     status = cDilate2D(
  *         &image[0,0],
  *         &dilation[0,0],             # <<<<<<<<<<<<<<
@@ -4469,11 +4472,11 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_8Dilate2D(CYTHON_UNUSED PyObje
   } else if (unlikely(__pyx_t_15 >= __pyx_pybuffernd_dilation.diminfo[1].shape)) __pyx_t_5 = 1;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 150, __pyx_L1_error)
+    __PYX_ERR(0, 182, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":148
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation = np.empty_like(image,dtype=np.uint16)
+  /* "quantimpy/morphology.pyx":180
+ *         image,dtype=np.uint16)
  * 
  *     status = cDilate2D(             # <<<<<<<<<<<<<<
  *         &image[0,0],
@@ -4481,8 +4484,8 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_8Dilate2D(CYTHON_UNUSED PyObje
  */
   __pyx_v_status = cDilate2D((&(*__Pyx_BufPtrCContig2d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_image.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_image.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_image.diminfo[1].strides))), (&(*__Pyx_BufPtrCContig2d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_dilation.rcbuffer->pybuffer.buf, __pyx_t_14, __pyx_pybuffernd_dilation.diminfo[0].strides, __pyx_t_15, __pyx_pybuffernd_dilation.diminfo[1].strides))), (__pyx_v_image->dimensions[0]), (__pyx_v_image->dimensions[1]), __pyx_v_dist, __pyx_v_res0, __pyx_v_res1);
 
-  /* "quantimpy/morphology.pyx":158
- *     )
+  /* "quantimpy/morphology.pyx":189
+ *         res1)
  * 
  *     assert status == 0             # <<<<<<<<<<<<<<
  *     return dilation.astype(np.bool)
@@ -4492,24 +4495,24 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_8Dilate2D(CYTHON_UNUSED PyObje
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_status == 0) != 0))) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 158, __pyx_L1_error)
+      __PYX_ERR(0, 189, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "quantimpy/morphology.pyx":159
+  /* "quantimpy/morphology.pyx":190
  * 
  *     assert status == 0
  *     return dilation.astype(np.bool)             # <<<<<<<<<<<<<<
  * 
- * ################################################################################
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_dilation), __pyx_n_s_astype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_dilation), __pyx_n_s_astype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_bool); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_bool); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -4525,19 +4528,19 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_8Dilate2D(CYTHON_UNUSED PyObje
   __pyx_t_10 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_1, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 159, __pyx_L1_error)
+  if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_10;
   __pyx_t_10 = 0;
   goto __pyx_L0;
 
-  /* "quantimpy/morphology.pyx":142
- * ################################################################################
+  /* "quantimpy/morphology.pyx":169
  * 
- * def Dilate2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, int dist, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def Dilate2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         int dist,
  */
 
   /* function exit code */
@@ -4568,12 +4571,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_8Dilate2D(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":168
- * ################################################################################
+/* "quantimpy/morphology.pyx":206
  * 
- * def Dilate3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, int dist, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def Dilate3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         int dist,
  */
 
 /* Python wrapper */
@@ -4620,29 +4623,29 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_11Dilate3D(PyObject *__pyx_sel
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Dilate3D", 1, 5, 5, 1); __PYX_ERR(0, 168, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Dilate3D", 1, 5, 5, 1); __PYX_ERR(0, 206, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res0)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Dilate3D", 1, 5, 5, 2); __PYX_ERR(0, 168, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Dilate3D", 1, 5, 5, 2); __PYX_ERR(0, 206, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Dilate3D", 1, 5, 5, 3); __PYX_ERR(0, 168, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Dilate3D", 1, 5, 5, 3); __PYX_ERR(0, 206, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Dilate3D", 1, 5, 5, 4); __PYX_ERR(0, 168, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Dilate3D", 1, 5, 5, 4); __PYX_ERR(0, 206, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Dilate3D") < 0)) __PYX_ERR(0, 168, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Dilate3D") < 0)) __PYX_ERR(0, 206, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 5) {
       goto __pyx_L5_argtuple_error;
@@ -4654,20 +4657,20 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_11Dilate3D(PyObject *__pyx_sel
       values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
     }
     __pyx_v_image = ((PyArrayObject *)values[0]);
-    __pyx_v_dist = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_dist == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 168, __pyx_L3_error)
-    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 168, __pyx_L3_error)
-    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 168, __pyx_L3_error)
-    __pyx_v_res2 = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_res2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 168, __pyx_L3_error)
+    __pyx_v_dist = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_dist == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 208, __pyx_L3_error)
+    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 209, __pyx_L3_error)
+    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 210, __pyx_L3_error)
+    __pyx_v_res2 = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_res2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 211, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("Dilate3D", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 168, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("Dilate3D", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 206, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.Dilate3D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 168, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 207, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_10Dilate3D(__pyx_self, __pyx_v_image, __pyx_v_dist, __pyx_v_res0, __pyx_v_res1, __pyx_v_res2);
 
   /* function exit code */
@@ -4720,20 +4723,20 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_10Dilate3D(CYTHON_UNUSED PyObj
   __pyx_pybuffernd_image.rcbuffer = &__pyx_pybuffer_image;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 168, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 206, __pyx_L1_error)
   }
   __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_image.diminfo[2].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_image.diminfo[2].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[2];
 
-  /* "quantimpy/morphology.pyx":170
- * def Dilate3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, int dist, double res0, double res1, double res2):
+  /* "quantimpy/morphology.pyx":213
+ *         double res2):
  * 
  *     image = np.ascontiguousarray(image)             # <<<<<<<<<<<<<<
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation = np.empty_like(image,dtype=np.uint16)
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation = np.empty_like(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 170, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 213, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 170, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 213, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -4748,10 +4751,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_10Dilate3D(CYTHON_UNUSED PyObj
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, ((PyObject *)__pyx_v_image)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_image));
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 213, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 170, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 213, __pyx_L1_error)
   __pyx_t_4 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -4768,50 +4771,66 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_10Dilate3D(CYTHON_UNUSED PyObj
       __pyx_t_6 = __pyx_t_7 = __pyx_t_8 = 0;
     }
     __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_image.diminfo[2].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_image.diminfo[2].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[2];
-    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 170, __pyx_L1_error)
+    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 213, __pyx_L1_error)
   }
   __pyx_t_4 = 0;
   __Pyx_DECREF_SET(__pyx_v_image, ((PyArrayObject *)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":172
+  /* "quantimpy/morphology.pyx":215
  *     image = np.ascontiguousarray(image)
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation = np.empty_like(image,dtype=np.uint16)             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "quantimpy/morphology.pyx":216
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation = np.empty_like(
+ *         image,dtype=np.uint16)             # <<<<<<<<<<<<<<
  * 
  *     status = cDilate3D(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 172, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject *)__pyx_v_image));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_image));
   PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_image));
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 172, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 172, __pyx_L1_error)
+
+  /* "quantimpy/morphology.pyx":215
+ *     image = np.ascontiguousarray(image)
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 215, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 172, __pyx_L1_error)
+  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 215, __pyx_L1_error)
   __pyx_t_11 = ((PyArrayObject *)__pyx_t_10);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_dilation.rcbuffer->pybuffer, (PyObject*)__pyx_t_11, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) {
       __pyx_v_dilation = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_dilation.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 172, __pyx_L1_error)
+      __PYX_ERR(0, 215, __pyx_L1_error)
     } else {__pyx_pybuffernd_dilation.diminfo[0].strides = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_dilation.diminfo[0].shape = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_dilation.diminfo[1].strides = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_dilation.diminfo[1].shape = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_dilation.diminfo[2].strides = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_dilation.diminfo[2].shape = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.shape[2];
     }
   }
@@ -4819,7 +4838,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_10Dilate3D(CYTHON_UNUSED PyObj
   __pyx_v_dilation = ((PyArrayObject *)__pyx_t_10);
   __pyx_t_10 = 0;
 
-  /* "quantimpy/morphology.pyx":175
+  /* "quantimpy/morphology.pyx":219
  * 
  *     status = cDilate3D(
  *         &image[0,0,0],             # <<<<<<<<<<<<<<
@@ -4844,10 +4863,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_10Dilate3D(CYTHON_UNUSED PyObj
   } else if (unlikely(__pyx_t_14 >= __pyx_pybuffernd_image.diminfo[2].shape)) __pyx_t_5 = 2;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 175, __pyx_L1_error)
+    __PYX_ERR(0, 219, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":176
+  /* "quantimpy/morphology.pyx":220
  *     status = cDilate3D(
  *         &image[0,0,0],
  *         &dilation[0,0,0],             # <<<<<<<<<<<<<<
@@ -4872,11 +4891,11 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_10Dilate3D(CYTHON_UNUSED PyObj
   } else if (unlikely(__pyx_t_17 >= __pyx_pybuffernd_dilation.diminfo[2].shape)) __pyx_t_5 = 2;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 176, __pyx_L1_error)
+    __PYX_ERR(0, 220, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":174
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation = np.empty_like(image,dtype=np.uint16)
+  /* "quantimpy/morphology.pyx":218
+ *         image,dtype=np.uint16)
  * 
  *     status = cDilate3D(             # <<<<<<<<<<<<<<
  *         &image[0,0,0],
@@ -4884,8 +4903,8 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_10Dilate3D(CYTHON_UNUSED PyObj
  */
   __pyx_v_status = cDilate3D((&(*__Pyx_BufPtrCContig3d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_image.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_image.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_image.diminfo[1].strides, __pyx_t_14, __pyx_pybuffernd_image.diminfo[2].strides))), (&(*__Pyx_BufPtrCContig3d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_dilation.rcbuffer->pybuffer.buf, __pyx_t_15, __pyx_pybuffernd_dilation.diminfo[0].strides, __pyx_t_16, __pyx_pybuffernd_dilation.diminfo[1].strides, __pyx_t_17, __pyx_pybuffernd_dilation.diminfo[2].strides))), (__pyx_v_image->dimensions[0]), (__pyx_v_image->dimensions[1]), (__pyx_v_image->dimensions[2]), __pyx_v_dist, __pyx_v_res0, __pyx_v_res1, __pyx_v_res2);
 
-  /* "quantimpy/morphology.pyx":186
- *     )
+  /* "quantimpy/morphology.pyx":229
+ *         res2)
  * 
  *     assert status == 0             # <<<<<<<<<<<<<<
  *     return dilation.astype(np.bool)
@@ -4895,12 +4914,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_10Dilate3D(CYTHON_UNUSED PyObj
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_status == 0) != 0))) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 186, __pyx_L1_error)
+      __PYX_ERR(0, 229, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "quantimpy/morphology.pyx":187
+  /* "quantimpy/morphology.pyx":230
  * 
  *     assert status == 0
  *     return dilation.astype(np.bool)             # <<<<<<<<<<<<<<
@@ -4908,11 +4927,11 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_10Dilate3D(CYTHON_UNUSED PyObj
  * # }}}
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_dilation), __pyx_n_s_astype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_dilation), __pyx_n_s_astype); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_bool); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_bool); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -4928,19 +4947,19 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_10Dilate3D(CYTHON_UNUSED PyObj
   __pyx_t_10 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_1, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 187, __pyx_L1_error)
+  if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_10;
   __pyx_t_10 = 0;
   goto __pyx_L0;
 
-  /* "quantimpy/morphology.pyx":168
- * ################################################################################
+  /* "quantimpy/morphology.pyx":206
  * 
- * def Dilate3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, int dist, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def Dilate3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         int dist,
  */
 
   /* function exit code */
@@ -4971,10 +4990,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_10Dilate3D(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":193
+/* "quantimpy/morphology.pyx":236
  * # {{{ Open
  * 
- * cpdef Open(np.ndarray erosion, int dist, res=None):             # <<<<<<<<<<<<<<
+ * cpdef Open(np.ndarray erosion, int dist, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (erosion.dtype == 'bool'):
  */
@@ -5007,31 +5026,31 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
   __Pyx_INCREF((PyObject *)__pyx_v_erosion);
   __Pyx_INCREF(__pyx_v_res);
 
-  /* "quantimpy/morphology.pyx":195
- * cpdef Open(np.ndarray erosion, int dist, res=None):
+  /* "quantimpy/morphology.pyx":238
+ * cpdef Open(np.ndarray erosion, int dist, res = None):
  * 
  *     if (erosion.dtype == 'bool'):             # <<<<<<<<<<<<<<
  *         erosion = erosion.astype(np.uint16)*np.iinfo(np.uint16).max
  *     else:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_erosion), __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_erosion), __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_bool, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_bool, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 238, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (likely(__pyx_t_2)) {
 
-    /* "quantimpy/morphology.pyx":196
+    /* "quantimpy/morphology.pyx":239
  * 
  *     if (erosion.dtype == 'bool'):
  *         erosion = erosion.astype(np.uint16)*np.iinfo(np.uint16).max             # <<<<<<<<<<<<<<
  *     else:
  *         raise ValueError('Input images need to be binary (data type bool)')
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_erosion), __pyx_n_s_astype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 196, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_erosion), __pyx_n_s_astype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 196, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_uint16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 196, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_uint16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -5047,17 +5066,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 196, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 196, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_iinfo); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 196, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_iinfo); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 196, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_uint16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 196, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_uint16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -5073,22 +5092,22 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
     __pyx_t_3 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 196, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_max); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 196, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_max); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 196, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 196, __pyx_L1_error)
+    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 239, __pyx_L1_error)
     __Pyx_DECREF_SET(__pyx_v_erosion, ((PyArrayObject *)__pyx_t_3));
     __pyx_t_3 = 0;
 
-    /* "quantimpy/morphology.pyx":195
- * cpdef Open(np.ndarray erosion, int dist, res=None):
+    /* "quantimpy/morphology.pyx":238
+ * cpdef Open(np.ndarray erosion, int dist, res = None):
  * 
  *     if (erosion.dtype == 'bool'):             # <<<<<<<<<<<<<<
  *         erosion = erosion.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -5097,7 +5116,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
     goto __pyx_L3;
   }
 
-  /* "quantimpy/morphology.pyx":198
+  /* "quantimpy/morphology.pyx":241
  *         erosion = erosion.astype(np.uint16)*np.iinfo(np.uint16).max
  *     else:
  *         raise ValueError('Input images need to be binary (data type bool)')             # <<<<<<<<<<<<<<
@@ -5105,15 +5124,15 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
  *     if (erosion.ndim == 2):
  */
   /*else*/ {
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 198, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 198, __pyx_L1_error)
+    __PYX_ERR(0, 241, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "quantimpy/morphology.pyx":200
+  /* "quantimpy/morphology.pyx":243
  *         raise ValueError('Input images need to be binary (data type bool)')
  * 
  *     if (erosion.ndim == 2):             # <<<<<<<<<<<<<<
@@ -5123,7 +5142,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
   switch (__pyx_v_erosion->nd) {
     case 2:
 
-    /* "quantimpy/morphology.pyx":202
+    /* "quantimpy/morphology.pyx":245
  *     if (erosion.ndim == 2):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -5134,7 +5153,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
     __pyx_t_7 = (__pyx_t_2 != 0);
     if (__pyx_t_7) {
 
-      /* "quantimpy/morphology.pyx":203
+      /* "quantimpy/morphology.pyx":246
  * # Set default resolution (length/voxel)
  *         if (res is None):
  *             res0 = 1.0             # <<<<<<<<<<<<<<
@@ -5144,17 +5163,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res0 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":204
+      /* "quantimpy/morphology.pyx":247
  *         if (res is None):
  *             res0 = 1.0
  *             res1 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res1 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":202
+      /* "quantimpy/morphology.pyx":245
  *     if (erosion.ndim == 2):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -5164,19 +5183,19 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
       goto __pyx_L4;
     }
 
-    /* "quantimpy/morphology.pyx":206
+    /* "quantimpy/morphology.pyx":249
  *             res1 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
     /*else*/ {
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 206, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 249, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 249, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 206, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 249, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_1 = NULL;
@@ -5192,39 +5211,39 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
       __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_1, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 206, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 249, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF_SET(__pyx_v_res, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":207
+      /* "quantimpy/morphology.pyx":250
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  * 
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 207, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 250, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res0 = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":208
- *             res  = res.astype(np.double)
+      /* "quantimpy/morphology.pyx":251
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  * 
  *         return Dilate2D(erosion, dist, res0, res1)
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 208, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 251, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res1 = __pyx_t_3;
       __pyx_t_3 = 0;
     }
     __pyx_L4:;
 
-    /* "quantimpy/morphology.pyx":210
+    /* "quantimpy/morphology.pyx":253
  *             res1 = res[1]
  * 
  *         return Dilate2D(erosion, dist, res0, res1)             # <<<<<<<<<<<<<<
@@ -5232,9 +5251,9 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
  * # Set default resolution (length/voxel)
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Dilate2D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 210, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Dilate2D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 253, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_dist); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_dist); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 253, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_1 = NULL;
     __pyx_t_8 = 0;
@@ -5251,7 +5270,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[5] = {__pyx_t_1, ((PyObject *)__pyx_v_erosion), __pyx_t_6, __pyx_v_res0, __pyx_v_res1};
-      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 210, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 253, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -5260,14 +5279,14 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[5] = {__pyx_t_1, ((PyObject *)__pyx_v_erosion), __pyx_t_6, __pyx_v_res0, __pyx_v_res1};
-      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 210, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 253, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else
     #endif
     {
-      __pyx_t_5 = PyTuple_New(4+__pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 210, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(4+__pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 253, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       if (__pyx_t_1) {
         __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -5284,7 +5303,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
       __Pyx_GIVEREF(__pyx_v_res1);
       PyTuple_SET_ITEM(__pyx_t_5, 3+__pyx_t_8, __pyx_v_res1);
       __pyx_t_6 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 210, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 253, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
@@ -5293,7 +5312,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "quantimpy/morphology.pyx":200
+    /* "quantimpy/morphology.pyx":243
  *         raise ValueError('Input images need to be binary (data type bool)')
  * 
  *     if (erosion.ndim == 2):             # <<<<<<<<<<<<<<
@@ -5303,7 +5322,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
     break;
     case 3:
 
-    /* "quantimpy/morphology.pyx":213
+    /* "quantimpy/morphology.pyx":256
  *     elif (erosion.ndim == 3):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -5314,7 +5333,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
     __pyx_t_2 = (__pyx_t_7 != 0);
     if (__pyx_t_2) {
 
-      /* "quantimpy/morphology.pyx":214
+      /* "quantimpy/morphology.pyx":257
  * # Set default resolution (length/voxel)
  *         if (res is None):
  *             res0 = 1.0             # <<<<<<<<<<<<<<
@@ -5324,7 +5343,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res0 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":215
+      /* "quantimpy/morphology.pyx":258
  *         if (res is None):
  *             res0 = 1.0
  *             res1 = 1.0             # <<<<<<<<<<<<<<
@@ -5334,17 +5353,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res1 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":216
+      /* "quantimpy/morphology.pyx":259
  *             res0 = 1.0
  *             res1 = 1.0
  *             res2 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res2 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":213
+      /* "quantimpy/morphology.pyx":256
  *     elif (erosion.ndim == 3):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -5354,19 +5373,19 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
       goto __pyx_L5;
     }
 
-    /* "quantimpy/morphology.pyx":218
+    /* "quantimpy/morphology.pyx":261
  *             res2 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
     /*else*/ {
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 218, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 261, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 218, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 261, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 218, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 261, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_5 = NULL;
@@ -5382,51 +5401,51 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
       __pyx_t_3 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 218, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 261, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF_SET(__pyx_v_res, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":219
+      /* "quantimpy/morphology.pyx":262
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  *             res2 = res[2]
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 219, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 262, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res0 = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":220
- *             res  = res.astype(np.double)
+      /* "quantimpy/morphology.pyx":263
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  *             res2 = res[2]
  * 
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 220, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 263, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res1 = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":221
+      /* "quantimpy/morphology.pyx":264
  *             res0 = res[0]
  *             res1 = res[1]
  *             res2 = res[2]             # <<<<<<<<<<<<<<
  * 
  *         return Dilate3D(erosion, dist, res0, res1, res2)
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 221, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 264, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res2 = __pyx_t_3;
       __pyx_t_3 = 0;
     }
     __pyx_L5:;
 
-    /* "quantimpy/morphology.pyx":223
+    /* "quantimpy/morphology.pyx":266
  *             res2 = res[2]
  * 
  *         return Dilate3D(erosion, dist, res0, res1, res2)             # <<<<<<<<<<<<<<
@@ -5434,9 +5453,9 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
  *         raise ValueError('Can only handle 2D or 3D images')
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Dilate3D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 223, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Dilate3D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 266, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_dist); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 223, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_dist); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 266, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_5 = NULL;
     __pyx_t_8 = 0;
@@ -5453,7 +5472,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[6] = {__pyx_t_5, ((PyObject *)__pyx_v_erosion), __pyx_t_6, __pyx_v_res0, __pyx_v_res1, __pyx_v_res2};
-      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 5+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 223, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 5+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 266, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -5462,14 +5481,14 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[6] = {__pyx_t_5, ((PyObject *)__pyx_v_erosion), __pyx_t_6, __pyx_v_res0, __pyx_v_res1, __pyx_v_res2};
-      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 5+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 223, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 5+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 266, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else
     #endif
     {
-      __pyx_t_1 = PyTuple_New(5+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 223, __pyx_L1_error)
+      __pyx_t_1 = PyTuple_New(5+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 266, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (__pyx_t_5) {
         __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -5489,7 +5508,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
       __Pyx_GIVEREF(__pyx_v_res2);
       PyTuple_SET_ITEM(__pyx_t_1, 4+__pyx_t_8, __pyx_v_res2);
       __pyx_t_6 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 223, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 266, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
@@ -5498,7 +5517,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "quantimpy/morphology.pyx":211
+    /* "quantimpy/morphology.pyx":254
  * 
  *         return Dilate2D(erosion, dist, res0, res1)
  *     elif (erosion.ndim == 3):             # <<<<<<<<<<<<<<
@@ -5508,25 +5527,25 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Open(PyArrayObject *__pyx_v_ero
     break;
     default:
 
-    /* "quantimpy/morphology.pyx":225
+    /* "quantimpy/morphology.pyx":268
  *         return Dilate3D(erosion, dist, res0, res1, res2)
  *     else:
  *         raise ValueError('Can only handle 2D or 3D images')             # <<<<<<<<<<<<<<
  * 
  * # }}}
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 225, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 268, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 225, __pyx_L1_error)
+    __PYX_ERR(0, 268, __pyx_L1_error)
     break;
   }
 
-  /* "quantimpy/morphology.pyx":193
+  /* "quantimpy/morphology.pyx":236
  * # {{{ Open
  * 
- * cpdef Open(np.ndarray erosion, int dist, res=None):             # <<<<<<<<<<<<<<
+ * cpdef Open(np.ndarray erosion, int dist, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (erosion.dtype == 'bool'):
  */
@@ -5589,7 +5608,7 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_13Open(PyObject *__pyx_self, P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Open", 0, 2, 3, 1); __PYX_ERR(0, 193, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Open", 0, 2, 3, 1); __PYX_ERR(0, 236, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -5599,7 +5618,7 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_13Open(PyObject *__pyx_self, P
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Open") < 0)) __PYX_ERR(0, 193, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Open") < 0)) __PYX_ERR(0, 236, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -5612,18 +5631,18 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_13Open(PyObject *__pyx_self, P
       }
     }
     __pyx_v_erosion = ((PyArrayObject *)values[0]);
-    __pyx_v_dist = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_dist == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 193, __pyx_L3_error)
+    __pyx_v_dist = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_dist == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 236, __pyx_L3_error)
     __pyx_v_res = values[2];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("Open", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 193, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("Open", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 236, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.Open", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_erosion), __pyx_ptype_5numpy_ndarray, 1, "erosion", 0))) __PYX_ERR(0, 193, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_erosion), __pyx_ptype_5numpy_ndarray, 1, "erosion", 0))) __PYX_ERR(0, 236, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_12Open(__pyx_self, __pyx_v_erosion, __pyx_v_dist, __pyx_v_res);
 
   /* function exit code */
@@ -5647,7 +5666,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_12Open(CYTHON_UNUSED PyObject 
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.res = __pyx_v_res;
-  __pyx_t_1 = __pyx_f_9quantimpy_10morphology_Open(__pyx_v_erosion, __pyx_v_dist, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9quantimpy_10morphology_Open(__pyx_v_erosion, __pyx_v_dist, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 236, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5664,10 +5683,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_12Open(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":231
+/* "quantimpy/morphology.pyx":274
  * # {{{ Close
  * 
- * cpdef Close(np.ndarray dilation, int dist, res=None):             # <<<<<<<<<<<<<<
+ * cpdef Close(np.ndarray dilation, int dist, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (dilation.dtype == 'bool'):
  */
@@ -5700,31 +5719,31 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
   __Pyx_INCREF((PyObject *)__pyx_v_dilation);
   __Pyx_INCREF(__pyx_v_res);
 
-  /* "quantimpy/morphology.pyx":233
- * cpdef Close(np.ndarray dilation, int dist, res=None):
+  /* "quantimpy/morphology.pyx":276
+ * cpdef Close(np.ndarray dilation, int dist, res = None):
  * 
  *     if (dilation.dtype == 'bool'):             # <<<<<<<<<<<<<<
  *         dilation = dilation.astype(np.uint16)*np.iinfo(np.uint16).max
  *     else:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_dilation), __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 233, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_dilation), __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 276, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_bool, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 233, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_bool, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 276, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (likely(__pyx_t_2)) {
 
-    /* "quantimpy/morphology.pyx":234
+    /* "quantimpy/morphology.pyx":277
  * 
  *     if (dilation.dtype == 'bool'):
  *         dilation = dilation.astype(np.uint16)*np.iinfo(np.uint16).max             # <<<<<<<<<<<<<<
  *     else:
  *         raise ValueError('Input images need to be binary (data type bool)')
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_dilation), __pyx_n_s_astype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 234, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_dilation), __pyx_n_s_astype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 277, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 234, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 277, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_uint16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 234, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_uint16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 277, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -5740,17 +5759,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 234, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 277, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 234, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 277, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_iinfo); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 234, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_iinfo); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 277, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 234, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 277, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_uint16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 234, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_uint16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 277, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -5766,22 +5785,22 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
     __pyx_t_3 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 234, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 277, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_max); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 234, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_max); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 277, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 234, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 277, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 234, __pyx_L1_error)
+    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 277, __pyx_L1_error)
     __Pyx_DECREF_SET(__pyx_v_dilation, ((PyArrayObject *)__pyx_t_3));
     __pyx_t_3 = 0;
 
-    /* "quantimpy/morphology.pyx":233
- * cpdef Close(np.ndarray dilation, int dist, res=None):
+    /* "quantimpy/morphology.pyx":276
+ * cpdef Close(np.ndarray dilation, int dist, res = None):
  * 
  *     if (dilation.dtype == 'bool'):             # <<<<<<<<<<<<<<
  *         dilation = dilation.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -5790,7 +5809,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
     goto __pyx_L3;
   }
 
-  /* "quantimpy/morphology.pyx":236
+  /* "quantimpy/morphology.pyx":279
  *         dilation = dilation.astype(np.uint16)*np.iinfo(np.uint16).max
  *     else:
  *         raise ValueError('Input images need to be binary (data type bool)')             # <<<<<<<<<<<<<<
@@ -5798,15 +5817,15 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
  *     if (dilation.ndim == 2):
  */
   /*else*/ {
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 236, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 279, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 236, __pyx_L1_error)
+    __PYX_ERR(0, 279, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "quantimpy/morphology.pyx":238
+  /* "quantimpy/morphology.pyx":281
  *         raise ValueError('Input images need to be binary (data type bool)')
  * 
  *     if (dilation.ndim == 2):             # <<<<<<<<<<<<<<
@@ -5816,7 +5835,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
   switch (__pyx_v_dilation->nd) {
     case 2:
 
-    /* "quantimpy/morphology.pyx":240
+    /* "quantimpy/morphology.pyx":283
  *     if (dilation.ndim == 2):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -5827,7 +5846,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
     __pyx_t_7 = (__pyx_t_2 != 0);
     if (__pyx_t_7) {
 
-      /* "quantimpy/morphology.pyx":241
+      /* "quantimpy/morphology.pyx":284
  * # Set default resolution (length/voxel)
  *         if (res is None):
  *             res0 = 1.0             # <<<<<<<<<<<<<<
@@ -5837,17 +5856,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res0 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":242
+      /* "quantimpy/morphology.pyx":285
  *         if (res is None):
  *             res0 = 1.0
  *             res1 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res1 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":240
+      /* "quantimpy/morphology.pyx":283
  *     if (dilation.ndim == 2):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -5857,19 +5876,19 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
       goto __pyx_L4;
     }
 
-    /* "quantimpy/morphology.pyx":244
+    /* "quantimpy/morphology.pyx":287
  *             res1 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
     /*else*/ {
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 244, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 287, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 244, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 287, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 244, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 287, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_1 = NULL;
@@ -5885,39 +5904,39 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
       __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_1, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 244, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 287, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF_SET(__pyx_v_res, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":245
+      /* "quantimpy/morphology.pyx":288
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  * 
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 245, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 288, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res0 = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":246
- *             res  = res.astype(np.double)
+      /* "quantimpy/morphology.pyx":289
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  * 
  *         return Erode2D(dilation, dist, res0, res1)
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 246, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 289, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res1 = __pyx_t_3;
       __pyx_t_3 = 0;
     }
     __pyx_L4:;
 
-    /* "quantimpy/morphology.pyx":248
+    /* "quantimpy/morphology.pyx":291
  *             res1 = res[1]
  * 
  *         return Erode2D(dilation, dist, res0, res1)             # <<<<<<<<<<<<<<
@@ -5925,9 +5944,9 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
  * # Set default resolution (length/voxel)
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Erode2D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 248, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Erode2D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 291, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_dist); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 248, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_dist); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 291, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_1 = NULL;
     __pyx_t_8 = 0;
@@ -5944,7 +5963,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[5] = {__pyx_t_1, ((PyObject *)__pyx_v_dilation), __pyx_t_6, __pyx_v_res0, __pyx_v_res1};
-      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 248, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 291, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -5953,14 +5972,14 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[5] = {__pyx_t_1, ((PyObject *)__pyx_v_dilation), __pyx_t_6, __pyx_v_res0, __pyx_v_res1};
-      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 248, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 291, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else
     #endif
     {
-      __pyx_t_5 = PyTuple_New(4+__pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 248, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(4+__pyx_t_8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 291, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       if (__pyx_t_1) {
         __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -5977,7 +5996,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
       __Pyx_GIVEREF(__pyx_v_res1);
       PyTuple_SET_ITEM(__pyx_t_5, 3+__pyx_t_8, __pyx_v_res1);
       __pyx_t_6 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 248, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 291, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
@@ -5986,7 +6005,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "quantimpy/morphology.pyx":238
+    /* "quantimpy/morphology.pyx":281
  *         raise ValueError('Input images need to be binary (data type bool)')
  * 
  *     if (dilation.ndim == 2):             # <<<<<<<<<<<<<<
@@ -5996,7 +6015,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
     break;
     case 3:
 
-    /* "quantimpy/morphology.pyx":251
+    /* "quantimpy/morphology.pyx":294
  *     elif (dilation.ndim == 3):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -6007,7 +6026,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
     __pyx_t_2 = (__pyx_t_7 != 0);
     if (__pyx_t_2) {
 
-      /* "quantimpy/morphology.pyx":252
+      /* "quantimpy/morphology.pyx":295
  * # Set default resolution (length/voxel)
  *         if (res is None):
  *             res0 = 1.0             # <<<<<<<<<<<<<<
@@ -6017,7 +6036,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res0 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":253
+      /* "quantimpy/morphology.pyx":296
  *         if (res is None):
  *             res0 = 1.0
  *             res1 = 1.0             # <<<<<<<<<<<<<<
@@ -6027,17 +6046,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res1 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":254
+      /* "quantimpy/morphology.pyx":297
  *             res0 = 1.0
  *             res1 = 1.0
  *             res2 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res2 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":251
+      /* "quantimpy/morphology.pyx":294
  *     elif (dilation.ndim == 3):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -6047,19 +6066,19 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
       goto __pyx_L5;
     }
 
-    /* "quantimpy/morphology.pyx":256
+    /* "quantimpy/morphology.pyx":299
  *             res2 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
     /*else*/ {
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 256, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 299, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 256, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 299, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 256, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 299, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_5 = NULL;
@@ -6075,51 +6094,51 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
       __pyx_t_3 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 256, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 299, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF_SET(__pyx_v_res, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":257
+      /* "quantimpy/morphology.pyx":300
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  *             res2 = res[2]
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 257, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 300, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res0 = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":258
- *             res  = res.astype(np.double)
+      /* "quantimpy/morphology.pyx":301
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  *             res2 = res[2]
  * 
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 258, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 301, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res1 = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":259
+      /* "quantimpy/morphology.pyx":302
  *             res0 = res[0]
  *             res1 = res[1]
  *             res2 = res[2]             # <<<<<<<<<<<<<<
  * 
  *         return Erode3D(dilation, dist, res0, res1, res2)
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 259, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 302, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res2 = __pyx_t_3;
       __pyx_t_3 = 0;
     }
     __pyx_L5:;
 
-    /* "quantimpy/morphology.pyx":261
+    /* "quantimpy/morphology.pyx":304
  *             res2 = res[2]
  * 
  *         return Erode3D(dilation, dist, res0, res1, res2)             # <<<<<<<<<<<<<<
@@ -6127,9 +6146,9 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
  *         raise ValueError('Can only handle 2D or 3D images')
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Erode3D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 261, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Erode3D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_dist); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 261, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_dist); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_5 = NULL;
     __pyx_t_8 = 0;
@@ -6146,7 +6165,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[6] = {__pyx_t_5, ((PyObject *)__pyx_v_dilation), __pyx_t_6, __pyx_v_res0, __pyx_v_res1, __pyx_v_res2};
-      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 5+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 261, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 5+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 304, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -6155,14 +6174,14 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[6] = {__pyx_t_5, ((PyObject *)__pyx_v_dilation), __pyx_t_6, __pyx_v_res0, __pyx_v_res1, __pyx_v_res2};
-      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 5+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 261, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 5+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 304, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else
     #endif
     {
-      __pyx_t_1 = PyTuple_New(5+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 261, __pyx_L1_error)
+      __pyx_t_1 = PyTuple_New(5+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (__pyx_t_5) {
         __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -6182,7 +6201,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
       __Pyx_GIVEREF(__pyx_v_res2);
       PyTuple_SET_ITEM(__pyx_t_1, 4+__pyx_t_8, __pyx_v_res2);
       __pyx_t_6 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 261, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 304, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
@@ -6191,7 +6210,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "quantimpy/morphology.pyx":249
+    /* "quantimpy/morphology.pyx":292
  * 
  *         return Erode2D(dilation, dist, res0, res1)
  *     elif (dilation.ndim == 3):             # <<<<<<<<<<<<<<
@@ -6201,25 +6220,25 @@ static PyObject *__pyx_f_9quantimpy_10morphology_Close(PyArrayObject *__pyx_v_di
     break;
     default:
 
-    /* "quantimpy/morphology.pyx":263
+    /* "quantimpy/morphology.pyx":306
  *         return Erode3D(dilation, dist, res0, res1, res2)
  *     else:
  *         raise ValueError('Can only handle 2D or 3D images')             # <<<<<<<<<<<<<<
  * 
  * # }}}
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 263, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 306, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 263, __pyx_L1_error)
+    __PYX_ERR(0, 306, __pyx_L1_error)
     break;
   }
 
-  /* "quantimpy/morphology.pyx":231
+  /* "quantimpy/morphology.pyx":274
  * # {{{ Close
  * 
- * cpdef Close(np.ndarray dilation, int dist, res=None):             # <<<<<<<<<<<<<<
+ * cpdef Close(np.ndarray dilation, int dist, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (dilation.dtype == 'bool'):
  */
@@ -6282,7 +6301,7 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_15Close(PyObject *__pyx_self, 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dist)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Close", 0, 2, 3, 1); __PYX_ERR(0, 231, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Close", 0, 2, 3, 1); __PYX_ERR(0, 274, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -6292,7 +6311,7 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_15Close(PyObject *__pyx_self, 
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Close") < 0)) __PYX_ERR(0, 231, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Close") < 0)) __PYX_ERR(0, 274, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -6305,18 +6324,18 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_15Close(PyObject *__pyx_self, 
       }
     }
     __pyx_v_dilation = ((PyArrayObject *)values[0]);
-    __pyx_v_dist = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_dist == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 231, __pyx_L3_error)
+    __pyx_v_dist = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_dist == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 274, __pyx_L3_error)
     __pyx_v_res = values[2];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("Close", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 231, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("Close", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 274, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.Close", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dilation), __pyx_ptype_5numpy_ndarray, 1, "dilation", 0))) __PYX_ERR(0, 231, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dilation), __pyx_ptype_5numpy_ndarray, 1, "dilation", 0))) __PYX_ERR(0, 274, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_14Close(__pyx_self, __pyx_v_dilation, __pyx_v_dist, __pyx_v_res);
 
   /* function exit code */
@@ -6340,7 +6359,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_14Close(CYTHON_UNUSED PyObject
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.res = __pyx_v_res;
-  __pyx_t_1 = __pyx_f_9quantimpy_10morphology_Close(__pyx_v_dilation, __pyx_v_dist, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 231, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9quantimpy_10morphology_Close(__pyx_v_dilation, __pyx_v_dist, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -6357,10 +6376,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_14Close(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":269
+/* "quantimpy/morphology.pyx":312
  * # {{{ ErodeMap
  * 
- * cpdef ErodeMap(np.ndarray image, res=None):             # <<<<<<<<<<<<<<
+ * cpdef ErodeMap(np.ndarray image, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (image.dtype == 'bool'):
  */
@@ -6393,31 +6412,31 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
   __Pyx_INCREF((PyObject *)__pyx_v_image);
   __Pyx_INCREF(__pyx_v_res);
 
-  /* "quantimpy/morphology.pyx":271
- * cpdef ErodeMap(np.ndarray image, res=None):
+  /* "quantimpy/morphology.pyx":314
+ * cpdef ErodeMap(np.ndarray image, res = None):
  * 
  *     if (image.dtype == 'bool'):             # <<<<<<<<<<<<<<
  *         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
  *     else:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_image), __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_image), __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 314, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_bool, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_bool, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 314, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (likely(__pyx_t_2)) {
 
-    /* "quantimpy/morphology.pyx":272
+    /* "quantimpy/morphology.pyx":315
  * 
  *     if (image.dtype == 'bool'):
  *         image = image.astype(np.uint16)*np.iinfo(np.uint16).max             # <<<<<<<<<<<<<<
  *     else:
  *         raise ValueError('Input image needs to be binary (data type bool)')
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_image), __pyx_n_s_astype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 272, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_image), __pyx_n_s_astype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 315, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 272, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 315, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_uint16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 272, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_uint16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 315, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -6433,17 +6452,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 272, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 315, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 272, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 315, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_iinfo); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 272, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_iinfo); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 315, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 272, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 315, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_uint16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 272, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_uint16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 315, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -6459,22 +6478,22 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
     __pyx_t_3 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 272, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 315, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_max); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 272, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_max); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 315, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 272, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 315, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 272, __pyx_L1_error)
+    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 315, __pyx_L1_error)
     __Pyx_DECREF_SET(__pyx_v_image, ((PyArrayObject *)__pyx_t_3));
     __pyx_t_3 = 0;
 
-    /* "quantimpy/morphology.pyx":271
- * cpdef ErodeMap(np.ndarray image, res=None):
+    /* "quantimpy/morphology.pyx":314
+ * cpdef ErodeMap(np.ndarray image, res = None):
  * 
  *     if (image.dtype == 'bool'):             # <<<<<<<<<<<<<<
  *         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -6483,7 +6502,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
     goto __pyx_L3;
   }
 
-  /* "quantimpy/morphology.pyx":274
+  /* "quantimpy/morphology.pyx":317
  *         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
  *     else:
  *         raise ValueError('Input image needs to be binary (data type bool)')             # <<<<<<<<<<<<<<
@@ -6491,15 +6510,15 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
  *     if (image.ndim == 2):
  */
   /*else*/ {
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 317, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 274, __pyx_L1_error)
+    __PYX_ERR(0, 317, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "quantimpy/morphology.pyx":276
+  /* "quantimpy/morphology.pyx":319
  *         raise ValueError('Input image needs to be binary (data type bool)')
  * 
  *     if (image.ndim == 2):             # <<<<<<<<<<<<<<
@@ -6509,7 +6528,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
   switch (__pyx_v_image->nd) {
     case 2:
 
-    /* "quantimpy/morphology.pyx":278
+    /* "quantimpy/morphology.pyx":321
  *     if (image.ndim == 2):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -6520,7 +6539,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
     __pyx_t_7 = (__pyx_t_2 != 0);
     if (__pyx_t_7) {
 
-      /* "quantimpy/morphology.pyx":279
+      /* "quantimpy/morphology.pyx":322
  * # Set default resolution (length/voxel)
  *         if (res is None):
  *             res0 = 1.0             # <<<<<<<<<<<<<<
@@ -6530,17 +6549,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res0 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":280
+      /* "quantimpy/morphology.pyx":323
  *         if (res is None):
  *             res0 = 1.0
  *             res1 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res1 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":278
+      /* "quantimpy/morphology.pyx":321
  *     if (image.ndim == 2):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -6550,19 +6569,19 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
       goto __pyx_L4;
     }
 
-    /* "quantimpy/morphology.pyx":282
+    /* "quantimpy/morphology.pyx":325
  *             res1 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
     /*else*/ {
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 282, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 325, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 282, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 325, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 282, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 325, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_1 = NULL;
@@ -6578,39 +6597,39 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
       __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_1, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 282, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 325, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF_SET(__pyx_v_res, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":283
+      /* "quantimpy/morphology.pyx":326
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  * 
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 283, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 326, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res0 = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":284
- *             res  = res.astype(np.double)
+      /* "quantimpy/morphology.pyx":327
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  * 
  *         return ErodeMap2D(image, res0, res1)
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 284, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 327, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res1 = __pyx_t_3;
       __pyx_t_3 = 0;
     }
     __pyx_L4:;
 
-    /* "quantimpy/morphology.pyx":286
+    /* "quantimpy/morphology.pyx":329
  *             res1 = res[1]
  * 
  *         return ErodeMap2D(image, res0, res1)             # <<<<<<<<<<<<<<
@@ -6618,7 +6637,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
  * # Set default resolution (length/voxel)
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ErodeMap2D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 286, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ErodeMap2D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 329, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_6 = NULL;
     __pyx_t_8 = 0;
@@ -6635,7 +6654,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[4] = {__pyx_t_6, ((PyObject *)__pyx_v_image), __pyx_v_res0, __pyx_v_res1};
-      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 286, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 329, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_3);
     } else
@@ -6643,13 +6662,13 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[4] = {__pyx_t_6, ((PyObject *)__pyx_v_image), __pyx_v_res0, __pyx_v_res1};
-      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 286, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 329, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_3);
     } else
     #endif
     {
-      __pyx_t_1 = PyTuple_New(3+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 286, __pyx_L1_error)
+      __pyx_t_1 = PyTuple_New(3+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 329, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -6663,7 +6682,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
       __Pyx_INCREF(__pyx_v_res1);
       __Pyx_GIVEREF(__pyx_v_res1);
       PyTuple_SET_ITEM(__pyx_t_1, 2+__pyx_t_8, __pyx_v_res1);
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 286, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 329, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
@@ -6672,7 +6691,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "quantimpy/morphology.pyx":276
+    /* "quantimpy/morphology.pyx":319
  *         raise ValueError('Input image needs to be binary (data type bool)')
  * 
  *     if (image.ndim == 2):             # <<<<<<<<<<<<<<
@@ -6682,7 +6701,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
     break;
     case 3:
 
-    /* "quantimpy/morphology.pyx":289
+    /* "quantimpy/morphology.pyx":332
  *     elif (image.ndim == 3):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -6693,7 +6712,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
     __pyx_t_2 = (__pyx_t_7 != 0);
     if (__pyx_t_2) {
 
-      /* "quantimpy/morphology.pyx":290
+      /* "quantimpy/morphology.pyx":333
  * # Set default resolution (length/voxel)
  *         if (res is None):
  *             res0 = 1.0             # <<<<<<<<<<<<<<
@@ -6703,7 +6722,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res0 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":291
+      /* "quantimpy/morphology.pyx":334
  *         if (res is None):
  *             res0 = 1.0
  *             res1 = 1.0             # <<<<<<<<<<<<<<
@@ -6713,17 +6732,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res1 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":292
+      /* "quantimpy/morphology.pyx":335
  *             res0 = 1.0
  *             res1 = 1.0
  *             res2 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res2 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":289
+      /* "quantimpy/morphology.pyx":332
  *     elif (image.ndim == 3):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -6733,19 +6752,19 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
       goto __pyx_L5;
     }
 
-    /* "quantimpy/morphology.pyx":294
+    /* "quantimpy/morphology.pyx":337
  *             res2 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
     /*else*/ {
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 294, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 337, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 294, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 337, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 294, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 337, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_1 = NULL;
@@ -6761,51 +6780,51 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
       __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_1, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 294, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 337, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF_SET(__pyx_v_res, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":295
+      /* "quantimpy/morphology.pyx":338
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  *             res2 = res[2]
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 295, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 338, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res0 = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":296
- *             res  = res.astype(np.double)
+      /* "quantimpy/morphology.pyx":339
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  *             res2 = res[2]
  * 
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 296, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 339, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res1 = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":297
+      /* "quantimpy/morphology.pyx":340
  *             res0 = res[0]
  *             res1 = res[1]
  *             res2 = res[2]             # <<<<<<<<<<<<<<
  * 
  *         return ErodeMap3D(image, res0, res1, res2)
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 297, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 340, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res2 = __pyx_t_3;
       __pyx_t_3 = 0;
     }
     __pyx_L5:;
 
-    /* "quantimpy/morphology.pyx":299
+    /* "quantimpy/morphology.pyx":342
  *             res2 = res[2]
  * 
  *         return ErodeMap3D(image, res0, res1, res2)             # <<<<<<<<<<<<<<
@@ -6813,7 +6832,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
  *         raise ValueError('Can only handle 2D or 3D images')
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ErodeMap3D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 299, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_ErodeMap3D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 342, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_6 = NULL;
     __pyx_t_8 = 0;
@@ -6830,7 +6849,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[5] = {__pyx_t_6, ((PyObject *)__pyx_v_image), __pyx_v_res0, __pyx_v_res1, __pyx_v_res2};
-      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 299, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 342, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_3);
     } else
@@ -6838,13 +6857,13 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[5] = {__pyx_t_6, ((PyObject *)__pyx_v_image), __pyx_v_res0, __pyx_v_res1, __pyx_v_res2};
-      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 299, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 342, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_3);
     } else
     #endif
     {
-      __pyx_t_1 = PyTuple_New(4+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 299, __pyx_L1_error)
+      __pyx_t_1 = PyTuple_New(4+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 342, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -6861,7 +6880,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
       __Pyx_INCREF(__pyx_v_res2);
       __Pyx_GIVEREF(__pyx_v_res2);
       PyTuple_SET_ITEM(__pyx_t_1, 3+__pyx_t_8, __pyx_v_res2);
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 299, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 342, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
@@ -6870,7 +6889,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "quantimpy/morphology.pyx":287
+    /* "quantimpy/morphology.pyx":330
  * 
  *         return ErodeMap2D(image, res0, res1)
  *     elif (image.ndim == 3):             # <<<<<<<<<<<<<<
@@ -6880,25 +6899,25 @@ static PyObject *__pyx_f_9quantimpy_10morphology_ErodeMap(PyArrayObject *__pyx_v
     break;
     default:
 
-    /* "quantimpy/morphology.pyx":301
+    /* "quantimpy/morphology.pyx":344
  *         return ErodeMap3D(image, res0, res1, res2)
  *     else:
  *         raise ValueError('Can only handle 2D or 3D images')             # <<<<<<<<<<<<<<
  * 
- * ################################################################################
+ * 
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 301, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 344, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 301, __pyx_L1_error)
+    __PYX_ERR(0, 344, __pyx_L1_error)
     break;
   }
 
-  /* "quantimpy/morphology.pyx":269
+  /* "quantimpy/morphology.pyx":312
  * # {{{ ErodeMap
  * 
- * cpdef ErodeMap(np.ndarray image, res=None):             # <<<<<<<<<<<<<<
+ * cpdef ErodeMap(np.ndarray image, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (image.dtype == 'bool'):
  */
@@ -6962,7 +6981,7 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_17ErodeMap(PyObject *__pyx_sel
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ErodeMap") < 0)) __PYX_ERR(0, 269, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ErodeMap") < 0)) __PYX_ERR(0, 312, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -6978,13 +6997,13 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_17ErodeMap(PyObject *__pyx_sel
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("ErodeMap", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 269, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("ErodeMap", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 312, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.ErodeMap", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 269, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 312, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_16ErodeMap(__pyx_self, __pyx_v_image, __pyx_v_res);
 
   /* function exit code */
@@ -7008,7 +7027,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_16ErodeMap(CYTHON_UNUSED PyObj
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.res = __pyx_v_res;
-  __pyx_t_1 = __pyx_f_9quantimpy_10morphology_ErodeMap(__pyx_v_image, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 269, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9quantimpy_10morphology_ErodeMap(__pyx_v_image, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 312, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -7025,12 +7044,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_16ErodeMap(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":310
- * ################################################################################
+/* "quantimpy/morphology.pyx":358
  * 
- * def ErodeMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def ErodeMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         double res0,
  */
 
 /* Python wrapper */
@@ -7071,17 +7090,17 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_19ErodeMap2D(PyObject *__pyx_s
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res0)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("ErodeMap2D", 1, 3, 3, 1); __PYX_ERR(0, 310, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("ErodeMap2D", 1, 3, 3, 1); __PYX_ERR(0, 358, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("ErodeMap2D", 1, 3, 3, 2); __PYX_ERR(0, 310, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("ErodeMap2D", 1, 3, 3, 2); __PYX_ERR(0, 358, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ErodeMap2D") < 0)) __PYX_ERR(0, 310, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ErodeMap2D") < 0)) __PYX_ERR(0, 358, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -7091,18 +7110,18 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_19ErodeMap2D(PyObject *__pyx_s
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
     __pyx_v_image = ((PyArrayObject *)values[0]);
-    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 310, __pyx_L3_error)
-    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 310, __pyx_L3_error)
+    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 360, __pyx_L3_error)
+    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 361, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("ErodeMap2D", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 310, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("ErodeMap2D", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 358, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.ErodeMap2D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 310, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 359, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_18ErodeMap2D(__pyx_self, __pyx_v_image, __pyx_v_res0, __pyx_v_res1);
 
   /* function exit code */
@@ -7153,20 +7172,20 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_18ErodeMap2D(CYTHON_UNUSED PyO
   __pyx_pybuffernd_image.rcbuffer = &__pyx_pybuffer_image;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 310, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 358, __pyx_L1_error)
   }
   __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1];
 
-  /* "quantimpy/morphology.pyx":312
- * def ErodeMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1):
+  /* "quantimpy/morphology.pyx":363
+ *         double res1):
  * 
  *     image = np.ascontiguousarray(image)             # <<<<<<<<<<<<<<
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(image,dtype=np.uint16)
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 312, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 312, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -7181,10 +7200,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_18ErodeMap2D(CYTHON_UNUSED PyO
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, ((PyObject *)__pyx_v_image)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_image));
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 312, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 312, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 363, __pyx_L1_error)
   __pyx_t_4 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -7201,50 +7220,66 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_18ErodeMap2D(CYTHON_UNUSED PyO
       __pyx_t_6 = __pyx_t_7 = __pyx_t_8 = 0;
     }
     __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1];
-    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 312, __pyx_L1_error)
+    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 363, __pyx_L1_error)
   }
   __pyx_t_4 = 0;
   __Pyx_DECREF_SET(__pyx_v_image, ((PyArrayObject *)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":314
+  /* "quantimpy/morphology.pyx":365
  *     image = np.ascontiguousarray(image)
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(image,dtype=np.uint16)             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 365, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 365, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "quantimpy/morphology.pyx":366
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(
+ *         image,dtype=np.uint16)             # <<<<<<<<<<<<<<
  * 
  *     status = cGetMap2D(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 314, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 314, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 314, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 365, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject *)__pyx_v_image));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_image));
   PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_image));
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 314, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 366, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 314, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 366, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 314, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 366, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 314, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 366, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 314, __pyx_L1_error)
+
+  /* "quantimpy/morphology.pyx":365
+ *     image = np.ascontiguousarray(image)
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 365, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 314, __pyx_L1_error)
+  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 365, __pyx_L1_error)
   __pyx_t_11 = ((PyArrayObject *)__pyx_t_10);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_distance.rcbuffer->pybuffer, (PyObject*)__pyx_t_11, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) {
       __pyx_v_distance = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_distance.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 314, __pyx_L1_error)
+      __PYX_ERR(0, 365, __pyx_L1_error)
     } else {__pyx_pybuffernd_distance.diminfo[0].strides = __pyx_pybuffernd_distance.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_distance.diminfo[0].shape = __pyx_pybuffernd_distance.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_distance.diminfo[1].strides = __pyx_pybuffernd_distance.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_distance.diminfo[1].shape = __pyx_pybuffernd_distance.rcbuffer->pybuffer.shape[1];
     }
   }
@@ -7252,7 +7287,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_18ErodeMap2D(CYTHON_UNUSED PyO
   __pyx_v_distance = ((PyArrayObject *)__pyx_t_10);
   __pyx_t_10 = 0;
 
-  /* "quantimpy/morphology.pyx":317
+  /* "quantimpy/morphology.pyx":369
  * 
  *     status = cGetMap2D(
  *         &image[0,0],             # <<<<<<<<<<<<<<
@@ -7272,10 +7307,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_18ErodeMap2D(CYTHON_UNUSED PyO
   } else if (unlikely(__pyx_t_13 >= __pyx_pybuffernd_image.diminfo[1].shape)) __pyx_t_5 = 1;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 317, __pyx_L1_error)
+    __PYX_ERR(0, 369, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":318
+  /* "quantimpy/morphology.pyx":370
  *     status = cGetMap2D(
  *         &image[0,0],
  *         &distance[0,0],             # <<<<<<<<<<<<<<
@@ -7295,11 +7330,11 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_18ErodeMap2D(CYTHON_UNUSED PyO
   } else if (unlikely(__pyx_t_15 >= __pyx_pybuffernd_distance.diminfo[1].shape)) __pyx_t_5 = 1;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 318, __pyx_L1_error)
+    __PYX_ERR(0, 370, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":316
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(image,dtype=np.uint16)
+  /* "quantimpy/morphology.pyx":368
+ *         image,dtype=np.uint16)
  * 
  *     status = cGetMap2D(             # <<<<<<<<<<<<<<
  *         &image[0,0],
@@ -7307,8 +7342,8 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_18ErodeMap2D(CYTHON_UNUSED PyO
  */
   __pyx_v_status = cGetMap2D((&(*__Pyx_BufPtrCContig2d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_image.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_image.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_image.diminfo[1].strides))), (&(*__Pyx_BufPtrCContig2d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_distance.rcbuffer->pybuffer.buf, __pyx_t_14, __pyx_pybuffernd_distance.diminfo[0].strides, __pyx_t_15, __pyx_pybuffernd_distance.diminfo[1].strides))), (__pyx_v_image->dimensions[0]), (__pyx_v_image->dimensions[1]), __pyx_v_res0, __pyx_v_res1, 1);
 
-  /* "quantimpy/morphology.pyx":326
- *     )
+  /* "quantimpy/morphology.pyx":377
+ *         1)
  * 
  *     assert status == 0             # <<<<<<<<<<<<<<
  *     return distance
@@ -7318,29 +7353,29 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_18ErodeMap2D(CYTHON_UNUSED PyO
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_status == 0) != 0))) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 326, __pyx_L1_error)
+      __PYX_ERR(0, 377, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "quantimpy/morphology.pyx":327
+  /* "quantimpy/morphology.pyx":378
  * 
  *     assert status == 0
  *     return distance             # <<<<<<<<<<<<<<
  * 
- * ################################################################################
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(((PyObject *)__pyx_v_distance));
   __pyx_r = ((PyObject *)__pyx_v_distance);
   goto __pyx_L0;
 
-  /* "quantimpy/morphology.pyx":310
- * ################################################################################
+  /* "quantimpy/morphology.pyx":358
  * 
- * def ErodeMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def ErodeMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         double res0,
  */
 
   /* function exit code */
@@ -7371,12 +7406,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_18ErodeMap2D(CYTHON_UNUSED PyO
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":336
- * ################################################################################
+/* "quantimpy/morphology.pyx":394
  * 
- * def ErodeMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def ErodeMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         double res0,
  */
 
 /* Python wrapper */
@@ -7420,23 +7455,23 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_21ErodeMap3D(PyObject *__pyx_s
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res0)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("ErodeMap3D", 1, 4, 4, 1); __PYX_ERR(0, 336, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("ErodeMap3D", 1, 4, 4, 1); __PYX_ERR(0, 394, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("ErodeMap3D", 1, 4, 4, 2); __PYX_ERR(0, 336, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("ErodeMap3D", 1, 4, 4, 2); __PYX_ERR(0, 394, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("ErodeMap3D", 1, 4, 4, 3); __PYX_ERR(0, 336, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("ErodeMap3D", 1, 4, 4, 3); __PYX_ERR(0, 394, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ErodeMap3D") < 0)) __PYX_ERR(0, 336, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ErodeMap3D") < 0)) __PYX_ERR(0, 394, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -7447,19 +7482,19 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_21ErodeMap3D(PyObject *__pyx_s
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
     __pyx_v_image = ((PyArrayObject *)values[0]);
-    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 336, __pyx_L3_error)
-    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 336, __pyx_L3_error)
-    __pyx_v_res2 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 336, __pyx_L3_error)
+    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 396, __pyx_L3_error)
+    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 397, __pyx_L3_error)
+    __pyx_v_res2 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 398, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("ErodeMap3D", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 336, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("ErodeMap3D", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 394, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.ErodeMap3D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 336, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 395, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_20ErodeMap3D(__pyx_self, __pyx_v_image, __pyx_v_res0, __pyx_v_res1, __pyx_v_res2);
 
   /* function exit code */
@@ -7512,20 +7547,20 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_20ErodeMap3D(CYTHON_UNUSED PyO
   __pyx_pybuffernd_image.rcbuffer = &__pyx_pybuffer_image;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 336, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 394, __pyx_L1_error)
   }
   __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_image.diminfo[2].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_image.diminfo[2].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[2];
 
-  /* "quantimpy/morphology.pyx":338
- * def ErodeMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2):
+  /* "quantimpy/morphology.pyx":400
+ *         double res2):
  * 
  *     image = np.ascontiguousarray(image)             # <<<<<<<<<<<<<<
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(image,dtype=np.uint16)
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 338, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 400, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 338, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 400, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -7540,10 +7575,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_20ErodeMap3D(CYTHON_UNUSED PyO
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, ((PyObject *)__pyx_v_image)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_image));
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 338, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 400, __pyx_L1_error)
   __pyx_t_4 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -7560,50 +7595,66 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_20ErodeMap3D(CYTHON_UNUSED PyO
       __pyx_t_6 = __pyx_t_7 = __pyx_t_8 = 0;
     }
     __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_image.diminfo[2].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_image.diminfo[2].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[2];
-    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 338, __pyx_L1_error)
+    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 400, __pyx_L1_error)
   }
   __pyx_t_4 = 0;
   __Pyx_DECREF_SET(__pyx_v_image, ((PyArrayObject *)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":340
+  /* "quantimpy/morphology.pyx":402
  *     image = np.ascontiguousarray(image)
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(image,dtype=np.uint16)             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 402, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 402, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "quantimpy/morphology.pyx":403
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(
+ *         image,dtype=np.uint16)             # <<<<<<<<<<<<<<
  * 
  *     status = cGetMap3D(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 340, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 340, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 340, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 402, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject *)__pyx_v_image));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_image));
   PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_image));
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 340, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 403, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 340, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 403, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 340, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 403, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 340, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 403, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 340, __pyx_L1_error)
+
+  /* "quantimpy/morphology.pyx":402
+ *     image = np.ascontiguousarray(image)
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 402, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 340, __pyx_L1_error)
+  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 402, __pyx_L1_error)
   __pyx_t_11 = ((PyArrayObject *)__pyx_t_10);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_distance.rcbuffer->pybuffer, (PyObject*)__pyx_t_11, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) {
       __pyx_v_distance = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_distance.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 340, __pyx_L1_error)
+      __PYX_ERR(0, 402, __pyx_L1_error)
     } else {__pyx_pybuffernd_distance.diminfo[0].strides = __pyx_pybuffernd_distance.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_distance.diminfo[0].shape = __pyx_pybuffernd_distance.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_distance.diminfo[1].strides = __pyx_pybuffernd_distance.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_distance.diminfo[1].shape = __pyx_pybuffernd_distance.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_distance.diminfo[2].strides = __pyx_pybuffernd_distance.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_distance.diminfo[2].shape = __pyx_pybuffernd_distance.rcbuffer->pybuffer.shape[2];
     }
   }
@@ -7611,7 +7662,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_20ErodeMap3D(CYTHON_UNUSED PyO
   __pyx_v_distance = ((PyArrayObject *)__pyx_t_10);
   __pyx_t_10 = 0;
 
-  /* "quantimpy/morphology.pyx":343
+  /* "quantimpy/morphology.pyx":406
  * 
  *     status = cGetMap3D(
  *         &image[0,0,0],             # <<<<<<<<<<<<<<
@@ -7636,10 +7687,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_20ErodeMap3D(CYTHON_UNUSED PyO
   } else if (unlikely(__pyx_t_14 >= __pyx_pybuffernd_image.diminfo[2].shape)) __pyx_t_5 = 2;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 343, __pyx_L1_error)
+    __PYX_ERR(0, 406, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":344
+  /* "quantimpy/morphology.pyx":407
  *     status = cGetMap3D(
  *         &image[0,0,0],
  *         &distance[0,0,0],             # <<<<<<<<<<<<<<
@@ -7664,11 +7715,11 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_20ErodeMap3D(CYTHON_UNUSED PyO
   } else if (unlikely(__pyx_t_17 >= __pyx_pybuffernd_distance.diminfo[2].shape)) __pyx_t_5 = 2;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 344, __pyx_L1_error)
+    __PYX_ERR(0, 407, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":342
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(image,dtype=np.uint16)
+  /* "quantimpy/morphology.pyx":405
+ *         image,dtype=np.uint16)
  * 
  *     status = cGetMap3D(             # <<<<<<<<<<<<<<
  *         &image[0,0,0],
@@ -7676,8 +7727,8 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_20ErodeMap3D(CYTHON_UNUSED PyO
  */
   __pyx_v_status = cGetMap3D((&(*__Pyx_BufPtrCContig3d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_image.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_image.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_image.diminfo[1].strides, __pyx_t_14, __pyx_pybuffernd_image.diminfo[2].strides))), (&(*__Pyx_BufPtrCContig3d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_distance.rcbuffer->pybuffer.buf, __pyx_t_15, __pyx_pybuffernd_distance.diminfo[0].strides, __pyx_t_16, __pyx_pybuffernd_distance.diminfo[1].strides, __pyx_t_17, __pyx_pybuffernd_distance.diminfo[2].strides))), (__pyx_v_image->dimensions[0]), (__pyx_v_image->dimensions[1]), (__pyx_v_image->dimensions[2]), __pyx_v_res0, __pyx_v_res1, __pyx_v_res2, 1);
 
-  /* "quantimpy/morphology.pyx":354
- *     )
+  /* "quantimpy/morphology.pyx":416
+ *         1)
  * 
  *     assert status == 0             # <<<<<<<<<<<<<<
  *     return distance
@@ -7687,12 +7738,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_20ErodeMap3D(CYTHON_UNUSED PyO
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_status == 0) != 0))) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 354, __pyx_L1_error)
+      __PYX_ERR(0, 416, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "quantimpy/morphology.pyx":355
+  /* "quantimpy/morphology.pyx":417
  * 
  *     assert status == 0
  *     return distance             # <<<<<<<<<<<<<<
@@ -7704,12 +7755,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_20ErodeMap3D(CYTHON_UNUSED PyO
   __pyx_r = ((PyObject *)__pyx_v_distance);
   goto __pyx_L0;
 
-  /* "quantimpy/morphology.pyx":336
- * ################################################################################
+  /* "quantimpy/morphology.pyx":394
  * 
- * def ErodeMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def ErodeMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         double res0,
  */
 
   /* function exit code */
@@ -7740,10 +7791,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_20ErodeMap3D(CYTHON_UNUSED PyO
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":361
+/* "quantimpy/morphology.pyx":423
  * # {{{ DilateMap
  * 
- * cpdef DilateMap(np.ndarray image, res=None):             # <<<<<<<<<<<<<<
+ * cpdef DilateMap(np.ndarray image, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (image.dtype == 'bool'):
  */
@@ -7776,31 +7827,31 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
   __Pyx_INCREF((PyObject *)__pyx_v_image);
   __Pyx_INCREF(__pyx_v_res);
 
-  /* "quantimpy/morphology.pyx":363
- * cpdef DilateMap(np.ndarray image, res=None):
+  /* "quantimpy/morphology.pyx":425
+ * cpdef DilateMap(np.ndarray image, res = None):
  * 
  *     if (image.dtype == 'bool'):             # <<<<<<<<<<<<<<
  *         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
  *     else:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_image), __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 363, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_image), __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 425, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_bool, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 363, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_bool, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 425, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (likely(__pyx_t_2)) {
 
-    /* "quantimpy/morphology.pyx":364
+    /* "quantimpy/morphology.pyx":426
  * 
  *     if (image.dtype == 'bool'):
  *         image = image.astype(np.uint16)*np.iinfo(np.uint16).max             # <<<<<<<<<<<<<<
  *     else:
  *         raise ValueError('Input image needs to be binary (data type bool)')
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_image), __pyx_n_s_astype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 364, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_image), __pyx_n_s_astype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 426, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 364, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 426, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_uint16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 364, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_uint16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 426, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -7816,17 +7867,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 364, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 426, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 364, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 426, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_iinfo); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 364, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_iinfo); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 426, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 364, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 426, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_uint16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 364, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_uint16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 426, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -7842,22 +7893,22 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
     __pyx_t_3 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 364, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 426, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_max); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 364, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_max); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 426, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 364, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 426, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 364, __pyx_L1_error)
+    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 426, __pyx_L1_error)
     __Pyx_DECREF_SET(__pyx_v_image, ((PyArrayObject *)__pyx_t_3));
     __pyx_t_3 = 0;
 
-    /* "quantimpy/morphology.pyx":363
- * cpdef DilateMap(np.ndarray image, res=None):
+    /* "quantimpy/morphology.pyx":425
+ * cpdef DilateMap(np.ndarray image, res = None):
  * 
  *     if (image.dtype == 'bool'):             # <<<<<<<<<<<<<<
  *         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -7866,7 +7917,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
     goto __pyx_L3;
   }
 
-  /* "quantimpy/morphology.pyx":366
+  /* "quantimpy/morphology.pyx":428
  *         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
  *     else:
  *         raise ValueError('Input image needs to be binary (data type bool)')             # <<<<<<<<<<<<<<
@@ -7874,15 +7925,15 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
  *     if (image.ndim == 2):
  */
   /*else*/ {
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 366, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 428, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 366, __pyx_L1_error)
+    __PYX_ERR(0, 428, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "quantimpy/morphology.pyx":368
+  /* "quantimpy/morphology.pyx":430
  *         raise ValueError('Input image needs to be binary (data type bool)')
  * 
  *     if (image.ndim == 2):             # <<<<<<<<<<<<<<
@@ -7892,7 +7943,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
   switch (__pyx_v_image->nd) {
     case 2:
 
-    /* "quantimpy/morphology.pyx":370
+    /* "quantimpy/morphology.pyx":432
  *     if (image.ndim == 2):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -7903,7 +7954,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
     __pyx_t_7 = (__pyx_t_2 != 0);
     if (__pyx_t_7) {
 
-      /* "quantimpy/morphology.pyx":371
+      /* "quantimpy/morphology.pyx":433
  * # Set default resolution (length/voxel)
  *         if (res is None):
  *             res0 = 1.0             # <<<<<<<<<<<<<<
@@ -7913,17 +7964,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res0 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":372
+      /* "quantimpy/morphology.pyx":434
  *         if (res is None):
  *             res0 = 1.0
  *             res1 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res1 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":370
+      /* "quantimpy/morphology.pyx":432
  *     if (image.ndim == 2):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -7933,19 +7984,19 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
       goto __pyx_L4;
     }
 
-    /* "quantimpy/morphology.pyx":374
+    /* "quantimpy/morphology.pyx":436
  *             res1 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
     /*else*/ {
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 374, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 436, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 374, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 436, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 374, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 436, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_1 = NULL;
@@ -7961,39 +8012,39 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
       __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_1, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 374, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 436, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF_SET(__pyx_v_res, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":375
+      /* "quantimpy/morphology.pyx":437
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  * 
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 375, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 437, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res0 = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":376
- *             res  = res.astype(np.double)
+      /* "quantimpy/morphology.pyx":438
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  * 
  *         return DilateMap2D(image, res0, res1)
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 376, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 438, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res1 = __pyx_t_3;
       __pyx_t_3 = 0;
     }
     __pyx_L4:;
 
-    /* "quantimpy/morphology.pyx":378
+    /* "quantimpy/morphology.pyx":440
  *             res1 = res[1]
  * 
  *         return DilateMap2D(image, res0, res1)             # <<<<<<<<<<<<<<
@@ -8001,7 +8052,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
  * # Set default resolution (length/voxel)
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_DilateMap2D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 378, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_DilateMap2D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 440, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_6 = NULL;
     __pyx_t_8 = 0;
@@ -8018,7 +8069,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[4] = {__pyx_t_6, ((PyObject *)__pyx_v_image), __pyx_v_res0, __pyx_v_res1};
-      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 378, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 440, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_3);
     } else
@@ -8026,13 +8077,13 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[4] = {__pyx_t_6, ((PyObject *)__pyx_v_image), __pyx_v_res0, __pyx_v_res1};
-      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 378, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 440, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_3);
     } else
     #endif
     {
-      __pyx_t_1 = PyTuple_New(3+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 378, __pyx_L1_error)
+      __pyx_t_1 = PyTuple_New(3+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 440, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -8046,7 +8097,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
       __Pyx_INCREF(__pyx_v_res1);
       __Pyx_GIVEREF(__pyx_v_res1);
       PyTuple_SET_ITEM(__pyx_t_1, 2+__pyx_t_8, __pyx_v_res1);
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 378, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 440, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
@@ -8055,7 +8106,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "quantimpy/morphology.pyx":368
+    /* "quantimpy/morphology.pyx":430
  *         raise ValueError('Input image needs to be binary (data type bool)')
  * 
  *     if (image.ndim == 2):             # <<<<<<<<<<<<<<
@@ -8065,7 +8116,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
     break;
     case 3:
 
-    /* "quantimpy/morphology.pyx":381
+    /* "quantimpy/morphology.pyx":443
  *     elif (image.ndim == 3):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -8076,7 +8127,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
     __pyx_t_2 = (__pyx_t_7 != 0);
     if (__pyx_t_2) {
 
-      /* "quantimpy/morphology.pyx":382
+      /* "quantimpy/morphology.pyx":444
  * # Set default resolution (length/voxel)
  *         if (res is None):
  *             res0 = 1.0             # <<<<<<<<<<<<<<
@@ -8086,7 +8137,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res0 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":383
+      /* "quantimpy/morphology.pyx":445
  *         if (res is None):
  *             res0 = 1.0
  *             res1 = 1.0             # <<<<<<<<<<<<<<
@@ -8096,17 +8147,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res1 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":384
+      /* "quantimpy/morphology.pyx":446
  *             res0 = 1.0
  *             res1 = 1.0
  *             res2 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res2 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":381
+      /* "quantimpy/morphology.pyx":443
  *     elif (image.ndim == 3):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -8116,19 +8167,19 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
       goto __pyx_L5;
     }
 
-    /* "quantimpy/morphology.pyx":386
+    /* "quantimpy/morphology.pyx":448
  *             res2 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
     /*else*/ {
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 386, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 448, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 386, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 448, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 386, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 448, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_1 = NULL;
@@ -8144,51 +8195,51 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
       __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_1, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 386, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 448, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF_SET(__pyx_v_res, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":387
+      /* "quantimpy/morphology.pyx":449
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  *             res2 = res[2]
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 387, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 449, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res0 = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":388
- *             res  = res.astype(np.double)
+      /* "quantimpy/morphology.pyx":450
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  *             res2 = res[2]
  * 
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 388, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 450, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res1 = __pyx_t_3;
       __pyx_t_3 = 0;
 
-      /* "quantimpy/morphology.pyx":389
+      /* "quantimpy/morphology.pyx":451
  *             res0 = res[0]
  *             res1 = res[1]
  *             res2 = res[2]             # <<<<<<<<<<<<<<
  * 
  *         return DilateMap3D(image, res0, res1, res2)
  */
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 389, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_res, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 451, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_v_res2 = __pyx_t_3;
       __pyx_t_3 = 0;
     }
     __pyx_L5:;
 
-    /* "quantimpy/morphology.pyx":391
+    /* "quantimpy/morphology.pyx":453
  *             res2 = res[2]
  * 
  *         return DilateMap3D(image, res0, res1, res2)             # <<<<<<<<<<<<<<
@@ -8196,7 +8247,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
  *         raise ValueError('Can only handle 2D or 3D images')
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_DilateMap3D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 391, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_DilateMap3D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 453, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_6 = NULL;
     __pyx_t_8 = 0;
@@ -8213,7 +8264,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[5] = {__pyx_t_6, ((PyObject *)__pyx_v_image), __pyx_v_res0, __pyx_v_res1, __pyx_v_res2};
-      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 391, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 453, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_3);
     } else
@@ -8221,13 +8272,13 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[5] = {__pyx_t_6, ((PyObject *)__pyx_v_image), __pyx_v_res0, __pyx_v_res1, __pyx_v_res2};
-      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 391, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 4+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 453, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_3);
     } else
     #endif
     {
-      __pyx_t_1 = PyTuple_New(4+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 391, __pyx_L1_error)
+      __pyx_t_1 = PyTuple_New(4+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 453, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -8244,7 +8295,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
       __Pyx_INCREF(__pyx_v_res2);
       __Pyx_GIVEREF(__pyx_v_res2);
       PyTuple_SET_ITEM(__pyx_t_1, 3+__pyx_t_8, __pyx_v_res2);
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 391, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 453, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
@@ -8253,7 +8304,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "quantimpy/morphology.pyx":379
+    /* "quantimpy/morphology.pyx":441
  * 
  *         return DilateMap2D(image, res0, res1)
  *     elif (image.ndim == 3):             # <<<<<<<<<<<<<<
@@ -8263,25 +8314,25 @@ static PyObject *__pyx_f_9quantimpy_10morphology_DilateMap(PyArrayObject *__pyx_
     break;
     default:
 
-    /* "quantimpy/morphology.pyx":393
+    /* "quantimpy/morphology.pyx":455
  *         return DilateMap3D(image, res0, res1, res2)
  *     else:
  *         raise ValueError('Can only handle 2D or 3D images')             # <<<<<<<<<<<<<<
  * 
- * ################################################################################
+ * 
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 393, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 455, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 393, __pyx_L1_error)
+    __PYX_ERR(0, 455, __pyx_L1_error)
     break;
   }
 
-  /* "quantimpy/morphology.pyx":361
+  /* "quantimpy/morphology.pyx":423
  * # {{{ DilateMap
  * 
- * cpdef DilateMap(np.ndarray image, res=None):             # <<<<<<<<<<<<<<
+ * cpdef DilateMap(np.ndarray image, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if (image.dtype == 'bool'):
  */
@@ -8345,7 +8396,7 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_23DilateMap(PyObject *__pyx_se
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "DilateMap") < 0)) __PYX_ERR(0, 361, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "DilateMap") < 0)) __PYX_ERR(0, 423, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -8361,13 +8412,13 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_23DilateMap(PyObject *__pyx_se
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("DilateMap", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 361, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("DilateMap", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 423, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.DilateMap", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 361, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 423, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_22DilateMap(__pyx_self, __pyx_v_image, __pyx_v_res);
 
   /* function exit code */
@@ -8391,7 +8442,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_22DilateMap(CYTHON_UNUSED PyOb
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.res = __pyx_v_res;
-  __pyx_t_1 = __pyx_f_9quantimpy_10morphology_DilateMap(__pyx_v_image, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 361, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9quantimpy_10morphology_DilateMap(__pyx_v_image, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 423, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -8408,12 +8459,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_22DilateMap(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":397
- * ################################################################################
+/* "quantimpy/morphology.pyx":458
  * 
- * def DilateMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def DilateMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         double res0,
  */
 
 /* Python wrapper */
@@ -8454,17 +8505,17 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_25DilateMap2D(PyObject *__pyx_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res0)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("DilateMap2D", 1, 3, 3, 1); __PYX_ERR(0, 397, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("DilateMap2D", 1, 3, 3, 1); __PYX_ERR(0, 458, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("DilateMap2D", 1, 3, 3, 2); __PYX_ERR(0, 397, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("DilateMap2D", 1, 3, 3, 2); __PYX_ERR(0, 458, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "DilateMap2D") < 0)) __PYX_ERR(0, 397, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "DilateMap2D") < 0)) __PYX_ERR(0, 458, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -8474,18 +8525,18 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_25DilateMap2D(PyObject *__pyx_
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
     __pyx_v_image = ((PyArrayObject *)values[0]);
-    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 397, __pyx_L3_error)
-    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 397, __pyx_L3_error)
+    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 460, __pyx_L3_error)
+    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 461, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("DilateMap2D", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 397, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("DilateMap2D", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 458, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.DilateMap2D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 397, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 459, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_24DilateMap2D(__pyx_self, __pyx_v_image, __pyx_v_res0, __pyx_v_res1);
 
   /* function exit code */
@@ -8536,20 +8587,20 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_24DilateMap2D(CYTHON_UNUSED Py
   __pyx_pybuffernd_image.rcbuffer = &__pyx_pybuffer_image;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 397, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 458, __pyx_L1_error)
   }
   __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1];
 
-  /* "quantimpy/morphology.pyx":399
- * def DilateMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1):
+  /* "quantimpy/morphology.pyx":463
+ *         double res1):
  * 
  *     image = np.ascontiguousarray(image)             # <<<<<<<<<<<<<<
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(image,dtype=np.uint16)
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 399, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 463, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 399, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 463, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -8564,10 +8615,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_24DilateMap2D(CYTHON_UNUSED Py
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, ((PyObject *)__pyx_v_image)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_image));
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 399, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 463, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 399, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 463, __pyx_L1_error)
   __pyx_t_4 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -8584,50 +8635,66 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_24DilateMap2D(CYTHON_UNUSED Py
       __pyx_t_6 = __pyx_t_7 = __pyx_t_8 = 0;
     }
     __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1];
-    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 399, __pyx_L1_error)
+    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 463, __pyx_L1_error)
   }
   __pyx_t_4 = 0;
   __Pyx_DECREF_SET(__pyx_v_image, ((PyArrayObject *)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":401
+  /* "quantimpy/morphology.pyx":465
  *     image = np.ascontiguousarray(image)
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(image,dtype=np.uint16)             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 465, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 465, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "quantimpy/morphology.pyx":466
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(
+ *         image,dtype=np.uint16)             # <<<<<<<<<<<<<<
  * 
  *     status = cGetMap2D(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 401, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 401, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 401, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 465, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject *)__pyx_v_image));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_image));
   PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_image));
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 401, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 401, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 401, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 401, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 466, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 401, __pyx_L1_error)
+
+  /* "quantimpy/morphology.pyx":465
+ *     image = np.ascontiguousarray(image)
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 465, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 401, __pyx_L1_error)
+  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 465, __pyx_L1_error)
   __pyx_t_11 = ((PyArrayObject *)__pyx_t_10);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_distance.rcbuffer->pybuffer, (PyObject*)__pyx_t_11, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) {
       __pyx_v_distance = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_distance.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 401, __pyx_L1_error)
+      __PYX_ERR(0, 465, __pyx_L1_error)
     } else {__pyx_pybuffernd_distance.diminfo[0].strides = __pyx_pybuffernd_distance.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_distance.diminfo[0].shape = __pyx_pybuffernd_distance.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_distance.diminfo[1].strides = __pyx_pybuffernd_distance.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_distance.diminfo[1].shape = __pyx_pybuffernd_distance.rcbuffer->pybuffer.shape[1];
     }
   }
@@ -8635,7 +8702,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_24DilateMap2D(CYTHON_UNUSED Py
   __pyx_v_distance = ((PyArrayObject *)__pyx_t_10);
   __pyx_t_10 = 0;
 
-  /* "quantimpy/morphology.pyx":404
+  /* "quantimpy/morphology.pyx":469
  * 
  *     status = cGetMap2D(
  *         &image[0,0],             # <<<<<<<<<<<<<<
@@ -8655,10 +8722,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_24DilateMap2D(CYTHON_UNUSED Py
   } else if (unlikely(__pyx_t_13 >= __pyx_pybuffernd_image.diminfo[1].shape)) __pyx_t_5 = 1;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 404, __pyx_L1_error)
+    __PYX_ERR(0, 469, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":405
+  /* "quantimpy/morphology.pyx":470
  *     status = cGetMap2D(
  *         &image[0,0],
  *         &distance[0,0],             # <<<<<<<<<<<<<<
@@ -8678,11 +8745,11 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_24DilateMap2D(CYTHON_UNUSED Py
   } else if (unlikely(__pyx_t_15 >= __pyx_pybuffernd_distance.diminfo[1].shape)) __pyx_t_5 = 1;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 405, __pyx_L1_error)
+    __PYX_ERR(0, 470, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":403
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] distance = np.empty_like(image,dtype=np.uint16)
+  /* "quantimpy/morphology.pyx":468
+ *         image,dtype=np.uint16)
  * 
  *     status = cGetMap2D(             # <<<<<<<<<<<<<<
  *         &image[0,0],
@@ -8690,7 +8757,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_24DilateMap2D(CYTHON_UNUSED Py
  */
   __pyx_v_status = cGetMap2D((&(*__Pyx_BufPtrCContig2d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_image.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_image.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_image.diminfo[1].strides))), (&(*__Pyx_BufPtrCContig2d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_distance.rcbuffer->pybuffer.buf, __pyx_t_14, __pyx_pybuffernd_distance.diminfo[0].strides, __pyx_t_15, __pyx_pybuffernd_distance.diminfo[1].strides))), (__pyx_v_image->dimensions[0]), (__pyx_v_image->dimensions[1]), __pyx_v_res0, __pyx_v_res1, 0);
 
-  /* "quantimpy/morphology.pyx":413
+  /* "quantimpy/morphology.pyx":478
  *     )
  * 
  *     assert status == 0             # <<<<<<<<<<<<<<
@@ -8701,29 +8768,29 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_24DilateMap2D(CYTHON_UNUSED Py
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_status == 0) != 0))) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 413, __pyx_L1_error)
+      __PYX_ERR(0, 478, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "quantimpy/morphology.pyx":414
+  /* "quantimpy/morphology.pyx":479
  * 
  *     assert status == 0
  *     return distance             # <<<<<<<<<<<<<<
  * 
- * ################################################################################
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(((PyObject *)__pyx_v_distance));
   __pyx_r = ((PyObject *)__pyx_v_distance);
   goto __pyx_L0;
 
-  /* "quantimpy/morphology.pyx":397
- * ################################################################################
+  /* "quantimpy/morphology.pyx":458
  * 
- * def DilateMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def DilateMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         double res0,
  */
 
   /* function exit code */
@@ -8754,12 +8821,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_24DilateMap2D(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":418
- * ################################################################################
+/* "quantimpy/morphology.pyx":482
  * 
- * def DilateMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def DilateMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         double res0,
  */
 
 /* Python wrapper */
@@ -8803,23 +8870,23 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_27DilateMap3D(PyObject *__pyx_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res0)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("DilateMap3D", 1, 4, 4, 1); __PYX_ERR(0, 418, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("DilateMap3D", 1, 4, 4, 1); __PYX_ERR(0, 482, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("DilateMap3D", 1, 4, 4, 2); __PYX_ERR(0, 418, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("DilateMap3D", 1, 4, 4, 2); __PYX_ERR(0, 482, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("DilateMap3D", 1, 4, 4, 3); __PYX_ERR(0, 418, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("DilateMap3D", 1, 4, 4, 3); __PYX_ERR(0, 482, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "DilateMap3D") < 0)) __PYX_ERR(0, 418, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "DilateMap3D") < 0)) __PYX_ERR(0, 482, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -8830,19 +8897,19 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_27DilateMap3D(PyObject *__pyx_
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
     __pyx_v_image = ((PyArrayObject *)values[0]);
-    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 418, __pyx_L3_error)
-    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 418, __pyx_L3_error)
-    __pyx_v_res2 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 418, __pyx_L3_error)
+    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 484, __pyx_L3_error)
+    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 485, __pyx_L3_error)
+    __pyx_v_res2 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 486, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("DilateMap3D", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 418, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("DilateMap3D", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 482, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.DilateMap3D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 418, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_image), __pyx_ptype_5numpy_ndarray, 1, "image", 0))) __PYX_ERR(0, 483, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_26DilateMap3D(__pyx_self, __pyx_v_image, __pyx_v_res0, __pyx_v_res1, __pyx_v_res2);
 
   /* function exit code */
@@ -8895,20 +8962,20 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_26DilateMap3D(CYTHON_UNUSED Py
   __pyx_pybuffernd_image.rcbuffer = &__pyx_pybuffer_image;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 418, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 482, __pyx_L1_error)
   }
   __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_image.diminfo[2].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_image.diminfo[2].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[2];
 
-  /* "quantimpy/morphology.pyx":420
- * def DilateMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2):
+  /* "quantimpy/morphology.pyx":488
+ *         double res2):
  * 
  *     image = np.ascontiguousarray(image)             # <<<<<<<<<<<<<<
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(image,dtype=np.uint16)
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 420, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 488, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 420, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 488, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -8923,10 +8990,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_26DilateMap3D(CYTHON_UNUSED Py
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, ((PyObject *)__pyx_v_image)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_image));
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 420, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 488, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 420, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 488, __pyx_L1_error)
   __pyx_t_4 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -8943,50 +9010,66 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_26DilateMap3D(CYTHON_UNUSED Py
       __pyx_t_6 = __pyx_t_7 = __pyx_t_8 = 0;
     }
     __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_image.diminfo[2].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_image.diminfo[2].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[2];
-    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 420, __pyx_L1_error)
+    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 488, __pyx_L1_error)
   }
   __pyx_t_4 = 0;
   __Pyx_DECREF_SET(__pyx_v_image, ((PyArrayObject *)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":422
+  /* "quantimpy/morphology.pyx":490
  *     image = np.ascontiguousarray(image)
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(image,dtype=np.uint16)             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 490, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 490, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "quantimpy/morphology.pyx":491
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(
+ *         image,dtype=np.uint16)             # <<<<<<<<<<<<<<
  * 
  *     status = cGetMap3D(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 422, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 422, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 422, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 490, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject *)__pyx_v_image));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_image));
   PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_image));
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 422, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 491, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 422, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 491, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 422, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 491, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 422, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 491, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 422, __pyx_L1_error)
+
+  /* "quantimpy/morphology.pyx":490
+ *     image = np.ascontiguousarray(image)
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(             # <<<<<<<<<<<<<<
+ *         image,dtype=np.uint16)
+ * 
+ */
+  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 490, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 422, __pyx_L1_error)
+  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 490, __pyx_L1_error)
   __pyx_t_11 = ((PyArrayObject *)__pyx_t_10);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_distance.rcbuffer->pybuffer, (PyObject*)__pyx_t_11, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) {
       __pyx_v_distance = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_distance.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 422, __pyx_L1_error)
+      __PYX_ERR(0, 490, __pyx_L1_error)
     } else {__pyx_pybuffernd_distance.diminfo[0].strides = __pyx_pybuffernd_distance.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_distance.diminfo[0].shape = __pyx_pybuffernd_distance.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_distance.diminfo[1].strides = __pyx_pybuffernd_distance.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_distance.diminfo[1].shape = __pyx_pybuffernd_distance.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_distance.diminfo[2].strides = __pyx_pybuffernd_distance.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_distance.diminfo[2].shape = __pyx_pybuffernd_distance.rcbuffer->pybuffer.shape[2];
     }
   }
@@ -8994,7 +9077,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_26DilateMap3D(CYTHON_UNUSED Py
   __pyx_v_distance = ((PyArrayObject *)__pyx_t_10);
   __pyx_t_10 = 0;
 
-  /* "quantimpy/morphology.pyx":425
+  /* "quantimpy/morphology.pyx":494
  * 
  *     status = cGetMap3D(
  *         &image[0,0,0],             # <<<<<<<<<<<<<<
@@ -9019,10 +9102,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_26DilateMap3D(CYTHON_UNUSED Py
   } else if (unlikely(__pyx_t_14 >= __pyx_pybuffernd_image.diminfo[2].shape)) __pyx_t_5 = 2;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 425, __pyx_L1_error)
+    __PYX_ERR(0, 494, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":426
+  /* "quantimpy/morphology.pyx":495
  *     status = cGetMap3D(
  *         &image[0,0,0],
  *         &distance[0,0,0],             # <<<<<<<<<<<<<<
@@ -9047,11 +9130,11 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_26DilateMap3D(CYTHON_UNUSED Py
   } else if (unlikely(__pyx_t_17 >= __pyx_pybuffernd_distance.diminfo[2].shape)) __pyx_t_5 = 2;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 426, __pyx_L1_error)
+    __PYX_ERR(0, 495, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":424
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] distance = np.empty_like(image,dtype=np.uint16)
+  /* "quantimpy/morphology.pyx":493
+ *         image,dtype=np.uint16)
  * 
  *     status = cGetMap3D(             # <<<<<<<<<<<<<<
  *         &image[0,0,0],
@@ -9059,7 +9142,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_26DilateMap3D(CYTHON_UNUSED Py
  */
   __pyx_v_status = cGetMap3D((&(*__Pyx_BufPtrCContig3d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_image.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_image.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_image.diminfo[1].strides, __pyx_t_14, __pyx_pybuffernd_image.diminfo[2].strides))), (&(*__Pyx_BufPtrCContig3d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_distance.rcbuffer->pybuffer.buf, __pyx_t_15, __pyx_pybuffernd_distance.diminfo[0].strides, __pyx_t_16, __pyx_pybuffernd_distance.diminfo[1].strides, __pyx_t_17, __pyx_pybuffernd_distance.diminfo[2].strides))), (__pyx_v_image->dimensions[0]), (__pyx_v_image->dimensions[1]), (__pyx_v_image->dimensions[2]), __pyx_v_res0, __pyx_v_res1, __pyx_v_res2, 0);
 
-  /* "quantimpy/morphology.pyx":436
+  /* "quantimpy/morphology.pyx":505
  *     )
  * 
  *     assert status == 0             # <<<<<<<<<<<<<<
@@ -9070,12 +9153,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_26DilateMap3D(CYTHON_UNUSED Py
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_status == 0) != 0))) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 436, __pyx_L1_error)
+      __PYX_ERR(0, 505, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "quantimpy/morphology.pyx":437
+  /* "quantimpy/morphology.pyx":506
  * 
  *     assert status == 0
  *     return distance             # <<<<<<<<<<<<<<
@@ -9087,12 +9170,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_26DilateMap3D(CYTHON_UNUSED Py
   __pyx_r = ((PyObject *)__pyx_v_distance);
   goto __pyx_L0;
 
-  /* "quantimpy/morphology.pyx":418
- * ################################################################################
+  /* "quantimpy/morphology.pyx":482
  * 
- * def DilateMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def DilateMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         double res0,
  */
 
   /* function exit code */
@@ -9123,10 +9206,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_26DilateMap3D(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":443
+/* "quantimpy/morphology.pyx":512
  * # {{{ OpenMap
  * 
- * cpdef OpenMap(np.ndarray erosion, res=None):             # <<<<<<<<<<<<<<
+ * cpdef OpenMap(np.ndarray erosion, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if not (erosion.dtype == 'uint16'):
  */
@@ -9157,35 +9240,35 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
   }
   __Pyx_INCREF(__pyx_v_res);
 
-  /* "quantimpy/morphology.pyx":445
- * cpdef OpenMap(np.ndarray erosion, res=None):
+  /* "quantimpy/morphology.pyx":514
+ * cpdef OpenMap(np.ndarray erosion, res = None):
  * 
  *     if not (erosion.dtype == 'uint16'):             # <<<<<<<<<<<<<<
  *         raise ValueError('Input image needs to be data type uint16')
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_erosion), __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 445, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_erosion), __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 514, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_uint16, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 445, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_uint16, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 514, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = ((!__pyx_t_2) != 0);
   if (unlikely(__pyx_t_3)) {
 
-    /* "quantimpy/morphology.pyx":446
+    /* "quantimpy/morphology.pyx":515
  * 
  *     if not (erosion.dtype == 'uint16'):
  *         raise ValueError('Input image needs to be data type uint16')             # <<<<<<<<<<<<<<
  * 
  *     if (erosion.ndim == 2):
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 446, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 515, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 446, __pyx_L1_error)
+    __PYX_ERR(0, 515, __pyx_L1_error)
 
-    /* "quantimpy/morphology.pyx":445
- * cpdef OpenMap(np.ndarray erosion, res=None):
+    /* "quantimpy/morphology.pyx":514
+ * cpdef OpenMap(np.ndarray erosion, res = None):
  * 
  *     if not (erosion.dtype == 'uint16'):             # <<<<<<<<<<<<<<
  *         raise ValueError('Input image needs to be data type uint16')
@@ -9193,7 +9276,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
  */
   }
 
-  /* "quantimpy/morphology.pyx":448
+  /* "quantimpy/morphology.pyx":517
  *         raise ValueError('Input image needs to be data type uint16')
  * 
  *     if (erosion.ndim == 2):             # <<<<<<<<<<<<<<
@@ -9203,7 +9286,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
   switch (__pyx_v_erosion->nd) {
     case 2:
 
-    /* "quantimpy/morphology.pyx":450
+    /* "quantimpy/morphology.pyx":519
  *     if (erosion.ndim == 2):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -9214,7 +9297,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
     __pyx_t_2 = (__pyx_t_3 != 0);
     if (__pyx_t_2) {
 
-      /* "quantimpy/morphology.pyx":451
+      /* "quantimpy/morphology.pyx":520
  * # Set default resolution (length/voxel)
  *         if (res is None):
  *             res0 = 1.0             # <<<<<<<<<<<<<<
@@ -9224,17 +9307,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res0 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":452
+      /* "quantimpy/morphology.pyx":521
  *         if (res is None):
  *             res0 = 1.0
  *             res1 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res1 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":450
+      /* "quantimpy/morphology.pyx":519
  *     if (erosion.ndim == 2):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -9244,19 +9327,19 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
       goto __pyx_L4;
     }
 
-    /* "quantimpy/morphology.pyx":454
+    /* "quantimpy/morphology.pyx":523
  *             res1 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
     /*else*/ {
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 454, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 523, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 454, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 523, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 454, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 523, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_5 = NULL;
@@ -9272,39 +9355,39 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
       __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 454, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 523, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF_SET(__pyx_v_res, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "quantimpy/morphology.pyx":455
+      /* "quantimpy/morphology.pyx":524
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  * 
  */
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 455, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 524, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_v_res0 = __pyx_t_1;
       __pyx_t_1 = 0;
 
-      /* "quantimpy/morphology.pyx":456
- *             res  = res.astype(np.double)
+      /* "quantimpy/morphology.pyx":525
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  * 
  *         return OpenMap2D(erosion, res0, res1)
  */
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 456, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 525, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_v_res1 = __pyx_t_1;
       __pyx_t_1 = 0;
     }
     __pyx_L4:;
 
-    /* "quantimpy/morphology.pyx":458
+    /* "quantimpy/morphology.pyx":527
  *             res1 = res[1]
  * 
  *         return OpenMap2D(erosion, res0, res1)             # <<<<<<<<<<<<<<
@@ -9312,7 +9395,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
  * # Set default resolution (length/voxel)
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_OpenMap2D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 458, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_OpenMap2D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 527, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_6 = NULL;
     __pyx_t_7 = 0;
@@ -9329,7 +9412,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[4] = {__pyx_t_6, ((PyObject *)__pyx_v_erosion), __pyx_v_res0, __pyx_v_res1};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 458, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 527, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -9337,13 +9420,13 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[4] = {__pyx_t_6, ((PyObject *)__pyx_v_erosion), __pyx_v_res0, __pyx_v_res1};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 458, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 527, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_5 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 458, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 527, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -9357,7 +9440,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
       __Pyx_INCREF(__pyx_v_res1);
       __Pyx_GIVEREF(__pyx_v_res1);
       PyTuple_SET_ITEM(__pyx_t_5, 2+__pyx_t_7, __pyx_v_res1);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 458, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 527, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
@@ -9366,7 +9449,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "quantimpy/morphology.pyx":448
+    /* "quantimpy/morphology.pyx":517
  *         raise ValueError('Input image needs to be data type uint16')
  * 
  *     if (erosion.ndim == 2):             # <<<<<<<<<<<<<<
@@ -9376,7 +9459,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
     break;
     case 3:
 
-    /* "quantimpy/morphology.pyx":461
+    /* "quantimpy/morphology.pyx":530
  *     elif (erosion.ndim == 3):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -9387,7 +9470,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
     __pyx_t_3 = (__pyx_t_2 != 0);
     if (__pyx_t_3) {
 
-      /* "quantimpy/morphology.pyx":462
+      /* "quantimpy/morphology.pyx":531
  * # Set default resolution (length/voxel)
  *         if (res is None):
  *             res0 = 1.0             # <<<<<<<<<<<<<<
@@ -9397,7 +9480,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res0 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":463
+      /* "quantimpy/morphology.pyx":532
  *         if (res is None):
  *             res0 = 1.0
  *             res1 = 1.0             # <<<<<<<<<<<<<<
@@ -9407,17 +9490,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res1 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":464
+      /* "quantimpy/morphology.pyx":533
  *             res0 = 1.0
  *             res1 = 1.0
  *             res2 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res2 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":461
+      /* "quantimpy/morphology.pyx":530
  *     elif (erosion.ndim == 3):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -9427,19 +9510,19 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
       goto __pyx_L5;
     }
 
-    /* "quantimpy/morphology.pyx":466
+    /* "quantimpy/morphology.pyx":535
  *             res2 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
     /*else*/ {
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 466, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 535, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 466, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 535, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 466, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 535, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_5 = NULL;
@@ -9455,51 +9538,51 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
       __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 466, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 535, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF_SET(__pyx_v_res, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "quantimpy/morphology.pyx":467
+      /* "quantimpy/morphology.pyx":536
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  *             res2 = res[2]
  */
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 467, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 536, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_v_res0 = __pyx_t_1;
       __pyx_t_1 = 0;
 
-      /* "quantimpy/morphology.pyx":468
- *             res  = res.astype(np.double)
+      /* "quantimpy/morphology.pyx":537
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  *             res2 = res[2]
  * 
  */
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 468, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 537, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_v_res1 = __pyx_t_1;
       __pyx_t_1 = 0;
 
-      /* "quantimpy/morphology.pyx":469
+      /* "quantimpy/morphology.pyx":538
  *             res0 = res[0]
  *             res1 = res[1]
  *             res2 = res[2]             # <<<<<<<<<<<<<<
  * 
  *         return OpenMap3D(erosion, res0, res1, res2)
  */
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 469, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 538, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_v_res2 = __pyx_t_1;
       __pyx_t_1 = 0;
     }
     __pyx_L5:;
 
-    /* "quantimpy/morphology.pyx":471
+    /* "quantimpy/morphology.pyx":540
  *             res2 = res[2]
  * 
  *         return OpenMap3D(erosion, res0, res1, res2)             # <<<<<<<<<<<<<<
@@ -9507,7 +9590,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
  *         raise ValueError('Can only handle 2D or 3D images')
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_OpenMap3D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 471, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_OpenMap3D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 540, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_6 = NULL;
     __pyx_t_7 = 0;
@@ -9524,7 +9607,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[5] = {__pyx_t_6, ((PyObject *)__pyx_v_erosion), __pyx_v_res0, __pyx_v_res1, __pyx_v_res2};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 4+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 471, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 4+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 540, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -9532,13 +9615,13 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[5] = {__pyx_t_6, ((PyObject *)__pyx_v_erosion), __pyx_v_res0, __pyx_v_res1, __pyx_v_res2};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 4+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 471, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 4+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 540, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_5 = PyTuple_New(4+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 471, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(4+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 540, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -9555,7 +9638,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
       __Pyx_INCREF(__pyx_v_res2);
       __Pyx_GIVEREF(__pyx_v_res2);
       PyTuple_SET_ITEM(__pyx_t_5, 3+__pyx_t_7, __pyx_v_res2);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 471, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 540, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
@@ -9564,7 +9647,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "quantimpy/morphology.pyx":459
+    /* "quantimpy/morphology.pyx":528
  * 
  *         return OpenMap2D(erosion, res0, res1)
  *     elif (erosion.ndim == 3):             # <<<<<<<<<<<<<<
@@ -9574,25 +9657,25 @@ static PyObject *__pyx_f_9quantimpy_10morphology_OpenMap(PyArrayObject *__pyx_v_
     break;
     default:
 
-    /* "quantimpy/morphology.pyx":473
+    /* "quantimpy/morphology.pyx":542
  *         return OpenMap3D(erosion, res0, res1, res2)
  *     else:
  *         raise ValueError('Can only handle 2D or 3D images')             # <<<<<<<<<<<<<<
  * 
- * ################################################################################
+ * 
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 473, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 542, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 473, __pyx_L1_error)
+    __PYX_ERR(0, 542, __pyx_L1_error)
     break;
   }
 
-  /* "quantimpy/morphology.pyx":443
+  /* "quantimpy/morphology.pyx":512
  * # {{{ OpenMap
  * 
- * cpdef OpenMap(np.ndarray erosion, res=None):             # <<<<<<<<<<<<<<
+ * cpdef OpenMap(np.ndarray erosion, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if not (erosion.dtype == 'uint16'):
  */
@@ -9654,7 +9737,7 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_29OpenMap(PyObject *__pyx_self
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "OpenMap") < 0)) __PYX_ERR(0, 443, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "OpenMap") < 0)) __PYX_ERR(0, 512, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -9670,13 +9753,13 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_29OpenMap(PyObject *__pyx_self
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("OpenMap", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 443, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("OpenMap", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 512, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.OpenMap", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_erosion), __pyx_ptype_5numpy_ndarray, 1, "erosion", 0))) __PYX_ERR(0, 443, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_erosion), __pyx_ptype_5numpy_ndarray, 1, "erosion", 0))) __PYX_ERR(0, 512, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_28OpenMap(__pyx_self, __pyx_v_erosion, __pyx_v_res);
 
   /* function exit code */
@@ -9700,7 +9783,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_28OpenMap(CYTHON_UNUSED PyObje
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.res = __pyx_v_res;
-  __pyx_t_1 = __pyx_f_9quantimpy_10morphology_OpenMap(__pyx_v_erosion, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 443, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9quantimpy_10morphology_OpenMap(__pyx_v_erosion, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 512, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -9717,12 +9800,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_28OpenMap(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":482
- * ################################################################################
+/* "quantimpy/morphology.pyx":555
  * 
- * def OpenMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     erosion = np.ascontiguousarray(erosion)
+ * def OpenMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion,
+ *         double res0,
  */
 
 /* Python wrapper */
@@ -9763,17 +9846,17 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_31OpenMap2D(PyObject *__pyx_se
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res0)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("OpenMap2D", 1, 3, 3, 1); __PYX_ERR(0, 482, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("OpenMap2D", 1, 3, 3, 1); __PYX_ERR(0, 555, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("OpenMap2D", 1, 3, 3, 2); __PYX_ERR(0, 482, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("OpenMap2D", 1, 3, 3, 2); __PYX_ERR(0, 555, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "OpenMap2D") < 0)) __PYX_ERR(0, 482, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "OpenMap2D") < 0)) __PYX_ERR(0, 555, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -9783,18 +9866,18 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_31OpenMap2D(PyObject *__pyx_se
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
     __pyx_v_erosion = ((PyArrayObject *)values[0]);
-    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 482, __pyx_L3_error)
-    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 482, __pyx_L3_error)
+    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 557, __pyx_L3_error)
+    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 558, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("OpenMap2D", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 482, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("OpenMap2D", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 555, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.OpenMap2D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_erosion), __pyx_ptype_5numpy_ndarray, 1, "erosion", 0))) __PYX_ERR(0, 482, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_erosion), __pyx_ptype_5numpy_ndarray, 1, "erosion", 0))) __PYX_ERR(0, 556, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_30OpenMap2D(__pyx_self, __pyx_v_erosion, __pyx_v_res0, __pyx_v_res1);
 
   /* function exit code */
@@ -9845,20 +9928,20 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_30OpenMap2D(CYTHON_UNUSED PyOb
   __pyx_pybuffernd_erosion.rcbuffer = &__pyx_pybuffer_erosion;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_erosion.rcbuffer->pybuffer, (PyObject*)__pyx_v_erosion, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 482, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_erosion.rcbuffer->pybuffer, (PyObject*)__pyx_v_erosion, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 555, __pyx_L1_error)
   }
   __pyx_pybuffernd_erosion.diminfo[0].strides = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_erosion.diminfo[0].shape = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_erosion.diminfo[1].strides = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_erosion.diminfo[1].shape = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.shape[1];
 
-  /* "quantimpy/morphology.pyx":484
- * def OpenMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion, double res0, double res1):
+  /* "quantimpy/morphology.pyx":560
+ *         double res1):
  * 
  *     erosion = np.ascontiguousarray(erosion)             # <<<<<<<<<<<<<<
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] opening = np.empty_like(erosion,dtype=np.uint16)
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] opening = np.empty_like(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 484, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 560, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 484, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 560, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -9873,10 +9956,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_30OpenMap2D(CYTHON_UNUSED PyOb
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, ((PyObject *)__pyx_v_erosion)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_erosion));
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 484, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 560, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 484, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 560, __pyx_L1_error)
   __pyx_t_4 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -9893,50 +9976,66 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_30OpenMap2D(CYTHON_UNUSED PyOb
       __pyx_t_6 = __pyx_t_7 = __pyx_t_8 = 0;
     }
     __pyx_pybuffernd_erosion.diminfo[0].strides = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_erosion.diminfo[0].shape = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_erosion.diminfo[1].strides = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_erosion.diminfo[1].shape = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.shape[1];
-    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 484, __pyx_L1_error)
+    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 560, __pyx_L1_error)
   }
   __pyx_t_4 = 0;
   __Pyx_DECREF_SET(__pyx_v_erosion, ((PyArrayObject *)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":486
+  /* "quantimpy/morphology.pyx":562
  *     erosion = np.ascontiguousarray(erosion)
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] opening = np.empty_like(erosion,dtype=np.uint16)             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] opening = np.empty_like(             # <<<<<<<<<<<<<<
+ *         erosion,dtype=np.uint16)
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 562, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 562, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "quantimpy/morphology.pyx":563
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] opening = np.empty_like(
+ *         erosion,dtype=np.uint16)             # <<<<<<<<<<<<<<
  * 
  *     status = cOpenMap2D(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 486, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 486, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 486, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 562, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject *)__pyx_v_erosion));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_erosion));
   PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_erosion));
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 486, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 563, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 486, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 563, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 486, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 563, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 486, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 563, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 486, __pyx_L1_error)
+
+  /* "quantimpy/morphology.pyx":562
+ *     erosion = np.ascontiguousarray(erosion)
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] opening = np.empty_like(             # <<<<<<<<<<<<<<
+ *         erosion,dtype=np.uint16)
+ * 
+ */
+  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 562, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 486, __pyx_L1_error)
+  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 562, __pyx_L1_error)
   __pyx_t_11 = ((PyArrayObject *)__pyx_t_10);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_opening.rcbuffer->pybuffer, (PyObject*)__pyx_t_11, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) {
       __pyx_v_opening = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_opening.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 486, __pyx_L1_error)
+      __PYX_ERR(0, 562, __pyx_L1_error)
     } else {__pyx_pybuffernd_opening.diminfo[0].strides = __pyx_pybuffernd_opening.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_opening.diminfo[0].shape = __pyx_pybuffernd_opening.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_opening.diminfo[1].strides = __pyx_pybuffernd_opening.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_opening.diminfo[1].shape = __pyx_pybuffernd_opening.rcbuffer->pybuffer.shape[1];
     }
   }
@@ -9944,7 +10043,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_30OpenMap2D(CYTHON_UNUSED PyOb
   __pyx_v_opening = ((PyArrayObject *)__pyx_t_10);
   __pyx_t_10 = 0;
 
-  /* "quantimpy/morphology.pyx":489
+  /* "quantimpy/morphology.pyx":566
  * 
  *     status = cOpenMap2D(
  *         &erosion[0,0],             # <<<<<<<<<<<<<<
@@ -9964,10 +10063,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_30OpenMap2D(CYTHON_UNUSED PyOb
   } else if (unlikely(__pyx_t_13 >= __pyx_pybuffernd_erosion.diminfo[1].shape)) __pyx_t_5 = 1;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 489, __pyx_L1_error)
+    __PYX_ERR(0, 566, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":490
+  /* "quantimpy/morphology.pyx":567
  *     status = cOpenMap2D(
  *         &erosion[0,0],
  *         &opening[0,0],             # <<<<<<<<<<<<<<
@@ -9987,11 +10086,11 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_30OpenMap2D(CYTHON_UNUSED PyOb
   } else if (unlikely(__pyx_t_15 >= __pyx_pybuffernd_opening.diminfo[1].shape)) __pyx_t_5 = 1;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 490, __pyx_L1_error)
+    __PYX_ERR(0, 567, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":488
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] opening = np.empty_like(erosion,dtype=np.uint16)
+  /* "quantimpy/morphology.pyx":565
+ *         erosion,dtype=np.uint16)
  * 
  *     status = cOpenMap2D(             # <<<<<<<<<<<<<<
  *         &erosion[0,0],
@@ -9999,7 +10098,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_30OpenMap2D(CYTHON_UNUSED PyOb
  */
   __pyx_v_status = cOpenMap2D((&(*__Pyx_BufPtrCContig2d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_erosion.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_erosion.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_erosion.diminfo[1].strides))), (&(*__Pyx_BufPtrCContig2d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_opening.rcbuffer->pybuffer.buf, __pyx_t_14, __pyx_pybuffernd_opening.diminfo[0].strides, __pyx_t_15, __pyx_pybuffernd_opening.diminfo[1].strides))), (__pyx_v_erosion->dimensions[0]), (__pyx_v_erosion->dimensions[1]), __pyx_v_res0, __pyx_v_res1);
 
-  /* "quantimpy/morphology.pyx":497
+  /* "quantimpy/morphology.pyx":574
  *     )
  * 
  *     assert status == 0             # <<<<<<<<<<<<<<
@@ -10010,29 +10109,29 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_30OpenMap2D(CYTHON_UNUSED PyOb
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_status == 0) != 0))) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 497, __pyx_L1_error)
+      __PYX_ERR(0, 574, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "quantimpy/morphology.pyx":498
+  /* "quantimpy/morphology.pyx":575
  * 
  *     assert status == 0
  *     return opening             # <<<<<<<<<<<<<<
  * 
- * ################################################################################
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(((PyObject *)__pyx_v_opening));
   __pyx_r = ((PyObject *)__pyx_v_opening);
   goto __pyx_L0;
 
-  /* "quantimpy/morphology.pyx":482
- * ################################################################################
+  /* "quantimpy/morphology.pyx":555
  * 
- * def OpenMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     erosion = np.ascontiguousarray(erosion)
+ * def OpenMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion,
+ *         double res0,
  */
 
   /* function exit code */
@@ -10063,12 +10162,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_30OpenMap2D(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":507
- * ################################################################################
+/* "quantimpy/morphology.pyx":590
  * 
- * def OpenMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     erosion = np.ascontiguousarray(erosion)
+ * def OpenMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion,
+ *         double res0,
  */
 
 /* Python wrapper */
@@ -10112,23 +10211,23 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_33OpenMap3D(PyObject *__pyx_se
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res0)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("OpenMap3D", 1, 4, 4, 1); __PYX_ERR(0, 507, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("OpenMap3D", 1, 4, 4, 1); __PYX_ERR(0, 590, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("OpenMap3D", 1, 4, 4, 2); __PYX_ERR(0, 507, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("OpenMap3D", 1, 4, 4, 2); __PYX_ERR(0, 590, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("OpenMap3D", 1, 4, 4, 3); __PYX_ERR(0, 507, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("OpenMap3D", 1, 4, 4, 3); __PYX_ERR(0, 590, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "OpenMap3D") < 0)) __PYX_ERR(0, 507, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "OpenMap3D") < 0)) __PYX_ERR(0, 590, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -10139,19 +10238,19 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_33OpenMap3D(PyObject *__pyx_se
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
     __pyx_v_erosion = ((PyArrayObject *)values[0]);
-    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 507, __pyx_L3_error)
-    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 507, __pyx_L3_error)
-    __pyx_v_res2 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 507, __pyx_L3_error)
+    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 592, __pyx_L3_error)
+    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 593, __pyx_L3_error)
+    __pyx_v_res2 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 594, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("OpenMap3D", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 507, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("OpenMap3D", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 590, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.OpenMap3D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_erosion), __pyx_ptype_5numpy_ndarray, 1, "erosion", 0))) __PYX_ERR(0, 507, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_erosion), __pyx_ptype_5numpy_ndarray, 1, "erosion", 0))) __PYX_ERR(0, 591, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_32OpenMap3D(__pyx_self, __pyx_v_erosion, __pyx_v_res0, __pyx_v_res1, __pyx_v_res2);
 
   /* function exit code */
@@ -10204,20 +10303,20 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_32OpenMap3D(CYTHON_UNUSED PyOb
   __pyx_pybuffernd_erosion.rcbuffer = &__pyx_pybuffer_erosion;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_erosion.rcbuffer->pybuffer, (PyObject*)__pyx_v_erosion, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 507, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_erosion.rcbuffer->pybuffer, (PyObject*)__pyx_v_erosion, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 590, __pyx_L1_error)
   }
   __pyx_pybuffernd_erosion.diminfo[0].strides = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_erosion.diminfo[0].shape = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_erosion.diminfo[1].strides = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_erosion.diminfo[1].shape = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_erosion.diminfo[2].strides = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_erosion.diminfo[2].shape = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.shape[2];
 
-  /* "quantimpy/morphology.pyx":509
- * def OpenMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion, double res0, double res1, double res2):
+  /* "quantimpy/morphology.pyx":596
+ *         double res2):
  * 
  *     erosion = np.ascontiguousarray(erosion)             # <<<<<<<<<<<<<<
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] opening = np.empty_like(erosion,dtype=np.uint16)
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] opening = np.empty_like(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 509, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 596, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 509, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 596, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -10232,10 +10331,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_32OpenMap3D(CYTHON_UNUSED PyOb
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, ((PyObject *)__pyx_v_erosion)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_erosion));
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 509, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 596, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 509, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 596, __pyx_L1_error)
   __pyx_t_4 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -10252,50 +10351,66 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_32OpenMap3D(CYTHON_UNUSED PyOb
       __pyx_t_6 = __pyx_t_7 = __pyx_t_8 = 0;
     }
     __pyx_pybuffernd_erosion.diminfo[0].strides = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_erosion.diminfo[0].shape = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_erosion.diminfo[1].strides = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_erosion.diminfo[1].shape = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_erosion.diminfo[2].strides = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_erosion.diminfo[2].shape = __pyx_pybuffernd_erosion.rcbuffer->pybuffer.shape[2];
-    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 509, __pyx_L1_error)
+    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 596, __pyx_L1_error)
   }
   __pyx_t_4 = 0;
   __Pyx_DECREF_SET(__pyx_v_erosion, ((PyArrayObject *)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":511
+  /* "quantimpy/morphology.pyx":598
  *     erosion = np.ascontiguousarray(erosion)
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] opening = np.empty_like(erosion,dtype=np.uint16)             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] opening = np.empty_like(             # <<<<<<<<<<<<<<
+ *         erosion,dtype=np.uint16)
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 598, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 598, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "quantimpy/morphology.pyx":599
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] opening = np.empty_like(
+ *         erosion,dtype=np.uint16)             # <<<<<<<<<<<<<<
  * 
  *     status = cOpenMap3D(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 511, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 511, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 511, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 598, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject *)__pyx_v_erosion));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_erosion));
   PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_erosion));
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 511, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 599, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 511, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 599, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 511, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 599, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 511, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 599, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 511, __pyx_L1_error)
+
+  /* "quantimpy/morphology.pyx":598
+ *     erosion = np.ascontiguousarray(erosion)
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] opening = np.empty_like(             # <<<<<<<<<<<<<<
+ *         erosion,dtype=np.uint16)
+ * 
+ */
+  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 598, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 511, __pyx_L1_error)
+  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 598, __pyx_L1_error)
   __pyx_t_11 = ((PyArrayObject *)__pyx_t_10);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_opening.rcbuffer->pybuffer, (PyObject*)__pyx_t_11, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) {
       __pyx_v_opening = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_opening.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 511, __pyx_L1_error)
+      __PYX_ERR(0, 598, __pyx_L1_error)
     } else {__pyx_pybuffernd_opening.diminfo[0].strides = __pyx_pybuffernd_opening.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_opening.diminfo[0].shape = __pyx_pybuffernd_opening.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_opening.diminfo[1].strides = __pyx_pybuffernd_opening.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_opening.diminfo[1].shape = __pyx_pybuffernd_opening.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_opening.diminfo[2].strides = __pyx_pybuffernd_opening.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_opening.diminfo[2].shape = __pyx_pybuffernd_opening.rcbuffer->pybuffer.shape[2];
     }
   }
@@ -10303,7 +10418,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_32OpenMap3D(CYTHON_UNUSED PyOb
   __pyx_v_opening = ((PyArrayObject *)__pyx_t_10);
   __pyx_t_10 = 0;
 
-  /* "quantimpy/morphology.pyx":514
+  /* "quantimpy/morphology.pyx":602
  * 
  *     status = cOpenMap3D(
  *         &erosion[0,0,0],             # <<<<<<<<<<<<<<
@@ -10328,10 +10443,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_32OpenMap3D(CYTHON_UNUSED PyOb
   } else if (unlikely(__pyx_t_14 >= __pyx_pybuffernd_erosion.diminfo[2].shape)) __pyx_t_5 = 2;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 514, __pyx_L1_error)
+    __PYX_ERR(0, 602, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":515
+  /* "quantimpy/morphology.pyx":603
  *     status = cOpenMap3D(
  *         &erosion[0,0,0],
  *         &opening[0,0,0],             # <<<<<<<<<<<<<<
@@ -10356,11 +10471,11 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_32OpenMap3D(CYTHON_UNUSED PyOb
   } else if (unlikely(__pyx_t_17 >= __pyx_pybuffernd_opening.diminfo[2].shape)) __pyx_t_5 = 2;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 515, __pyx_L1_error)
+    __PYX_ERR(0, 603, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":513
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] opening = np.empty_like(erosion,dtype=np.uint16)
+  /* "quantimpy/morphology.pyx":601
+ *         erosion,dtype=np.uint16)
  * 
  *     status = cOpenMap3D(             # <<<<<<<<<<<<<<
  *         &erosion[0,0,0],
@@ -10368,7 +10483,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_32OpenMap3D(CYTHON_UNUSED PyOb
  */
   __pyx_v_status = cOpenMap3D((&(*__Pyx_BufPtrCContig3d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_erosion.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_erosion.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_erosion.diminfo[1].strides, __pyx_t_14, __pyx_pybuffernd_erosion.diminfo[2].strides))), (&(*__Pyx_BufPtrCContig3d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_opening.rcbuffer->pybuffer.buf, __pyx_t_15, __pyx_pybuffernd_opening.diminfo[0].strides, __pyx_t_16, __pyx_pybuffernd_opening.diminfo[1].strides, __pyx_t_17, __pyx_pybuffernd_opening.diminfo[2].strides))), (__pyx_v_erosion->dimensions[0]), (__pyx_v_erosion->dimensions[1]), (__pyx_v_erosion->dimensions[2]), __pyx_v_res0, __pyx_v_res1, __pyx_v_res2);
 
-  /* "quantimpy/morphology.pyx":524
+  /* "quantimpy/morphology.pyx":612
  *     )
  * 
  *     assert status == 0             # <<<<<<<<<<<<<<
@@ -10379,12 +10494,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_32OpenMap3D(CYTHON_UNUSED PyOb
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_status == 0) != 0))) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 524, __pyx_L1_error)
+      __PYX_ERR(0, 612, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "quantimpy/morphology.pyx":525
+  /* "quantimpy/morphology.pyx":613
  * 
  *     assert status == 0
  *     return opening             # <<<<<<<<<<<<<<
@@ -10396,12 +10511,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_32OpenMap3D(CYTHON_UNUSED PyOb
   __pyx_r = ((PyObject *)__pyx_v_opening);
   goto __pyx_L0;
 
-  /* "quantimpy/morphology.pyx":507
- * ################################################################################
+  /* "quantimpy/morphology.pyx":590
  * 
- * def OpenMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     erosion = np.ascontiguousarray(erosion)
+ * def OpenMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion,
+ *         double res0,
  */
 
   /* function exit code */
@@ -10432,10 +10547,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_32OpenMap3D(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":531
+/* "quantimpy/morphology.pyx":619
  * # {{{ CloseMap
  * 
- * cpdef CloseMap(np.ndarray dilation, res=None):             # <<<<<<<<<<<<<<
+ * cpdef CloseMap(np.ndarray dilation, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if not (dilation.dtype == 'uint16'):
  */
@@ -10466,35 +10581,35 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
   }
   __Pyx_INCREF(__pyx_v_res);
 
-  /* "quantimpy/morphology.pyx":533
- * cpdef CloseMap(np.ndarray dilation, res=None):
+  /* "quantimpy/morphology.pyx":621
+ * cpdef CloseMap(np.ndarray dilation, res = None):
  * 
  *     if not (dilation.dtype == 'uint16'):             # <<<<<<<<<<<<<<
  *         raise ValueError('Input image needs to be data type uint16')
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_dilation), __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 533, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_dilation), __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 621, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_uint16, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 533, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_n_u_uint16, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 621, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = ((!__pyx_t_2) != 0);
   if (unlikely(__pyx_t_3)) {
 
-    /* "quantimpy/morphology.pyx":534
+    /* "quantimpy/morphology.pyx":622
  * 
  *     if not (dilation.dtype == 'uint16'):
  *         raise ValueError('Input image needs to be data type uint16')             # <<<<<<<<<<<<<<
  * 
  *     if (dilation.ndim == 2):
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 534, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 622, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 534, __pyx_L1_error)
+    __PYX_ERR(0, 622, __pyx_L1_error)
 
-    /* "quantimpy/morphology.pyx":533
- * cpdef CloseMap(np.ndarray dilation, res=None):
+    /* "quantimpy/morphology.pyx":621
+ * cpdef CloseMap(np.ndarray dilation, res = None):
  * 
  *     if not (dilation.dtype == 'uint16'):             # <<<<<<<<<<<<<<
  *         raise ValueError('Input image needs to be data type uint16')
@@ -10502,7 +10617,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
  */
   }
 
-  /* "quantimpy/morphology.pyx":536
+  /* "quantimpy/morphology.pyx":624
  *         raise ValueError('Input image needs to be data type uint16')
  * 
  *     if (dilation.ndim == 2):             # <<<<<<<<<<<<<<
@@ -10512,7 +10627,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
   switch (__pyx_v_dilation->nd) {
     case 2:
 
-    /* "quantimpy/morphology.pyx":538
+    /* "quantimpy/morphology.pyx":626
  *     if (dilation.ndim == 2):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -10523,7 +10638,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
     __pyx_t_2 = (__pyx_t_3 != 0);
     if (__pyx_t_2) {
 
-      /* "quantimpy/morphology.pyx":539
+      /* "quantimpy/morphology.pyx":627
  * # Set default resolution (length/voxel)
  *         if (res is None):
  *             res0 = 1.0             # <<<<<<<<<<<<<<
@@ -10533,17 +10648,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res0 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":540
+      /* "quantimpy/morphology.pyx":628
  *         if (res is None):
  *             res0 = 1.0
  *             res1 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res1 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":538
+      /* "quantimpy/morphology.pyx":626
  *     if (dilation.ndim == 2):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -10553,19 +10668,19 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
       goto __pyx_L4;
     }
 
-    /* "quantimpy/morphology.pyx":542
+    /* "quantimpy/morphology.pyx":630
  *             res1 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
     /*else*/ {
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 542, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 630, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 542, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 630, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 542, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 630, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_5 = NULL;
@@ -10581,39 +10696,39 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
       __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 542, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 630, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF_SET(__pyx_v_res, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "quantimpy/morphology.pyx":543
+      /* "quantimpy/morphology.pyx":631
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  * 
  */
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 543, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 631, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_v_res0 = __pyx_t_1;
       __pyx_t_1 = 0;
 
-      /* "quantimpy/morphology.pyx":544
- *             res  = res.astype(np.double)
+      /* "quantimpy/morphology.pyx":632
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  * 
  *         return CloseMap2D(dilation, res0, res1)
  */
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 544, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 632, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_v_res1 = __pyx_t_1;
       __pyx_t_1 = 0;
     }
     __pyx_L4:;
 
-    /* "quantimpy/morphology.pyx":546
+    /* "quantimpy/morphology.pyx":634
  *             res1 = res[1]
  * 
  *         return CloseMap2D(dilation, res0, res1)             # <<<<<<<<<<<<<<
@@ -10621,7 +10736,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
  * # Set default resolution (length/voxel)
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_CloseMap2D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 546, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_CloseMap2D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 634, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_6 = NULL;
     __pyx_t_7 = 0;
@@ -10638,7 +10753,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[4] = {__pyx_t_6, ((PyObject *)__pyx_v_dilation), __pyx_v_res0, __pyx_v_res1};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 546, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 634, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -10646,13 +10761,13 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[4] = {__pyx_t_6, ((PyObject *)__pyx_v_dilation), __pyx_v_res0, __pyx_v_res1};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 546, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 634, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_5 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 546, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 634, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -10666,7 +10781,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
       __Pyx_INCREF(__pyx_v_res1);
       __Pyx_GIVEREF(__pyx_v_res1);
       PyTuple_SET_ITEM(__pyx_t_5, 2+__pyx_t_7, __pyx_v_res1);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 546, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 634, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
@@ -10675,7 +10790,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "quantimpy/morphology.pyx":536
+    /* "quantimpy/morphology.pyx":624
  *         raise ValueError('Input image needs to be data type uint16')
  * 
  *     if (dilation.ndim == 2):             # <<<<<<<<<<<<<<
@@ -10685,7 +10800,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
     break;
     case 3:
 
-    /* "quantimpy/morphology.pyx":549
+    /* "quantimpy/morphology.pyx":637
  *     elif (dilation.ndim == 3):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -10696,7 +10811,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
     __pyx_t_3 = (__pyx_t_2 != 0);
     if (__pyx_t_3) {
 
-      /* "quantimpy/morphology.pyx":550
+      /* "quantimpy/morphology.pyx":638
  * # Set default resolution (length/voxel)
  *         if (res is None):
  *             res0 = 1.0             # <<<<<<<<<<<<<<
@@ -10706,7 +10821,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res0 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":551
+      /* "quantimpy/morphology.pyx":639
  *         if (res is None):
  *             res0 = 1.0
  *             res1 = 1.0             # <<<<<<<<<<<<<<
@@ -10716,17 +10831,17 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res1 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":552
+      /* "quantimpy/morphology.pyx":640
  *             res0 = 1.0
  *             res1 = 1.0
  *             res2 = 1.0             # <<<<<<<<<<<<<<
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  */
       __Pyx_INCREF(__pyx_float_1_0);
       __pyx_v_res2 = __pyx_float_1_0;
 
-      /* "quantimpy/morphology.pyx":549
+      /* "quantimpy/morphology.pyx":637
  *     elif (dilation.ndim == 3):
  * # Set default resolution (length/voxel)
  *         if (res is None):             # <<<<<<<<<<<<<<
@@ -10736,19 +10851,19 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
       goto __pyx_L5;
     }
 
-    /* "quantimpy/morphology.pyx":554
+    /* "quantimpy/morphology.pyx":642
  *             res2 = 1.0
  *         else:
- *             res  = res.astype(np.double)             # <<<<<<<<<<<<<<
+ *             res = res.astype(np.double)             # <<<<<<<<<<<<<<
  *             res0 = res[0]
  *             res1 = res[1]
  */
     /*else*/ {
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 554, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_res, __pyx_n_s_astype); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 642, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 554, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 642, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 554, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_double); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 642, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_5 = NULL;
@@ -10764,51 +10879,51 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
       __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 554, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 642, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF_SET(__pyx_v_res, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "quantimpy/morphology.pyx":555
+      /* "quantimpy/morphology.pyx":643
  *         else:
- *             res  = res.astype(np.double)
+ *             res = res.astype(np.double)
  *             res0 = res[0]             # <<<<<<<<<<<<<<
  *             res1 = res[1]
  *             res2 = res[2]
  */
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 555, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 643, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_v_res0 = __pyx_t_1;
       __pyx_t_1 = 0;
 
-      /* "quantimpy/morphology.pyx":556
- *             res  = res.astype(np.double)
+      /* "quantimpy/morphology.pyx":644
+ *             res = res.astype(np.double)
  *             res0 = res[0]
  *             res1 = res[1]             # <<<<<<<<<<<<<<
  *             res2 = res[2]
  * 
  */
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 556, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 644, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_v_res1 = __pyx_t_1;
       __pyx_t_1 = 0;
 
-      /* "quantimpy/morphology.pyx":557
+      /* "quantimpy/morphology.pyx":645
  *             res0 = res[0]
  *             res1 = res[1]
  *             res2 = res[2]             # <<<<<<<<<<<<<<
  * 
  *         return CloseMap3D(dilation, res0, res1, res2)
  */
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 557, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_res, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 645, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_v_res2 = __pyx_t_1;
       __pyx_t_1 = 0;
     }
     __pyx_L5:;
 
-    /* "quantimpy/morphology.pyx":559
+    /* "quantimpy/morphology.pyx":647
  *             res2 = res[2]
  * 
  *         return CloseMap3D(dilation, res0, res1, res2)             # <<<<<<<<<<<<<<
@@ -10816,7 +10931,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
  *         raise ValueError('Can only handle 2D or 3D images')
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_CloseMap3D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 559, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_CloseMap3D); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 647, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_6 = NULL;
     __pyx_t_7 = 0;
@@ -10833,7 +10948,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[5] = {__pyx_t_6, ((PyObject *)__pyx_v_dilation), __pyx_v_res0, __pyx_v_res1, __pyx_v_res2};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 4+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 559, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 4+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 647, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -10841,13 +10956,13 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[5] = {__pyx_t_6, ((PyObject *)__pyx_v_dilation), __pyx_v_res0, __pyx_v_res1, __pyx_v_res2};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 4+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 559, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 4+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 647, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_5 = PyTuple_New(4+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 559, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(4+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 647, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -10864,7 +10979,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
       __Pyx_INCREF(__pyx_v_res2);
       __Pyx_GIVEREF(__pyx_v_res2);
       PyTuple_SET_ITEM(__pyx_t_5, 3+__pyx_t_7, __pyx_v_res2);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 559, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 647, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
@@ -10873,7 +10988,7 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "quantimpy/morphology.pyx":547
+    /* "quantimpy/morphology.pyx":635
  * 
  *         return CloseMap2D(dilation, res0, res1)
  *     elif (dilation.ndim == 3):             # <<<<<<<<<<<<<<
@@ -10883,25 +10998,25 @@ static PyObject *__pyx_f_9quantimpy_10morphology_CloseMap(PyArrayObject *__pyx_v
     break;
     default:
 
-    /* "quantimpy/morphology.pyx":561
+    /* "quantimpy/morphology.pyx":649
  *         return CloseMap3D(dilation, res0, res1, res2)
  *     else:
  *         raise ValueError('Can only handle 2D or 3D images')             # <<<<<<<<<<<<<<
  * 
- * ################################################################################
+ * 
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 561, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 649, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 561, __pyx_L1_error)
+    __PYX_ERR(0, 649, __pyx_L1_error)
     break;
   }
 
-  /* "quantimpy/morphology.pyx":531
+  /* "quantimpy/morphology.pyx":619
  * # {{{ CloseMap
  * 
- * cpdef CloseMap(np.ndarray dilation, res=None):             # <<<<<<<<<<<<<<
+ * cpdef CloseMap(np.ndarray dilation, res = None):             # <<<<<<<<<<<<<<
  * 
  *     if not (dilation.dtype == 'uint16'):
  */
@@ -10963,7 +11078,7 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_35CloseMap(PyObject *__pyx_sel
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "CloseMap") < 0)) __PYX_ERR(0, 531, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "CloseMap") < 0)) __PYX_ERR(0, 619, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -10979,13 +11094,13 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_35CloseMap(PyObject *__pyx_sel
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("CloseMap", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 531, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("CloseMap", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 619, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.CloseMap", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dilation), __pyx_ptype_5numpy_ndarray, 1, "dilation", 0))) __PYX_ERR(0, 531, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dilation), __pyx_ptype_5numpy_ndarray, 1, "dilation", 0))) __PYX_ERR(0, 619, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_34CloseMap(__pyx_self, __pyx_v_dilation, __pyx_v_res);
 
   /* function exit code */
@@ -11009,7 +11124,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_34CloseMap(CYTHON_UNUSED PyObj
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.res = __pyx_v_res;
-  __pyx_t_1 = __pyx_f_9quantimpy_10morphology_CloseMap(__pyx_v_dilation, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 531, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9quantimpy_10morphology_CloseMap(__pyx_v_dilation, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 619, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -11026,12 +11141,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_34CloseMap(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":570
- * ################################################################################
+/* "quantimpy/morphology.pyx":662
  * 
- * def CloseMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     dilation = np.ascontiguousarray(dilation)
+ * def CloseMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation,
+ *         double res0,
  */
 
 /* Python wrapper */
@@ -11072,17 +11187,17 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_37CloseMap2D(PyObject *__pyx_s
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res0)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("CloseMap2D", 1, 3, 3, 1); __PYX_ERR(0, 570, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("CloseMap2D", 1, 3, 3, 1); __PYX_ERR(0, 662, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("CloseMap2D", 1, 3, 3, 2); __PYX_ERR(0, 570, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("CloseMap2D", 1, 3, 3, 2); __PYX_ERR(0, 662, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "CloseMap2D") < 0)) __PYX_ERR(0, 570, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "CloseMap2D") < 0)) __PYX_ERR(0, 662, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -11092,18 +11207,18 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_37CloseMap2D(PyObject *__pyx_s
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
     __pyx_v_dilation = ((PyArrayObject *)values[0]);
-    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 570, __pyx_L3_error)
-    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 570, __pyx_L3_error)
+    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 664, __pyx_L3_error)
+    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 665, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("CloseMap2D", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 570, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("CloseMap2D", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 662, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.CloseMap2D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dilation), __pyx_ptype_5numpy_ndarray, 1, "dilation", 0))) __PYX_ERR(0, 570, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dilation), __pyx_ptype_5numpy_ndarray, 1, "dilation", 0))) __PYX_ERR(0, 663, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_36CloseMap2D(__pyx_self, __pyx_v_dilation, __pyx_v_res0, __pyx_v_res1);
 
   /* function exit code */
@@ -11154,20 +11269,20 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_36CloseMap2D(CYTHON_UNUSED PyO
   __pyx_pybuffernd_dilation.rcbuffer = &__pyx_pybuffer_dilation;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_dilation.rcbuffer->pybuffer, (PyObject*)__pyx_v_dilation, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 570, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_dilation.rcbuffer->pybuffer, (PyObject*)__pyx_v_dilation, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 662, __pyx_L1_error)
   }
   __pyx_pybuffernd_dilation.diminfo[0].strides = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_dilation.diminfo[0].shape = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_dilation.diminfo[1].strides = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_dilation.diminfo[1].shape = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.shape[1];
 
-  /* "quantimpy/morphology.pyx":572
- * def CloseMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation, double res0, double res1):
+  /* "quantimpy/morphology.pyx":667
+ *         double res1):
  * 
  *     dilation = np.ascontiguousarray(dilation)             # <<<<<<<<<<<<<<
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] closing = np.empty_like(dilation,dtype=np.uint16)
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] closing = np.empty_like(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 572, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 667, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 572, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 667, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -11182,10 +11297,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_36CloseMap2D(CYTHON_UNUSED PyO
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, ((PyObject *)__pyx_v_dilation)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_dilation));
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 572, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 667, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 572, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 667, __pyx_L1_error)
   __pyx_t_4 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -11202,50 +11317,66 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_36CloseMap2D(CYTHON_UNUSED PyO
       __pyx_t_6 = __pyx_t_7 = __pyx_t_8 = 0;
     }
     __pyx_pybuffernd_dilation.diminfo[0].strides = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_dilation.diminfo[0].shape = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_dilation.diminfo[1].strides = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_dilation.diminfo[1].shape = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.shape[1];
-    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 572, __pyx_L1_error)
+    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 667, __pyx_L1_error)
   }
   __pyx_t_4 = 0;
   __Pyx_DECREF_SET(__pyx_v_dilation, ((PyArrayObject *)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":574
+  /* "quantimpy/morphology.pyx":669
  *     dilation = np.ascontiguousarray(dilation)
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] closing = np.empty_like(dilation,dtype=np.uint16)             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] closing = np.empty_like(             # <<<<<<<<<<<<<<
+ *         dilation,dtype=np.uint16)
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 669, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 669, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "quantimpy/morphology.pyx":670
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] closing = np.empty_like(
+ *         dilation,dtype=np.uint16)             # <<<<<<<<<<<<<<
  * 
  *     status = cCloseMap2D(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 574, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 574, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 574, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 669, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject *)__pyx_v_dilation));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_dilation));
   PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_dilation));
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 574, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 670, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 574, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 670, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 574, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 670, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 574, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 670, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 574, __pyx_L1_error)
+
+  /* "quantimpy/morphology.pyx":669
+ *     dilation = np.ascontiguousarray(dilation)
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] closing = np.empty_like(             # <<<<<<<<<<<<<<
+ *         dilation,dtype=np.uint16)
+ * 
+ */
+  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 669, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 574, __pyx_L1_error)
+  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 669, __pyx_L1_error)
   __pyx_t_11 = ((PyArrayObject *)__pyx_t_10);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_closing.rcbuffer->pybuffer, (PyObject*)__pyx_t_11, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 2, 0, __pyx_stack) == -1)) {
       __pyx_v_closing = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_closing.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 574, __pyx_L1_error)
+      __PYX_ERR(0, 669, __pyx_L1_error)
     } else {__pyx_pybuffernd_closing.diminfo[0].strides = __pyx_pybuffernd_closing.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_closing.diminfo[0].shape = __pyx_pybuffernd_closing.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_closing.diminfo[1].strides = __pyx_pybuffernd_closing.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_closing.diminfo[1].shape = __pyx_pybuffernd_closing.rcbuffer->pybuffer.shape[1];
     }
   }
@@ -11253,7 +11384,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_36CloseMap2D(CYTHON_UNUSED PyO
   __pyx_v_closing = ((PyArrayObject *)__pyx_t_10);
   __pyx_t_10 = 0;
 
-  /* "quantimpy/morphology.pyx":577
+  /* "quantimpy/morphology.pyx":673
  * 
  *     status = cCloseMap2D(
  *         &dilation[0,0],             # <<<<<<<<<<<<<<
@@ -11273,10 +11404,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_36CloseMap2D(CYTHON_UNUSED PyO
   } else if (unlikely(__pyx_t_13 >= __pyx_pybuffernd_dilation.diminfo[1].shape)) __pyx_t_5 = 1;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 577, __pyx_L1_error)
+    __PYX_ERR(0, 673, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":578
+  /* "quantimpy/morphology.pyx":674
  *     status = cCloseMap2D(
  *         &dilation[0,0],
  *         &closing[0,0],             # <<<<<<<<<<<<<<
@@ -11296,11 +11427,11 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_36CloseMap2D(CYTHON_UNUSED PyO
   } else if (unlikely(__pyx_t_15 >= __pyx_pybuffernd_closing.diminfo[1].shape)) __pyx_t_5 = 1;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 578, __pyx_L1_error)
+    __PYX_ERR(0, 674, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":576
- *     cdef np.ndarray[np.uint16_t, ndim=2, mode="c"] closing = np.empty_like(dilation,dtype=np.uint16)
+  /* "quantimpy/morphology.pyx":672
+ *         dilation,dtype=np.uint16)
  * 
  *     status = cCloseMap2D(             # <<<<<<<<<<<<<<
  *         &dilation[0,0],
@@ -11308,7 +11439,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_36CloseMap2D(CYTHON_UNUSED PyO
  */
   __pyx_v_status = cCloseMap2D((&(*__Pyx_BufPtrCContig2d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_dilation.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_dilation.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_dilation.diminfo[1].strides))), (&(*__Pyx_BufPtrCContig2d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_closing.rcbuffer->pybuffer.buf, __pyx_t_14, __pyx_pybuffernd_closing.diminfo[0].strides, __pyx_t_15, __pyx_pybuffernd_closing.diminfo[1].strides))), (__pyx_v_dilation->dimensions[0]), (__pyx_v_dilation->dimensions[1]), __pyx_v_res0, __pyx_v_res1);
 
-  /* "quantimpy/morphology.pyx":585
+  /* "quantimpy/morphology.pyx":681
  *     )
  * 
  *     assert status == 0             # <<<<<<<<<<<<<<
@@ -11319,29 +11450,29 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_36CloseMap2D(CYTHON_UNUSED PyO
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_status == 0) != 0))) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 585, __pyx_L1_error)
+      __PYX_ERR(0, 681, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "quantimpy/morphology.pyx":586
+  /* "quantimpy/morphology.pyx":682
  * 
  *     assert status == 0
  *     return closing             # <<<<<<<<<<<<<<
  * 
- * ################################################################################
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(((PyObject *)__pyx_v_closing));
   __pyx_r = ((PyObject *)__pyx_v_closing);
   goto __pyx_L0;
 
-  /* "quantimpy/morphology.pyx":570
- * ################################################################################
+  /* "quantimpy/morphology.pyx":662
  * 
- * def CloseMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     dilation = np.ascontiguousarray(dilation)
+ * def CloseMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation,
+ *         double res0,
  */
 
   /* function exit code */
@@ -11372,12 +11503,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_36CloseMap2D(CYTHON_UNUSED PyO
   return __pyx_r;
 }
 
-/* "quantimpy/morphology.pyx":595
- * ################################################################################
+/* "quantimpy/morphology.pyx":697
  * 
- * def CloseMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     dilation = np.ascontiguousarray(dilation)
+ * def CloseMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation,
+ *         double res0,
  */
 
 /* Python wrapper */
@@ -11421,23 +11552,23 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_39CloseMap3D(PyObject *__pyx_s
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res0)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("CloseMap3D", 1, 4, 4, 1); __PYX_ERR(0, 595, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("CloseMap3D", 1, 4, 4, 1); __PYX_ERR(0, 697, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("CloseMap3D", 1, 4, 4, 2); __PYX_ERR(0, 595, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("CloseMap3D", 1, 4, 4, 2); __PYX_ERR(0, 697, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_res2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("CloseMap3D", 1, 4, 4, 3); __PYX_ERR(0, 595, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("CloseMap3D", 1, 4, 4, 3); __PYX_ERR(0, 697, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "CloseMap3D") < 0)) __PYX_ERR(0, 595, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "CloseMap3D") < 0)) __PYX_ERR(0, 697, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -11448,19 +11579,19 @@ static PyObject *__pyx_pw_9quantimpy_10morphology_39CloseMap3D(PyObject *__pyx_s
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
     __pyx_v_dilation = ((PyArrayObject *)values[0]);
-    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 595, __pyx_L3_error)
-    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 595, __pyx_L3_error)
-    __pyx_v_res2 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 595, __pyx_L3_error)
+    __pyx_v_res0 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_res0 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 699, __pyx_L3_error)
+    __pyx_v_res1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_res1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 700, __pyx_L3_error)
+    __pyx_v_res2 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_res2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 701, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("CloseMap3D", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 595, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("CloseMap3D", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 697, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("quantimpy.morphology.CloseMap3D", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dilation), __pyx_ptype_5numpy_ndarray, 1, "dilation", 0))) __PYX_ERR(0, 595, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dilation), __pyx_ptype_5numpy_ndarray, 1, "dilation", 0))) __PYX_ERR(0, 698, __pyx_L1_error)
   __pyx_r = __pyx_pf_9quantimpy_10morphology_38CloseMap3D(__pyx_self, __pyx_v_dilation, __pyx_v_res0, __pyx_v_res1, __pyx_v_res2);
 
   /* function exit code */
@@ -11513,20 +11644,20 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_38CloseMap3D(CYTHON_UNUSED PyO
   __pyx_pybuffernd_dilation.rcbuffer = &__pyx_pybuffer_dilation;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_dilation.rcbuffer->pybuffer, (PyObject*)__pyx_v_dilation, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 595, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_dilation.rcbuffer->pybuffer, (PyObject*)__pyx_v_dilation, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 697, __pyx_L1_error)
   }
   __pyx_pybuffernd_dilation.diminfo[0].strides = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_dilation.diminfo[0].shape = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_dilation.diminfo[1].strides = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_dilation.diminfo[1].shape = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_dilation.diminfo[2].strides = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_dilation.diminfo[2].shape = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.shape[2];
 
-  /* "quantimpy/morphology.pyx":597
- * def CloseMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation, double res0, double res1, double res2):
+  /* "quantimpy/morphology.pyx":703
+ *         double res2):
  * 
  *     dilation = np.ascontiguousarray(dilation)             # <<<<<<<<<<<<<<
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] closing = np.empty_like(dilation,dtype=np.uint16)
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] closing = np.empty_like(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 597, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 703, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 597, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 703, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -11541,10 +11672,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_38CloseMap3D(CYTHON_UNUSED PyO
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, ((PyObject *)__pyx_v_dilation)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_dilation));
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 597, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 703, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 597, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 703, __pyx_L1_error)
   __pyx_t_4 = ((PyArrayObject *)__pyx_t_1);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -11561,50 +11692,66 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_38CloseMap3D(CYTHON_UNUSED PyO
       __pyx_t_6 = __pyx_t_7 = __pyx_t_8 = 0;
     }
     __pyx_pybuffernd_dilation.diminfo[0].strides = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_dilation.diminfo[0].shape = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_dilation.diminfo[1].strides = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_dilation.diminfo[1].shape = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_dilation.diminfo[2].strides = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_dilation.diminfo[2].shape = __pyx_pybuffernd_dilation.rcbuffer->pybuffer.shape[2];
-    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 597, __pyx_L1_error)
+    if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 703, __pyx_L1_error)
   }
   __pyx_t_4 = 0;
   __Pyx_DECREF_SET(__pyx_v_dilation, ((PyArrayObject *)__pyx_t_1));
   __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":599
+  /* "quantimpy/morphology.pyx":705
  *     dilation = np.ascontiguousarray(dilation)
  * 
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] closing = np.empty_like(dilation,dtype=np.uint16)             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] closing = np.empty_like(             # <<<<<<<<<<<<<<
+ *         dilation,dtype=np.uint16)
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 705, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 705, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "quantimpy/morphology.pyx":706
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] closing = np.empty_like(
+ *         dilation,dtype=np.uint16)             # <<<<<<<<<<<<<<
  * 
  *     status = cCloseMap3D(
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 599, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty_like); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 599, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 599, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 705, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(((PyObject *)__pyx_v_dilation));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_dilation));
   PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_dilation));
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 599, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 706, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 599, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 706, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 599, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_uint16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 706, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 599, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_10) < 0) __PYX_ERR(0, 706, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 599, __pyx_L1_error)
+
+  /* "quantimpy/morphology.pyx":705
+ *     dilation = np.ascontiguousarray(dilation)
+ * 
+ *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] closing = np.empty_like(             # <<<<<<<<<<<<<<
+ *         dilation,dtype=np.uint16)
+ * 
+ */
+  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 705, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 599, __pyx_L1_error)
+  if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 705, __pyx_L1_error)
   __pyx_t_11 = ((PyArrayObject *)__pyx_t_10);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_closing.rcbuffer->pybuffer, (PyObject*)__pyx_t_11, &__Pyx_TypeInfo_nn___pyx_t_5numpy_uint16_t, PyBUF_FORMAT| PyBUF_C_CONTIGUOUS, 3, 0, __pyx_stack) == -1)) {
       __pyx_v_closing = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_closing.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 599, __pyx_L1_error)
+      __PYX_ERR(0, 705, __pyx_L1_error)
     } else {__pyx_pybuffernd_closing.diminfo[0].strides = __pyx_pybuffernd_closing.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_closing.diminfo[0].shape = __pyx_pybuffernd_closing.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_closing.diminfo[1].strides = __pyx_pybuffernd_closing.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_closing.diminfo[1].shape = __pyx_pybuffernd_closing.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_closing.diminfo[2].strides = __pyx_pybuffernd_closing.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_closing.diminfo[2].shape = __pyx_pybuffernd_closing.rcbuffer->pybuffer.shape[2];
     }
   }
@@ -11612,7 +11759,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_38CloseMap3D(CYTHON_UNUSED PyO
   __pyx_v_closing = ((PyArrayObject *)__pyx_t_10);
   __pyx_t_10 = 0;
 
-  /* "quantimpy/morphology.pyx":602
+  /* "quantimpy/morphology.pyx":709
  * 
  *     status = cCloseMap3D(
  *         &dilation[0,0,0],             # <<<<<<<<<<<<<<
@@ -11637,10 +11784,10 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_38CloseMap3D(CYTHON_UNUSED PyO
   } else if (unlikely(__pyx_t_14 >= __pyx_pybuffernd_dilation.diminfo[2].shape)) __pyx_t_5 = 2;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 602, __pyx_L1_error)
+    __PYX_ERR(0, 709, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":603
+  /* "quantimpy/morphology.pyx":710
  *     status = cCloseMap3D(
  *         &dilation[0,0,0],
  *         &closing[0,0,0],             # <<<<<<<<<<<<<<
@@ -11665,11 +11812,11 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_38CloseMap3D(CYTHON_UNUSED PyO
   } else if (unlikely(__pyx_t_17 >= __pyx_pybuffernd_closing.diminfo[2].shape)) __pyx_t_5 = 2;
   if (unlikely(__pyx_t_5 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_5);
-    __PYX_ERR(0, 603, __pyx_L1_error)
+    __PYX_ERR(0, 710, __pyx_L1_error)
   }
 
-  /* "quantimpy/morphology.pyx":601
- *     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] closing = np.empty_like(dilation,dtype=np.uint16)
+  /* "quantimpy/morphology.pyx":708
+ *         dilation,dtype=np.uint16)
  * 
  *     status = cCloseMap3D(             # <<<<<<<<<<<<<<
  *         &dilation[0,0,0],
@@ -11677,7 +11824,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_38CloseMap3D(CYTHON_UNUSED PyO
  */
   __pyx_v_status = cCloseMap3D((&(*__Pyx_BufPtrCContig3d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_dilation.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_dilation.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_dilation.diminfo[1].strides, __pyx_t_14, __pyx_pybuffernd_dilation.diminfo[2].strides))), (&(*__Pyx_BufPtrCContig3d(__pyx_t_5numpy_uint16_t *, __pyx_pybuffernd_closing.rcbuffer->pybuffer.buf, __pyx_t_15, __pyx_pybuffernd_closing.diminfo[0].strides, __pyx_t_16, __pyx_pybuffernd_closing.diminfo[1].strides, __pyx_t_17, __pyx_pybuffernd_closing.diminfo[2].strides))), (__pyx_v_dilation->dimensions[0]), (__pyx_v_dilation->dimensions[1]), (__pyx_v_dilation->dimensions[2]), __pyx_v_res0, __pyx_v_res1, __pyx_v_res2);
 
-  /* "quantimpy/morphology.pyx":612
+  /* "quantimpy/morphology.pyx":719
  *     )
  * 
  *     assert status == 0             # <<<<<<<<<<<<<<
@@ -11688,12 +11835,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_38CloseMap3D(CYTHON_UNUSED PyO
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!((__pyx_v_status == 0) != 0))) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 612, __pyx_L1_error)
+      __PYX_ERR(0, 719, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "quantimpy/morphology.pyx":613
+  /* "quantimpy/morphology.pyx":720
  * 
  *     assert status == 0
  *     return closing             # <<<<<<<<<<<<<<
@@ -11705,12 +11852,12 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_38CloseMap3D(CYTHON_UNUSED PyO
   __pyx_r = ((PyObject *)__pyx_v_closing);
   goto __pyx_L0;
 
-  /* "quantimpy/morphology.pyx":595
- * ################################################################################
+  /* "quantimpy/morphology.pyx":697
  * 
- * def CloseMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     dilation = np.ascontiguousarray(dilation)
+ * def CloseMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation,
+ *         double res0,
  */
 
   /* function exit code */
@@ -11741,866 +11888,7 @@ static PyObject *__pyx_pf_9quantimpy_10morphology_38CloseMap3D(CYTHON_UNUSED PyO
   return __pyx_r;
 }
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":258
- *         # experimental exception made for __getbuffer__ and __releasebuffer__
- *         # -- the details of this may change.
- *         def __getbuffer__(ndarray self, Py_buffer* info, int flags):             # <<<<<<<<<<<<<<
- *             # This implementation of getbuffer is geared towards Cython
- *             # requirements, and does not yet fulfill the PEP.
- */
-
-/* Python wrapper */
-static CYTHON_UNUSED int __pyx_pw_5numpy_7ndarray_1__getbuffer__(PyObject *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /*proto*/
-static CYTHON_UNUSED int __pyx_pw_5numpy_7ndarray_1__getbuffer__(PyObject *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags) {
-  int __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__getbuffer__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_5numpy_7ndarray___getbuffer__(((PyArrayObject *)__pyx_v_self), ((Py_buffer *)__pyx_v_info), ((int)__pyx_v_flags));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags) {
-  int __pyx_v_i;
-  int __pyx_v_ndim;
-  int __pyx_v_endian_detector;
-  int __pyx_v_little_endian;
-  int __pyx_v_t;
-  char *__pyx_v_f;
-  PyArray_Descr *__pyx_v_descr = 0;
-  int __pyx_v_offset;
-  int __pyx_r;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  int __pyx_t_2;
-  PyObject *__pyx_t_3 = NULL;
-  int __pyx_t_4;
-  int __pyx_t_5;
-  int __pyx_t_6;
-  PyArray_Descr *__pyx_t_7;
-  PyObject *__pyx_t_8 = NULL;
-  char *__pyx_t_9;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  if (__pyx_v_info == NULL) {
-    PyErr_SetString(PyExc_BufferError, "PyObject_GetBuffer: view==NULL argument is obsolete");
-    return -1;
-  }
-  __Pyx_RefNannySetupContext("__getbuffer__", 0);
-  __pyx_v_info->obj = Py_None; __Pyx_INCREF(Py_None);
-  __Pyx_GIVEREF(__pyx_v_info->obj);
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":265
- * 
- *             cdef int i, ndim
- *             cdef int endian_detector = 1             # <<<<<<<<<<<<<<
- *             cdef bint little_endian = ((<char*>&endian_detector)[0] != 0)
- * 
- */
-  __pyx_v_endian_detector = 1;
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":266
- *             cdef int i, ndim
- *             cdef int endian_detector = 1
- *             cdef bint little_endian = ((<char*>&endian_detector)[0] != 0)             # <<<<<<<<<<<<<<
- * 
- *             ndim = PyArray_NDIM(self)
- */
-  __pyx_v_little_endian = ((((char *)(&__pyx_v_endian_detector))[0]) != 0);
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":268
- *             cdef bint little_endian = ((<char*>&endian_detector)[0] != 0)
- * 
- *             ndim = PyArray_NDIM(self)             # <<<<<<<<<<<<<<
- * 
- *             if ((flags & pybuf.PyBUF_C_CONTIGUOUS == pybuf.PyBUF_C_CONTIGUOUS)
- */
-  __pyx_v_ndim = PyArray_NDIM(__pyx_v_self);
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":270
- *             ndim = PyArray_NDIM(self)
- * 
- *             if ((flags & pybuf.PyBUF_C_CONTIGUOUS == pybuf.PyBUF_C_CONTIGUOUS)             # <<<<<<<<<<<<<<
- *                 and not PyArray_CHKFLAGS(self, NPY_ARRAY_C_CONTIGUOUS)):
- *                 raise ValueError(u"ndarray is not C contiguous")
- */
-  __pyx_t_2 = (((__pyx_v_flags & PyBUF_C_CONTIGUOUS) == PyBUF_C_CONTIGUOUS) != 0);
-  if (__pyx_t_2) {
-  } else {
-    __pyx_t_1 = __pyx_t_2;
-    goto __pyx_L4_bool_binop_done;
-  }
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":271
- * 
- *             if ((flags & pybuf.PyBUF_C_CONTIGUOUS == pybuf.PyBUF_C_CONTIGUOUS)
- *                 and not PyArray_CHKFLAGS(self, NPY_ARRAY_C_CONTIGUOUS)):             # <<<<<<<<<<<<<<
- *                 raise ValueError(u"ndarray is not C contiguous")
- * 
- */
-  __pyx_t_2 = ((!(PyArray_CHKFLAGS(__pyx_v_self, NPY_ARRAY_C_CONTIGUOUS) != 0)) != 0);
-  __pyx_t_1 = __pyx_t_2;
-  __pyx_L4_bool_binop_done:;
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":270
- *             ndim = PyArray_NDIM(self)
- * 
- *             if ((flags & pybuf.PyBUF_C_CONTIGUOUS == pybuf.PyBUF_C_CONTIGUOUS)             # <<<<<<<<<<<<<<
- *                 and not PyArray_CHKFLAGS(self, NPY_ARRAY_C_CONTIGUOUS)):
- *                 raise ValueError(u"ndarray is not C contiguous")
- */
-  if (unlikely(__pyx_t_1)) {
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":272
- *             if ((flags & pybuf.PyBUF_C_CONTIGUOUS == pybuf.PyBUF_C_CONTIGUOUS)
- *                 and not PyArray_CHKFLAGS(self, NPY_ARRAY_C_CONTIGUOUS)):
- *                 raise ValueError(u"ndarray is not C contiguous")             # <<<<<<<<<<<<<<
- * 
- *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
- */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 272, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_Raise(__pyx_t_3, 0, 0, 0);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(1, 272, __pyx_L1_error)
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":270
- *             ndim = PyArray_NDIM(self)
- * 
- *             if ((flags & pybuf.PyBUF_C_CONTIGUOUS == pybuf.PyBUF_C_CONTIGUOUS)             # <<<<<<<<<<<<<<
- *                 and not PyArray_CHKFLAGS(self, NPY_ARRAY_C_CONTIGUOUS)):
- *                 raise ValueError(u"ndarray is not C contiguous")
- */
-  }
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":274
- *                 raise ValueError(u"ndarray is not C contiguous")
- * 
- *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)             # <<<<<<<<<<<<<<
- *                 and not PyArray_CHKFLAGS(self, NPY_ARRAY_F_CONTIGUOUS)):
- *                 raise ValueError(u"ndarray is not Fortran contiguous")
- */
-  __pyx_t_2 = (((__pyx_v_flags & PyBUF_F_CONTIGUOUS) == PyBUF_F_CONTIGUOUS) != 0);
-  if (__pyx_t_2) {
-  } else {
-    __pyx_t_1 = __pyx_t_2;
-    goto __pyx_L7_bool_binop_done;
-  }
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":275
- * 
- *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
- *                 and not PyArray_CHKFLAGS(self, NPY_ARRAY_F_CONTIGUOUS)):             # <<<<<<<<<<<<<<
- *                 raise ValueError(u"ndarray is not Fortran contiguous")
- * 
- */
-  __pyx_t_2 = ((!(PyArray_CHKFLAGS(__pyx_v_self, NPY_ARRAY_F_CONTIGUOUS) != 0)) != 0);
-  __pyx_t_1 = __pyx_t_2;
-  __pyx_L7_bool_binop_done:;
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":274
- *                 raise ValueError(u"ndarray is not C contiguous")
- * 
- *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)             # <<<<<<<<<<<<<<
- *                 and not PyArray_CHKFLAGS(self, NPY_ARRAY_F_CONTIGUOUS)):
- *                 raise ValueError(u"ndarray is not Fortran contiguous")
- */
-  if (unlikely(__pyx_t_1)) {
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":276
- *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
- *                 and not PyArray_CHKFLAGS(self, NPY_ARRAY_F_CONTIGUOUS)):
- *                 raise ValueError(u"ndarray is not Fortran contiguous")             # <<<<<<<<<<<<<<
- * 
- *             info.buf = PyArray_DATA(self)
- */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 276, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_Raise(__pyx_t_3, 0, 0, 0);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(1, 276, __pyx_L1_error)
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":274
- *                 raise ValueError(u"ndarray is not C contiguous")
- * 
- *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)             # <<<<<<<<<<<<<<
- *                 and not PyArray_CHKFLAGS(self, NPY_ARRAY_F_CONTIGUOUS)):
- *                 raise ValueError(u"ndarray is not Fortran contiguous")
- */
-  }
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":278
- *                 raise ValueError(u"ndarray is not Fortran contiguous")
- * 
- *             info.buf = PyArray_DATA(self)             # <<<<<<<<<<<<<<
- *             info.ndim = ndim
- *             if sizeof(npy_intp) != sizeof(Py_ssize_t):
- */
-  __pyx_v_info->buf = PyArray_DATA(__pyx_v_self);
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":279
- * 
- *             info.buf = PyArray_DATA(self)
- *             info.ndim = ndim             # <<<<<<<<<<<<<<
- *             if sizeof(npy_intp) != sizeof(Py_ssize_t):
- *                 # Allocate new buffer for strides and shape info.
- */
-  __pyx_v_info->ndim = __pyx_v_ndim;
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":280
- *             info.buf = PyArray_DATA(self)
- *             info.ndim = ndim
- *             if sizeof(npy_intp) != sizeof(Py_ssize_t):             # <<<<<<<<<<<<<<
- *                 # Allocate new buffer for strides and shape info.
- *                 # This is allocated as one block, strides first.
- */
-  __pyx_t_1 = (((sizeof(npy_intp)) != (sizeof(Py_ssize_t))) != 0);
-  if (__pyx_t_1) {
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":283
- *                 # Allocate new buffer for strides and shape info.
- *                 # This is allocated as one block, strides first.
- *                 info.strides = <Py_ssize_t*>PyObject_Malloc(sizeof(Py_ssize_t) * 2 * <size_t>ndim)             # <<<<<<<<<<<<<<
- *                 info.shape = info.strides + ndim
- *                 for i in range(ndim):
- */
-    __pyx_v_info->strides = ((Py_ssize_t *)PyObject_Malloc((((sizeof(Py_ssize_t)) * 2) * ((size_t)__pyx_v_ndim))));
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":284
- *                 # This is allocated as one block, strides first.
- *                 info.strides = <Py_ssize_t*>PyObject_Malloc(sizeof(Py_ssize_t) * 2 * <size_t>ndim)
- *                 info.shape = info.strides + ndim             # <<<<<<<<<<<<<<
- *                 for i in range(ndim):
- *                     info.strides[i] = PyArray_STRIDES(self)[i]
- */
-    __pyx_v_info->shape = (__pyx_v_info->strides + __pyx_v_ndim);
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":285
- *                 info.strides = <Py_ssize_t*>PyObject_Malloc(sizeof(Py_ssize_t) * 2 * <size_t>ndim)
- *                 info.shape = info.strides + ndim
- *                 for i in range(ndim):             # <<<<<<<<<<<<<<
- *                     info.strides[i] = PyArray_STRIDES(self)[i]
- *                     info.shape[i] = PyArray_DIMS(self)[i]
- */
-    __pyx_t_4 = __pyx_v_ndim;
-    __pyx_t_5 = __pyx_t_4;
-    for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
-      __pyx_v_i = __pyx_t_6;
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":286
- *                 info.shape = info.strides + ndim
- *                 for i in range(ndim):
- *                     info.strides[i] = PyArray_STRIDES(self)[i]             # <<<<<<<<<<<<<<
- *                     info.shape[i] = PyArray_DIMS(self)[i]
- *             else:
- */
-      (__pyx_v_info->strides[__pyx_v_i]) = (PyArray_STRIDES(__pyx_v_self)[__pyx_v_i]);
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":287
- *                 for i in range(ndim):
- *                     info.strides[i] = PyArray_STRIDES(self)[i]
- *                     info.shape[i] = PyArray_DIMS(self)[i]             # <<<<<<<<<<<<<<
- *             else:
- *                 info.strides = <Py_ssize_t*>PyArray_STRIDES(self)
- */
-      (__pyx_v_info->shape[__pyx_v_i]) = (PyArray_DIMS(__pyx_v_self)[__pyx_v_i]);
-    }
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":280
- *             info.buf = PyArray_DATA(self)
- *             info.ndim = ndim
- *             if sizeof(npy_intp) != sizeof(Py_ssize_t):             # <<<<<<<<<<<<<<
- *                 # Allocate new buffer for strides and shape info.
- *                 # This is allocated as one block, strides first.
- */
-    goto __pyx_L9;
-  }
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":289
- *                     info.shape[i] = PyArray_DIMS(self)[i]
- *             else:
- *                 info.strides = <Py_ssize_t*>PyArray_STRIDES(self)             # <<<<<<<<<<<<<<
- *                 info.shape = <Py_ssize_t*>PyArray_DIMS(self)
- *             info.suboffsets = NULL
- */
-  /*else*/ {
-    __pyx_v_info->strides = ((Py_ssize_t *)PyArray_STRIDES(__pyx_v_self));
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":290
- *             else:
- *                 info.strides = <Py_ssize_t*>PyArray_STRIDES(self)
- *                 info.shape = <Py_ssize_t*>PyArray_DIMS(self)             # <<<<<<<<<<<<<<
- *             info.suboffsets = NULL
- *             info.itemsize = PyArray_ITEMSIZE(self)
- */
-    __pyx_v_info->shape = ((Py_ssize_t *)PyArray_DIMS(__pyx_v_self));
-  }
-  __pyx_L9:;
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":291
- *                 info.strides = <Py_ssize_t*>PyArray_STRIDES(self)
- *                 info.shape = <Py_ssize_t*>PyArray_DIMS(self)
- *             info.suboffsets = NULL             # <<<<<<<<<<<<<<
- *             info.itemsize = PyArray_ITEMSIZE(self)
- *             info.readonly = not PyArray_ISWRITEABLE(self)
- */
-  __pyx_v_info->suboffsets = NULL;
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":292
- *                 info.shape = <Py_ssize_t*>PyArray_DIMS(self)
- *             info.suboffsets = NULL
- *             info.itemsize = PyArray_ITEMSIZE(self)             # <<<<<<<<<<<<<<
- *             info.readonly = not PyArray_ISWRITEABLE(self)
- * 
- */
-  __pyx_v_info->itemsize = PyArray_ITEMSIZE(__pyx_v_self);
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":293
- *             info.suboffsets = NULL
- *             info.itemsize = PyArray_ITEMSIZE(self)
- *             info.readonly = not PyArray_ISWRITEABLE(self)             # <<<<<<<<<<<<<<
- * 
- *             cdef int t
- */
-  __pyx_v_info->readonly = (!(PyArray_ISWRITEABLE(__pyx_v_self) != 0));
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":296
- * 
- *             cdef int t
- *             cdef char* f = NULL             # <<<<<<<<<<<<<<
- *             cdef dtype descr = <dtype>PyArray_DESCR(self)
- *             cdef int offset
- */
-  __pyx_v_f = NULL;
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":297
- *             cdef int t
- *             cdef char* f = NULL
- *             cdef dtype descr = <dtype>PyArray_DESCR(self)             # <<<<<<<<<<<<<<
- *             cdef int offset
- * 
- */
-  __pyx_t_7 = PyArray_DESCR(__pyx_v_self);
-  __pyx_t_3 = ((PyObject *)__pyx_t_7);
-  __Pyx_INCREF(__pyx_t_3);
-  __pyx_v_descr = ((PyArray_Descr *)__pyx_t_3);
-  __pyx_t_3 = 0;
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":300
- *             cdef int offset
- * 
- *             info.obj = self             # <<<<<<<<<<<<<<
- * 
- *             if not PyDataType_HASFIELDS(descr):
- */
-  __Pyx_INCREF(((PyObject *)__pyx_v_self));
-  __Pyx_GIVEREF(((PyObject *)__pyx_v_self));
-  __Pyx_GOTREF(__pyx_v_info->obj);
-  __Pyx_DECREF(__pyx_v_info->obj);
-  __pyx_v_info->obj = ((PyObject *)__pyx_v_self);
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":302
- *             info.obj = self
- * 
- *             if not PyDataType_HASFIELDS(descr):             # <<<<<<<<<<<<<<
- *                 t = descr.type_num
- *                 if ((descr.byteorder == c'>' and little_endian) or
- */
-  __pyx_t_1 = ((!(PyDataType_HASFIELDS(__pyx_v_descr) != 0)) != 0);
-  if (__pyx_t_1) {
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":303
- * 
- *             if not PyDataType_HASFIELDS(descr):
- *                 t = descr.type_num             # <<<<<<<<<<<<<<
- *                 if ((descr.byteorder == c'>' and little_endian) or
- *                     (descr.byteorder == c'<' and not little_endian)):
- */
-    __pyx_t_4 = __pyx_v_descr->type_num;
-    __pyx_v_t = __pyx_t_4;
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":304
- *             if not PyDataType_HASFIELDS(descr):
- *                 t = descr.type_num
- *                 if ((descr.byteorder == c'>' and little_endian) or             # <<<<<<<<<<<<<<
- *                     (descr.byteorder == c'<' and not little_endian)):
- *                     raise ValueError(u"Non-native byte order not supported")
- */
-    __pyx_t_2 = ((__pyx_v_descr->byteorder == '>') != 0);
-    if (!__pyx_t_2) {
-      goto __pyx_L15_next_or;
-    } else {
-    }
-    __pyx_t_2 = (__pyx_v_little_endian != 0);
-    if (!__pyx_t_2) {
-    } else {
-      __pyx_t_1 = __pyx_t_2;
-      goto __pyx_L14_bool_binop_done;
-    }
-    __pyx_L15_next_or:;
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":305
- *                 t = descr.type_num
- *                 if ((descr.byteorder == c'>' and little_endian) or
- *                     (descr.byteorder == c'<' and not little_endian)):             # <<<<<<<<<<<<<<
- *                     raise ValueError(u"Non-native byte order not supported")
- *                 if   t == NPY_BYTE:        f = "b"
- */
-    __pyx_t_2 = ((__pyx_v_descr->byteorder == '<') != 0);
-    if (__pyx_t_2) {
-    } else {
-      __pyx_t_1 = __pyx_t_2;
-      goto __pyx_L14_bool_binop_done;
-    }
-    __pyx_t_2 = ((!(__pyx_v_little_endian != 0)) != 0);
-    __pyx_t_1 = __pyx_t_2;
-    __pyx_L14_bool_binop_done:;
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":304
- *             if not PyDataType_HASFIELDS(descr):
- *                 t = descr.type_num
- *                 if ((descr.byteorder == c'>' and little_endian) or             # <<<<<<<<<<<<<<
- *                     (descr.byteorder == c'<' and not little_endian)):
- *                     raise ValueError(u"Non-native byte order not supported")
- */
-    if (unlikely(__pyx_t_1)) {
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":306
- *                 if ((descr.byteorder == c'>' and little_endian) or
- *                     (descr.byteorder == c'<' and not little_endian)):
- *                     raise ValueError(u"Non-native byte order not supported")             # <<<<<<<<<<<<<<
- *                 if   t == NPY_BYTE:        f = "b"
- *                 elif t == NPY_UBYTE:       f = "B"
- */
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 306, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_Raise(__pyx_t_3, 0, 0, 0);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __PYX_ERR(1, 306, __pyx_L1_error)
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":304
- *             if not PyDataType_HASFIELDS(descr):
- *                 t = descr.type_num
- *                 if ((descr.byteorder == c'>' and little_endian) or             # <<<<<<<<<<<<<<
- *                     (descr.byteorder == c'<' and not little_endian)):
- *                     raise ValueError(u"Non-native byte order not supported")
- */
-    }
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":307
- *                     (descr.byteorder == c'<' and not little_endian)):
- *                     raise ValueError(u"Non-native byte order not supported")
- *                 if   t == NPY_BYTE:        f = "b"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_UBYTE:       f = "B"
- *                 elif t == NPY_SHORT:       f = "h"
- */
-    switch (__pyx_v_t) {
-      case NPY_BYTE:
-      __pyx_v_f = ((char *)"b");
-      break;
-      case NPY_UBYTE:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":308
- *                     raise ValueError(u"Non-native byte order not supported")
- *                 if   t == NPY_BYTE:        f = "b"
- *                 elif t == NPY_UBYTE:       f = "B"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_SHORT:       f = "h"
- *                 elif t == NPY_USHORT:      f = "H"
- */
-      __pyx_v_f = ((char *)"B");
-      break;
-      case NPY_SHORT:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":309
- *                 if   t == NPY_BYTE:        f = "b"
- *                 elif t == NPY_UBYTE:       f = "B"
- *                 elif t == NPY_SHORT:       f = "h"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_USHORT:      f = "H"
- *                 elif t == NPY_INT:         f = "i"
- */
-      __pyx_v_f = ((char *)"h");
-      break;
-      case NPY_USHORT:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":310
- *                 elif t == NPY_UBYTE:       f = "B"
- *                 elif t == NPY_SHORT:       f = "h"
- *                 elif t == NPY_USHORT:      f = "H"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_INT:         f = "i"
- *                 elif t == NPY_UINT:        f = "I"
- */
-      __pyx_v_f = ((char *)"H");
-      break;
-      case NPY_INT:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":311
- *                 elif t == NPY_SHORT:       f = "h"
- *                 elif t == NPY_USHORT:      f = "H"
- *                 elif t == NPY_INT:         f = "i"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_UINT:        f = "I"
- *                 elif t == NPY_LONG:        f = "l"
- */
-      __pyx_v_f = ((char *)"i");
-      break;
-      case NPY_UINT:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":312
- *                 elif t == NPY_USHORT:      f = "H"
- *                 elif t == NPY_INT:         f = "i"
- *                 elif t == NPY_UINT:        f = "I"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_LONG:        f = "l"
- *                 elif t == NPY_ULONG:       f = "L"
- */
-      __pyx_v_f = ((char *)"I");
-      break;
-      case NPY_LONG:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":313
- *                 elif t == NPY_INT:         f = "i"
- *                 elif t == NPY_UINT:        f = "I"
- *                 elif t == NPY_LONG:        f = "l"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_ULONG:       f = "L"
- *                 elif t == NPY_LONGLONG:    f = "q"
- */
-      __pyx_v_f = ((char *)"l");
-      break;
-      case NPY_ULONG:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":314
- *                 elif t == NPY_UINT:        f = "I"
- *                 elif t == NPY_LONG:        f = "l"
- *                 elif t == NPY_ULONG:       f = "L"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_LONGLONG:    f = "q"
- *                 elif t == NPY_ULONGLONG:   f = "Q"
- */
-      __pyx_v_f = ((char *)"L");
-      break;
-      case NPY_LONGLONG:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":315
- *                 elif t == NPY_LONG:        f = "l"
- *                 elif t == NPY_ULONG:       f = "L"
- *                 elif t == NPY_LONGLONG:    f = "q"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_ULONGLONG:   f = "Q"
- *                 elif t == NPY_FLOAT:       f = "f"
- */
-      __pyx_v_f = ((char *)"q");
-      break;
-      case NPY_ULONGLONG:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":316
- *                 elif t == NPY_ULONG:       f = "L"
- *                 elif t == NPY_LONGLONG:    f = "q"
- *                 elif t == NPY_ULONGLONG:   f = "Q"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_FLOAT:       f = "f"
- *                 elif t == NPY_DOUBLE:      f = "d"
- */
-      __pyx_v_f = ((char *)"Q");
-      break;
-      case NPY_FLOAT:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":317
- *                 elif t == NPY_LONGLONG:    f = "q"
- *                 elif t == NPY_ULONGLONG:   f = "Q"
- *                 elif t == NPY_FLOAT:       f = "f"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_DOUBLE:      f = "d"
- *                 elif t == NPY_LONGDOUBLE:  f = "g"
- */
-      __pyx_v_f = ((char *)"f");
-      break;
-      case NPY_DOUBLE:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":318
- *                 elif t == NPY_ULONGLONG:   f = "Q"
- *                 elif t == NPY_FLOAT:       f = "f"
- *                 elif t == NPY_DOUBLE:      f = "d"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_LONGDOUBLE:  f = "g"
- *                 elif t == NPY_CFLOAT:      f = "Zf"
- */
-      __pyx_v_f = ((char *)"d");
-      break;
-      case NPY_LONGDOUBLE:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":319
- *                 elif t == NPY_FLOAT:       f = "f"
- *                 elif t == NPY_DOUBLE:      f = "d"
- *                 elif t == NPY_LONGDOUBLE:  f = "g"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_CFLOAT:      f = "Zf"
- *                 elif t == NPY_CDOUBLE:     f = "Zd"
- */
-      __pyx_v_f = ((char *)"g");
-      break;
-      case NPY_CFLOAT:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":320
- *                 elif t == NPY_DOUBLE:      f = "d"
- *                 elif t == NPY_LONGDOUBLE:  f = "g"
- *                 elif t == NPY_CFLOAT:      f = "Zf"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_CDOUBLE:     f = "Zd"
- *                 elif t == NPY_CLONGDOUBLE: f = "Zg"
- */
-      __pyx_v_f = ((char *)"Zf");
-      break;
-      case NPY_CDOUBLE:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":321
- *                 elif t == NPY_LONGDOUBLE:  f = "g"
- *                 elif t == NPY_CFLOAT:      f = "Zf"
- *                 elif t == NPY_CDOUBLE:     f = "Zd"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_CLONGDOUBLE: f = "Zg"
- *                 elif t == NPY_OBJECT:      f = "O"
- */
-      __pyx_v_f = ((char *)"Zd");
-      break;
-      case NPY_CLONGDOUBLE:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":322
- *                 elif t == NPY_CFLOAT:      f = "Zf"
- *                 elif t == NPY_CDOUBLE:     f = "Zd"
- *                 elif t == NPY_CLONGDOUBLE: f = "Zg"             # <<<<<<<<<<<<<<
- *                 elif t == NPY_OBJECT:      f = "O"
- *                 else:
- */
-      __pyx_v_f = ((char *)"Zg");
-      break;
-      case NPY_OBJECT:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":323
- *                 elif t == NPY_CDOUBLE:     f = "Zd"
- *                 elif t == NPY_CLONGDOUBLE: f = "Zg"
- *                 elif t == NPY_OBJECT:      f = "O"             # <<<<<<<<<<<<<<
- *                 else:
- *                     raise ValueError(u"unknown dtype code in numpy.pxd (%d)" % t)
- */
-      __pyx_v_f = ((char *)"O");
-      break;
-      default:
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":325
- *                 elif t == NPY_OBJECT:      f = "O"
- *                 else:
- *                     raise ValueError(u"unknown dtype code in numpy.pxd (%d)" % t)             # <<<<<<<<<<<<<<
- *                 info.format = f
- *                 return
- */
-      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_t); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 325, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_8 = PyUnicode_Format(__pyx_kp_u_unknown_dtype_code_in_numpy_pxd, __pyx_t_3); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 325, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_8);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 325, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __Pyx_Raise(__pyx_t_3, 0, 0, 0);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __PYX_ERR(1, 325, __pyx_L1_error)
-      break;
-    }
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":326
- *                 else:
- *                     raise ValueError(u"unknown dtype code in numpy.pxd (%d)" % t)
- *                 info.format = f             # <<<<<<<<<<<<<<
- *                 return
- *             else:
- */
-    __pyx_v_info->format = __pyx_v_f;
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":327
- *                     raise ValueError(u"unknown dtype code in numpy.pxd (%d)" % t)
- *                 info.format = f
- *                 return             # <<<<<<<<<<<<<<
- *             else:
- *                 info.format = <char*>PyObject_Malloc(_buffer_format_string_len)
- */
-    __pyx_r = 0;
-    goto __pyx_L0;
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":302
- *             info.obj = self
- * 
- *             if not PyDataType_HASFIELDS(descr):             # <<<<<<<<<<<<<<
- *                 t = descr.type_num
- *                 if ((descr.byteorder == c'>' and little_endian) or
- */
-  }
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":329
- *                 return
- *             else:
- *                 info.format = <char*>PyObject_Malloc(_buffer_format_string_len)             # <<<<<<<<<<<<<<
- *                 info.format[0] = c'^' # Native data types, manual alignment
- *                 offset = 0
- */
-  /*else*/ {
-    __pyx_v_info->format = ((char *)PyObject_Malloc(0xFF));
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":330
- *             else:
- *                 info.format = <char*>PyObject_Malloc(_buffer_format_string_len)
- *                 info.format[0] = c'^' # Native data types, manual alignment             # <<<<<<<<<<<<<<
- *                 offset = 0
- *                 f = _util_dtypestring(descr, info.format + 1,
- */
-    (__pyx_v_info->format[0]) = '^';
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":331
- *                 info.format = <char*>PyObject_Malloc(_buffer_format_string_len)
- *                 info.format[0] = c'^' # Native data types, manual alignment
- *                 offset = 0             # <<<<<<<<<<<<<<
- *                 f = _util_dtypestring(descr, info.format + 1,
- *                                       info.format + _buffer_format_string_len,
- */
-    __pyx_v_offset = 0;
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":332
- *                 info.format[0] = c'^' # Native data types, manual alignment
- *                 offset = 0
- *                 f = _util_dtypestring(descr, info.format + 1,             # <<<<<<<<<<<<<<
- *                                       info.format + _buffer_format_string_len,
- *                                       &offset)
- */
-    __pyx_t_9 = __pyx_f_5numpy__util_dtypestring(__pyx_v_descr, (__pyx_v_info->format + 1), (__pyx_v_info->format + 0xFF), (&__pyx_v_offset)); if (unlikely(__pyx_t_9 == ((char *)NULL))) __PYX_ERR(1, 332, __pyx_L1_error)
-    __pyx_v_f = __pyx_t_9;
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":335
- *                                       info.format + _buffer_format_string_len,
- *                                       &offset)
- *                 f[0] = c'\0' # Terminate format string             # <<<<<<<<<<<<<<
- * 
- *         def __releasebuffer__(ndarray self, Py_buffer* info):
- */
-    (__pyx_v_f[0]) = '\x00';
-  }
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":258
- *         # experimental exception made for __getbuffer__ and __releasebuffer__
- *         # -- the details of this may change.
- *         def __getbuffer__(ndarray self, Py_buffer* info, int flags):             # <<<<<<<<<<<<<<
- *             # This implementation of getbuffer is geared towards Cython
- *             # requirements, and does not yet fulfill the PEP.
- */
-
-  /* function exit code */
-  __pyx_r = 0;
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("numpy.ndarray.__getbuffer__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = -1;
-  if (__pyx_v_info->obj != NULL) {
-    __Pyx_GOTREF(__pyx_v_info->obj);
-    __Pyx_DECREF(__pyx_v_info->obj); __pyx_v_info->obj = 0;
-  }
-  goto __pyx_L2;
-  __pyx_L0:;
-  if (__pyx_v_info->obj == Py_None) {
-    __Pyx_GOTREF(__pyx_v_info->obj);
-    __Pyx_DECREF(__pyx_v_info->obj); __pyx_v_info->obj = 0;
-  }
-  __pyx_L2:;
-  __Pyx_XDECREF((PyObject *)__pyx_v_descr);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":337
- *                 f[0] = c'\0' # Terminate format string
- * 
- *         def __releasebuffer__(ndarray self, Py_buffer* info):             # <<<<<<<<<<<<<<
- *             if PyArray_HASFIELDS(self):
- *                 PyObject_Free(info.format)
- */
-
-/* Python wrapper */
-static CYTHON_UNUSED void __pyx_pw_5numpy_7ndarray_3__releasebuffer__(PyObject *__pyx_v_self, Py_buffer *__pyx_v_info); /*proto*/
-static CYTHON_UNUSED void __pyx_pw_5numpy_7ndarray_3__releasebuffer__(PyObject *__pyx_v_self, Py_buffer *__pyx_v_info) {
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__releasebuffer__ (wrapper)", 0);
-  __pyx_pf_5numpy_7ndarray_2__releasebuffer__(((PyArrayObject *)__pyx_v_self), ((Py_buffer *)__pyx_v_info));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-}
-
-static void __pyx_pf_5numpy_7ndarray_2__releasebuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info) {
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  __Pyx_RefNannySetupContext("__releasebuffer__", 0);
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":338
- * 
- *         def __releasebuffer__(ndarray self, Py_buffer* info):
- *             if PyArray_HASFIELDS(self):             # <<<<<<<<<<<<<<
- *                 PyObject_Free(info.format)
- *             if sizeof(npy_intp) != sizeof(Py_ssize_t):
- */
-  __pyx_t_1 = (PyArray_HASFIELDS(__pyx_v_self) != 0);
-  if (__pyx_t_1) {
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":339
- *         def __releasebuffer__(ndarray self, Py_buffer* info):
- *             if PyArray_HASFIELDS(self):
- *                 PyObject_Free(info.format)             # <<<<<<<<<<<<<<
- *             if sizeof(npy_intp) != sizeof(Py_ssize_t):
- *                 PyObject_Free(info.strides)
- */
-    PyObject_Free(__pyx_v_info->format);
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":338
- * 
- *         def __releasebuffer__(ndarray self, Py_buffer* info):
- *             if PyArray_HASFIELDS(self):             # <<<<<<<<<<<<<<
- *                 PyObject_Free(info.format)
- *             if sizeof(npy_intp) != sizeof(Py_ssize_t):
- */
-  }
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":340
- *             if PyArray_HASFIELDS(self):
- *                 PyObject_Free(info.format)
- *             if sizeof(npy_intp) != sizeof(Py_ssize_t):             # <<<<<<<<<<<<<<
- *                 PyObject_Free(info.strides)
- *                 # info.shape was stored after info.strides in the same block
- */
-  __pyx_t_1 = (((sizeof(npy_intp)) != (sizeof(Py_ssize_t))) != 0);
-  if (__pyx_t_1) {
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":341
- *                 PyObject_Free(info.format)
- *             if sizeof(npy_intp) != sizeof(Py_ssize_t):
- *                 PyObject_Free(info.strides)             # <<<<<<<<<<<<<<
- *                 # info.shape was stored after info.strides in the same block
- * 
- */
-    PyObject_Free(__pyx_v_info->strides);
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":340
- *             if PyArray_HASFIELDS(self):
- *                 PyObject_Free(info.format)
- *             if sizeof(npy_intp) != sizeof(Py_ssize_t):             # <<<<<<<<<<<<<<
- *                 PyObject_Free(info.strides)
- *                 # info.shape was stored after info.strides in the same block
- */
-  }
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":337
- *                 f[0] = c'\0' # Terminate format string
- * 
- *         def __releasebuffer__(ndarray self, Py_buffer* info):             # <<<<<<<<<<<<<<
- *             if PyArray_HASFIELDS(self):
- *                 PyObject_Free(info.format)
- */
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-}
-
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":820
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":734
  * ctypedef npy_cdouble     complex_t
  * 
  * cdef inline object PyArray_MultiIterNew1(a):             # <<<<<<<<<<<<<<
@@ -12617,7 +11905,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew1(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew1", 0);
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":821
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":735
  * 
  * cdef inline object PyArray_MultiIterNew1(a):
  *     return PyArray_MultiIterNew(1, <void*>a)             # <<<<<<<<<<<<<<
@@ -12625,13 +11913,13 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew1(PyObject *__
  * cdef inline object PyArray_MultiIterNew2(a, b):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyArray_MultiIterNew(1, ((void *)__pyx_v_a)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 821, __pyx_L1_error)
+  __pyx_t_1 = PyArray_MultiIterNew(1, ((void *)__pyx_v_a)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 735, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":820
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":734
  * ctypedef npy_cdouble     complex_t
  * 
  * cdef inline object PyArray_MultiIterNew1(a):             # <<<<<<<<<<<<<<
@@ -12650,7 +11938,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew1(PyObject *__
   return __pyx_r;
 }
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":823
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":737
  *     return PyArray_MultiIterNew(1, <void*>a)
  * 
  * cdef inline object PyArray_MultiIterNew2(a, b):             # <<<<<<<<<<<<<<
@@ -12667,7 +11955,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew2(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew2", 0);
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":824
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":738
  * 
  * cdef inline object PyArray_MultiIterNew2(a, b):
  *     return PyArray_MultiIterNew(2, <void*>a, <void*>b)             # <<<<<<<<<<<<<<
@@ -12675,13 +11963,13 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew2(PyObject *__
  * cdef inline object PyArray_MultiIterNew3(a, b, c):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyArray_MultiIterNew(2, ((void *)__pyx_v_a), ((void *)__pyx_v_b)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 824, __pyx_L1_error)
+  __pyx_t_1 = PyArray_MultiIterNew(2, ((void *)__pyx_v_a), ((void *)__pyx_v_b)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 738, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":823
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":737
  *     return PyArray_MultiIterNew(1, <void*>a)
  * 
  * cdef inline object PyArray_MultiIterNew2(a, b):             # <<<<<<<<<<<<<<
@@ -12700,7 +11988,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew2(PyObject *__
   return __pyx_r;
 }
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":826
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":740
  *     return PyArray_MultiIterNew(2, <void*>a, <void*>b)
  * 
  * cdef inline object PyArray_MultiIterNew3(a, b, c):             # <<<<<<<<<<<<<<
@@ -12717,7 +12005,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew3(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew3", 0);
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":827
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":741
  * 
  * cdef inline object PyArray_MultiIterNew3(a, b, c):
  *     return PyArray_MultiIterNew(3, <void*>a, <void*>b, <void*> c)             # <<<<<<<<<<<<<<
@@ -12725,13 +12013,13 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew3(PyObject *__
  * cdef inline object PyArray_MultiIterNew4(a, b, c, d):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyArray_MultiIterNew(3, ((void *)__pyx_v_a), ((void *)__pyx_v_b), ((void *)__pyx_v_c)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 827, __pyx_L1_error)
+  __pyx_t_1 = PyArray_MultiIterNew(3, ((void *)__pyx_v_a), ((void *)__pyx_v_b), ((void *)__pyx_v_c)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 741, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":826
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":740
  *     return PyArray_MultiIterNew(2, <void*>a, <void*>b)
  * 
  * cdef inline object PyArray_MultiIterNew3(a, b, c):             # <<<<<<<<<<<<<<
@@ -12750,7 +12038,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew3(PyObject *__
   return __pyx_r;
 }
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":829
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":743
  *     return PyArray_MultiIterNew(3, <void*>a, <void*>b, <void*> c)
  * 
  * cdef inline object PyArray_MultiIterNew4(a, b, c, d):             # <<<<<<<<<<<<<<
@@ -12767,7 +12055,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew4(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew4", 0);
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":830
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":744
  * 
  * cdef inline object PyArray_MultiIterNew4(a, b, c, d):
  *     return PyArray_MultiIterNew(4, <void*>a, <void*>b, <void*>c, <void*> d)             # <<<<<<<<<<<<<<
@@ -12775,13 +12063,13 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew4(PyObject *__
  * cdef inline object PyArray_MultiIterNew5(a, b, c, d, e):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyArray_MultiIterNew(4, ((void *)__pyx_v_a), ((void *)__pyx_v_b), ((void *)__pyx_v_c), ((void *)__pyx_v_d)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 830, __pyx_L1_error)
+  __pyx_t_1 = PyArray_MultiIterNew(4, ((void *)__pyx_v_a), ((void *)__pyx_v_b), ((void *)__pyx_v_c), ((void *)__pyx_v_d)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 744, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":829
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":743
  *     return PyArray_MultiIterNew(3, <void*>a, <void*>b, <void*> c)
  * 
  * cdef inline object PyArray_MultiIterNew4(a, b, c, d):             # <<<<<<<<<<<<<<
@@ -12800,7 +12088,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew4(PyObject *__
   return __pyx_r;
 }
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":832
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":746
  *     return PyArray_MultiIterNew(4, <void*>a, <void*>b, <void*>c, <void*> d)
  * 
  * cdef inline object PyArray_MultiIterNew5(a, b, c, d, e):             # <<<<<<<<<<<<<<
@@ -12817,7 +12105,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew5(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew5", 0);
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":833
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":747
  * 
  * cdef inline object PyArray_MultiIterNew5(a, b, c, d, e):
  *     return PyArray_MultiIterNew(5, <void*>a, <void*>b, <void*>c, <void*> d, <void*> e)             # <<<<<<<<<<<<<<
@@ -12825,13 +12113,13 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew5(PyObject *__
  * cdef inline tuple PyDataType_SHAPE(dtype d):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyArray_MultiIterNew(5, ((void *)__pyx_v_a), ((void *)__pyx_v_b), ((void *)__pyx_v_c), ((void *)__pyx_v_d), ((void *)__pyx_v_e)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 833, __pyx_L1_error)
+  __pyx_t_1 = PyArray_MultiIterNew(5, ((void *)__pyx_v_a), ((void *)__pyx_v_b), ((void *)__pyx_v_c), ((void *)__pyx_v_d), ((void *)__pyx_v_e)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 747, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":832
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":746
  *     return PyArray_MultiIterNew(4, <void*>a, <void*>b, <void*>c, <void*> d)
  * 
  * cdef inline object PyArray_MultiIterNew5(a, b, c, d, e):             # <<<<<<<<<<<<<<
@@ -12850,7 +12138,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew5(PyObject *__
   return __pyx_r;
 }
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":835
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":749
  *     return PyArray_MultiIterNew(5, <void*>a, <void*>b, <void*>c, <void*> d, <void*> e)
  * 
  * cdef inline tuple PyDataType_SHAPE(dtype d):             # <<<<<<<<<<<<<<
@@ -12864,7 +12152,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("PyDataType_SHAPE", 0);
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":836
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":750
  * 
  * cdef inline tuple PyDataType_SHAPE(dtype d):
  *     if PyDataType_HASSUBARRAY(d):             # <<<<<<<<<<<<<<
@@ -12874,7 +12162,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
   __pyx_t_1 = (PyDataType_HASSUBARRAY(__pyx_v_d) != 0);
   if (__pyx_t_1) {
 
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":837
+    /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":751
  * cdef inline tuple PyDataType_SHAPE(dtype d):
  *     if PyDataType_HASSUBARRAY(d):
  *         return <tuple>d.subarray.shape             # <<<<<<<<<<<<<<
@@ -12886,7 +12174,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
     __pyx_r = ((PyObject*)__pyx_v_d->subarray->shape);
     goto __pyx_L0;
 
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":836
+    /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":750
  * 
  * cdef inline tuple PyDataType_SHAPE(dtype d):
  *     if PyDataType_HASSUBARRAY(d):             # <<<<<<<<<<<<<<
@@ -12895,12 +12183,12 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
  */
   }
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":839
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":753
  *         return <tuple>d.subarray.shape
  *     else:
  *         return ()             # <<<<<<<<<<<<<<
  * 
- * cdef inline char* _util_dtypestring(dtype descr, char* f, char* end, int* offset) except NULL:
+ * 
  */
   /*else*/ {
     __Pyx_XDECREF(__pyx_r);
@@ -12909,7 +12197,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
     goto __pyx_L0;
   }
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":835
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":749
  *     return PyArray_MultiIterNew(5, <void*>a, <void*>b, <void*>c, <void*> d, <void*> e)
  * 
  * cdef inline tuple PyDataType_SHAPE(dtype d):             # <<<<<<<<<<<<<<
@@ -12924,756 +12212,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
   return __pyx_r;
 }
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":841
- *         return ()
- * 
- * cdef inline char* _util_dtypestring(dtype descr, char* f, char* end, int* offset) except NULL:             # <<<<<<<<<<<<<<
- *     # Recursive utility function used in __getbuffer__ to get format
- *     # string. The new location in the format string is returned.
- */
-
-static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *__pyx_v_descr, char *__pyx_v_f, char *__pyx_v_end, int *__pyx_v_offset) {
-  PyArray_Descr *__pyx_v_child = 0;
-  int __pyx_v_endian_detector;
-  int __pyx_v_little_endian;
-  PyObject *__pyx_v_fields = 0;
-  PyObject *__pyx_v_childname = NULL;
-  PyObject *__pyx_v_new_offset = NULL;
-  PyObject *__pyx_v_t = NULL;
-  char *__pyx_r;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  Py_ssize_t __pyx_t_2;
-  PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
-  int __pyx_t_5;
-  int __pyx_t_6;
-  int __pyx_t_7;
-  long __pyx_t_8;
-  char *__pyx_t_9;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("_util_dtypestring", 0);
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":846
- * 
- *     cdef dtype child
- *     cdef int endian_detector = 1             # <<<<<<<<<<<<<<
- *     cdef bint little_endian = ((<char*>&endian_detector)[0] != 0)
- *     cdef tuple fields
- */
-  __pyx_v_endian_detector = 1;
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":847
- *     cdef dtype child
- *     cdef int endian_detector = 1
- *     cdef bint little_endian = ((<char*>&endian_detector)[0] != 0)             # <<<<<<<<<<<<<<
- *     cdef tuple fields
- * 
- */
-  __pyx_v_little_endian = ((((char *)(&__pyx_v_endian_detector))[0]) != 0);
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":850
- *     cdef tuple fields
- * 
- *     for childname in descr.names:             # <<<<<<<<<<<<<<
- *         fields = descr.fields[childname]
- *         child, new_offset = fields
- */
-  if (unlikely(__pyx_v_descr->names == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(1, 850, __pyx_L1_error)
-  }
-  __pyx_t_1 = __pyx_v_descr->names; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
-  for (;;) {
-    if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
-    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_3); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(1, 850, __pyx_L1_error)
-    #else
-    __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 850, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    #endif
-    __Pyx_XDECREF_SET(__pyx_v_childname, __pyx_t_3);
-    __pyx_t_3 = 0;
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":851
- * 
- *     for childname in descr.names:
- *         fields = descr.fields[childname]             # <<<<<<<<<<<<<<
- *         child, new_offset = fields
- * 
- */
-    if (unlikely(__pyx_v_descr->fields == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(1, 851, __pyx_L1_error)
-    }
-    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_descr->fields, __pyx_v_childname); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 851, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    if (!(likely(PyTuple_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(1, 851, __pyx_L1_error)
-    __Pyx_XDECREF_SET(__pyx_v_fields, ((PyObject*)__pyx_t_3));
-    __pyx_t_3 = 0;
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":852
- *     for childname in descr.names:
- *         fields = descr.fields[childname]
- *         child, new_offset = fields             # <<<<<<<<<<<<<<
- * 
- *         if (end - f) - <int>(new_offset - offset[0]) < 15:
- */
-    if (likely(__pyx_v_fields != Py_None)) {
-      PyObject* sequence = __pyx_v_fields;
-      Py_ssize_t size = __Pyx_PySequence_SIZE(sequence);
-      if (unlikely(size != 2)) {
-        if (size > 2) __Pyx_RaiseTooManyValuesError(2);
-        else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(1, 852, __pyx_L1_error)
-      }
-      #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-      __pyx_t_3 = PyTuple_GET_ITEM(sequence, 0); 
-      __pyx_t_4 = PyTuple_GET_ITEM(sequence, 1); 
-      __Pyx_INCREF(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_4);
-      #else
-      __pyx_t_3 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 852, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_4 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 852, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      #endif
-    } else {
-      __Pyx_RaiseNoneNotIterableError(); __PYX_ERR(1, 852, __pyx_L1_error)
-    }
-    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_5numpy_dtype))))) __PYX_ERR(1, 852, __pyx_L1_error)
-    __Pyx_XDECREF_SET(__pyx_v_child, ((PyArray_Descr *)__pyx_t_3));
-    __pyx_t_3 = 0;
-    __Pyx_XDECREF_SET(__pyx_v_new_offset, __pyx_t_4);
-    __pyx_t_4 = 0;
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":854
- *         child, new_offset = fields
- * 
- *         if (end - f) - <int>(new_offset - offset[0]) < 15:             # <<<<<<<<<<<<<<
- *             raise RuntimeError(u"Format string allocated too short, see comment in numpy.pxd")
- * 
- */
-    __pyx_t_4 = __Pyx_PyInt_From_int((__pyx_v_offset[0])); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 854, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = PyNumber_Subtract(__pyx_v_new_offset, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 854, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 854, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_6 = ((((__pyx_v_end - __pyx_v_f) - ((int)__pyx_t_5)) < 15) != 0);
-    if (unlikely(__pyx_t_6)) {
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":855
- * 
- *         if (end - f) - <int>(new_offset - offset[0]) < 15:
- *             raise RuntimeError(u"Format string allocated too short, see comment in numpy.pxd")             # <<<<<<<<<<<<<<
- * 
- *         if ((child.byteorder == c'>' and little_endian) or
- */
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 855, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_Raise(__pyx_t_3, 0, 0, 0);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __PYX_ERR(1, 855, __pyx_L1_error)
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":854
- *         child, new_offset = fields
- * 
- *         if (end - f) - <int>(new_offset - offset[0]) < 15:             # <<<<<<<<<<<<<<
- *             raise RuntimeError(u"Format string allocated too short, see comment in numpy.pxd")
- * 
- */
-    }
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":857
- *             raise RuntimeError(u"Format string allocated too short, see comment in numpy.pxd")
- * 
- *         if ((child.byteorder == c'>' and little_endian) or             # <<<<<<<<<<<<<<
- *             (child.byteorder == c'<' and not little_endian)):
- *             raise ValueError(u"Non-native byte order not supported")
- */
-    __pyx_t_7 = ((__pyx_v_child->byteorder == '>') != 0);
-    if (!__pyx_t_7) {
-      goto __pyx_L8_next_or;
-    } else {
-    }
-    __pyx_t_7 = (__pyx_v_little_endian != 0);
-    if (!__pyx_t_7) {
-    } else {
-      __pyx_t_6 = __pyx_t_7;
-      goto __pyx_L7_bool_binop_done;
-    }
-    __pyx_L8_next_or:;
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":858
- * 
- *         if ((child.byteorder == c'>' and little_endian) or
- *             (child.byteorder == c'<' and not little_endian)):             # <<<<<<<<<<<<<<
- *             raise ValueError(u"Non-native byte order not supported")
- *             # One could encode it in the format string and have Cython
- */
-    __pyx_t_7 = ((__pyx_v_child->byteorder == '<') != 0);
-    if (__pyx_t_7) {
-    } else {
-      __pyx_t_6 = __pyx_t_7;
-      goto __pyx_L7_bool_binop_done;
-    }
-    __pyx_t_7 = ((!(__pyx_v_little_endian != 0)) != 0);
-    __pyx_t_6 = __pyx_t_7;
-    __pyx_L7_bool_binop_done:;
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":857
- *             raise RuntimeError(u"Format string allocated too short, see comment in numpy.pxd")
- * 
- *         if ((child.byteorder == c'>' and little_endian) or             # <<<<<<<<<<<<<<
- *             (child.byteorder == c'<' and not little_endian)):
- *             raise ValueError(u"Non-native byte order not supported")
- */
-    if (unlikely(__pyx_t_6)) {
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":859
- *         if ((child.byteorder == c'>' and little_endian) or
- *             (child.byteorder == c'<' and not little_endian)):
- *             raise ValueError(u"Non-native byte order not supported")             # <<<<<<<<<<<<<<
- *             # One could encode it in the format string and have Cython
- *             # complain instead, BUT: < and > in format strings also imply
- */
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 859, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_Raise(__pyx_t_3, 0, 0, 0);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __PYX_ERR(1, 859, __pyx_L1_error)
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":857
- *             raise RuntimeError(u"Format string allocated too short, see comment in numpy.pxd")
- * 
- *         if ((child.byteorder == c'>' and little_endian) or             # <<<<<<<<<<<<<<
- *             (child.byteorder == c'<' and not little_endian)):
- *             raise ValueError(u"Non-native byte order not supported")
- */
-    }
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":869
- * 
- *         # Output padding bytes
- *         while offset[0] < new_offset:             # <<<<<<<<<<<<<<
- *             f[0] = 120 # "x"; pad byte
- *             f += 1
- */
-    while (1) {
-      __pyx_t_3 = __Pyx_PyInt_From_int((__pyx_v_offset[0])); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 869, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_4 = PyObject_RichCompare(__pyx_t_3, __pyx_v_new_offset, Py_LT); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 869, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 869, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (!__pyx_t_6) break;
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":870
- *         # Output padding bytes
- *         while offset[0] < new_offset:
- *             f[0] = 120 # "x"; pad byte             # <<<<<<<<<<<<<<
- *             f += 1
- *             offset[0] += 1
- */
-      (__pyx_v_f[0]) = 0x78;
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":871
- *         while offset[0] < new_offset:
- *             f[0] = 120 # "x"; pad byte
- *             f += 1             # <<<<<<<<<<<<<<
- *             offset[0] += 1
- * 
- */
-      __pyx_v_f = (__pyx_v_f + 1);
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":872
- *             f[0] = 120 # "x"; pad byte
- *             f += 1
- *             offset[0] += 1             # <<<<<<<<<<<<<<
- * 
- *         offset[0] += child.itemsize
- */
-      __pyx_t_8 = 0;
-      (__pyx_v_offset[__pyx_t_8]) = ((__pyx_v_offset[__pyx_t_8]) + 1);
-    }
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":874
- *             offset[0] += 1
- * 
- *         offset[0] += child.itemsize             # <<<<<<<<<<<<<<
- * 
- *         if not PyDataType_HASFIELDS(child):
- */
-    __pyx_t_8 = 0;
-    (__pyx_v_offset[__pyx_t_8]) = ((__pyx_v_offset[__pyx_t_8]) + __pyx_v_child->elsize);
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":876
- *         offset[0] += child.itemsize
- * 
- *         if not PyDataType_HASFIELDS(child):             # <<<<<<<<<<<<<<
- *             t = child.type_num
- *             if end - f < 5:
- */
-    __pyx_t_6 = ((!(PyDataType_HASFIELDS(__pyx_v_child) != 0)) != 0);
-    if (__pyx_t_6) {
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":877
- * 
- *         if not PyDataType_HASFIELDS(child):
- *             t = child.type_num             # <<<<<<<<<<<<<<
- *             if end - f < 5:
- *                 raise RuntimeError(u"Format string allocated too short.")
- */
-      __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_child->type_num); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 877, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_XDECREF_SET(__pyx_v_t, __pyx_t_4);
-      __pyx_t_4 = 0;
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":878
- *         if not PyDataType_HASFIELDS(child):
- *             t = child.type_num
- *             if end - f < 5:             # <<<<<<<<<<<<<<
- *                 raise RuntimeError(u"Format string allocated too short.")
- * 
- */
-      __pyx_t_6 = (((__pyx_v_end - __pyx_v_f) < 5) != 0);
-      if (unlikely(__pyx_t_6)) {
-
-        /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":879
- *             t = child.type_num
- *             if end - f < 5:
- *                 raise RuntimeError(u"Format string allocated too short.")             # <<<<<<<<<<<<<<
- * 
- *             # Until ticket #99 is fixed, use integers to avoid warnings
- */
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_RuntimeError, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 879, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_4);
-        __Pyx_Raise(__pyx_t_4, 0, 0, 0);
-        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __PYX_ERR(1, 879, __pyx_L1_error)
-
-        /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":878
- *         if not PyDataType_HASFIELDS(child):
- *             t = child.type_num
- *             if end - f < 5:             # <<<<<<<<<<<<<<
- *                 raise RuntimeError(u"Format string allocated too short.")
- * 
- */
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":882
- * 
- *             # Until ticket #99 is fixed, use integers to avoid warnings
- *             if   t == NPY_BYTE:        f[0] =  98 #"b"             # <<<<<<<<<<<<<<
- *             elif t == NPY_UBYTE:       f[0] =  66 #"B"
- *             elif t == NPY_SHORT:       f[0] = 104 #"h"
- */
-      __pyx_t_4 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_BYTE); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 882, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_3 = PyObject_RichCompare(__pyx_v_t, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 882, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 882, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 98;
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":883
- *             # Until ticket #99 is fixed, use integers to avoid warnings
- *             if   t == NPY_BYTE:        f[0] =  98 #"b"
- *             elif t == NPY_UBYTE:       f[0] =  66 #"B"             # <<<<<<<<<<<<<<
- *             elif t == NPY_SHORT:       f[0] = 104 #"h"
- *             elif t == NPY_USHORT:      f[0] =  72 #"H"
- */
-      __pyx_t_3 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_UBYTE); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 883, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_4 = PyObject_RichCompare(__pyx_v_t, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 883, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 883, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 66;
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":884
- *             if   t == NPY_BYTE:        f[0] =  98 #"b"
- *             elif t == NPY_UBYTE:       f[0] =  66 #"B"
- *             elif t == NPY_SHORT:       f[0] = 104 #"h"             # <<<<<<<<<<<<<<
- *             elif t == NPY_USHORT:      f[0] =  72 #"H"
- *             elif t == NPY_INT:         f[0] = 105 #"i"
- */
-      __pyx_t_4 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_SHORT); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 884, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_3 = PyObject_RichCompare(__pyx_v_t, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 884, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 884, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 0x68;
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":885
- *             elif t == NPY_UBYTE:       f[0] =  66 #"B"
- *             elif t == NPY_SHORT:       f[0] = 104 #"h"
- *             elif t == NPY_USHORT:      f[0] =  72 #"H"             # <<<<<<<<<<<<<<
- *             elif t == NPY_INT:         f[0] = 105 #"i"
- *             elif t == NPY_UINT:        f[0] =  73 #"I"
- */
-      __pyx_t_3 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_USHORT); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 885, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_4 = PyObject_RichCompare(__pyx_v_t, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 885, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 885, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 72;
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":886
- *             elif t == NPY_SHORT:       f[0] = 104 #"h"
- *             elif t == NPY_USHORT:      f[0] =  72 #"H"
- *             elif t == NPY_INT:         f[0] = 105 #"i"             # <<<<<<<<<<<<<<
- *             elif t == NPY_UINT:        f[0] =  73 #"I"
- *             elif t == NPY_LONG:        f[0] = 108 #"l"
- */
-      __pyx_t_4 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_INT); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 886, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_3 = PyObject_RichCompare(__pyx_v_t, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 886, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 886, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 0x69;
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":887
- *             elif t == NPY_USHORT:      f[0] =  72 #"H"
- *             elif t == NPY_INT:         f[0] = 105 #"i"
- *             elif t == NPY_UINT:        f[0] =  73 #"I"             # <<<<<<<<<<<<<<
- *             elif t == NPY_LONG:        f[0] = 108 #"l"
- *             elif t == NPY_ULONG:       f[0] = 76  #"L"
- */
-      __pyx_t_3 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_UINT); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 887, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_4 = PyObject_RichCompare(__pyx_v_t, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 887, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 887, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 73;
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":888
- *             elif t == NPY_INT:         f[0] = 105 #"i"
- *             elif t == NPY_UINT:        f[0] =  73 #"I"
- *             elif t == NPY_LONG:        f[0] = 108 #"l"             # <<<<<<<<<<<<<<
- *             elif t == NPY_ULONG:       f[0] = 76  #"L"
- *             elif t == NPY_LONGLONG:    f[0] = 113 #"q"
- */
-      __pyx_t_4 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_LONG); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 888, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_3 = PyObject_RichCompare(__pyx_v_t, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 888, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 888, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 0x6C;
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":889
- *             elif t == NPY_UINT:        f[0] =  73 #"I"
- *             elif t == NPY_LONG:        f[0] = 108 #"l"
- *             elif t == NPY_ULONG:       f[0] = 76  #"L"             # <<<<<<<<<<<<<<
- *             elif t == NPY_LONGLONG:    f[0] = 113 #"q"
- *             elif t == NPY_ULONGLONG:   f[0] = 81  #"Q"
- */
-      __pyx_t_3 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_ULONG); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 889, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_4 = PyObject_RichCompare(__pyx_v_t, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 889, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 889, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 76;
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":890
- *             elif t == NPY_LONG:        f[0] = 108 #"l"
- *             elif t == NPY_ULONG:       f[0] = 76  #"L"
- *             elif t == NPY_LONGLONG:    f[0] = 113 #"q"             # <<<<<<<<<<<<<<
- *             elif t == NPY_ULONGLONG:   f[0] = 81  #"Q"
- *             elif t == NPY_FLOAT:       f[0] = 102 #"f"
- */
-      __pyx_t_4 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_LONGLONG); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 890, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_3 = PyObject_RichCompare(__pyx_v_t, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 890, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 890, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 0x71;
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":891
- *             elif t == NPY_ULONG:       f[0] = 76  #"L"
- *             elif t == NPY_LONGLONG:    f[0] = 113 #"q"
- *             elif t == NPY_ULONGLONG:   f[0] = 81  #"Q"             # <<<<<<<<<<<<<<
- *             elif t == NPY_FLOAT:       f[0] = 102 #"f"
- *             elif t == NPY_DOUBLE:      f[0] = 100 #"d"
- */
-      __pyx_t_3 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_ULONGLONG); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 891, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_4 = PyObject_RichCompare(__pyx_v_t, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 891, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 891, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 81;
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":892
- *             elif t == NPY_LONGLONG:    f[0] = 113 #"q"
- *             elif t == NPY_ULONGLONG:   f[0] = 81  #"Q"
- *             elif t == NPY_FLOAT:       f[0] = 102 #"f"             # <<<<<<<<<<<<<<
- *             elif t == NPY_DOUBLE:      f[0] = 100 #"d"
- *             elif t == NPY_LONGDOUBLE:  f[0] = 103 #"g"
- */
-      __pyx_t_4 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_FLOAT); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 892, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_3 = PyObject_RichCompare(__pyx_v_t, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 892, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 892, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 0x66;
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":893
- *             elif t == NPY_ULONGLONG:   f[0] = 81  #"Q"
- *             elif t == NPY_FLOAT:       f[0] = 102 #"f"
- *             elif t == NPY_DOUBLE:      f[0] = 100 #"d"             # <<<<<<<<<<<<<<
- *             elif t == NPY_LONGDOUBLE:  f[0] = 103 #"g"
- *             elif t == NPY_CFLOAT:      f[0] = 90; f[1] = 102; f += 1 # Zf
- */
-      __pyx_t_3 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_DOUBLE); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 893, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_4 = PyObject_RichCompare(__pyx_v_t, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 893, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 893, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 0x64;
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":894
- *             elif t == NPY_FLOAT:       f[0] = 102 #"f"
- *             elif t == NPY_DOUBLE:      f[0] = 100 #"d"
- *             elif t == NPY_LONGDOUBLE:  f[0] = 103 #"g"             # <<<<<<<<<<<<<<
- *             elif t == NPY_CFLOAT:      f[0] = 90; f[1] = 102; f += 1 # Zf
- *             elif t == NPY_CDOUBLE:     f[0] = 90; f[1] = 100; f += 1 # Zd
- */
-      __pyx_t_4 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_LONGDOUBLE); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 894, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_3 = PyObject_RichCompare(__pyx_v_t, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 894, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 894, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 0x67;
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":895
- *             elif t == NPY_DOUBLE:      f[0] = 100 #"d"
- *             elif t == NPY_LONGDOUBLE:  f[0] = 103 #"g"
- *             elif t == NPY_CFLOAT:      f[0] = 90; f[1] = 102; f += 1 # Zf             # <<<<<<<<<<<<<<
- *             elif t == NPY_CDOUBLE:     f[0] = 90; f[1] = 100; f += 1 # Zd
- *             elif t == NPY_CLONGDOUBLE: f[0] = 90; f[1] = 103; f += 1 # Zg
- */
-      __pyx_t_3 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_CFLOAT); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 895, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_4 = PyObject_RichCompare(__pyx_v_t, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 895, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 895, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 90;
-        (__pyx_v_f[1]) = 0x66;
-        __pyx_v_f = (__pyx_v_f + 1);
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":896
- *             elif t == NPY_LONGDOUBLE:  f[0] = 103 #"g"
- *             elif t == NPY_CFLOAT:      f[0] = 90; f[1] = 102; f += 1 # Zf
- *             elif t == NPY_CDOUBLE:     f[0] = 90; f[1] = 100; f += 1 # Zd             # <<<<<<<<<<<<<<
- *             elif t == NPY_CLONGDOUBLE: f[0] = 90; f[1] = 103; f += 1 # Zg
- *             elif t == NPY_OBJECT:      f[0] = 79 #"O"
- */
-      __pyx_t_4 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_CDOUBLE); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 896, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_3 = PyObject_RichCompare(__pyx_v_t, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 896, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 896, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 90;
-        (__pyx_v_f[1]) = 0x64;
-        __pyx_v_f = (__pyx_v_f + 1);
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":897
- *             elif t == NPY_CFLOAT:      f[0] = 90; f[1] = 102; f += 1 # Zf
- *             elif t == NPY_CDOUBLE:     f[0] = 90; f[1] = 100; f += 1 # Zd
- *             elif t == NPY_CLONGDOUBLE: f[0] = 90; f[1] = 103; f += 1 # Zg             # <<<<<<<<<<<<<<
- *             elif t == NPY_OBJECT:      f[0] = 79 #"O"
- *             else:
- */
-      __pyx_t_3 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_CLONGDOUBLE); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 897, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_4 = PyObject_RichCompare(__pyx_v_t, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 897, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 897, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (__pyx_t_6) {
-        (__pyx_v_f[0]) = 90;
-        (__pyx_v_f[1]) = 0x67;
-        __pyx_v_f = (__pyx_v_f + 1);
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":898
- *             elif t == NPY_CDOUBLE:     f[0] = 90; f[1] = 100; f += 1 # Zd
- *             elif t == NPY_CLONGDOUBLE: f[0] = 90; f[1] = 103; f += 1 # Zg
- *             elif t == NPY_OBJECT:      f[0] = 79 #"O"             # <<<<<<<<<<<<<<
- *             else:
- *                 raise ValueError(u"unknown dtype code in numpy.pxd (%d)" % t)
- */
-      __pyx_t_4 = __Pyx_PyInt_From_enum__NPY_TYPES(NPY_OBJECT); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 898, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_3 = PyObject_RichCompare(__pyx_v_t, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 898, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(1, 898, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (likely(__pyx_t_6)) {
-        (__pyx_v_f[0]) = 79;
-        goto __pyx_L15;
-      }
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":900
- *             elif t == NPY_OBJECT:      f[0] = 79 #"O"
- *             else:
- *                 raise ValueError(u"unknown dtype code in numpy.pxd (%d)" % t)             # <<<<<<<<<<<<<<
- *             f += 1
- *         else:
- */
-      /*else*/ {
-        __pyx_t_3 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_unknown_dtype_code_in_numpy_pxd, __pyx_v_t); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 900, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_ValueError, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 900, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_4);
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __Pyx_Raise(__pyx_t_4, 0, 0, 0);
-        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __PYX_ERR(1, 900, __pyx_L1_error)
-      }
-      __pyx_L15:;
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":901
- *             else:
- *                 raise ValueError(u"unknown dtype code in numpy.pxd (%d)" % t)
- *             f += 1             # <<<<<<<<<<<<<<
- *         else:
- *             # Cython ignores struct boundary information ("T{...}"),
- */
-      __pyx_v_f = (__pyx_v_f + 1);
-
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":876
- *         offset[0] += child.itemsize
- * 
- *         if not PyDataType_HASFIELDS(child):             # <<<<<<<<<<<<<<
- *             t = child.type_num
- *             if end - f < 5:
- */
-      goto __pyx_L13;
-    }
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":905
- *             # Cython ignores struct boundary information ("T{...}"),
- *             # so don't output it
- *             f = _util_dtypestring(child, f, end, offset)             # <<<<<<<<<<<<<<
- *     return f
- * 
- */
-    /*else*/ {
-      __pyx_t_9 = __pyx_f_5numpy__util_dtypestring(__pyx_v_child, __pyx_v_f, __pyx_v_end, __pyx_v_offset); if (unlikely(__pyx_t_9 == ((char *)NULL))) __PYX_ERR(1, 905, __pyx_L1_error)
-      __pyx_v_f = __pyx_t_9;
-    }
-    __pyx_L13:;
-
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":850
- *     cdef tuple fields
- * 
- *     for childname in descr.names:             # <<<<<<<<<<<<<<
- *         fields = descr.fields[childname]
- *         child, new_offset = fields
- */
-  }
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":906
- *             # so don't output it
- *             f = _util_dtypestring(child, f, end, offset)
- *     return f             # <<<<<<<<<<<<<<
- * 
- * 
- */
-  __pyx_r = __pyx_v_f;
-  goto __pyx_L0;
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":841
- *         return ()
- * 
- * cdef inline char* _util_dtypestring(dtype descr, char* f, char* end, int* offset) except NULL:             # <<<<<<<<<<<<<<
- *     # Recursive utility function used in __getbuffer__ to get format
- *     # string. The new location in the format string is returned.
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("numpy._util_dtypestring", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __pyx_L0:;
-  __Pyx_XDECREF((PyObject *)__pyx_v_child);
-  __Pyx_XDECREF(__pyx_v_fields);
-  __Pyx_XDECREF(__pyx_v_childname);
-  __Pyx_XDECREF(__pyx_v_new_offset);
-  __Pyx_XDECREF(__pyx_v_t);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1021
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":868
  *     int _import_umath() except -1
  * 
  * cdef inline void set_array_base(ndarray arr, object base):             # <<<<<<<<<<<<<<
@@ -13685,7 +12224,7 @@ static CYTHON_INLINE void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_a
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_array_base", 0);
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1022
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":869
  * 
  * cdef inline void set_array_base(ndarray arr, object base):
  *     Py_INCREF(base) # important to do this before stealing the reference below!             # <<<<<<<<<<<<<<
@@ -13694,7 +12233,7 @@ static CYTHON_INLINE void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_a
  */
   Py_INCREF(__pyx_v_base);
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1023
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":870
  * cdef inline void set_array_base(ndarray arr, object base):
  *     Py_INCREF(base) # important to do this before stealing the reference below!
  *     PyArray_SetBaseObject(arr, base)             # <<<<<<<<<<<<<<
@@ -13703,7 +12242,7 @@ static CYTHON_INLINE void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_a
  */
   (void)(PyArray_SetBaseObject(__pyx_v_arr, __pyx_v_base));
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1021
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":868
  *     int _import_umath() except -1
  * 
  * cdef inline void set_array_base(ndarray arr, object base):             # <<<<<<<<<<<<<<
@@ -13715,7 +12254,7 @@ static CYTHON_INLINE void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_a
   __Pyx_RefNannyFinishContext();
 }
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1025
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":872
  *     PyArray_SetBaseObject(arr, base)
  * 
  * cdef inline object get_array_base(ndarray arr):             # <<<<<<<<<<<<<<
@@ -13730,7 +12269,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("get_array_base", 0);
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1026
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":873
  * 
  * cdef inline object get_array_base(ndarray arr):
  *     base = PyArray_BASE(arr)             # <<<<<<<<<<<<<<
@@ -13739,7 +12278,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
  */
   __pyx_v_base = PyArray_BASE(__pyx_v_arr);
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1027
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":874
  * cdef inline object get_array_base(ndarray arr):
  *     base = PyArray_BASE(arr)
  *     if base is NULL:             # <<<<<<<<<<<<<<
@@ -13749,7 +12288,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
   __pyx_t_1 = ((__pyx_v_base == NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1028
+    /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":875
  *     base = PyArray_BASE(arr)
  *     if base is NULL:
  *         return None             # <<<<<<<<<<<<<<
@@ -13760,7 +12299,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1027
+    /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":874
  * cdef inline object get_array_base(ndarray arr):
  *     base = PyArray_BASE(arr)
  *     if base is NULL:             # <<<<<<<<<<<<<<
@@ -13769,7 +12308,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
  */
   }
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1029
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":876
  *     if base is NULL:
  *         return None
  *     return <object>base             # <<<<<<<<<<<<<<
@@ -13781,7 +12320,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
   __pyx_r = ((PyObject *)__pyx_v_base);
   goto __pyx_L0;
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1025
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":872
  *     PyArray_SetBaseObject(arr, base)
  * 
  * cdef inline object get_array_base(ndarray arr):             # <<<<<<<<<<<<<<
@@ -13796,12 +12335,12 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
   return __pyx_r;
 }
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1033
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":880
  * # Versions of the import_* functions which are more suitable for
  * # Cython code.
  * cdef inline int import_array() except -1:             # <<<<<<<<<<<<<<
  *     try:
- *         _import_array()
+ *         __pyx_import_array()
  */
 
 static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
@@ -13820,11 +12359,11 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("import_array", 0);
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1034
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":881
  * # Cython code.
  * cdef inline int import_array() except -1:
  *     try:             # <<<<<<<<<<<<<<
- *         _import_array()
+ *         __pyx_import_array()
  *     except Exception:
  */
   {
@@ -13836,20 +12375,20 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1035
+      /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":882
  * cdef inline int import_array() except -1:
  *     try:
- *         _import_array()             # <<<<<<<<<<<<<<
+ *         __pyx_import_array()             # <<<<<<<<<<<<<<
  *     except Exception:
  *         raise ImportError("numpy.core.multiarray failed to import")
  */
-      __pyx_t_4 = _import_array(); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(1, 1035, __pyx_L3_error)
+      __pyx_t_4 = _import_array(); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(1, 882, __pyx_L3_error)
 
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1034
+      /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":881
  * # Cython code.
  * cdef inline int import_array() except -1:
  *     try:             # <<<<<<<<<<<<<<
- *         _import_array()
+ *         __pyx_import_array()
  *     except Exception:
  */
     }
@@ -13859,9 +12398,9 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
     goto __pyx_L8_try_end;
     __pyx_L3_error:;
 
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1036
+    /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":883
  *     try:
- *         _import_array()
+ *         __pyx_import_array()
  *     except Exception:             # <<<<<<<<<<<<<<
  *         raise ImportError("numpy.core.multiarray failed to import")
  * 
@@ -13869,32 +12408,32 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
     __pyx_t_4 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
     if (__pyx_t_4) {
       __Pyx_AddTraceback("numpy.import_array", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_6, &__pyx_t_7) < 0) __PYX_ERR(1, 1036, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_6, &__pyx_t_7) < 0) __PYX_ERR(1, 883, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GOTREF(__pyx_t_7);
 
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1037
- *         _import_array()
+      /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":884
+ *         __pyx_import_array()
  *     except Exception:
  *         raise ImportError("numpy.core.multiarray failed to import")             # <<<<<<<<<<<<<<
  * 
  * cdef inline int import_umath() except -1:
  */
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 1037, __pyx_L5_except_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 884, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_Raise(__pyx_t_8, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __PYX_ERR(1, 1037, __pyx_L5_except_error)
+      __PYX_ERR(1, 884, __pyx_L5_except_error)
     }
     goto __pyx_L5_except_error;
     __pyx_L5_except_error:;
 
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1034
+    /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":881
  * # Cython code.
  * cdef inline int import_array() except -1:
  *     try:             # <<<<<<<<<<<<<<
- *         _import_array()
+ *         __pyx_import_array()
  *     except Exception:
  */
     __Pyx_XGIVEREF(__pyx_t_1);
@@ -13905,12 +12444,12 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
     __pyx_L8_try_end:;
   }
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1033
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":880
  * # Versions of the import_* functions which are more suitable for
  * # Cython code.
  * cdef inline int import_array() except -1:             # <<<<<<<<<<<<<<
  *     try:
- *         _import_array()
+ *         __pyx_import_array()
  */
 
   /* function exit code */
@@ -13928,7 +12467,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
   return __pyx_r;
 }
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1039
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":886
  *         raise ImportError("numpy.core.multiarray failed to import")
  * 
  * cdef inline int import_umath() except -1:             # <<<<<<<<<<<<<<
@@ -13952,7 +12491,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("import_umath", 0);
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1040
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":887
  * 
  * cdef inline int import_umath() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -13968,16 +12507,16 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1041
+      /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":888
  * cdef inline int import_umath() except -1:
  *     try:
  *         _import_umath()             # <<<<<<<<<<<<<<
  *     except Exception:
  *         raise ImportError("numpy.core.umath failed to import")
  */
-      __pyx_t_4 = _import_umath(); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(1, 1041, __pyx_L3_error)
+      __pyx_t_4 = _import_umath(); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(1, 888, __pyx_L3_error)
 
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1040
+      /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":887
  * 
  * cdef inline int import_umath() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -13991,7 +12530,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
     goto __pyx_L8_try_end;
     __pyx_L3_error:;
 
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1042
+    /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":889
  *     try:
  *         _import_umath()
  *     except Exception:             # <<<<<<<<<<<<<<
@@ -14001,28 +12540,28 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
     __pyx_t_4 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
     if (__pyx_t_4) {
       __Pyx_AddTraceback("numpy.import_umath", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_6, &__pyx_t_7) < 0) __PYX_ERR(1, 1042, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_6, &__pyx_t_7) < 0) __PYX_ERR(1, 889, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GOTREF(__pyx_t_7);
 
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1043
+      /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":890
  *         _import_umath()
  *     except Exception:
  *         raise ImportError("numpy.core.umath failed to import")             # <<<<<<<<<<<<<<
  * 
  * cdef inline int import_ufunc() except -1:
  */
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 1043, __pyx_L5_except_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 890, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_Raise(__pyx_t_8, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __PYX_ERR(1, 1043, __pyx_L5_except_error)
+      __PYX_ERR(1, 890, __pyx_L5_except_error)
     }
     goto __pyx_L5_except_error;
     __pyx_L5_except_error:;
 
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1040
+    /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":887
  * 
  * cdef inline int import_umath() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -14037,7 +12576,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
     __pyx_L8_try_end:;
   }
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1039
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":886
  *         raise ImportError("numpy.core.multiarray failed to import")
  * 
  * cdef inline int import_umath() except -1:             # <<<<<<<<<<<<<<
@@ -14060,7 +12599,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
   return __pyx_r;
 }
 
-/* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1045
+/* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":892
  *         raise ImportError("numpy.core.umath failed to import")
  * 
  * cdef inline int import_ufunc() except -1:             # <<<<<<<<<<<<<<
@@ -14084,7 +12623,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("import_ufunc", 0);
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1046
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":893
  * 
  * cdef inline int import_ufunc() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -14100,16 +12639,16 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1047
+      /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":894
  * cdef inline int import_ufunc() except -1:
  *     try:
  *         _import_umath()             # <<<<<<<<<<<<<<
  *     except Exception:
  *         raise ImportError("numpy.core.umath failed to import")
  */
-      __pyx_t_4 = _import_umath(); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(1, 1047, __pyx_L3_error)
+      __pyx_t_4 = _import_umath(); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(1, 894, __pyx_L3_error)
 
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1046
+      /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":893
  * 
  * cdef inline int import_ufunc() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -14123,35 +12662,38 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
     goto __pyx_L8_try_end;
     __pyx_L3_error:;
 
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1048
+    /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":895
  *     try:
  *         _import_umath()
  *     except Exception:             # <<<<<<<<<<<<<<
  *         raise ImportError("numpy.core.umath failed to import")
+ * 
  */
     __pyx_t_4 = __Pyx_PyErr_ExceptionMatches(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
     if (__pyx_t_4) {
       __Pyx_AddTraceback("numpy.import_ufunc", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_6, &__pyx_t_7) < 0) __PYX_ERR(1, 1048, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_6, &__pyx_t_7) < 0) __PYX_ERR(1, 895, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GOTREF(__pyx_t_7);
 
-      /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1049
+      /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":896
  *         _import_umath()
  *     except Exception:
  *         raise ImportError("numpy.core.umath failed to import")             # <<<<<<<<<<<<<<
+ * 
+ * cdef extern from *:
  */
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 1049, __pyx_L5_except_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 896, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_Raise(__pyx_t_8, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __PYX_ERR(1, 1049, __pyx_L5_except_error)
+      __PYX_ERR(1, 896, __pyx_L5_except_error)
     }
     goto __pyx_L5_except_error;
     __pyx_L5_except_error:;
 
-    /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1046
+    /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":893
  * 
  * cdef inline int import_ufunc() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -14166,7 +12708,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
     __pyx_L8_try_end:;
   }
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1045
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":892
  *         raise ImportError("numpy.core.umath failed to import")
  * 
  * cdef inline int import_ufunc() except -1:             # <<<<<<<<<<<<<<
@@ -14254,16 +12796,12 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_Erode3D, __pyx_k_Erode3D, sizeof(__pyx_k_Erode3D), 0, 0, 1, 1},
   {&__pyx_n_s_ErodeMap2D, __pyx_k_ErodeMap2D, sizeof(__pyx_k_ErodeMap2D), 0, 0, 1, 1},
   {&__pyx_n_s_ErodeMap3D, __pyx_k_ErodeMap3D, sizeof(__pyx_k_ErodeMap3D), 0, 0, 1, 1},
-  {&__pyx_kp_u_Format_string_allocated_too_shor, __pyx_k_Format_string_allocated_too_shor, sizeof(__pyx_k_Format_string_allocated_too_shor), 0, 1, 0, 0},
-  {&__pyx_kp_u_Format_string_allocated_too_shor_2, __pyx_k_Format_string_allocated_too_shor_2, sizeof(__pyx_k_Format_string_allocated_too_shor_2), 0, 1, 0, 0},
   {&__pyx_n_s_ImportError, __pyx_k_ImportError, sizeof(__pyx_k_ImportError), 0, 0, 1, 1},
   {&__pyx_kp_u_Input_image_needs_to_be_binary_d, __pyx_k_Input_image_needs_to_be_binary_d, sizeof(__pyx_k_Input_image_needs_to_be_binary_d), 0, 1, 0, 0},
   {&__pyx_kp_u_Input_image_needs_to_be_data_typ, __pyx_k_Input_image_needs_to_be_data_typ, sizeof(__pyx_k_Input_image_needs_to_be_data_typ), 0, 1, 0, 0},
   {&__pyx_kp_u_Input_images_need_to_be_binary_d, __pyx_k_Input_images_need_to_be_binary_d, sizeof(__pyx_k_Input_images_need_to_be_binary_d), 0, 1, 0, 0},
-  {&__pyx_kp_u_Non_native_byte_order_not_suppor, __pyx_k_Non_native_byte_order_not_suppor, sizeof(__pyx_k_Non_native_byte_order_not_suppor), 0, 1, 0, 0},
   {&__pyx_n_s_OpenMap2D, __pyx_k_OpenMap2D, sizeof(__pyx_k_OpenMap2D), 0, 0, 1, 1},
   {&__pyx_n_s_OpenMap3D, __pyx_k_OpenMap3D, sizeof(__pyx_k_OpenMap3D), 0, 0, 1, 1},
-  {&__pyx_n_s_RuntimeError, __pyx_k_RuntimeError, sizeof(__pyx_k_RuntimeError), 0, 0, 1, 1},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_ascontiguousarray, __pyx_k_ascontiguousarray, sizeof(__pyx_k_ascontiguousarray), 0, 0, 1, 1},
   {&__pyx_n_s_astype, __pyx_k_astype, sizeof(__pyx_k_astype), 0, 0, 1, 1},
@@ -14284,8 +12822,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_max, __pyx_k_max, sizeof(__pyx_k_max), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
-  {&__pyx_kp_u_ndarray_is_not_C_contiguous, __pyx_k_ndarray_is_not_C_contiguous, sizeof(__pyx_k_ndarray_is_not_C_contiguous), 0, 1, 0, 0},
-  {&__pyx_kp_u_ndarray_is_not_Fortran_contiguou, __pyx_k_ndarray_is_not_Fortran_contiguou, sizeof(__pyx_k_ndarray_is_not_Fortran_contiguou), 0, 1, 0, 0},
   {&__pyx_n_s_np, __pyx_k_np, sizeof(__pyx_k_np), 0, 0, 1, 1},
   {&__pyx_n_s_numpy, __pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 0, 1, 1},
   {&__pyx_kp_u_numpy_core_multiarray_failed_to, __pyx_k_numpy_core_multiarray_failed_to, sizeof(__pyx_k_numpy_core_multiarray_failed_to), 0, 1, 0, 0},
@@ -14293,7 +12829,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_opening, __pyx_k_opening, sizeof(__pyx_k_opening), 0, 0, 1, 1},
   {&__pyx_n_s_quantimpy_morphology, __pyx_k_quantimpy_morphology, sizeof(__pyx_k_quantimpy_morphology), 0, 0, 1, 1},
   {&__pyx_kp_s_quantimpy_morphology_pyx, __pyx_k_quantimpy_morphology_pyx, sizeof(__pyx_k_quantimpy_morphology_pyx), 0, 0, 1, 0},
-  {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
   {&__pyx_n_s_res, __pyx_k_res, sizeof(__pyx_k_res), 0, 0, 1, 1},
   {&__pyx_n_s_res0, __pyx_k_res0, sizeof(__pyx_k_res0), 0, 0, 1, 1},
   {&__pyx_n_s_res1, __pyx_k_res1, sizeof(__pyx_k_res1), 0, 0, 1, 1},
@@ -14302,14 +12837,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_uint16, __pyx_k_uint16, sizeof(__pyx_k_uint16), 0, 0, 1, 1},
   {&__pyx_n_u_uint16, __pyx_k_uint16, sizeof(__pyx_k_uint16), 0, 1, 0, 1},
-  {&__pyx_kp_u_unknown_dtype_code_in_numpy_pxd, __pyx_k_unknown_dtype_code_in_numpy_pxd, sizeof(__pyx_k_unknown_dtype_code_in_numpy_pxd), 0, 1, 0, 0},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 14, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(1, 285, __pyx_L1_error)
-  __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) __PYX_ERR(1, 855, __pyx_L1_error)
-  __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(1, 1037, __pyx_L1_error)
+  __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(1, 884, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -14335,254 +12867,199 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     else:
  *         raise ValueError('Can only handle 2D or 3D images')             # <<<<<<<<<<<<<<
  * 
- * ################################################################################
+ * 
  */
   __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_Can_only_handle_2D_or_3D_images); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "quantimpy/morphology.pyx":198
+  /* "quantimpy/morphology.pyx":241
  *         erosion = erosion.astype(np.uint16)*np.iinfo(np.uint16).max
  *     else:
  *         raise ValueError('Input images need to be binary (data type bool)')             # <<<<<<<<<<<<<<
  * 
  *     if (erosion.ndim == 2):
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_Input_images_need_to_be_binary_d); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_Input_images_need_to_be_binary_d); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 241, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "quantimpy/morphology.pyx":446
+  /* "quantimpy/morphology.pyx":515
  * 
  *     if not (erosion.dtype == 'uint16'):
  *         raise ValueError('Input image needs to be data type uint16')             # <<<<<<<<<<<<<<
  * 
  *     if (erosion.ndim == 2):
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_Input_image_needs_to_be_data_typ); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 446, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_Input_image_needs_to_be_data_typ); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 515, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":272
- *             if ((flags & pybuf.PyBUF_C_CONTIGUOUS == pybuf.PyBUF_C_CONTIGUOUS)
- *                 and not PyArray_CHKFLAGS(self, NPY_ARRAY_C_CONTIGUOUS)):
- *                 raise ValueError(u"ndarray is not C contiguous")             # <<<<<<<<<<<<<<
- * 
- *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
- */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_ndarray_is_not_C_contiguous); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(1, 272, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__5);
-  __Pyx_GIVEREF(__pyx_tuple__5);
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":276
- *             if ((flags & pybuf.PyBUF_F_CONTIGUOUS == pybuf.PyBUF_F_CONTIGUOUS)
- *                 and not PyArray_CHKFLAGS(self, NPY_ARRAY_F_CONTIGUOUS)):
- *                 raise ValueError(u"ndarray is not Fortran contiguous")             # <<<<<<<<<<<<<<
- * 
- *             info.buf = PyArray_DATA(self)
- */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_u_ndarray_is_not_Fortran_contiguou); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(1, 276, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__6);
-  __Pyx_GIVEREF(__pyx_tuple__6);
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":306
- *                 if ((descr.byteorder == c'>' and little_endian) or
- *                     (descr.byteorder == c'<' and not little_endian)):
- *                     raise ValueError(u"Non-native byte order not supported")             # <<<<<<<<<<<<<<
- *                 if   t == NPY_BYTE:        f = "b"
- *                 elif t == NPY_UBYTE:       f = "B"
- */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_u_Non_native_byte_order_not_suppor); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(1, 306, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__7);
-  __Pyx_GIVEREF(__pyx_tuple__7);
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":855
- * 
- *         if (end - f) - <int>(new_offset - offset[0]) < 15:
- *             raise RuntimeError(u"Format string allocated too short, see comment in numpy.pxd")             # <<<<<<<<<<<<<<
- * 
- *         if ((child.byteorder == c'>' and little_endian) or
- */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_u_Format_string_allocated_too_shor); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(1, 855, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__8);
-  __Pyx_GIVEREF(__pyx_tuple__8);
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":879
- *             t = child.type_num
- *             if end - f < 5:
- *                 raise RuntimeError(u"Format string allocated too short.")             # <<<<<<<<<<<<<<
- * 
- *             # Until ticket #99 is fixed, use integers to avoid warnings
- */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_u_Format_string_allocated_too_shor_2); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(1, 879, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
-
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1037
- *         _import_array()
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":884
+ *         __pyx_import_array()
  *     except Exception:
  *         raise ImportError("numpy.core.multiarray failed to import")             # <<<<<<<<<<<<<<
  * 
  * cdef inline int import_umath() except -1:
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_u_numpy_core_multiarray_failed_to); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(1, 1037, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__10);
-  __Pyx_GIVEREF(__pyx_tuple__10);
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_numpy_core_multiarray_failed_to); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(1, 884, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__5);
+  __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1043
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":890
  *         _import_umath()
  *     except Exception:
  *         raise ImportError("numpy.core.umath failed to import")             # <<<<<<<<<<<<<<
  * 
  * cdef inline int import_ufunc() except -1:
  */
-  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_kp_u_numpy_core_umath_failed_to_impor); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(1, 1043, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_u_numpy_core_umath_failed_to_impor); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(1, 890, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
+
+  /* "quantimpy/morphology.pyx":55
+ * 
+ * 
+ * def Erode2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         int dist,
+ */
+  __pyx_tuple__7 = PyTuple_Pack(6, __pyx_n_s_image, __pyx_n_s_dist, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_erosion, __pyx_n_s_status); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__7);
+  __Pyx_GIVEREF(__pyx_tuple__7);
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(4, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_Erode2D, 55, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 55, __pyx_L1_error)
+
+  /* "quantimpy/morphology.pyx":93
+ * 
+ * 
+ * def Erode3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         int dist,
+ */
+  __pyx_tuple__9 = PyTuple_Pack(7, __pyx_n_s_image, __pyx_n_s_dist, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_res2, __pyx_n_s_erosion, __pyx_n_s_status); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__9);
+  __Pyx_GIVEREF(__pyx_tuple__9);
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(5, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_Erode3D, 93, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 93, __pyx_L1_error)
+
+  /* "quantimpy/morphology.pyx":169
+ * 
+ * 
+ * def Dilate2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         int dist,
+ */
+  __pyx_tuple__11 = PyTuple_Pack(6, __pyx_n_s_image, __pyx_n_s_dist, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_dilation, __pyx_n_s_status); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(4, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_Dilate2D, 169, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 169, __pyx_L1_error)
 
-  /* "quantimpy/morphology.pyx":50
- * ################################################################################
+  /* "quantimpy/morphology.pyx":206
  * 
- * def Erode2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, int dist, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def Dilate3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         int dist,
  */
-  __pyx_tuple__12 = PyTuple_Pack(6, __pyx_n_s_image, __pyx_n_s_dist, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_erosion, __pyx_n_s_status); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 50, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__12);
-  __Pyx_GIVEREF(__pyx_tuple__12);
-  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(4, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_Erode2D, 50, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(7, __pyx_n_s_image, __pyx_n_s_dist, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_res2, __pyx_n_s_dilation, __pyx_n_s_status); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 206, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(5, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_Dilate3D, 206, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 206, __pyx_L1_error)
 
-  /* "quantimpy/morphology.pyx":76
- * ################################################################################
+  /* "quantimpy/morphology.pyx":358
  * 
- * def Erode3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, int dist, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def ErodeMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         double res0,
  */
-  __pyx_tuple__14 = PyTuple_Pack(7, __pyx_n_s_image, __pyx_n_s_dist, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_res2, __pyx_n_s_erosion, __pyx_n_s_status); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 76, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__14);
-  __Pyx_GIVEREF(__pyx_tuple__14);
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(5, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_Erode3D, 76, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_tuple__15 = PyTuple_Pack(5, __pyx_n_s_image, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_distance, __pyx_n_s_status); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 358, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__15);
+  __Pyx_GIVEREF(__pyx_tuple__15);
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_ErodeMap2D, 358, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 358, __pyx_L1_error)
 
-  /* "quantimpy/morphology.pyx":142
- * ################################################################################
+  /* "quantimpy/morphology.pyx":394
  * 
- * def Dilate2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, int dist, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def ErodeMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         double res0,
  */
-  __pyx_tuple__16 = PyTuple_Pack(6, __pyx_n_s_image, __pyx_n_s_dist, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_dilation, __pyx_n_s_status); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 142, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__16);
-  __Pyx_GIVEREF(__pyx_tuple__16);
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(4, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_Dilate2D, 142, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_tuple__17 = PyTuple_Pack(6, __pyx_n_s_image, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_res2, __pyx_n_s_distance, __pyx_n_s_status); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 394, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__17);
+  __Pyx_GIVEREF(__pyx_tuple__17);
+  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(4, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_ErodeMap3D, 394, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 394, __pyx_L1_error)
 
-  /* "quantimpy/morphology.pyx":168
- * ################################################################################
+  /* "quantimpy/morphology.pyx":458
  * 
- * def Dilate3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, int dist, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def DilateMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         double res0,
  */
-  __pyx_tuple__18 = PyTuple_Pack(7, __pyx_n_s_image, __pyx_n_s_dist, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_res2, __pyx_n_s_dilation, __pyx_n_s_status); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 168, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__18);
-  __Pyx_GIVEREF(__pyx_tuple__18);
-  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(5, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_Dilate3D, 168, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 168, __pyx_L1_error)
-
-  /* "quantimpy/morphology.pyx":310
- * ################################################################################
- * 
- * def ErodeMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1):             # <<<<<<<<<<<<<<
- * 
- *     image = np.ascontiguousarray(image)
- */
-  __pyx_tuple__20 = PyTuple_Pack(5, __pyx_n_s_image, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_distance, __pyx_n_s_status); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 310, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__20);
-  __Pyx_GIVEREF(__pyx_tuple__20);
-  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__20, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_ErodeMap2D, 310, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(0, 310, __pyx_L1_error)
-
-  /* "quantimpy/morphology.pyx":336
- * ################################################################################
- * 
- * def ErodeMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
- * 
- *     image = np.ascontiguousarray(image)
- */
-  __pyx_tuple__22 = PyTuple_Pack(6, __pyx_n_s_image, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_res2, __pyx_n_s_distance, __pyx_n_s_status); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 336, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__22);
-  __Pyx_GIVEREF(__pyx_tuple__22);
-  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(4, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_ErodeMap3D, 336, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 336, __pyx_L1_error)
-
-  /* "quantimpy/morphology.pyx":397
- * ################################################################################
- * 
- * def DilateMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1):             # <<<<<<<<<<<<<<
- * 
- *     image = np.ascontiguousarray(image)
- */
-  __pyx_tuple__24 = PyTuple_Pack(5, __pyx_n_s_image, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_distance, __pyx_n_s_status); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 397, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__24);
-  __Pyx_GIVEREF(__pyx_tuple__24);
-  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_DilateMap2D, 397, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 397, __pyx_L1_error)
-
-  /* "quantimpy/morphology.pyx":418
- * ################################################################################
- * 
- * def DilateMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
- * 
- *     image = np.ascontiguousarray(image)
- */
-  __pyx_tuple__26 = PyTuple_Pack(6, __pyx_n_s_image, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_res2, __pyx_n_s_distance, __pyx_n_s_status); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 418, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__26);
-  __Pyx_GIVEREF(__pyx_tuple__26);
-  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(4, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_DilateMap3D, 418, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 418, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(5, __pyx_n_s_image, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_distance, __pyx_n_s_status); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 458, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__19);
+  __Pyx_GIVEREF(__pyx_tuple__19);
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_DilateMap2D, 458, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 458, __pyx_L1_error)
 
   /* "quantimpy/morphology.pyx":482
- * ################################################################################
  * 
- * def OpenMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     erosion = np.ascontiguousarray(erosion)
+ * def DilateMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         double res0,
  */
-  __pyx_tuple__28 = PyTuple_Pack(5, __pyx_n_s_erosion, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_opening, __pyx_n_s_status); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 482, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__28);
-  __Pyx_GIVEREF(__pyx_tuple__28);
-  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_OpenMap2D, 482, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 482, __pyx_L1_error)
+  __pyx_tuple__21 = PyTuple_Pack(6, __pyx_n_s_image, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_res2, __pyx_n_s_distance, __pyx_n_s_status); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 482, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__21);
+  __Pyx_GIVEREF(__pyx_tuple__21);
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(4, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_DilateMap3D, 482, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 482, __pyx_L1_error)
 
-  /* "quantimpy/morphology.pyx":507
- * ################################################################################
+  /* "quantimpy/morphology.pyx":555
  * 
- * def OpenMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     erosion = np.ascontiguousarray(erosion)
+ * def OpenMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion,
+ *         double res0,
  */
-  __pyx_tuple__30 = PyTuple_Pack(6, __pyx_n_s_erosion, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_res2, __pyx_n_s_opening, __pyx_n_s_status); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 507, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__30);
-  __Pyx_GIVEREF(__pyx_tuple__30);
-  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(4, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__30, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_OpenMap3D, 507, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 507, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(5, __pyx_n_s_erosion, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_opening, __pyx_n_s_status); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 555, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__23);
+  __Pyx_GIVEREF(__pyx_tuple__23);
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_OpenMap2D, 555, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 555, __pyx_L1_error)
 
-  /* "quantimpy/morphology.pyx":570
- * ################################################################################
+  /* "quantimpy/morphology.pyx":590
  * 
- * def CloseMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     dilation = np.ascontiguousarray(dilation)
+ * def OpenMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion,
+ *         double res0,
  */
-  __pyx_tuple__32 = PyTuple_Pack(5, __pyx_n_s_dilation, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_closing, __pyx_n_s_status); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 570, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__32);
-  __Pyx_GIVEREF(__pyx_tuple__32);
-  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_CloseMap2D, 570, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) __PYX_ERR(0, 570, __pyx_L1_error)
+  __pyx_tuple__25 = PyTuple_Pack(6, __pyx_n_s_erosion, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_res2, __pyx_n_s_opening, __pyx_n_s_status); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 590, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__25);
+  __Pyx_GIVEREF(__pyx_tuple__25);
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(4, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_OpenMap3D, 590, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 590, __pyx_L1_error)
 
-  /* "quantimpy/morphology.pyx":595
- * ################################################################################
+  /* "quantimpy/morphology.pyx":662
  * 
- * def CloseMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     dilation = np.ascontiguousarray(dilation)
+ * def CloseMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation,
+ *         double res0,
  */
-  __pyx_tuple__34 = PyTuple_Pack(6, __pyx_n_s_dilation, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_res2, __pyx_n_s_closing, __pyx_n_s_status); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 595, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__34);
-  __Pyx_GIVEREF(__pyx_tuple__34);
-  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(4, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_CloseMap3D, 595, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) __PYX_ERR(0, 595, __pyx_L1_error)
+  __pyx_tuple__27 = PyTuple_Pack(5, __pyx_n_s_dilation, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_closing, __pyx_n_s_status); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 662, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__27);
+  __Pyx_GIVEREF(__pyx_tuple__27);
+  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_CloseMap2D, 662, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 662, __pyx_L1_error)
+
+  /* "quantimpy/morphology.pyx":697
+ * 
+ * 
+ * def CloseMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation,
+ *         double res0,
+ */
+  __pyx_tuple__29 = PyTuple_Pack(6, __pyx_n_s_dilation, __pyx_n_s_res0, __pyx_n_s_res1, __pyx_n_s_res2, __pyx_n_s_closing, __pyx_n_s_status); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 697, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__29);
+  __Pyx_GIVEREF(__pyx_tuple__29);
+  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(4, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_quantimpy_morphology_pyx, __pyx_n_s_CloseMap3D, 697, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 697, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -14657,18 +13134,18 @@ static int __Pyx_modinit_type_import_code(void) {
   __Pyx_ImportType_CheckSize_Warn);
    if (!__pyx_ptype_7cpython_4type_type) __PYX_ERR(2, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyImport_ImportModule("numpy"); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 206, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule("numpy"); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 199, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_ptype_5numpy_dtype = __Pyx_ImportType(__pyx_t_1, "numpy", "dtype", sizeof(PyArray_Descr), __Pyx_ImportType_CheckSize_Ignore);
-   if (!__pyx_ptype_5numpy_dtype) __PYX_ERR(1, 206, __pyx_L1_error)
-  __pyx_ptype_5numpy_flatiter = __Pyx_ImportType(__pyx_t_1, "numpy", "flatiter", sizeof(PyArrayIterObject), __Pyx_ImportType_CheckSize_Warn);
-   if (!__pyx_ptype_5numpy_flatiter) __PYX_ERR(1, 229, __pyx_L1_error)
-  __pyx_ptype_5numpy_broadcast = __Pyx_ImportType(__pyx_t_1, "numpy", "broadcast", sizeof(PyArrayMultiIterObject), __Pyx_ImportType_CheckSize_Warn);
-   if (!__pyx_ptype_5numpy_broadcast) __PYX_ERR(1, 233, __pyx_L1_error)
+   if (!__pyx_ptype_5numpy_dtype) __PYX_ERR(1, 199, __pyx_L1_error)
+  __pyx_ptype_5numpy_flatiter = __Pyx_ImportType(__pyx_t_1, "numpy", "flatiter", sizeof(PyArrayIterObject), __Pyx_ImportType_CheckSize_Ignore);
+   if (!__pyx_ptype_5numpy_flatiter) __PYX_ERR(1, 222, __pyx_L1_error)
+  __pyx_ptype_5numpy_broadcast = __Pyx_ImportType(__pyx_t_1, "numpy", "broadcast", sizeof(PyArrayMultiIterObject), __Pyx_ImportType_CheckSize_Ignore);
+   if (!__pyx_ptype_5numpy_broadcast) __PYX_ERR(1, 226, __pyx_L1_error)
   __pyx_ptype_5numpy_ndarray = __Pyx_ImportType(__pyx_t_1, "numpy", "ndarray", sizeof(PyArrayObject), __Pyx_ImportType_CheckSize_Ignore);
-   if (!__pyx_ptype_5numpy_ndarray) __PYX_ERR(1, 242, __pyx_L1_error)
-  __pyx_ptype_5numpy_ufunc = __Pyx_ImportType(__pyx_t_1, "numpy", "ufunc", sizeof(PyUFuncObject), __Pyx_ImportType_CheckSize_Warn);
-   if (!__pyx_ptype_5numpy_ufunc) __PYX_ERR(1, 917, __pyx_L1_error)
+   if (!__pyx_ptype_5numpy_ndarray) __PYX_ERR(1, 238, __pyx_L1_error)
+  __pyx_ptype_5numpy_ufunc = __Pyx_ImportType(__pyx_t_1, "numpy", "ufunc", sizeof(PyUFuncObject), __Pyx_ImportType_CheckSize_Ignore);
+   if (!__pyx_ptype_5numpy_ufunc) __PYX_ERR(1, 764, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -14912,152 +13389,152 @@ if (!__Pyx_RefNanny) {
  * 
  * np.import_array()             # <<<<<<<<<<<<<<
  * 
- * ################################################################################
+ * ###############################################################################
  */
   __pyx_t_2 = __pyx_f_5numpy_import_array(); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 4, __pyx_L1_error)
 
-  /* "quantimpy/morphology.pyx":50
- * ################################################################################
+  /* "quantimpy/morphology.pyx":55
  * 
- * def Erode2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, int dist, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def Erode2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         int dist,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_3Erode2D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_3Erode2D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Erode2D, __pyx_t_1) < 0) __PYX_ERR(0, 50, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Erode2D, __pyx_t_1) < 0) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":76
- * ################################################################################
+  /* "quantimpy/morphology.pyx":93
  * 
- * def Erode3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, int dist, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def Erode3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         int dist,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_5Erode3D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_5Erode3D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Erode3D, __pyx_t_1) < 0) __PYX_ERR(0, 76, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Erode3D, __pyx_t_1) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":142
- * ################################################################################
+  /* "quantimpy/morphology.pyx":169
  * 
- * def Dilate2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, int dist, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def Dilate2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         int dist,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_9Dilate2D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_9Dilate2D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Dilate2D, __pyx_t_1) < 0) __PYX_ERR(0, 142, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Dilate2D, __pyx_t_1) < 0) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":168
- * ################################################################################
+  /* "quantimpy/morphology.pyx":206
  * 
- * def Dilate3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, int dist, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def Dilate3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         int dist,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_11Dilate3D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_11Dilate3D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Dilate3D, __pyx_t_1) < 0) __PYX_ERR(0, 168, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Dilate3D, __pyx_t_1) < 0) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":310
- * ################################################################################
+  /* "quantimpy/morphology.pyx":358
  * 
- * def ErodeMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def ErodeMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         double res0,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_19ErodeMap2D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 310, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_19ErodeMap2D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ErodeMap2D, __pyx_t_1) < 0) __PYX_ERR(0, 310, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ErodeMap2D, __pyx_t_1) < 0) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":336
- * ################################################################################
+  /* "quantimpy/morphology.pyx":394
  * 
- * def ErodeMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def ErodeMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         double res0,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_21ErodeMap3D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 336, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_21ErodeMap3D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 394, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ErodeMap3D, __pyx_t_1) < 0) __PYX_ERR(0, 336, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ErodeMap3D, __pyx_t_1) < 0) __PYX_ERR(0, 394, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":397
- * ################################################################################
+  /* "quantimpy/morphology.pyx":458
  * 
- * def DilateMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] image, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     image = np.ascontiguousarray(image)
+ * def DilateMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] image,
+ *         double res0,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_25DilateMap2D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 397, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_25DilateMap2D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 458, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DilateMap2D, __pyx_t_1) < 0) __PYX_ERR(0, 397, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "quantimpy/morphology.pyx":418
- * ################################################################################
- * 
- * def DilateMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] image, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
- * 
- *     image = np.ascontiguousarray(image)
- */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_27DilateMap3D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 418, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DilateMap3D, __pyx_t_1) < 0) __PYX_ERR(0, 418, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DilateMap2D, __pyx_t_1) < 0) __PYX_ERR(0, 458, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "quantimpy/morphology.pyx":482
- * ################################################################################
  * 
- * def OpenMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     erosion = np.ascontiguousarray(erosion)
+ * def DilateMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] image,
+ *         double res0,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_31OpenMap2D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 482, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_27DilateMap3D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 482, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_OpenMap2D, __pyx_t_1) < 0) __PYX_ERR(0, 482, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DilateMap3D, __pyx_t_1) < 0) __PYX_ERR(0, 482, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":507
- * ################################################################################
+  /* "quantimpy/morphology.pyx":555
  * 
- * def OpenMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     erosion = np.ascontiguousarray(erosion)
+ * def OpenMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] erosion,
+ *         double res0,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_33OpenMap3D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 507, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_31OpenMap2D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 555, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_OpenMap3D, __pyx_t_1) < 0) __PYX_ERR(0, 507, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_OpenMap2D, __pyx_t_1) < 0) __PYX_ERR(0, 555, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":570
- * ################################################################################
+  /* "quantimpy/morphology.pyx":590
  * 
- * def CloseMap2D(np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation, double res0, double res1):             # <<<<<<<<<<<<<<
  * 
- *     dilation = np.ascontiguousarray(dilation)
+ * def OpenMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion,
+ *         double res0,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_37CloseMap2D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 570, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_33OpenMap3D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 590, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_CloseMap2D, __pyx_t_1) < 0) __PYX_ERR(0, 570, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_OpenMap3D, __pyx_t_1) < 0) __PYX_ERR(0, 590, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "quantimpy/morphology.pyx":595
- * ################################################################################
+  /* "quantimpy/morphology.pyx":662
  * 
- * def CloseMap3D(np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation, double res0, double res1, double res2):             # <<<<<<<<<<<<<<
  * 
- *     dilation = np.ascontiguousarray(dilation)
+ * def CloseMap2D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=2, mode="c"] dilation,
+ *         double res0,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_39CloseMap3D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 595, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_37CloseMap2D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 662, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_CloseMap3D, __pyx_t_1) < 0) __PYX_ERR(0, 595, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_CloseMap2D, __pyx_t_1) < 0) __PYX_ERR(0, 662, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "quantimpy/morphology.pyx":697
+ * 
+ * 
+ * def CloseMap3D(             # <<<<<<<<<<<<<<
+ *         np.ndarray[np.uint16_t, ndim=3, mode="c"] dilation,
+ *         double res0,
+ */
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9quantimpy_10morphology_39CloseMap3D, NULL, __pyx_n_s_quantimpy_morphology); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 697, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_CloseMap3D, __pyx_t_1) < 0) __PYX_ERR(0, 697, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "quantimpy/morphology.pyx":1
@@ -15070,7 +13547,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "../../../../usr/lib/python3/dist-packages/Cython/Includes/numpy/__init__.pxd":1045
+  /* "../../.local/lib/python3.9/site-packages/numpy/__init__.pxd":892
  *         raise ImportError("numpy.core.umath failed to import")
  * 
  * cdef inline int import_ufunc() except -1:             # <<<<<<<<<<<<<<
@@ -16627,48 +15104,6 @@ fail:;
      "Out of bounds on buffer access (axis %d)", axis);
 }
 
-/* DictGetItem */
-  #if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
-static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key) {
-    PyObject *value;
-    value = PyDict_GetItemWithError(d, key);
-    if (unlikely(!value)) {
-        if (!PyErr_Occurred()) {
-            if (unlikely(PyTuple_Check(key))) {
-                PyObject* args = PyTuple_Pack(1, key);
-                if (likely(args)) {
-                    PyErr_SetObject(PyExc_KeyError, args);
-                    Py_DECREF(args);
-                }
-            } else {
-                PyErr_SetObject(PyExc_KeyError, key);
-            }
-        }
-        return NULL;
-    }
-    Py_INCREF(value);
-    return value;
-}
-#endif
-
-/* RaiseTooManyValuesToUnpack */
-  static CYTHON_INLINE void __Pyx_RaiseTooManyValuesError(Py_ssize_t expected) {
-    PyErr_Format(PyExc_ValueError,
-                 "too many values to unpack (expected %" CYTHON_FORMAT_SSIZE_T "d)", expected);
-}
-
-/* RaiseNeedMoreValuesToUnpack */
-  static CYTHON_INLINE void __Pyx_RaiseNeedMoreValuesError(Py_ssize_t index) {
-    PyErr_Format(PyExc_ValueError,
-                 "need more than %" CYTHON_FORMAT_SSIZE_T "d value%.1s to unpack",
-                 index, (index == 1) ? "" : "s");
-}
-
-/* RaiseNoneIterError */
-  static CYTHON_INLINE void __Pyx_RaiseNoneNotIterableError(void) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-}
-
 /* GetTopmostException */
   #if CYTHON_USE_EXC_INFO_STACK
 static _PyErr_StackItem *
@@ -17160,7 +15595,6 @@ bad:
 #if PY_MAJOR_VERSION < 3
 static int __Pyx_GetBuffer(PyObject *obj, Py_buffer *view, int flags) {
     if (PyObject_CheckBuffer(obj)) return PyObject_GetBuffer(obj, view, flags);
-        if (__Pyx_TypeCheck(obj, __pyx_ptype_5numpy_ndarray)) return __pyx_pw_5numpy_7ndarray_1__getbuffer__(obj, view, flags);
     PyErr_Format(PyExc_TypeError, "'%.200s' does not have the buffer interface", Py_TYPE(obj)->tp_name);
     return -1;
 }
@@ -17172,7 +15606,6 @@ static void __Pyx_ReleaseBuffer(Py_buffer *view) {
         return;
     }
     if ((0)) {}
-        else if (__Pyx_TypeCheck(obj, __pyx_ptype_5numpy_ndarray)) __pyx_pw_5numpy_7ndarray_3__releasebuffer__(obj, view);
     view->obj = NULL;
     Py_DECREF(obj);
 }
@@ -17570,37 +16003,6 @@ static void __Pyx_ReleaseBuffer(Py_buffer *view) {
         }
     #endif
 #endif
-
-/* CIntToPy */
-  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum__NPY_TYPES(enum NPY_TYPES value) {
-    const enum NPY_TYPES neg_one = (enum NPY_TYPES) ((enum NPY_TYPES) 0 - (enum NPY_TYPES) 1), const_zero = (enum NPY_TYPES) 0;
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(enum NPY_TYPES) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(enum NPY_TYPES) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(enum NPY_TYPES) <= sizeof(unsigned PY_LONG_LONG)) {
-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
-#endif
-        }
-    } else {
-        if (sizeof(enum NPY_TYPES) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(enum NPY_TYPES) <= sizeof(PY_LONG_LONG)) {
-            return PyLong_FromLongLong((PY_LONG_LONG) value);
-#endif
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(enum NPY_TYPES),
-                                     little, !is_unsigned);
-    }
-}
 
 /* CIntFromPy */
   static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {

@@ -1,0 +1,6 @@
+:mod:`quantimpy`
+================
+
+.. py:module:: quantimpy
+
+

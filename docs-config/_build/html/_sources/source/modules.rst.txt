@@ -1,0 +1,7 @@
+quantimpy
+=========
+
+.. toctree::
+   :maxdepth: 4
+
+   quantimpy

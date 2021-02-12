@@ -1,4 +1,4 @@
-"""Compute the Minkowski functionals and functions
+r"""Compute the Minkowski functionals and functions
 
 This module can compute both the Minkowski functionals and functions for 2D and
 3D Numpy arrays. These computations can handle both isotropic and anisotropic
@@ -6,16 +6,16 @@ image resolutions.
 
 Notes
 ----------
-
-More information about the used algorithm can be found in the book ''Statistical
-analysis of microstructures in materials science'' by Joachim Ohser and Frank
-Mücklich [1].
+More information about the used algorithm can be found in the book "Statistical
+analysis of microstructures in materials science" by Joachim Ohser and Frank
+Mücklich [1]_.
 
 References
 ----------
+.. [1] Joachim Ohser and Frank Mücklich, "Statistical analysis of
+    microstructures in materials science", Wiley and Sons, New York, 2000, ISBN:
+    0471974862
 
-.. [1] Joachim Ohser and Frank Mücklich, ''Statistical analysis of
-microstructures in materials science'', Wiley and Sons, New York, 2000, ISBN: 0471974862
 """
 
 import numpy as np
@@ -29,11 +29,10 @@ np.import_array()
 cpdef functionals(np.ndarray image, res = None):
     r"""Compute the Minkowski functionals in 2D or 3D.
 
-    This function computes the Minkowski functionals for Numpy array `image`.
-    Both 2D and 3D arrays are supported. Optionally, the (anisotropic)
-    resolution of the array can be provided using the Numpy array `res`. When a
-    resolution array is provided it needs to be the same dimension as the image
-    array.
+    This function computes the Minkowski functionals for Numpy array `image`. Both
+    2D and 3D arrays are supported. Optionally, the (anisotropic) resolution of the
+    array can be provided using the Numpy array `res`. When a resolution array is
+    provided it needs to be the same dimension as the image array.
 
     Parameters
     ----------
@@ -55,20 +54,96 @@ cpdef functionals(np.ndarray image, res = None):
 
     See Also
     --------
-    quantimpy.minkowski.functionsOpen
-    quantimpy.minkowski.functionsClose
+    quantimpy.minkowski.functions_open
+    quantimpy.minkowski.functions_close
 
     Notes
     -----
-    For 2D image arrays the following integrals are computed:
 
-    .. math:: \omega \int_{a}^{b}
-    
+    The definition of the Minkowski functionals follows the convention in the
+    physics literature [2]_.
 
-    For 3D image arrays the following integrals are computed:
+    Considering a 2D body, :math:`X`, with a smooth boundary, :math:`\delta X`,
+    the following functionals are computed:
+
+    .. math:: M_{0} (X) &= \int_{X} d s, \\
+              M_{1} (X) &= \frac{1}{2 \pi} \int_{\delta X} d c, \text{ and } \\
+              M_{2} (X) &= \frac{1}{2 \pi^{2}} \int_{\delta X} \left[\frac{1}{R} \right] d c,
+
+    where :math:`d s` is a surface element and :math:`d c` is a circumference
+    element. :math:`R` is the radius of the local curvature. This results in the
+    following definitions for the surface area, :math:`S = M_{0} (X)`,
+    circumference, :math:`C = 2 \pi M_{1} (X)`, and the 2D Euler characteristic,
+    :math:`\chi (X) = \pi M_{2} (X)`. 
+
+    Considering a 3D body, :math:`X`, with a smooth boundary surface, :math:`\delta
+    X`, the following functionals are computed:
+
+    .. math:: M_{0} (X) &= V = \int_{X} d v, \\
+              M_{1} (X) &= \frac{1}{8} \int_{\delta X} d s, \\
+              M_{2} (X) &= \frac{1}{2 \pi^{2}} \int_{\delta X}  \frac{1}{2} \left[\frac{1}{R_{1}} + \frac{1}{R_{2}}\right] d s, \text{ and } \\
+              M_{3} (X) &= \frac{3}{(4 \pi)^{2}} \int_{\delta X} \left[\frac{1}{R_{1} R_{2}}\right] d s,
+
+    where :math:`d v` is a volume element and :math:`d s` is a surface element.
+    :math:`R_{1}` and :math:`R_{2}` are the principal radii of curvature of
+    surface element :math:`d s`. This results in the following definitions for
+    the volume, :math:`V = M_{0} (X)`, surface area, :math:`S = 8 M_{1} (X)`,
+    integral mean curvature, :math:`H = 2 \pi^{2} M_{2} (X)`, and the 3D Euler
+    characteristic, :math:`\chi (X) = 4 \pi/3 M_{3} (X)`.
 
     Examples
     --------
+    These examples use the skimage Python package [3]_. For a 2D image the
+    Minkowski fucntionals can be computed using the following example:
+
+    .. code-block:: python
+
+        import numpy as np    
+        from quantimpy import minkowski as mk
+        from skimage.morphology import (disk)
+
+        image = np.zeros([128,128],dtype=bool)
+        image[16:113,16:113] = disk(48,dtype=bool)
+
+        minkowski = mk.functionals(image)
+
+        # Compute Minkowski functionals for image with anisotropic resolution
+        res = np.array([2, 1])
+        minkowski = mk.functionals(image,res)
+
+    For a 3D image the Minkowski fucntionals can be computed using the following
+    example:
+
+    .. code-block:: python
+
+        import numpy as np    
+        from quantimpy import minkowski as mk
+        from skimage.morphology import (ball)
+
+        image = np.zeros([128,128,128],dtype=bool)
+        image[16:113,16:113,16:113] = ball(48,dtype=bool)
+
+        minkowski = mk.functionals(image)
+
+        # Compute Minkowski functionals for image with anisotropic resolution
+        res = np.array([2, 1, 3])
+        minkowski = mk.functionals(image,res)
+
+    References
+    ----------
+    .. [2] Klaus R. Mecke, "Additivity, convexity, and beyond: applications of
+        Minkowski Functionals in statistical physics" in "Statistical Physics
+        and Spatial Statistics", pp 111–184, Springer (2000) doi:
+        `10.1007/3-540-45043-2_6`_
+
+    .. _10.1007/3-540-45043-2_6: https://doi.org/10.1007/3-540-45043-2_6
+
+    .. [3] Stéfan van der Walt, Johannes L. Schönberger, Juan Nunez-Iglesias,
+        François Boulogne, Joshua D. Warner, Neil Yager, Emmanuelle Gouillart,
+        Tony Yu and the scikit-image contributors. "scikit-image: Image
+        processing in Python." PeerJ 2:e453 (2014) doi: `10.7717/peerj.453`_
+
+    .. _10.7717/peerj.453: https://doi.org/10.7717/peerj.453
 
 
     """
@@ -83,7 +158,7 @@ cpdef functionals(np.ndarray image, res = None):
         if (res is None):
             res0 = 1.0
             res1 = 1.0
-        elif (res.ndim == 2):
+        elif (res.size == 2):
             res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
@@ -97,7 +172,7 @@ cpdef functionals(np.ndarray image, res = None):
             res0 = 1.0
             res1 = 1.0
             res2 = 1.0
-        elif (res.ndim == 3):
+        elif (res.size == 3):
             res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
@@ -197,9 +272,9 @@ def _functionals3D(
 
 # }}}
 ###############################################################################
-# {{{ functionsOpen
+# {{{ functions_open
 
-cpdef functionsOpen(np.ndarray closing, res = None):
+cpdef functions_open(np.ndarray closing, res = None):
 
     if not (closing.dtype == 'uint16'):
         closing = closing.astype('uint16')
@@ -348,9 +423,9 @@ def _FunctionsOpen3D(
 
 # }}}
 ###############################################################################
-# {{{ functionsClose
+# {{{ functions_close
 
-cpdef functionsClose(np.ndarray closing, res = None):
+cpdef functions_close(np.ndarray closing, res = None):
 
     if not (closing.dtype == 'uint16'):
         closing = closing.astype('uint16')

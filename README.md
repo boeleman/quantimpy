@@ -9,3 +9,7 @@ Compute Minkowski functionals and Minkowski functions from numpy arrays
 Install using:
 
 pip install quantimpy
+
+Documentation:
+
+https://boeleman.github.io/quantimpy/

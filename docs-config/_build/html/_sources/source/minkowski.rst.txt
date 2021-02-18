@@ -1,7 +1,0 @@
-minkowski module
-================
-
-.. automodule:: minkowski
-   :members:
-   :undoc-members:
-   :show-inheritance:

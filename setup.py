@@ -33,6 +33,10 @@ setup(
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Science/Research',
         'Operating System :: POSIX :: Linux',
+        'Operating System :: MacOS',
+        'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python :: 3',
+        'Programming Language :: C',
+        'Programming Language :: Cython',
     ],
 )

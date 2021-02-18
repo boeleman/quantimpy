@@ -10,14 +10,9 @@ More information about the used algorithm can be found in the book "Statistical
 analysis of microstructures in materials science" by Joachim Ohser and Frank
 Mücklich [1]_.
 
-References
-----------
-.. [1] Joachim Ohser and Frank Mücklich, "Statistical analysis of
-    microstructures in materials science", Wiley and Sons, New York, 2000, ISBN:
-    0471974862
-
 """
 
+import cython
 import numpy as np
 cimport numpy as np
 
@@ -26,6 +21,7 @@ np.import_array()
 ###############################################################################
 # {{{ functionals
 
+@cython.binding(True)
 cpdef functionals(np.ndarray image, res = None):
     r"""Compute the Minkowski functionals in 2D or 3D.
 
@@ -39,7 +35,7 @@ cpdef functionals(np.ndarray image, res = None):
     image : ndarray, bool
         Image can be either a 2D or 3D array of data type `bool`.
     res : ndarray, {int, float}, optional
-        By default the resolution is assumed to be 1mm/pixel in all directions.
+        By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
         image array.
 
@@ -47,15 +43,15 @@ cpdef functionals(np.ndarray image, res = None):
     -------
     out : tuple, float
         In the case of a 2D image this function returns a tuple of the area,
-        length, and euler densities. In the case of a 3D image this function
-        returns a tuple of the volume, surface, curvature, and euler densities.
+        length, and Euler characteristic. In the case of a 3D image this function
+        returns a tuple of the volume, surface, curvature, and Euler characteristic.
         The return data type is `float`.
 
 
     See Also
     --------
-    quantimpy.minkowski.functions_open
-    quantimpy.minkowski.functions_close
+    ~quantimpy.minkowski.functions_open
+    ~quantimpy.minkowski.functions_close
 
     Notes
     -----
@@ -93,23 +89,31 @@ cpdef functionals(np.ndarray image, res = None):
 
     Examples
     --------
-    These examples use the skimage Python package [3]_. For a 2D image the
-    Minkowski fucntionals can be computed using the following example:
+    These examples use the skimage Python package [3]_ and the Matplotlib Python
+    package [4]_. For a 2D image the Minkowski functionals can be computed using
+    the following example:
 
     .. code-block:: python
 
-        import numpy as np    
-        from quantimpy import minkowski as mk
+        import numpy as np
+        import matplotlib.pyplot as plt
         from skimage.morphology import (disk)
+        from quantimpy import minkowski as mk
 
         image = np.zeros([128,128],dtype=bool)
         image[16:113,16:113] = disk(48,dtype=bool)
 
+        plt.gray()
+        plt.imshow(image[:,:])
+        plt.show()
+
         minkowski = mk.functionals(image)
+        print(minkowski)
 
         # Compute Minkowski functionals for image with anisotropic resolution
         res = np.array([2, 1])
         minkowski = mk.functionals(image,res)
+        print(minkowski)
 
     For a 3D image the Minkowski fucntionals can be computed using the following
     example:
@@ -117,34 +121,24 @@ cpdef functionals(np.ndarray image, res = None):
     .. code-block:: python
 
         import numpy as np    
-        from quantimpy import minkowski as mk
+        import matplotlib.pyplot as plt
         from skimage.morphology import (ball)
+        from quantimpy import minkowski as mk
 
         image = np.zeros([128,128,128],dtype=bool)
         image[16:113,16:113,16:113] = ball(48,dtype=bool)
 
+        plt.gray()
+        plt.imshow(image[:,:,64])
+        plt.show()
+
         minkowski = mk.functionals(image)
+        print(minkowski)
 
         # Compute Minkowski functionals for image with anisotropic resolution
         res = np.array([2, 1, 3])
         minkowski = mk.functionals(image,res)
-
-    References
-    ----------
-    .. [2] Klaus R. Mecke, "Additivity, convexity, and beyond: applications of
-        Minkowski Functionals in statistical physics" in "Statistical Physics
-        and Spatial Statistics", pp 111–184, Springer (2000) doi:
-        `10.1007/3-540-45043-2_6`_
-
-    .. _10.1007/3-540-45043-2_6: https://doi.org/10.1007/3-540-45043-2_6
-
-    .. [3] Stéfan van der Walt, Johannes L. Schönberger, Juan Nunez-Iglesias,
-        François Boulogne, Joshua D. Warner, Neil Yager, Emmanuelle Gouillart,
-        Tony Yu and the scikit-image contributors. "scikit-image: Image
-        processing in Python." PeerJ 2:e453 (2014) doi: `10.7717/peerj.453`_
-
-    .. _10.7717/peerj.453: https://doi.org/10.7717/peerj.453
-
+        print(minkowski)
 
     """
 
@@ -186,7 +180,7 @@ cpdef functionals(np.ndarray image, res = None):
 
 
 cdef extern from "minkowskic.h":
-    bint cFunctionals2D(
+    bint c_functionals_2d(
         unsigned short* image, 
         int dim0, 
         int dim1, 
@@ -210,7 +204,7 @@ def _functionals2D(
     
     image = np.ascontiguousarray(image)
     
-    status = cFunctionals2D(
+    status = c_functionals_2d(
         &image[0,0], 
         image.shape[0], image.shape[1],
         res0, res1,
@@ -221,7 +215,7 @@ def _functionals2D(
 
 
 cdef extern from "minkowskic.h":
-    bint cFunctionals3D(
+    bint c_functionals_3d(
         unsigned short* image, 
         int dim0, 
         int dim1, 
@@ -253,7 +247,7 @@ def _functionals3D(
     cdef np.ndarray[np.uint16_t, ndim=3, mode="c"] erosion = np.empty_like(
         image,dtype=np.uint16)
     
-    status = cFunctionals3D(
+    status = c_functionals_3d(
         &image[0,0,0],
         image.shape[0], 
         image.shape[1], 
@@ -274,31 +268,181 @@ def _functionals3D(
 ###############################################################################
 # {{{ functions_open
 
-cpdef functions_open(np.ndarray closing, res = None):
+@cython.binding(True)
+cpdef functions_open(np.ndarray opening, res = None):
+    r"""
+    Compute the Minkowski functions in 2D or 3D.
 
-    if not (closing.dtype == 'uint16'):
-        closing = closing.astype('uint16')
+    This function computes the Minkowski functionals as function of the
+    grayscale values in the Numpy array `opening`. Both 2D and 3D arrays are supported.
+    Optionally, the (anisotropic) resolution of the array can be provided using
+    the Numpy array `res`. When a resolution array is provided it needs to be of
+    the same dimension as the 'opening' array. 
+
+    The algorithm iterates over all grayscale values present in the array,
+    starting at the smallest value (black). For every grayscale value the array
+    is converted into a binary image where values larger than the grayscale
+    value become one (white) and all other values become zero (black). For each
+    of these binary images the minkowski functionals are computed according to
+    the function :func:`~quantimpy.minkowski.functionals`.
+
+    This function can be used in combination with the
+    :func:`~quantimpy.morphology` module to compute the Minkowski functions of
+    different morphological distance maps.
+
+    Parameters
+    ----------
+    opening : ndarray, float
+        Opening can be either a 2D or 3D array of data type `float`.
+    res : ndarray, {int, float}, optional
+        By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
+        If a resolution is provided it needs to be of the same dimension as the
+        image array.
+
+    Returns
+    -------
+    out : tuple, ndarray, float
+        In the case of a 2D image this function returns a tuple of Numpy arrays
+        consisting of the distance (assuming one grayscale value is used per
+        unit of length), area, length, and Euler characteristic. In the case of a 3D image this function
+        returns a tuple of Numpy arrays consistenting of the distance, volume,
+        surface, curvature, and Euler characteristic. The return data type is
+        `float`.
+
+
+    See Also
+    --------
+    ~quantimpy.minkowski.functionals
+    ~quantimpy.minkowski.functions_close
+    ~quantimpy.morphology
+
+    Examples
+    --------
+    These examples use the skimage Python package [3]_ and the Matplotlib Python
+    package [4]_. For a 2D image the Minkowski functions can be computed using
+    the following example:
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from skimage.morphology import (disk)
+        from quantimpy import morphology as mp
+        from quantimpy import minkowski as mk
+
+        image = np.zeros([128,128],dtype=bool)
+        image[16:113,16:113] = disk(48,dtype=bool)
+
+        erosion_map = mp.erode_map(image)
+
+        plt.gray()
+        plt.imshow(image[:,:])
+        plt.show()
+
+        plt.gray()
+        plt.imshow(erosion_map[:,:])
+        plt.show()
+
+        dist, area, length, euler = mk.functions_open(erosion_map)
+
+        plt.plot(dist,area)
+        plt.show()
+
+        plt.plot(dist,length)
+        plt.show()
+
+        plt.plot(dist,euler)
+        plt.show()
+
+    For a 3D image the Minkowski fucntionals can be computed using the following
+    example:
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from skimage.morphology import (ball)
+        from quantimpy import morphology as mp
+        from quantimpy import minkowski as mk
+
+        image = np.zeros([128,128,128],dtype=bool)
+        image[16:113,16:113,16:113] = ball(48,dtype=bool)
+
+        erosion_map = mp.erode_map(image)
+
+        plt.gray()
+        plt.imshow(image[:,:,64])
+        plt.show()
+
+        plt.gray()
+        plt.imshow(erosion_map[:,:,64])
+        plt.show()
+
+        dist, volume, surface, curvature, euler = mk.functions_open(erosion_map)
+
+        plt.plot(dist,volume)
+        plt.show()
+
+        plt.plot(dist,surface)
+        plt.show()
+
+        plt.plot(dist,curvature)
+        plt.show()
+
+        plt.plot(dist,euler)
+        plt.show()
+
+    References
+    ----------
+    .. [1] Joachim Ohser and Frank Mücklich, "Statistical analysis of
+        microstructures in materials science", Wiley and Sons, New York (2000) ISBN:
+        0471974862
+
+    .. [2] Klaus R. Mecke, "Additivity, convexity, and beyond: applications of
+        Minkowski Functionals in statistical physics" in "Statistical Physics
+        and Spatial Statistics", pp 111–184, Springer (2000) doi:
+        `10.1007/3-540-45043-2_6`_
+
+    .. _10.1007/3-540-45043-2_6: https://doi.org/10.1007/3-540-45043-2_6
+
+    .. [3] Stéfan van der Walt, Johannes L. Schönberger, Juan Nunez-Iglesias,
+        François Boulogne, Joshua D. Warner, Neil Yager, Emmanuelle Gouillart,
+        Tony Yu and the scikit-image contributors. "scikit-image: Image
+        processing in Python." PeerJ 2:e453 (2014) doi: `10.7717/peerj.453`_
+
+    .. _10.7717/peerj.453: https://doi.org/10.7717/peerj.453
+
+    .. [4] John D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in
+        Science & Engineering, vol. 9, no. 3, pp. 90-95, 2007.
+        doi:`10.1109/MCSE.2007.55`_
+
+    .. _10.1109/MCSE.2007.55: https://doi.org/10.1109/MCSE.2007.55
+
+    """
+
+    if not (opening.dtype == 'uint16'):
+        opening = opening.astype('uint16')
     
-    if (closing.ndim == 2):
+    if (opening.ndim == 2):
 # Set default resolution (length/voxel)
         if (res is None):
             res0 = 1.0
             res1 = 1.0
-        elif (res.ndim == 2):
+        elif (res.size == 2):
             res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
         else:
             raise ValueError('Input image and resolution need to be the same dimension')
 
-        return _FunctionsOpen2D(closing, res0, res1)
-    elif (closing.ndim == 3):
+        return _FunctionsOpen2D(opening, res0, res1)
+    elif (opening.ndim == 3):
 # Set default resolution (length/voxel)
         if (res is None):
             res0 = 1.0
             res1 = 1.0
             res2 = 1.0
-        elif (res.ndim == 3):
+        elif (res.size == 3):
             res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
@@ -306,14 +450,14 @@ cpdef functions_open(np.ndarray closing, res = None):
         else:
             raise ValueError('Input image and resolution need to be the same dimension')
 
-        return _FunctionsOpen3D(closing, res0, res1, res2)
+        return _FunctionsOpen3D(opening, res0, res1, res2)
     else:
-        raise ValueError('Can only handle 2D or 3D closings')
+        raise ValueError('Can only handle 2D or 3D openings')
 
 
 cdef extern from "minkowskic.h":
-    bint cFunctionsOpen2D(
-        unsigned short* closing, 
+    bint c_functions_open_2d(
+        unsigned short* opening, 
         int dim0, 
         int dim1, 
         double res0, 
@@ -326,13 +470,13 @@ cdef extern from "minkowskic.h":
 
 
 def _FunctionsOpen2D(
-        np.ndarray[np.uint16_t, ndim=2, mode="c"] closing, 
+        np.ndarray[np.uint16_t, ndim=2, mode="c"] opening, 
         res0, res1):
     cdef int dim3
 
-    closing = np.ascontiguousarray(closing)
+    opening = np.ascontiguousarray(opening)
 
-    dim3 = np.amax(closing) - np.amin(closing)
+    dim3 = np.amax(opening) - np.amin(opening)
 
     cdef np.ndarray[np.double_t, ndim=1, mode="c"] dist = np.empty(
         dim3,dtype=np.double)
@@ -345,10 +489,10 @@ def _FunctionsOpen2D(
     cdef np.ndarray[np.double_t, ndim=1, mode="c"] euler8 = np.empty(
         dim3,dtype=np.double)
 
-    status = cFunctionsOpen2D(
-        &closing[0,0], 
-        closing.shape[0], 
-        closing.shape[1],
+    status = c_functions_open_2d(
+        &opening[0,0], 
+        opening.shape[0], 
+        opening.shape[1],
         res0, 
         res1,
         &dist[0], 
@@ -362,8 +506,8 @@ def _FunctionsOpen2D(
 
 
 cdef extern from "minkowskic.h":
-    bint cFunctionsOpen3D(
-        unsigned short* closing, 
+    bint c_functions_open_3d(
+        unsigned short* opening, 
         int dim0, 
         int dim1, 
         int dim2, 
@@ -379,16 +523,16 @@ cdef extern from "minkowskic.h":
 
 
 def _FunctionsOpen3D(
-        np.ndarray[np.uint16_t, ndim=3, mode="c"] closing, 
+        np.ndarray[np.uint16_t, ndim=3, mode="c"] opening, 
         res0, 
         res1, 
         res2):
 
     cdef int dim3
 
-    closing = np.ascontiguousarray(closing)
+    opening = np.ascontiguousarray(opening)
 
-    dim3 = np.amax(closing) - np.amin(closing)
+    dim3 = np.amax(opening) - np.amin(opening)
 
     cdef np.ndarray[np.double_t, ndim=1, mode="c"] dist = np.empty(
         dim3,dtype=np.double)
@@ -403,11 +547,11 @@ def _FunctionsOpen3D(
     cdef np.ndarray[np.double_t, ndim=1, mode="c"] euler26 = np.empty(
         dim3,dtype=np.double)
 
-    status = cFunctionsOpen3D(
-        &closing[0,0,0], 
-        closing.shape[0],
-        closing.shape[1],
-        closing.shape[2],
+    status = c_functions_open_3d(
+        &opening[0,0,0], 
+        opening.shape[0],
+        opening.shape[1],
+        opening.shape[2],
         res0,
         res1,
         res2,
@@ -425,7 +569,131 @@ def _FunctionsOpen3D(
 ###############################################################################
 # {{{ functions_close
 
+@cython.binding(True)
 cpdef functions_close(np.ndarray closing, res = None):
+    r"""
+    Compute the Minkowski functions in 2D or 3D.
+
+    This function computes the Minkowski functionals as function of the
+    grayscale values in the Numpy array `closing`. Both 2D and 3D arrays are supported.
+    Optionally, the (anisotropic) resolution of the array can be provided using
+    the Numpy array `res`. When a resolution array is provided it needs to be of
+    the same dimension as the 'closing' array. 
+
+    The algorithm iterates over all grayscale values present in the array,
+    starting at the largest value (white). For every grayscale value the array
+    is converted into a binary image where values larger than the grayscale
+    value become one (white) and all other values become zero (black). For each
+    of these binary images the minkowski functionals are computed according to
+    the function :func:`~quantimpy.minkowski.functionals`.
+
+    This function can be used in combination with the
+    :func:`~quantimpy.morphology` module to compute the Minkowski functions of
+    different morphological distance maps.
+
+    Parameters
+    ----------
+    closing : ndarray, float
+        Closing can be either a 2D or 3D array of data type `float`.
+    res : ndarray, {int, float}, optional
+        By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
+        If a resolution is provided it needs to be of the same dimension as the
+        image array.
+
+    Returns
+    -------
+    out : tuple, ndarray, float
+        In the case of a 2D image this function returns a tuple of Numpy arrays
+        consisting of the distance (assuming one grayscale value is used per
+        unit of length), area, length, and Euler characteristic. In the case of a 3D image this function
+        returns a tuple of Numpy arrays consistenting of the distance, volume,
+        surface, curvature, and Euler characteristic. The return data type is
+        `float`.
+
+
+    See Also
+    --------
+    ~quantimpy.minkowski.functionals
+    ~quantimpy.minkowski.functions_open
+    ~quantimpy.morphology
+
+    Examples
+    --------
+    These examples use the skimage Python package [3]_ and the Matplotlib Python
+    package [4]_. For a 2D image the Minkowski functions can be computed using
+    the following example:
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from skimage.morphology import (disk)
+        from quantimpy import morphology as mp
+        from quantimpy import minkowski as mk
+
+        image = np.zeros([128,128],dtype=bool)
+        image[16:113,16:113] = disk(48,dtype=bool)
+
+        erosion_map = mp.erode_map(image)
+
+        plt.gray()
+        plt.imshow(image[:,:])
+        plt.show()
+
+        plt.gray()
+        plt.imshow(erosion_map[:,:])
+        plt.show()
+
+        dist, area, length, euler = mk.functions_open(erosion_map)
+
+        plt.plot(dist,area)
+        plt.show()
+
+        plt.plot(dist,length)
+        plt.show()
+
+        plt.plot(dist,euler)
+        plt.show()
+
+    For a 3D image the Minkowski fucntionals can be computed using the following
+    example:
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from skimage.morphology import (ball)
+        from quantimpy import morphology as mp
+        from quantimpy import minkowski as mk
+
+        image = np.zeros([128,128,128],dtype=bool)
+        image[16:113,16:113,16:113] = ball(48,dtype=bool)
+
+        erosion_map = mp.erode_map(image)
+
+        plt.gray()
+        plt.imshow(image[:,:,64])
+        plt.show()
+
+        plt.gray()
+        plt.imshow(erosion_map[:,:,64])
+        plt.show()
+
+        dist, volume, surface, curvature, euler = mk.functions_open(erosion_map)
+
+        plt.plot(dist,volume)
+        plt.show()
+
+        plt.plot(dist,surface)
+        plt.show()
+
+        plt.plot(dist,curvature)
+        plt.show()
+
+        plt.plot(dist,euler)
+        plt.show()
+
+    """
 
     if not (closing.dtype == 'uint16'):
         closing = closing.astype('uint16')
@@ -435,21 +703,21 @@ cpdef functions_close(np.ndarray closing, res = None):
         if (res is None):
             res0 = 1.0
             res1 = 1.0
-        elif (res.ndim == 2):
+        elif (res.size == 2):
             res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
         else:
             raise ValueError('Input image and resolution need to be the same dimension')
 
-        return _FunctionsClose2D(closing, res0, res1)
+        return _functions_close_2d(closing, res0, res1)
     elif (closing.ndim == 3):
 # Set default resolution (length/voxel)
         if (res is None):
             res0 = 1.0
             res1 = 1.0
             res2 = 1.0
-        elif (res.ndim == 3):
+        elif (res.size == 3):
             res = res.astype(np.double)
             res0 = res[0]
             res1 = res[1]
@@ -457,13 +725,13 @@ cpdef functions_close(np.ndarray closing, res = None):
         else:
             raise ValueError('Input image and resolution need to be the same dimension')
 
-        return _FunctionsClose3D(closing, res0, res1, res2)
+        return _functions_close_3d(closing, res0, res1, res2)
     else:
         raise ValueError('Can only handle 2D or 3D closings')
 
 
 cdef extern from "minkowskic.h":
-    bint cFunctionsClose2D(
+    bint c_functions_close_2d(
         unsigned short* closing, 
         int dim0, 
         int dim1, 
@@ -476,7 +744,7 @@ cdef extern from "minkowskic.h":
         double* euler8)
 
 
-def _FunctionsClose2D(
+def _functions_close_2d(
         np.ndarray[np.uint16_t, ndim=2, mode="c"] closing, 
         res0, 
         res1):
@@ -498,7 +766,7 @@ def _FunctionsClose2D(
     cdef np.ndarray[np.double_t, ndim=1, mode="c"] euler8 = np.empty(
         dim3,dtype=np.double)
 
-    status = cFunctionsClose2D(
+    status = c_functions_close_2d(
         &closing[0,0], 
         closing.shape[0],
         closing.shape[1],
@@ -515,7 +783,7 @@ def _FunctionsClose2D(
 
 
 cdef extern from "minkowskic.h":
-    bint cFunctionsClose3D(
+    bint c_functions_close_3d(
         unsigned short* closing, 
         int dim0, 
         int dim1, 
@@ -531,7 +799,7 @@ cdef extern from "minkowskic.h":
         double* euler26)
 
 
-def _FunctionsClose3D(
+def _functions_close_3d(
         np.ndarray[np.uint16_t, ndim=3, mode="c"] closing, 
         res0, 
         res1, 
@@ -556,7 +824,7 @@ def _FunctionsClose3D(
     cdef np.ndarray[np.double_t, ndim=1, mode="c"] euler26 = np.empty(
         dim3,dtype=np.double)
 
-    status = cFunctionsClose3D(
+    status = c_functions_close_3d(
         &closing[0,0,0], 
         closing.shape[0],
         closing.shape[1],

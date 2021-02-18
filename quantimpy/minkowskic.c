@@ -4,7 +4,7 @@
 /******************************************************************************/
 // {{{ cFunctionals
 
-int cFunctionals2D(unsigned short* image, int dim0, int dim1, double res0, double res1, double* area, double* length, double* euler4, double* euler8) {
+int c_functionals_2d(unsigned short* image, int dim0, int dim1, double res0, double res1, double* area, double* length, double* euler4, double* euler8) {
     double norm;
     long int* h;
 
@@ -24,7 +24,7 @@ int cFunctionals2D(unsigned short* image, int dim0, int dim1, double res0, doubl
 
 /******************************************************************************/
 
-int cFunctionals3D(unsigned short* image, int dim0, int dim1, int dim2, double res0, double res1, double res2, double* volume, double* surface, double* curvature, double* euler6, double* euler26) {
+int c_functionals_3d(unsigned short* image, int dim0, int dim1, int dim2, double res0, double res1, double res2, double* volume, double* surface, double* curvature, double* euler6, double* euler26) {
     double norm;
     long int* h;
 
@@ -47,7 +47,7 @@ int cFunctionals3D(unsigned short* image, int dim0, int dim1, int dim2, double r
 /******************************************************************************/
 // {{{ cFunctionsOpen
 
-int cFunctionsOpen2D(unsigned short* opening, int dim0, int dim1, double res0, double res1, double* dist, double* area, double* length, double* euler4, double* euler8) {
+int c_functions_open_2d(unsigned short* opening, int dim0, int dim1, double res0, double res1, double* dist, double* area, double* length, double* euler4, double* euler8) {
     int i, j, k;
     double norm;
     long int* h;
@@ -92,7 +92,7 @@ int cFunctionsOpen2D(unsigned short* opening, int dim0, int dim1, double res0, d
 
 /******************************************************************************/
 
-int cFunctionsOpen3D(unsigned short* opening, int dim0, int dim1, int dim2, double res0, double res1, double res2, double* dist, double* volume, double* surface, double* curvature, double* euler6, double* euler26) {
+int c_functions_open_3d(unsigned short* opening, int dim0, int dim1, int dim2, double res0, double res1, double res2, double* dist, double* volume, double* surface, double* curvature, double* euler6, double* euler26) {
     int i, j, k;
     double norm;
     long int* h;
@@ -140,7 +140,7 @@ int cFunctionsOpen3D(unsigned short* opening, int dim0, int dim1, int dim2, doub
 /******************************************************************************/
 // {{{ cFunctionsClose
 
-int cFunctionsClose2D(unsigned short* closing, int dim0, int dim1, double res0, double res1, double* dist, double* area, double* length, double* euler4, double* euler8) {
+int c_functions_close_2d(unsigned short* closing, int dim0, int dim1, double res0, double res1, double* dist, double* area, double* length, double* euler4, double* euler8) {
     int i, j, k;
     double norm;
     long int* h;
@@ -185,7 +185,7 @@ int cFunctionsClose2D(unsigned short* closing, int dim0, int dim1, double res0, 
 
 /******************************************************************************/
 
-int cFunctionsClose3D(unsigned short* closing, int dim0, int dim1, int dim2, double res0, double res1, double res2, double* dist, double* volume, double* surface, double* curvature, double* euler6, double* euler26) {
+int c_functions_close_3d(unsigned short* closing, int dim0, int dim1, int dim2, double res0, double res1, double res2, double* dist, double* volume, double* surface, double* curvature, double* euler6, double* euler26) {
     int i, j, k;
     double norm;
     long int* h;

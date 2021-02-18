@@ -311,9 +311,9 @@ cpdef Close(np.ndarray dilation, int dist, res = None):
 
 # }}}
 ###############################################################################
-# {{{ ErodeMap
+# {{{ erode_map
 
-cpdef ErodeMap(np.ndarray image, res = None):
+cpdef erode_map(np.ndarray image, res = None):
 
     if (image.dtype == 'bool'):
         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -511,9 +511,9 @@ def DilateMap3D(
 
 # }}}
 ###############################################################################
-# {{{ OpenMap
+# {{{ open_map
 
-cpdef OpenMap(np.ndarray erosion, res = None):
+cpdef open_map(np.ndarray erosion, res = None):
 
     if not (erosion.dtype == 'uint16'):
         raise ValueError('Input image needs to be data type uint16')

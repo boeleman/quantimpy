@@ -2,7 +2,7 @@
 #include <minkowskic.h>
 
 /******************************************************************************/
-// {{{ cFunctionals
+// {{{ c_functionals
 
 int c_functionals_2d(unsigned short* image, int dim0, int dim1, double res0, double res1, double* area, double* length, double* euler4, double* euler8) {
     double norm;
@@ -10,12 +10,12 @@ int c_functionals_2d(unsigned short* image, int dim0, int dim1, double res0, dou
 
     norm = (double)(dim0-1)/dim0 * (dim1-1)/dim1;
 
-    h = quant2D(image, dim0, dim1);
+    h = quant_2d(image, dim0, dim1);
 
-    *area   = norm * areaDens2D(h);
-    *length = norm * lengDens2D(h,res0,res1);
-    *euler4 = norm * eul4Dens2D(h,res0,res1);
-    *euler8 = norm * eul8Dens2D(h,res0,res1);
+    *area   = norm * area_dens_2d(h);
+    *length = norm * leng_dens_2d(h,res0,res1);
+    *euler4 = norm * eul4_dens_2d(h,res0,res1);
+    *euler8 = norm * eul8_dens_2d(h,res0,res1);
 
     free(h);
 
@@ -30,13 +30,13 @@ int c_functionals_3d(unsigned short* image, int dim0, int dim1, int dim2, double
 
     norm = (double)(dim0-1)/dim0 * (dim1-1)/dim1 * (dim2-1)/dim2;
 	
-    h = quant3D(image, dim0, dim1, dim2);
+    h = quant_3d(image, dim0, dim1, dim2);
 
-    *volume    = norm * voluDens3D(h);
-    *surface   = norm * surfDens3D(h, res0, res1, res2);
-    *curvature = norm * curvDens3D(h, res0, res1, res2);
-    *euler6    = norm * eul6Dens3D(h, res0, res1, res2);
-    *euler26   = norm * eu26Dens3D(h, res0, res1, res2);
+    *volume    = norm * volu_dens_3d(h);
+    *surface   = norm * surf_dens_3d(h, res0, res1, res2);
+    *curvature = norm * curv_dens_3d(h, res0, res1, res2);
+    *euler6    = norm * eul6_dens_3d(h, res0, res1, res2);
+    *euler26   = norm * eu26_dens_3d(h, res0, res1, res2);
 
     free(h);
 
@@ -45,7 +45,7 @@ int c_functionals_3d(unsigned short* image, int dim0, int dim1, int dim2, double
 
 // }}}
 /******************************************************************************/
-// {{{ cFunctionsOpen
+// {{{ c_functions_open
 
 int c_functions_open_2d(unsigned short* opening, int dim0, int dim1, double res0, double res1, double* dist, double* area, double* length, double* euler4, double* euler8) {
     int i, j, k;
@@ -73,15 +73,15 @@ int c_functions_open_2d(unsigned short* opening, int dim0, int dim1, double res0
             image[k] = opening[k];
         }
         
-        bin2D(j, 0, USHRT_MAX, image, dim0, dim1);
+        bin_2d(j, 0, USHRT_MAX, image, dim0, dim1);
 
-        h = quant2D(image, dim0, dim1);
+        h = quant_2d(image, dim0, dim1);
 
         dist[i]   = (double)(i);
-        area[i]   = norm * areaDens2D(h);
-        length[i] = norm * lengDens2D(h,res0,res1);
-        euler4[i] = norm * eul4Dens2D(h,res0,res1);
-        euler8[i] = norm * eul8Dens2D(h,res0,res1);
+        area[i]   = norm * area_dens_2d(h);
+        length[i] = norm * leng_dens_2d(h,res0,res1);
+        euler4[i] = norm * eul4_dens_2d(h,res0,res1);
+        euler8[i] = norm * eul8_dens_2d(h,res0,res1);
     }
         
     free(h);
@@ -118,16 +118,16 @@ int c_functions_open_3d(unsigned short* opening, int dim0, int dim1, int dim2, d
             image[k] = opening[k];
         }
         
-        bin3D(j, 0, USHRT_MAX, image, dim0, dim1, dim2);
+        bin_3d(j, 0, USHRT_MAX, image, dim0, dim1, dim2);
 
-        h = quant3D(image, dim0, dim1, dim2);
+        h = quant_3d(image, dim0, dim1, dim2);
 
         dist[i]      = (double)(i);
-        volume[i]    = norm * voluDens3D(h);
-        surface[i]   = norm * surfDens3D(h, res0, res1, res2);
-        curvature[i] = norm * curvDens3D(h, res0, res1, res2);
-        euler6[i]    = norm * eul6Dens3D(h, res0, res1, res2);
-        euler26[i]   = norm * eu26Dens3D(h, res0, res1, res2);
+        volume[i]    = norm * volu_dens_3d(h);
+        surface[i]   = norm * surf_dens_3d(h, res0, res1, res2);
+        curvature[i] = norm * curv_dens_3d(h, res0, res1, res2);
+        euler6[i]    = norm * eul6_dens_3d(h, res0, res1, res2);
+        euler26[i]   = norm * eu26_dens_3d(h, res0, res1, res2);
     }
 
     free(h);
@@ -138,7 +138,7 @@ int c_functions_open_3d(unsigned short* opening, int dim0, int dim1, int dim2, d
 
 // }}}
 /******************************************************************************/
-// {{{ cFunctionsClose
+// {{{ c_functions_close
 
 int c_functions_close_2d(unsigned short* closing, int dim0, int dim1, double res0, double res1, double* dist, double* area, double* length, double* euler4, double* euler8) {
     int i, j, k;
@@ -166,15 +166,15 @@ int c_functions_close_2d(unsigned short* closing, int dim0, int dim1, double res
             image[k] = closing[k];
         }
         
-        bin2D(j, 0, USHRT_MAX, image, dim0, dim1);
+        bin_2d(j, 0, USHRT_MAX, image, dim0, dim1);
 
-        h = quant2D(image, dim0, dim1);
+        h = quant_2d(image, dim0, dim1);
 
         dist[i]   = (double)(i+1.0);
-        area[i]   = norm * areaDens2D(h);
-        length[i] = norm * lengDens2D(h,res0,res1);
-        euler4[i] = norm * eul4Dens2D(h,res0,res1);
-        euler8[i] = norm * eul8Dens2D(h,res0,res1);
+        area[i]   = norm * area_dens_2d(h);
+        length[i] = norm * leng_dens_2d(h,res0,res1);
+        euler4[i] = norm * eul4_dens_2d(h,res0,res1);
+        euler8[i] = norm * eul8_dens_2d(h,res0,res1);
     }
         
     free(h);
@@ -211,16 +211,16 @@ int c_functions_close_3d(unsigned short* closing, int dim0, int dim1, int dim2, 
             image[k] = closing[k];
         }
         
-        bin3D(j, 0, USHRT_MAX, image, dim0, dim1, dim2);
+        bin_3d(j, 0, USHRT_MAX, image, dim0, dim1, dim2);
 
-        h = quant3D(image, dim0, dim1, dim2);
+        h = quant_3d(image, dim0, dim1, dim2);
 
         dist[i]      = (double)(i+1.0);
-        volume[i]    = norm * voluDens3D(h);
-        surface[i]   = norm * surfDens3D(h, res0, res1, res2);
-        curvature[i] = norm * curvDens3D(h, res0, res1, res2);
-        euler6[i]    = norm * eul6Dens3D(h, res0, res1, res2);
-        euler26[i]   = norm * eu26Dens3D(h, res0, res1, res2);
+        volume[i]    = norm * volu_dens_3d(h);
+        surface[i]   = norm * surf_dens_3d(h, res0, res1, res2);
+        curvature[i] = norm * curv_dens_3d(h, res0, res1, res2);
+        euler6[i]    = norm * eul6_dens_3d(h, res0, res1, res2);
+        euler26[i]   = norm * eu26_dens_3d(h, res0, res1, res2);
     }
 
     free(h);
@@ -233,7 +233,7 @@ int c_functions_close_3d(unsigned short* closing, int dim0, int dim1, int dim2, 
 /******************************************************************************/
 // {{{ quant
 
-long int* quant2D(unsigned short* image, int dim0, int dim1) {
+long int* quant_2d(unsigned short* image, int dim0, int dim1) {
     int x, y, i;
     int mask;
 	long int *h;
@@ -243,11 +243,11 @@ long int* quant2D(unsigned short* image, int dim0, int dim1) {
  	for (i = 0; i < 16; i++) h[i] = 0;
 
     for (x = 0; x < dim0 - 1; x++) {
-        mask =  (rPixel2D(x  ,0,image,dim1) == USHRT_MAX) 
-             + ((rPixel2D(x+1,0,image,dim1) == USHRT_MAX) << 1); 
+        mask =  (r_pixel_2d(x  ,0,image,dim1) == USHRT_MAX) 
+             + ((r_pixel_2d(x+1,0,image,dim1) == USHRT_MAX) << 1); 
         for (y = 1; y < dim1; y++) {
-            mask += ((rPixel2D(x  ,y,image,dim1) == USHRT_MAX) << 2) 
-                  + ((rPixel2D(x+1,y,image,dim1) == USHRT_MAX) << 3);
+            mask += ((r_pixel_2d(x  ,y,image,dim1) == USHRT_MAX) << 2) 
+                  + ((r_pixel_2d(x+1,y,image,dim1) == USHRT_MAX) << 3);
 		    h[mask]++;
 		    mask >>= 2;
         }
@@ -259,7 +259,7 @@ long int* quant2D(unsigned short* image, int dim0, int dim1) {
 
 /******************************************************************************/
 
-long int* quant3D(unsigned short* image, int dim0, int dim1, int dim2) {
+long int* quant_3d(unsigned short* image, int dim0, int dim1, int dim2) {
 	int x, y, z, i;
     int mask;
 	long int *h;
@@ -270,15 +270,15 @@ long int* quant3D(unsigned short* image, int dim0, int dim1, int dim2) {
 
     for (x = 0; x < dim0-1; x++)
         for (y = 0; y < dim1-1; y++) {
-		    mask =  (rPixel3D(x  ,y  ,0,image,dim1,dim2) == USHRT_MAX) 
-                 + ((rPixel3D(x+1,y  ,0,image,dim1,dim2) == USHRT_MAX) << 1) 
-                 + ((rPixel3D(x  ,y+1,0,image,dim1,dim2) == USHRT_MAX) << 2)
-                 + ((rPixel3D(x+1,y+1,0,image,dim1,dim2) == USHRT_MAX) << 3); 
+		    mask =  (r_pixel_3d(x  ,y  ,0,image,dim1,dim2) == USHRT_MAX) 
+                 + ((r_pixel_3d(x+1,y  ,0,image,dim1,dim2) == USHRT_MAX) << 1) 
+                 + ((r_pixel_3d(x  ,y+1,0,image,dim1,dim2) == USHRT_MAX) << 2)
+                 + ((r_pixel_3d(x+1,y+1,0,image,dim1,dim2) == USHRT_MAX) << 3); 
     		for (z = 1; z < dim2; z++) {
-                mask += ((rPixel3D(x  ,y  ,z,image,dim1,dim2) == USHRT_MAX) << 4)
-                      + ((rPixel3D(x+1,y  ,z,image,dim1,dim2) == USHRT_MAX) << 5)
-                      + ((rPixel3D(x  ,y+1,z,image,dim1,dim2) == USHRT_MAX) << 6)
-                      + ((rPixel3D(x+1,y+1,z,image,dim1,dim2) == USHRT_MAX) << 7);
+                mask += ((r_pixel_3d(x  ,y  ,z,image,dim1,dim2) == USHRT_MAX) << 4)
+                      + ((r_pixel_3d(x+1,y  ,z,image,dim1,dim2) == USHRT_MAX) << 5)
+                      + ((r_pixel_3d(x  ,y+1,z,image,dim1,dim2) == USHRT_MAX) << 6)
+                      + ((r_pixel_3d(x+1,y+1,z,image,dim1,dim2) == USHRT_MAX) << 7);
     		    h[mask]++;
 		        mask >>= 4;
 		    }
@@ -289,9 +289,9 @@ long int* quant3D(unsigned short* image, int dim0, int dim1, int dim2) {
 
 // }}}
 /******************************************************************************/
-// {{{ areaDens2D
+// {{{ area_dens_2d
 
-double areaDens2D(long int *h) {
+double area_dens_2d(long int *h) {
     int i;
 	unsigned long int iChi = 0, iVol = 0;
  
@@ -306,9 +306,9 @@ double areaDens2D(long int *h) {
 
 // }}}
 /******************************************************************************/
-// {{{ lengDens2D
+// {{{ leng_dens_2d
 
-double lengDens2D(long int *h, double res0, double res1) {
+double leng_dens_2d(long int *h, double res0, double res1) {
 	unsigned int i, l;
 	long int  numpix=0, ii;
 	double II=0, LI=0, w[4], r[4];
@@ -340,9 +340,9 @@ double lengDens2D(long int *h, double res0, double res1) {
 
 // }}}
 /******************************************************************************/
-// {{{ euleDens2D
+// {{{ eule_dens_2d
 
-double eul4Dens2D(long int *h, double res0, double res1) {
+double eul4_dens_2d(long int *h, double res0, double res1) {
 	int i;
 	long int iChi = 0, iVol = 0;
 	int iu[16] = {0, 1, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, 0};
@@ -357,7 +357,7 @@ double eul4Dens2D(long int *h, double res0, double res1) {
 
 /******************************************************************************/
 
-double eul8Dens2D(long int *h, double res0, double res1) {
+double eul8_dens_2d(long int *h, double res0, double res1) {
 	int i;
 	long int iChi = 0, iVol = 0;
 	int iu[16] = {0, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, -1, 0};
@@ -372,9 +372,9 @@ double eul8Dens2D(long int *h, double res0, double res1) {
 
 // }}}
 /******************************************************************************/
-// {{{ voluDens3D
+// {{{ volu_dens_3d
 
-double voluDens3D(long int *h) {
+double volu_dens_3d(long int *h) {
 	int i;
 	unsigned long int iChi = 0, iVol = 0;
 
@@ -389,9 +389,9 @@ double voluDens3D(long int *h) {
 
 // }}}
 /******************************************************************************/
-// {{{ surfDens3D
+// {{{ surf_dens_3d
 
-double surfDens3D(long int *h, double res0, double res1, double res2) {
+double surf_dens_3d(long int *h, double res0, double res1, double res2) {
     int i, l;
 	unsigned long sv, le=0;
 	double wi[13], r[13], Sv, Lv, *Delta, *weight;
@@ -440,9 +440,9 @@ double surfDens3D(long int *h, double res0, double res1, double res2) {
 
 // }}}
 /******************************************************************************/
-// {{{ curvDens3D
+// {{{ curv_dens_3d
 
-double curvDens3D(long int *h, double res0, double res1, double res2) {
+double curv_dens_3d(long int *h, double res0, double res1, double res2) {
 /* Mean curvature in 3D is related to the 2D-Euler number on a 2D section plane.
  * Within a 2x2x2 cube 13 different planes can be defined (see lang+99). The
  * results for the different planes are weighted by the sin of the plane to the
@@ -517,9 +517,9 @@ double curvDens3D(long int *h, double res0, double res1, double res2) {
 
 // }}}
 /******************************************************************************/
-// {{{ euleDens3D
+// {{{ eule_dens_3d
 
-double eul6Dens3D(long int *h, double res0, double res1, double res2) {
+double eul6_dens_3d(long int *h, double res0, double res1, double res2) {
     unsigned int i, p;
 	long int iChi = 0, iVol = 0, hi[256];
 	int iu[256] = {
@@ -557,7 +557,7 @@ double eul6Dens3D(long int *h, double res0, double res1, double res2) {
 
 /******************************************************************************/
 
-double eu26Dens3D(long int *h, double res0, double res1, double res2) {
+double eu26_dens_3d(long int *h, double res0, double res1, double res2) {
 	int i;
 	long int iChi = 0, iVol = 0;
 	int iu[256] = {

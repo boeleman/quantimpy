@@ -2,61 +2,61 @@
 #include <morphologyc.h>
 
 /******************************************************************************/
-// {{{ cErode
+// {{{ c_erode
 
-int cErode2D(unsigned short* image, unsigned short* erosion, int dim0, int dim1, int dist, double res0, double res1) {
+int c_erode_2d(unsigned short* image, unsigned short* erosion, int dim0, int dim1, int dist, double res0, double res1) {
     int status;
 
-    status = cGetMap2D(image, erosion, dim0, dim1, res0, res1, 1);
+    status = c_get_map_2d(image, erosion, dim0, dim1, res0, res1, 1);
 
-    bin2D(dist, 0, USHRT_MAX, erosion, dim0, dim1);
+    bin_2d(dist, 0, USHRT_MAX, erosion, dim0, dim1);
 
     return status > 0 ? status : 0;
 }
 
 /******************************************************************************/
 
-int cErode3D(unsigned short* image, unsigned short* erosion, int dim0, int dim1, int dim2, int dist, double res0, double res1, double res2) {
+int c_erode_3d(unsigned short* image, unsigned short* erosion, int dim0, int dim1, int dim2, int dist, double res0, double res1, double res2) {
     int status;
 
-    status = cGetMap3D(image, erosion, dim0, dim1, dim2, res0, res1, res2, 1);
+    status = c_get_map_3d(image, erosion, dim0, dim1, dim2, res0, res1, res2, 1);
 
-    bin3D(dist, 0, USHRT_MAX, erosion, dim0, dim1, dim2);
-
-    return status > 0 ? status : 0;
-}
-
-// }}}
-/******************************************************************************/
-// {{{ cDilate
-
-int cDilate2D(unsigned short* image, unsigned short* dilation, int dim0, int dim1, int dist, double res0, double res1) {
-    int status;
-
-    status = cGetMap2D(image, dilation, dim0, dim1, res0, res1, 0);
-
-    bin2D(USHRT_MAX-dist-1, 0, USHRT_MAX, dilation, dim0, dim1);
-
-    return status > 0 ? status : 0;
-}
-
-/******************************************************************************/
-
-int cDilate3D(unsigned short* image, unsigned short* dilation, int dim0, int dim1, int dim2, int dist, double res0, double res1, double res2) {
-    int status;
-
-    status = cGetMap3D(image, dilation, dim0, dim1, dim2, res0, res1, res2, 0);
-
-    bin3D(USHRT_MAX-dist-1, 0, USHRT_MAX, dilation, dim0, dim1, dim2);
+    bin_3d(dist, 0, USHRT_MAX, erosion, dim0, dim1, dim2);
 
     return status > 0 ? status : 0;
 }
 
 // }}}
 /******************************************************************************/
-// {{{ cOpenMap
+// {{{ c_dilate
 
-int cOpenMap2D(unsigned short* erosion, unsigned short* opening, int dim0, int dim1, double res0, double res1) {
+int c_dilate_2d(unsigned short* image, unsigned short* dilation, int dim0, int dim1, int dist, double res0, double res1) {
+    int status;
+
+    status = c_get_map_2d(image, dilation, dim0, dim1, res0, res1, 0);
+
+    bin_2d(USHRT_MAX-dist-1, 0, USHRT_MAX, dilation, dim0, dim1);
+
+    return status > 0 ? status : 0;
+}
+
+/******************************************************************************/
+
+int c_dilate_3d(unsigned short* image, unsigned short* dilation, int dim0, int dim1, int dim2, int dist, double res0, double res1, double res2) {
+    int status;
+
+    status = c_get_map_3d(image, dilation, dim0, dim1, dim2, res0, res1, res2, 0);
+
+    bin_3d(USHRT_MAX-dist-1, 0, USHRT_MAX, dilation, dim0, dim1, dim2);
+
+    return status > 0 ? status : 0;
+}
+
+// }}}
+/******************************************************************************/
+// {{{ c_open_map
+
+int c_open_map_2d(unsigned short* erosion, unsigned short* opening, int dim0, int dim1, double res0, double res1) {
     int x, y, i;
     int step;
     unsigned long count;
@@ -80,14 +80,14 @@ int cOpenMap2D(unsigned short* erosion, unsigned short* opening, int dim0, int d
             image[i]   = erosion[i];
         }
 
-        bin2D(step, 0, USHRT_MAX, image, dim0, dim1);
+        bin_2d(step, 0, USHRT_MAX, image, dim0, dim1);
         
-        cDilate2D(image, image, dim0, dim1, step, res0, res1);
+        c_dilate_2d(image, image, dim0, dim1, step, res0, res1);
         
         for (y = 0; y < dim1; y++)
             for (x = 0; x < dim0; x++)
-                if (rPixel2D(x, y, erosion, dim1) != USHRT_MAX && rPixel2D(x, y, image, dim1) != 0) {
-                    wPixel2D(x, y, opening, dim1, step);
+                if (r_pixel_2d(x, y, erosion, dim1) != USHRT_MAX && r_pixel_2d(x, y, image, dim1) != 0) {
+                    w_pixel_2d(x, y, opening, dim1, step);
                     count++;
         }
 
@@ -101,7 +101,7 @@ int cOpenMap2D(unsigned short* erosion, unsigned short* opening, int dim0, int d
 
 /******************************************************************************/
 
-int cOpenMap3D(unsigned short* erosion, unsigned short* opening, int dim0, int dim1, int dim2, double res0, double res1, double res2) {
+int c_open_map_3d(unsigned short* erosion, unsigned short* opening, int dim0, int dim1, int dim2, double res0, double res1, double res2) {
     int x, y, z, i;
     int step;
     unsigned long count;
@@ -125,15 +125,15 @@ int cOpenMap3D(unsigned short* erosion, unsigned short* opening, int dim0, int d
             image[i] = erosion[i];
         }
 
-        bin3D(step, 0, USHRT_MAX, image, dim0, dim1, dim2);
+        bin_3d(step, 0, USHRT_MAX, image, dim0, dim1, dim2);
         
-        cDilate3D(image, image, dim0, dim1, dim2, step, res0, res1, res2);
+        c_dilate_3d(image, image, dim0, dim1, dim2, step, res0, res1, res2);
         
         for (z = 0; z < dim2; z++)
             for (y = 0; y < dim1; y++)
                 for (x = 0; x < dim0; x++)
-                    if (rPixel3D(x,y,z,erosion,dim1,dim2) != USHRT_MAX && rPixel3D(x,y,z,image,dim1,dim2) != 0) {
-                        wPixel3D(x,y,z,opening,dim1,dim2, step);
+                    if (r_pixel_3d(x,y,z,erosion,dim1,dim2) != USHRT_MAX && r_pixel_3d(x,y,z,image,dim1,dim2) != 0) {
+                        w_pixel_3d(x,y,z,opening,dim1,dim2, step);
                         count++;
         }
 
@@ -147,9 +147,9 @@ int cOpenMap3D(unsigned short* erosion, unsigned short* opening, int dim0, int d
 
 // }}}
 /******************************************************************************/
-// {{{ cCloseMap
+// {{{ c_close_map
 
-int cCloseMap2D(unsigned short* dilation, unsigned short* closing, int dim0, int dim1, double res0, double res1) {
+int c_close_map_2d(unsigned short* dilation, unsigned short* closing, int dim0, int dim1, double res0, double res1) {
     int x, y, i;
     int step;
     unsigned long count;
@@ -173,14 +173,14 @@ int cCloseMap2D(unsigned short* dilation, unsigned short* closing, int dim0, int
             image[i] = dilation[i];
         }
 
-        bin2D(USHRT_MAX-step-1, 0, USHRT_MAX, image, dim0, dim1);
+        bin_2d(USHRT_MAX-step-1, 0, USHRT_MAX, image, dim0, dim1);
 
-        cErode2D(image, image, dim0, dim1, step, res0, res1);
+        c_erode_2d(image, image, dim0, dim1, step, res0, res1);
         
         for (y = 0; y < dim1; y++)
             for (x = 0; x < dim0; x++)
-                if (rPixel2D(x, y, dilation, dim1) != 0 && rPixel2D(x, y, image, dim1) != USHRT_MAX) {
-                    wPixel2D(x, y, closing, dim1, USHRT_MAX-step);
+                if (r_pixel_2d(x, y, dilation, dim1) != 0 && r_pixel_2d(x, y, image, dim1) != USHRT_MAX) {
+                    w_pixel_2d(x, y, closing, dim1, USHRT_MAX-step);
                     count++;
         }
 
@@ -194,7 +194,7 @@ int cCloseMap2D(unsigned short* dilation, unsigned short* closing, int dim0, int
 
 /******************************************************************************/
 
-int cCloseMap3D(unsigned short* dilation, unsigned short* closing, int dim0, int dim1, int dim2, double res0, double res1, double res2) {
+int c_close_map_3d(unsigned short* dilation, unsigned short* closing, int dim0, int dim1, int dim2, double res0, double res1, double res2) {
     int x, y, z, i;
     int step;
     unsigned long count;
@@ -218,15 +218,15 @@ int cCloseMap3D(unsigned short* dilation, unsigned short* closing, int dim0, int
             image[i] = dilation[i];
         }
 
-        bin3D(USHRT_MAX-step-1, 0, USHRT_MAX, image, dim0, dim1, dim2);
+        bin_3d(USHRT_MAX-step-1, 0, USHRT_MAX, image, dim0, dim1, dim2);
 
-        cErode3D(image, image, dim0, dim1, dim2, step, res0, res1, res2);
+        c_erode_3d(image, image, dim0, dim1, dim2, step, res0, res1, res2);
         
         for (z = 0; z < dim2; z++)
             for (y = 0; y < dim1; y++)
                 for (x = 0; x < dim0; x++)
-                    if (rPixel3D(x,y,z,dilation,dim1,dim2) != 0 && rPixel3D(x,y,z,image,dim1,dim2) != USHRT_MAX) {
-                        wPixel3D(x,y,z,closing,dim1,dim2,USHRT_MAX-step);
+                    if (r_pixel_3d(x,y,z,dilation,dim1,dim2) != 0 && r_pixel_3d(x,y,z,image,dim1,dim2) != USHRT_MAX) {
+                        w_pixel_3d(x,y,z,closing,dim1,dim2,USHRT_MAX-step);
                         count++;
         }
 
@@ -240,9 +240,9 @@ int cCloseMap3D(unsigned short* dilation, unsigned short* closing, int dim0, int
 
 // }}}
 /******************************************************************************/
-// {{{ cGetMap
+// {{{ c_get_map
 
-int cGetMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim1, double res0, double res1, int mode) {
+int c_get_map_2d(unsigned short* image, unsigned short* distance, int dim0, int dim1, double res0, double res1, int mode) {
     int x, y;
 	int dist; 
     unsigned int distsq;
@@ -263,7 +263,7 @@ int cGetMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim
         for (dist = 1; dist < dim0; dist++) {
             distsq = (unsigned int)dist*dist;
             for (x = 0; x < dim0 - dist; x++) {
-                if (rPixel2D(x,y,image,dim1) != rPixel2D(x+dist,y,image,dim1)) {
+                if (r_pixel_2d(x,y,image,dim1) != r_pixel_2d(x+dist,y,image,dim1)) {
                     if (matrix1[x+y*dim0] > distsq) {
                         matrix1[x+y*dim0] = distsq;
                     }
@@ -282,7 +282,7 @@ int cGetMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim
         for (dist = 0; dist < dim1; dist++) {
             distsq = (unsigned int)((double)(dist*dist)*fact);
             for (y = 0; y < dim1 - dist; y++) {
-                if (rPixel2D(x,y,image,dim1) != rPixel2D(x,y+dist,image,dim1)) {
+                if (r_pixel_2d(x,y,image,dim1) != r_pixel_2d(x,y+dist,image,dim1)) {
 // Look for minimum distance between phases
 					if (matrix2[x+y*dim0] > distsq) {
                         matrix2[x+y*dim0] = distsq;
@@ -308,19 +308,19 @@ int cGetMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim
         for (y = 0; y < dim1; y++) {
             matrix2[x+y*dim0] = (unsigned int)ceil(sqrt(matrix2[x+y*dim0]));
             if (mode) {
-                if (rPixel2D(x,y,image,dim1) == 0) {
-                    wPixel2D(x,y,distance,dim1,0);
+                if (r_pixel_2d(x,y,image,dim1) == 0) {
+                    w_pixel_2d(x,y,distance,dim1,0);
                 }
                 else {
-                    wPixel2D(x,y,distance,dim1,(unsigned short)(matrix2[x+y*dim0]));
+                    w_pixel_2d(x,y,distance,dim1,(unsigned short)(matrix2[x+y*dim0]));
                 }
             }
             else {
-                if (rPixel2D(x,y,image,dim1) == USHRT_MAX) {
-                    wPixel2D(x,y,distance,dim1,USHRT_MAX);
+                if (r_pixel_2d(x,y,image,dim1) == USHRT_MAX) {
+                    w_pixel_2d(x,y,distance,dim1,USHRT_MAX);
                 }
                 else {
-                    wPixel2D(x,y,distance,dim1,USHRT_MAX-(unsigned short)(matrix2[x+y*dim0]));
+                    w_pixel_2d(x,y,distance,dim1,USHRT_MAX-(unsigned short)(matrix2[x+y*dim0]));
                 }
             }
     }
@@ -333,7 +333,7 @@ int cGetMap2D(unsigned short* image, unsigned short* distance, int dim0, int dim
 
 /******************************************************************************/
 
-int cGetMap3D(unsigned short* image, unsigned short* distance, int dim0, int dim1, int dim2, double res0, double res1, double res2, int mode) {
+int c_get_map_3d(unsigned short* image, unsigned short* distance, int dim0, int dim1, int dim2, double res0, double res1, double res2, int mode) {
     int x, y, z;
 	int dist; 
     unsigned int distsq;
@@ -356,7 +356,7 @@ int cGetMap3D(unsigned short* image, unsigned short* distance, int dim0, int dim
 			for (dist = 1; dist < dim0; dist++) {
 				distsq = (unsigned int)dist*dist;
 				for (x = 0; x < dim0-dist; x++) {
-					if (rPixel3D(x,y,z,image,dim1,dim2) != rPixel3D(x+dist,y,z,image,dim1,dim2)) {
+					if (r_pixel_3d(x,y,z,image,dim1,dim2) != r_pixel_3d(x+dist,y,z,image,dim1,dim2)) {
 						if (matrix1[x+y*dim0+z*dim1*dim0] > distsq) {
 							matrix1[x+y*dim0+z*dim1*dim0] = distsq;
 						}
@@ -376,7 +376,7 @@ int cGetMap3D(unsigned short* image, unsigned short* distance, int dim0, int dim
 			for (dist = 0; dist < dim1; dist++) {
 				distsq = (unsigned int)((double)(dist*dist)*fact);
 				for (y = 0; y < dim1 - dist; y++) {
-					if (rPixel3D(x,y,z,image,dim1,dim2) != rPixel3D(x,y+dist,z,image,dim1,dim2)) {
+					if (r_pixel_3d(x,y,z,image,dim1,dim2) != r_pixel_3d(x,y+dist,z,image,dim1,dim2)) {
 // Look for minimum distance between phases
 			            if (matrix2[x+y*dim0+z*dim1*dim0] > distsq) {
 							matrix2[x+y*dim0+z*dim1*dim0] = distsq;
@@ -410,7 +410,7 @@ int cGetMap3D(unsigned short* image, unsigned short* distance, int dim0, int dim
 			for (dist = 0; dist < dim2; dist++) {
 				distsq = (unsigned int)((double)(dist*dist)*fact);
 				for (z = 0; z < dim2 - dist; z++) {
-					if (rPixel3D(x,y,z,image,dim1,dim2) != rPixel3D(x,y,z+dist,image,dim1,dim2)) {
+					if (r_pixel_3d(x,y,z,image,dim1,dim2) != r_pixel_3d(x,y,z+dist,image,dim1,dim2)) {
 						if (matrix1[x+y*dim0+z*dim1*dim0] > distsq) {
 							matrix1[x+y*dim0+z*dim1*dim0] = distsq;
 							
@@ -439,19 +439,19 @@ int cGetMap3D(unsigned short* image, unsigned short* distance, int dim0, int dim
 			for (z = 0; z < dim2; z++) {
 			    matrix1[x+y*dim0+z*dim1*dim0] = (unsigned int)ceil(sqrt(matrix1[x+y*dim0+z*dim1*dim0]));
                 if (mode) {
-                    if (rPixel3D(x,y,z,image,dim1,dim2) == 0) {
-                        wPixel3D(x,y,z,distance,dim1,dim2,0);
+                    if (r_pixel_3d(x,y,z,image,dim1,dim2) == 0) {
+                        w_pixel_3d(x,y,z,distance,dim1,dim2,0);
                     }
                     else {
-                        wPixel3D(x,y,z,distance,dim1,dim2,(unsigned short)(matrix1[x+y*dim0+z*dim1*dim0]));
+                        w_pixel_3d(x,y,z,distance,dim1,dim2,(unsigned short)(matrix1[x+y*dim0+z*dim1*dim0]));
                     }
                 }
                 else {
-                    if (rPixel3D(x,y,z,image,dim1,dim2) == USHRT_MAX) {
-                        wPixel3D(x,y,z,distance,dim1,dim2,USHRT_MAX);
+                    if (r_pixel_3d(x,y,z,image,dim1,dim2) == USHRT_MAX) {
+                        w_pixel_3d(x,y,z,distance,dim1,dim2,USHRT_MAX);
                     }
                     else {
-                        wPixel3D(x,y,z,distance,dim1,dim2,USHRT_MAX-(unsigned short)(matrix1[x+y*dim0+z*dim1*dim0]));
+                        w_pixel_3d(x,y,z,distance,dim1,dim2,USHRT_MAX-(unsigned short)(matrix1[x+y*dim0+z*dim1*dim0]));
                     }
                 }
     }

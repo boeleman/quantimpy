@@ -15,19 +15,19 @@ int c_functions_close_3d(unsigned short* closing, int dim0, int dim1, int dim2, 
 
 /******************************************************************************/
 
-long int* quant2D(unsigned short* image, int dim0, int dim1          );
-long int* quant3D(unsigned short* image, int dim0, int dim1, int dim2);
+long int* quant_2d(unsigned short* image, int dim0, int dim1          );
+long int* quant_3d(unsigned short* image, int dim0, int dim1, int dim2);
 
-double areaDens2D(long int *h);
-double lengDens2D(long int *h, double res0, double res1);
-double eul4Dens2D(long int *h, double res0, double res1);
-double eul8Dens2D(long int *h, double res0, double res1);
+double area_dens_2d(long int *h);
+double leng_dens_2d(long int *h, double res0, double res1);
+double eul4_dens_2d(long int *h, double res0, double res1);
+double eul8_dens_2d(long int *h, double res0, double res1);
 
-double voluDens3D(long int *h);
-double surfDens3D(long int *h, double res0, double res1, double res2);
-double curvDens3D(long int *h, double res0, double res1, double res2);
-double eul6Dens3D(long int *h, double res0, double res1, double res2);
-double eu26Dens3D(long int *h, double res0, double res1, double res2);
+double volu_dens_3d(long int *h);
+double surf_dens_3d(long int *h, double res0, double res1, double res2);
+double curv_dens_3d(long int *h, double res0, double res1, double res2);
+double eul6_dens_3d(long int *h, double res0, double res1, double res2);
+double eu26_dens_3d(long int *h, double res0, double res1, double res2);
 
 /******************************************************************************/
 

@@ -115,7 +115,7 @@ cpdef functionals(np.ndarray image, res = None):
         minkowski = mk.functionals(image,res)
         print(minkowski)
 
-    For a 3D image the Minkowski fucntionals can be computed using the following
+    For a 3D image the Minkowski functionals can be computed using the following
     example:
 
     .. code-block:: python
@@ -354,7 +354,7 @@ cpdef functions_open(np.ndarray opening, res = None):
         plt.plot(dist,euler)
         plt.show()
 
-    For a 3D image the Minkowski fucntionals can be computed using the following
+    For a 3D image the Minkowski functionals can be computed using the following
     example:
 
     .. code-block:: python
@@ -655,7 +655,7 @@ cpdef functions_close(np.ndarray closing, res = None):
         plt.plot(dist,euler)
         plt.show()
 
-    For a 3D image the Minkowski fucntionals can be computed using the following
+    For a 3D image the Minkowski functionals can be computed using the following
     example:
 
     .. code-block:: python

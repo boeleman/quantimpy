@@ -5,38 +5,41 @@ from Cython.Build import cythonize
 import numpy as np
 
 extensions = [
+#    Extension(
+#        name="quantimpy.morphology",
+#        sources=["quantimpy/morphology.pyx", "quantimpy/quantimpyc.c", "quantimpy/morphologyc.c"],
+#    ),
     Extension(
-        name='quantimpy.morphology',
-        sources=['quantimpy/morphology.pyx', 'quantimpy/quantimpyc.c', 'quantimpy/morphologyc.c'],
-    ),
-    Extension(
-        name='quantimpy.minkowski',
-        sources=['quantimpy/minkowski.pyx', 'quantimpy/quantimpyc.c', 'quantimpy/minkowskic.c'],
+        name="quantimpy.minkowski",
+        sources=["quantimpy/minkowski.pyx", "quantimpy/quantimpyc.c", "quantimpy/minkowskic.c"],
     ),
 ]
 
 setup(
-    name='quantimpy',
-    version='0.1.0',
-    description='This package performs morphological operations and can compute the Minkowski functionals and functions',
-    url='https://github.com/boeleman/quantimpy',
-    author='Arnout Boelens',
-    author_email='boelens@stanford.edu',
+    name="quantimpy",
+    version="0.1.0",
+    description="This package performs morphological operations and can compute the Minkowski functionals and functions",
+    url="https://github.com/boeleman/quantimpy",
+    author="Arnout Boelens",
+    author_email="boelens@stanford.edu",
     install_requires=[
-        'numpy',
+        "numpy",
+        "edt",
     ],
     ext_modules=cythonize(extensions, language_level=3),
+#    packages=["quantimpy.morphology", "quantimpy.minkowski"],
     packages=find_packages(),
+#    py_modules = ["quantimpy.morphology", "quantimpy.minkowski"],
     include_dirs=[np.get_include()],
 
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
-        'Intended Audience :: Science/Research',
-        'Operating System :: POSIX :: Linux',
-        'Operating System :: MacOS',
-        'Operating System :: Microsoft :: Windows',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: C',
-        'Programming Language :: Cython',
+        "Development Status :: 2 - Pre-Alpha",
+        "Intended Audience :: Science/Research",
+        "Operating System :: POSIX :: Linux",
+        "Operating System :: MacOS",
+        "Operating System :: Microsoft :: Windows",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: C",
+        "Programming Language :: Cython",
     ],
 )

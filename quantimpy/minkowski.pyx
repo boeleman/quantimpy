@@ -1,14 +1,14 @@
 r"""Compute the Minkowski functionals and functions
 
 This module can compute both the Minkowski functionals and functions for 2D and
-3D Numpy arrays. These computations can handle both isotropic and anisotropic
+3D Numpy [1]_ arrays. These computations can handle both isotropic and anisotropic
 image resolutions.
 
 Notes
 ----------
 More information about the used algorithm can be found in the book "Statistical
 analysis of microstructures in materials science" by Joachim Ohser and Frank
-Mücklich [1]_.
+Mücklich [2]_.
 
 """
 
@@ -57,7 +57,7 @@ cpdef functionals(np.ndarray image, res = None):
     -----
 
     The definition of the Minkowski functionals follows the convention in the
-    physics literature [2]_.
+    physics literature [3]_.
 
     Considering a 2D body, :math:`X`, with a smooth boundary, :math:`\delta X`,
     the following functionals are computed:
@@ -89,8 +89,8 @@ cpdef functionals(np.ndarray image, res = None):
 
     Examples
     --------
-    These examples use the skimage Python package [3]_ and the Matplotlib Python
-    package [4]_. For a 2D image the Minkowski functionals can be computed using
+    These examples use the skimage Python package [4]_ and the Matplotlib Python
+    package [5]_. For a 2D image the Minkowski functionals can be computed using
     the following example:
 
     .. code-block:: python
@@ -318,8 +318,8 @@ cpdef functions_open(np.ndarray opening, res = None):
 
     Examples
     --------
-    These examples use the skimage Python package [3]_ and the Matplotlib Python
-    package [4]_. For a 2D image the Minkowski functions can be computed using
+    These examples use the skimage Python package [4]_ and the Matplotlib Python
+    package [5]_. For a 2D image the Minkowski functions can be computed using
     the following example:
 
     .. code-block:: python
@@ -394,25 +394,31 @@ cpdef functions_open(np.ndarray opening, res = None):
 
     References
     ----------
-    .. [1] Joachim Ohser and Frank Mücklich, "Statistical analysis of
+    .. [1] Charles R. Harris, K. Jarrod Millman, Stéfan J. van der Walt et al.,
+        "Array programming with NumPy", Nature, vol. 585, pp 357-362, 2020,
+        doi:`10.1038/s41586-020-2649-2`_
+
+    .. _10.1038/s41586-020-2649-2: https://doi.org/10.1038/s41586-020-2649-2
+
+    .. [2] Joachim Ohser and Frank Mücklich, "Statistical analysis of
         microstructures in materials science", Wiley and Sons, New York (2000) ISBN:
         0471974862
 
-    .. [2] Klaus R. Mecke, "Additivity, convexity, and beyond: applications of
+    .. [3] Klaus R. Mecke, "Additivity, convexity, and beyond: applications of
         Minkowski Functionals in statistical physics" in "Statistical Physics
         and Spatial Statistics", pp 111–184, Springer (2000) doi:
         `10.1007/3-540-45043-2_6`_
 
     .. _10.1007/3-540-45043-2_6: https://doi.org/10.1007/3-540-45043-2_6
 
-    .. [3] Stéfan van der Walt, Johannes L. Schönberger, Juan Nunez-Iglesias,
+    .. [4] Stéfan van der Walt, Johannes L. Schönberger, Juan Nunez-Iglesias,
         François Boulogne, Joshua D. Warner, Neil Yager, Emmanuelle Gouillart,
         Tony Yu and the scikit-image contributors. "scikit-image: Image
         processing in Python." PeerJ 2:e453 (2014) doi: `10.7717/peerj.453`_
 
     .. _10.7717/peerj.453: https://doi.org/10.7717/peerj.453
 
-    .. [4] John D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in
+    .. [5] John D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in
         Science & Engineering, vol. 9, no. 3, pp. 90-95, 2007.
         doi:`10.1109/MCSE.2007.55`_
 
@@ -619,8 +625,8 @@ cpdef functions_close(np.ndarray closing, res = None):
 
     Examples
     --------
-    These examples use the skimage Python package [3]_ and the Matplotlib Python
-    package [4]_. For a 2D image the Minkowski functions can be computed using
+    These examples use the skimage Python package [4]_ and the Matplotlib Python
+    package [5]_. For a 2D image the Minkowski functions can be computed using
     the following example:
 
     .. code-block:: python

@@ -49,55 +49,313 @@
             
   <div class="section" id="module-quantimpy.morphology">
 <span id="quantimpy-morphology-module"></span><h1>quantimpy.morphology module<a class="headerlink" href="#module-quantimpy.morphology" title="Permalink to this headline">¶</a></h1>
-<p>This module performs various morphological operations on 2D and 3D Numpy arrays.
-These computations can handle both isotropic and anisotropic image resolutions.</p>
+<p>This module performs various morphological operations on 2D and 3D Numpy <a class="footnote-reference brackets" href="#id9" id="id1">1</a>
+arrays. These computations can handle both isotropic and anisotropic image
+resolutions.</p>
 <p class="rubric">Notes</p>
-<p>images
-Test</p>
-<p>thickening  iterative dilation
-thinning  iterative erosion
-Paglieroni</p>
-<p>Thresholding distance transform</p>
-<p>ragnemalm1992,</p>
+<p>To perform morphological operations this library uses the Euclidean distance
+transform <a class="footnote-reference brackets" href="#id10" id="id2">2</a>. These transforms are computed using the <a class="reference external" href="https://pypi.org/project/edt/">MLAEDT-3D</a> library.</p>
 <dl class="py function">
 <dt id="quantimpy.morphology.close">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.close" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">close</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dilation</span></em>, <em class="sig-param"><span class="n">dist</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Morphologically close a binary Numpy array</p>
+<p>This function is an alias for the function
+<a class="reference internal" href="#quantimpy.morphology.erode" title="quantimpy.morphology.erode"><code class="xref py py-func docutils literal notranslate"><span class="pre">erode()</span></code></a>. Together with the
+<code class="xref py py-func docutils literal notranslate"><span class="pre">dilate()</span></code> function this function performs the
+morphological closing operation on the binary Numpy array <cite>dilation</cite>. Both
+2D and 3D arrays are supported. Optionally, the (anisotropic) resolution of
+the array can be provided using the Numpy array <cite>res</cite>. When a resolution
+array is provided it needs to be of the same dimension as the ‘dilation’
+array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dilation</strong> (<em>ndarray</em><em>, </em><em>bool</em>) – Dilation can be either a 2D or 3D array of data type <cite>bool</cite>.</p></li>
+<li><p><strong>dist</strong> (<em>{int</em><em>, </em><em>float}</em>) – The distance away from the interface to which an array is closed.</p></li>
+<li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
+If a resolution is provided it needs to be of the same dimension as the
+dilation array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out</strong> – This function returns a morphologically closed Numpy array. The return
+data type is <cite>bool</cite>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray, bool</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#quantimpy.morphology.erode" title="quantimpy.morphology.erode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">erode</span></code></a>, <a class="reference internal" href="#quantimpy.morphology.dilate" title="quantimpy.morphology.dilate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dilate</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>These examples use the skimage Python package <a class="footnote-reference brackets" href="#id12" id="id3">3</a> and the Matplotlib Python
+package <a class="footnote-reference brackets" href="#id13" id="id4">4</a>. For a 2D image a morphologcally closed image can be computed
+using the following example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">skimage.morphology</span> <span class="kn">import</span> <span class="p">(</span><span class="n">square</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">quantimpy</span> <span class="kn">import</span> <span class="n">morphology</span> <span class="k">as</span> <span class="n">mp</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">127</span><span class="p">,</span><span class="mi">128</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">image</span><span class="p">[</span><span class="mi">17</span><span class="p">:</span><span class="mi">65</span><span class="p">,</span><span class="mi">16</span><span class="p">:</span><span class="mi">64</span><span class="p">]</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">image</span><span class="p">[</span><span class="mi">65</span><span class="p">:</span><span class="mi">113</span><span class="p">,</span><span class="mi">64</span><span class="p">:</span><span class="mi">112</span><span class="p">]</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+<span class="n">dilation</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">dilate</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">closing</span>  <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">dilation</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">closing</span><span class="p">[:,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>For a 3D image the following example can be used:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">skimage.morphology</span> <span class="kn">import</span> <span class="p">(</span><span class="n">cube</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">quantimpy</span> <span class="kn">import</span> <span class="n">morphology</span> <span class="k">as</span> <span class="n">mp</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">128</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">128</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">image</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">64</span><span class="p">,</span><span class="mi">16</span><span class="p">:</span><span class="mi">64</span><span class="p">,</span><span class="mi">16</span><span class="p">:</span><span class="mi">64</span><span class="p">]</span> <span class="o">=</span> <span class="n">cube</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">image</span><span class="p">[</span><span class="mi">64</span><span class="p">:</span><span class="mi">112</span><span class="p">,</span><span class="mi">64</span><span class="p">:</span><span class="mi">112</span><span class="p">,</span><span class="mi">64</span><span class="p">:</span><span class="mi">112</span><span class="p">]</span> <span class="o">=</span> <span class="n">cube</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+<span class="n">dilation</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">dilate</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">closing</span>  <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">dilation</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">64</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">closing</span><span class="p">[:,:,</span><span class="mi">64</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
 
 <dl class="py function">
 <dt id="quantimpy.morphology.close_map">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">close_map</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.close_map" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">close_map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dilation_map</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.close_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute a morphological closing map of a Numpy array</p>
+<p>Together with the <code class="xref py py-func docutils literal notranslate"><span class="pre">dilate_map()</span></code> function this
+function computes a morphological closing map of the Numpy array
+<cite>dilation_map</cite>. Both 2D and 3D arrays are supported. Optionally, the
+(anisotropic) resolution of the array can be provided using the Numpy array
+<cite>res</cite>. When a resolution array is provided it needs to be of the same
+dimension as the ‘dilation’ array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dilation_map</strong> (<em>ndarray</em><em>, </em><em>float</em>) – Dilation can be either a 2D or 3D array of data type <cite>float</cite>.</p></li>
+<li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
+If a resolution is provided it needs to be of the same dimension as the
+dilation array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out</strong> – This function returns a distance map of a morphologically closed Numpy array. The return
+data type is <cite>float</cite>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray, float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#quantimpy.morphology.dilate_map" title="quantimpy.morphology.dilate_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dilate_map</span></code></a>, <a class="reference internal" href="#quantimpy.morphology.open_map" title="quantimpy.morphology.open_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">open_map</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>These examples use the skimage Python package <a class="footnote-reference brackets" href="#id12" id="id5">3</a> and the Matplotlib Python
+package <a class="footnote-reference brackets" href="#id13" id="id6">4</a>. For a 2D image a morphological closing map can be computed
+using the following example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">skimage.morphology</span> <span class="kn">import</span> <span class="p">(</span><span class="n">square</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">quantimpy</span> <span class="kn">import</span> <span class="n">morphology</span> <span class="k">as</span> <span class="n">mp</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">128</span><span class="p">,</span><span class="mi">128</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">image</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">64</span><span class="p">,</span><span class="mi">16</span><span class="p">:</span><span class="mi">64</span><span class="p">]</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">image</span><span class="p">[</span><span class="mi">64</span><span class="p">:</span><span class="mi">112</span><span class="p">,</span><span class="mi">64</span><span class="p">:</span><span class="mi">112</span><span class="p">]</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+<span class="n">dilationMap</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">dilate_map</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="n">closingMap</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">close_map</span><span class="p">(</span><span class="n">dilationMap</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dilationMap</span><span class="p">[:,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">closingMap</span><span class="p">[:,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>For a 3D image the following example can be used:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">skimage.morphology</span> <span class="kn">import</span> <span class="p">(</span><span class="n">cube</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">quantimpy</span> <span class="kn">import</span> <span class="n">morphology</span> <span class="k">as</span> <span class="n">mp</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">128</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">128</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">image</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">64</span><span class="p">,</span><span class="mi">16</span><span class="p">:</span><span class="mi">64</span><span class="p">,</span><span class="mi">16</span><span class="p">:</span><span class="mi">64</span><span class="p">]</span> <span class="o">=</span> <span class="n">cube</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">image</span><span class="p">[</span><span class="mi">64</span><span class="p">:</span><span class="mi">112</span><span class="p">,</span><span class="mi">64</span><span class="p">:</span><span class="mi">112</span><span class="p">,</span><span class="mi">64</span><span class="p">:</span><span class="mi">112</span><span class="p">]</span> <span class="o">=</span> <span class="n">cube</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+<span class="n">dilationMap</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">dilate_map</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="n">closingMap</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">close_map</span><span class="p">(</span><span class="n">dilationMap</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">64</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dilationMap</span><span class="p">[:,:,</span><span class="mi">64</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">closingMap</span><span class="p">[:,:,</span><span class="mi">64</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
 
 <dl class="py function">
 <dt id="quantimpy.morphology.dilate">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">dilate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.dilate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">dilate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">dist</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.dilate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Morphologically dilate a binary Numpy array</p>
+<p>This function performs the morphological dilation operation on the binary
+Numpy array <cite>image</cite>. Both 2D and 3D arrays are supported. Optionally, the
+(anisotropic) resolution of the array can be provided using the Numpy array
+<cite>res</cite>. When a resolution array is provided it needs to be of the same
+dimension as the ‘image’ array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>ndarray</em><em>, </em><em>bool</em>) – Image can be either a 2D or 3D array of data type <cite>bool</cite>.</p></li>
+<li><p><strong>dist</strong> (<em>{int</em><em>, </em><em>float}</em>) – The distance away from the interface to which an array is dilated.</p></li>
+<li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
+If a resolution is provided it needs to be of the same dimension as the
+dilation array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out</strong> – This function returns a morphologically dilated Numpy array. The return
+data type is <cite>bool</cite>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray, bool</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#quantimpy.morphology.erode" title="quantimpy.morphology.erode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">erode</span></code></a>, <a class="reference internal" href="#quantimpy.morphology.dilate_map" title="quantimpy.morphology.dilate_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dilate_map</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>These examples use the skimage Python package <a class="footnote-reference brackets" href="#id12" id="id7">3</a> and the Matplotlib Python
+package <a class="footnote-reference brackets" href="#id13" id="id8">4</a>. For a 2D image a morphologcally dilated image can be computed
+using the following example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">skimage.morphology</span> <span class="kn">import</span> <span class="p">(</span><span class="n">square</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">quantimpy</span> <span class="kn">import</span> <span class="n">morphology</span> <span class="k">as</span> <span class="n">mp</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">128</span><span class="p">,</span><span class="mi">128</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">image</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">112</span><span class="p">,</span><span class="mi">16</span><span class="p">:</span><span class="mi">112</span><span class="p">]</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="mi">96</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+<span class="n">dilation</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">dilate</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dilation</span><span class="p">[:,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>For a 3D image the following example can be used:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">skimage.morphology</span> <span class="kn">import</span> <span class="p">(</span><span class="n">cube</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">quantimpy</span> <span class="kn">import</span> <span class="n">morphology</span> <span class="k">as</span> <span class="n">mp</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">128</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">128</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">image</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">112</span><span class="p">,</span><span class="mi">16</span><span class="p">:</span><span class="mi">112</span><span class="p">,</span><span class="mi">16</span><span class="p">:</span><span class="mi">112</span><span class="p">]</span> <span class="o">=</span> <span class="n">cube</span><span class="p">(</span><span class="mi">96</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+<span class="n">dilation</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">dilate</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">64</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dilation</span><span class="p">[:,:,</span><span class="mi">64</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
 
 <dl class="py function">
 <dt id="quantimpy.morphology.dilate_map">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">dilate_map</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.dilate_map" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">dilate_map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.dilate_map" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="quantimpy.morphology.erode">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">erode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.erode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">erode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">dist</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.erode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="quantimpy.morphology.erode_map">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">erode_map</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.erode_map" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">erode_map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.erode_map" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="quantimpy.morphology.open">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">open</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.open" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">open</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">dist</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.open" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="quantimpy.morphology.open_map">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">open_map</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.open_map" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">open_map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.open_map" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id9"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Charles R. Harris, K. Jarrod Millman, Stéfan J. van der Walt et al.,
+“Array programming with NumPy”, Nature, vol. 585, pp 357-362, 2020,
+doi:<a class="reference external" href="https://doi.org/10.1038/s41586-020-2649-2">10.1038/s41586-020-2649-2</a></p>
+</dd>
+</dl>
+<dl class="footnote brackets">
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Ingemar Ragnemalm, “Fast erosion and dilation by contour processing and
+thresholding of distance maps”, Pattern recognition letters, vol. 13, no. 3,
+pp 161-166, 1992, doi:<a class="reference external" href="https://doi.org/10.1016/0167-8655(92)90055-5">10.1016/0167-8655(92)90055-5</a></p>
+</dd>
+</dl>
+<dl class="footnote brackets">
+<dt class="label" id="id12"><span class="brackets">3</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id5">2</a>,<a href="#id7">3</a>)</span></dt>
+<dd><p>Stéfan van der Walt, Johannes L. Schönberger, Juan Nunez-Iglesias,
+François Boulogne, Joshua D. Warner, Neil Yager, Emmanuelle Gouillart,
+Tony Yu and the scikit-image contributors. “scikit-image: Image
+processing in Python.” PeerJ 2:e453 (2014) doi: <a class="reference external" href="https://doi.org/10.7717/peerj.453">10.7717/peerj.453</a></p>
+</dd>
+</dl>
+<dl class="footnote brackets">
+<dt class="label" id="id13"><span class="brackets">4</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id6">2</a>,<a href="#id8">3</a>)</span></dt>
+<dd><p>John D. Hunter, “Matplotlib: A 2D Graphics Environment”, Computing in
+Science &amp; Engineering, vol. 9, no. 3, pp. 90-95, 2007.
+doi:<a class="reference external" href="https://doi.org/10.1109/MCSE.2007.55">10.1109/MCSE.2007.55</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 

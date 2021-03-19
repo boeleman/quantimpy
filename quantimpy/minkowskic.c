@@ -8,7 +8,7 @@ int c_functionals_2d(unsigned short* image, int dim0, int dim1, double res0, dou
     double norm;
     long int* h;
 
-    norm = (double)(dim0-1)/dim0 * (dim1-1)/dim1;
+    norm = (double)(dim0-1) * (dim1-1) * res0 * res1;
 
     h = quant_2d(image, dim0, dim1);
 
@@ -28,7 +28,7 @@ int c_functionals_3d(unsigned short* image, int dim0, int dim1, int dim2, double
     double norm;
     long int* h;
 
-    norm = (double)(dim0-1)/dim0 * (dim1-1)/dim1 * (dim2-1)/dim2;
+    norm = (double)(dim0-1) * (dim1-1) * (dim2-1) * res0 * res1 * res2;
 	
     h = quant_3d(image, dim0, dim1, dim2);
 
@@ -64,7 +64,7 @@ int c_functions_open_2d(unsigned short* opening, int dim0, int dim1, double res0
         if (max < opening[k]) max = opening[k];
     }
 
-    norm = (double)(dim0-1)/dim0 * (dim1-1)/dim1;
+    norm = (double)(dim0-1) * (dim1-1) * res0 * res1;
 
     for (i = 0, j = min; j < max; i++, j++) {
         printf("\r Functions step : %d \n",i);
@@ -109,7 +109,7 @@ int c_functions_open_3d(unsigned short* opening, int dim0, int dim1, int dim2, d
         if (max < opening[k]) max = opening[k];
     }
 
-    norm = (double)(dim0-1)/dim0 * (dim1-1)/dim1 * (dim2-1)/dim2;
+    norm = (double)(dim0-1) * (dim1-1) * (dim2-1) * res0 * res1 * res2;
 
     for (i = 0, j = min; j < max; i++, j++) {
         printf("\r Functions step : %d \n",i);
@@ -335,7 +335,7 @@ double leng_dens_2d(long int *h, double res0, double res1) {
 	}
 
 	if(!LI) return 0;
-	else return M_PI/2 * II/LI;
+	else return 0.25 * II/LI;
 }
 
 // }}}
@@ -352,7 +352,7 @@ double eul4_dens_2d(long int *h, double res0, double res1) {
 		iVol += h[i];
 	}
 
- 	return (double)iChi/((double)iVol*res0*res1);
+ 	return (double)iChi/((double)iVol*res0*res1)/M_PI;
 }
 
 /******************************************************************************/
@@ -367,7 +367,7 @@ double eul8_dens_2d(long int *h, double res0, double res1) {
 		iVol += h[i];
 	}
 
-    return (double)iChi/((double)iVol*res0*res1);
+    return (double)iChi/((double)iVol*res0*res1)/M_PI;
 }
 
 // }}}
@@ -435,7 +435,7 @@ double surf_dens_3d(long int *h, double res0, double res1, double res2) {
 	free(weight);
 
 	if(!Lv) return 0;
-	else return 2.0 * Sv/Lv;
+	else return 0.25 * Sv/Lv;
 }
 
 // }}}
@@ -510,9 +510,7 @@ double curv_dens_3d(long int *h, double res0, double res1, double res2) {
                       );
     }
 
-//    return (double)4*M_PI*mc/(double)(iVol);
-// Normalize to return radius of a sphere
-    return (double)mc/(double)(iVol);
+    return (double)mc/(double)(iVol) * 2.0/M_PI;
 }
 
 // }}}
@@ -552,7 +550,7 @@ double eul6_dens_3d(long int *h, double res0, double res1, double res2) {
 	}
 
 	if(!iVol) return 0;
- 	else return (double)iChi/((double)iVol*res0*res1*res2);
+ 	else return (double)iChi/((double)iVol*res0*res1*res2)*3.0/(4.0*M_PI);
 }
 
 /******************************************************************************/
@@ -585,7 +583,7 @@ double eu26_dens_3d(long int *h, double res0, double res1, double res2) {
 	}
 
 	if(!iVol) return 0;
- 	else return (double)iChi/((double)iVol*res0*res1*res2);
+ 	else return (double)iChi/((double)iVol*res0*res1*res2)*3.0/(4.0*M_PI);
 }
 
 // }}}

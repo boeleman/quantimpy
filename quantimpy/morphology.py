@@ -19,6 +19,86 @@ import edt
 # {{{ erode
 
 def erode(image, dist, res = None):
+    r"""
+    Morphologically erode a binary Numpy array
+
+    This function performs the morphological erosion on the binary
+    Numpy array `image`. Both 2D and 3D arrays are supported. Optionally, the
+    (anisotropic) resolution of the array can be provided using the Numpy array
+    `res`. When a resolution array is provided it needs to be of the same
+    dimension as the 'image' array. 
+
+    Parameters
+    ----------
+    image : ndarray, bool
+        Image can be either a 2D or 3D array of data type `bool`.
+    dist : {int, float} 
+        The distance away from the interface to which an array is dilated.
+    res : ndarray, {int, float}, optional
+        By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
+        If a resolution is provided it needs to be of the same dimension as the
+        dilation array.
+
+    Returns
+    -------
+    out : ndarray, bool
+        This function returns a morphologically eroded Numpy array. The return
+        data type is `bool`.
+
+    See Also
+    --------
+    ~quantimpy.morphology.erode_map
+    ~quantimpy.morphology.dilate
+
+    Examples
+    --------
+    These examples use the skimage Python package [3]_ and the Matplotlib Python
+    package [4]_. For a 2D image a morphologcally dilated image can be computed
+    using the following example:
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from skimage.morphology import (square)
+        from quantimpy import morphology as mp
+
+        image = np.zeros([128,128],dtype=bool)
+        image[16:112,16:112] = square(96,dtype=bool)
+
+        erosion = mp.erode(image,10)
+
+        plt.gray()
+        plt.imshow(image[:,:])
+        plt.show()
+
+        plt.gray()
+        plt.imshow(erosion[:,:])
+        plt.show()
+
+    For a 3D image the following example can be used: 
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from skimage.morphology import (cube)
+        from quantimpy import morphology as mp
+
+        image = np.zeros([128,128,128],dtype=bool)
+        image[16:112,16:112,16:112] = cube(96,dtype=bool)
+
+        erosion = mp.erode(image,10)
+
+        plt.gray()
+        plt.imshow(image[:,:,64])
+        plt.show()
+
+        plt.gray()
+        plt.imshow(erosion[:,:,64])
+        plt.show()
+
+    """
     
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
@@ -181,9 +261,95 @@ def dilate(image, dist, res = None):
 ###############################################################################
 # {{{ open
 
-def open(image, dist, res = None):
+def open(erosion, dist, res = None):
+    r"""
+    Morphologically open a binary Numpy array
 
-    return dilate(image, dist, res)    
+    This function is an alias for the function
+    :func:`~quantimpy.morphology.dilate`. Together with the
+    :func:`~quantimpy.morphology.erode` function this function performs the
+    morphological opening operation on the binary Numpy array `erosion`. Both
+    2D and 3D arrays are supported. Optionally, the (anisotropic) resolution of
+    the array can be provided using the Numpy array `res`. When a resolution
+    array is provided it needs to be of the same dimension as the 'dilation'
+    array. 
+
+    Parameters
+    ----------
+    erosion : ndarray, bool
+        Erosion can be either a 2D or 3D array of data type `bool`.
+    dist : {int, float} 
+        The distance away from the interface to which an array is opened.
+    res : ndarray, {int, float}, optional
+        By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
+        If a resolution is provided it needs to be of the same dimension as the
+        dilation array.
+
+    Returns
+    -------
+    out : ndarray, bool
+        This function returns a morphologically opened Numpy array. The return
+        data type is `bool`.
+
+    See Also
+    --------
+    ~quantimpy.morphology.dilate
+    ~quantimpy.morphology.erode
+    ~quantimpy.morphology.close
+
+    Examples
+    --------
+    These examples use the skimage Python package [3]_ and the Matplotlib Python
+    package [4]_. For a 2D image a morphologcally opened image can be computed
+    using the following example:
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from skimage.morphology import (square)
+        from quantimpy import morphology as mp
+
+        image = np.zeros([128,128],dtype=bool)
+        image[16:112,16:112] = square(96,dtype=bool)
+
+        erosion = mp.erode(image,10)
+        opening = mp.open(erosion,10)
+
+        plt.gray()
+        plt.imshow(image[:,:])
+        plt.show()
+
+        plt.gray()
+        plt.imshow(opening[:,:])
+        plt.show()
+
+    For a 3D image the following example can be used: 
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from skimage.morphology import (cube)
+        from quantimpy import morphology as mp
+
+        image = np.zeros([128,128,128],dtype=bool)
+        image[16:112,16:112,16:112] = cube(96,dtype=bool)
+
+        erosion = mp.erode(image,10)
+        opening = mp.open(erosion,10)
+
+        plt.gray()
+        plt.imshow(image[:,:,64])
+        plt.show()
+
+        plt.gray()
+        plt.imshow(opening[:,:,64])
+        plt.show()
+
+    """
+
+    return dilate(erosion, dist, res)    
 
 # }}}
 ###############################################################################
@@ -195,7 +361,7 @@ def close(dilation, dist, res = None):
 
     This function is an alias for the function
     :func:`~quantimpy.morphology.erode`. Together with the
-    :func:`~quantimpy.minkowski.dilate` function this function performs the
+    :func:`~quantimpy.morphology.dilate` function this function performs the
     morphological closing operation on the binary Numpy array `dilation`. Both
     2D and 3D arrays are supported. Optionally, the (anisotropic) resolution of
     the array can be provided using the Numpy array `res`. When a resolution
@@ -223,6 +389,7 @@ def close(dilation, dist, res = None):
     --------
     ~quantimpy.morphology.erode
     ~quantimpy.morphology.dilate
+    ~quantimpy.morphology.open
 
     Examples
     --------
@@ -285,6 +452,84 @@ def close(dilation, dist, res = None):
 # {{{ erode_map
 
 def erode_map(image, res = None):
+    r"""
+    Compute a morphological erosion map of a Numpy array
+
+    This function computes a morphological erosion map of the binary Numpy array
+    `image`. Both 2D and 3D arrays are supported. Optionally, the (anisotropic)
+    resolution of the array can be provided using the Numpy array `res`. When a
+    resolution array is provided it needs to be of the same dimension as the
+    'image' array. 
+
+    Parameters
+    ----------
+    image : ndarray, bool
+        Image can be either a 2D or 3D array of data type `bool`.
+    res : ndarray, {int, float}, optional
+        By default the resolution is assumed to be 1 <unit of length>/pixel in
+        all directions. If a resolution is provided it needs to be of the same
+        dimension as the dilation array.
+
+    Returns
+    -------
+    out : ndarray, float
+        This function returns an erosion map of a binary Numpy array. The return
+        data type is `float`.
+
+    See Also
+    --------
+    ~quantimpy.morphology.erode
+    ~quantimpy.morphology.open_map
+
+    Examples
+    --------
+    These examples use the skimage Python package [3]_ and the Matplotlib Python
+    package [4]_. For a 2D image a morphological erosion map can be computed
+    using the following example:
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from skimage.morphology import (disk)
+        from quantimpy import morphology as mp
+
+        image = np.zeros([128,128],dtype=bool)
+        image[16:113,16:113] = disk(48,dtype=bool)
+
+        erosionMap = mp.erode_map(image)
+
+        plt.gray()
+        plt.imshow(image[:,:])
+        plt.show()
+
+        plt.gray()
+        plt.imshow(erosionMap[:,:])
+        plt.show()
+
+    For a 3D image the following example can be used: 
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from skimage.morphology import (ball)
+        from quantimpy import morphology as mp
+
+        image = np.zeros([129,127,128],dtype=bool)
+        image[15:112,14:111,16:113] = ball(48,dtype=bool)
+
+        erosionMap = mp.erode_map(image)
+
+        plt.gray()
+        plt.imshow(image[:,:,64])
+        plt.show()
+
+        plt.gray()
+        plt.imshow(erosionMap[:,:,64])
+        plt.show()
+
+    """
     
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
@@ -325,6 +570,84 @@ def erode_map(image, res = None):
 # {{{ dilate_map
 
 def dilate_map(image, res = None):
+    r"""
+    Compute a morphological dilation map of a Numpy array
+
+    This function computes a morphological dilation map of the binary Numpy array
+    `image`. Both 2D and 3D arrays are supported. Optionally, the (anisotropic)
+    resolution of the array can be provided using the Numpy array `res`. When a
+    resolution array is provided it needs to be of the same dimension as the
+    'dilation' array. 
+
+    Parameters
+    ----------
+    image : ndarray, bool
+        Image can be either a 2D or 3D array of data type `bool`.
+    res : ndarray, {int, float}, optional
+        By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
+        If a resolution is provided it needs to be of the same dimension as the
+        dilation array.
+
+    Returns
+    -------
+    out : ndarray, float
+        This function returns a dilation map of a binary Numpy array. The return
+        data type is `float`.
+
+    See Also
+    --------
+    ~quantimpy.morphology.erode_map
+    ~quantimpy.morphology.close_map
+
+    Examples
+    --------
+    These examples use the skimage Python package [3]_ and the Matplotlib Python
+    package [4]_. For a 2D image a morphological closing map can be computed
+    using the following example:
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from skimage.morphology import (disk)
+        from quantimpy import morphology as mp
+
+        image = np.zeros([127,128],dtype=bool)
+        image[16:113,16:113] = disk(48,dtype=bool)
+
+        dilationMap = mp.dilate_map(image)
+
+        plt.gray()
+        plt.imshow(image[:,:])
+        plt.show()
+
+        plt.gray()
+        plt.imshow(dilationMap[:,:])
+        plt.show()
+
+    For a 3D image the following example can be used: 
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from skimage.morphology import (ball)
+        from quantimpy import morphology as mp
+
+        image = np.zeros([129,127,128],dtype=bool)
+        image[15:112,14:111,16:113] = ball(48,dtype=bool)
+
+        dilationMap = mp.dilate_map(image)
+
+        plt.gray()
+        plt.imshow(image[:,:,64])
+        plt.show()
+
+        plt.gray()
+        plt.imshow(dilationMap[:,:,64])
+        plt.show()
+    
+    """
     
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
@@ -364,9 +687,87 @@ def dilate_map(image, res = None):
 ###############################################################################
 # {{{ open_map
 
-def open_map(image, res = None):
+def open_map(erosion_map, res = None):
 
     r"""
+    Compute a morphological opening map of a Numpy array
+
+    Together with the :func:`~quantimpy.morphology.erode_map` function this
+    function computes a morphological opening map of the Numpy array
+    `erosion_map`. Both 2D and 3D arrays are supported. Optionally, the
+    (anisotropic) resolution of the array can be provided using the Numpy array
+    `res`. When a resolution array is provided it needs to be of the same
+    dimension as the 'dilation' array. 
+
+    Parameters
+    ----------
+    erosion_map : ndarray, float
+        Erosion_map can be either a 2D or 3D array of data type `float`.
+    res : ndarray, {int, float}, optional
+        By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
+        If a resolution is provided it needs to be of the same dimension as the
+        dilation array.
+
+    Returns
+    -------
+    out : ndarray, float
+        This function returns a distance map of a morphologically closed Numpy array. The return
+        data type is `float`.
+
+    See Also
+    --------
+    ~quantimpy.morphology.dilate_map
+    ~quantimpy.morphology.open_map
+
+    Examples
+    --------
+    These examples use the skimage Python package [3]_ and the Matplotlib Python
+    package [4]_. For a 2D image a morphological closing map can be computed
+    using the following example:
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from skimage.morphology import (square)
+        from quantimpy import morphology as mp
+
+        image = np.zeros([128,128],dtype=bool)
+        image[16:112,16:112] = square(96,dtype=bool)
+
+        erosionMap = mp.erode_map(image)
+        openingMap = mp.open_map(erosionMap)
+
+        plt.gray()
+        plt.imshow(image[:,:])
+        plt.show()
+
+        plt.gray()
+        plt.imshow(openingMap[:,:])
+        plt.show()
+
+    For a 3D image the following example can be used: 
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from skimage.morphology import (cube)
+        from quantimpy import morphology as mp
+
+        image = np.zeros([128,128,128],dtype=bool)
+        image[16:112,16:112,16:112] = cube(96,dtype=bool)
+
+        erosionMap = mp.erode_map(image)
+        openingMap = mp.open_map(erosionMap)
+
+        plt.gray()
+        plt.imshow(image[:,:,64])
+        plt.show()
+
+        plt.gray()
+        plt.imshow(openingMap[:,:,64])
+        plt.show()
 
     References
     ----------
@@ -397,10 +798,10 @@ def open_map(image, res = None):
 
     """
     
-    if (image.dtype != "uint16"):
+    if (erosion_map.dtype != "uint16"):
         raise ValueError("Input image needs to be data type uint16")
     
-    if (image.ndim == 2):
+    if (erosion_map.ndim == 2):
 # Set default resolution (length/voxel)
         if (res is None):
             res0 = 1.0
@@ -412,10 +813,10 @@ def open_map(image, res = None):
         else:
             raise ValueError("Input image and resolution need to be the same dimension")
 
-        open_map = np.zeros_like(image).astype(np.uint16)
+        open_map = np.zeros_like(erosion_map).astype(np.uint16)
 
-        for i in range(np.max(image)+1):
-            dilation = np.logical_not(image >= i)
+        for i in range(np.max(erosion_map)+1):
+            dilation = np.logical_not(erosion_map >= i)
             
             dilation = edt.edt(dilation, anisotropy=(res0, res1)).astype(np.uint16)
             dilation = dilation < i
@@ -423,7 +824,7 @@ def open_map(image, res = None):
             open_map[dilation] = i
 
         return open_map
-    elif (image.ndim == 3):
+    elif (erosion_map.ndim == 3):
 # Set default resolution (length/voxel)
         if (res is None):
             res0 = 1.0
@@ -437,10 +838,10 @@ def open_map(image, res = None):
         else:
             raise ValueError("Input image and resolution need to be the same dimension")
 
-        open_map = np.zeros_like(image).astype(np.uint16)
+        open_map = np.zeros_like(erosion_map).astype(np.uint16)
 
-        for i in range(np.max(image)+1):
-            dilation = np.logical_not(image >= i)
+        for i in range(np.max(erosion_map)+1):
+            dilation = np.logical_not(erosion_map >= i)
             
             dilation = edt.edt(dilation, anisotropy=(res0, res1, res2)).astype(np.uint16)
             dilation = dilation < i
@@ -459,7 +860,7 @@ def close_map(dilation_map, res = None):
     r"""
     Compute a morphological closing map of a Numpy array
 
-    Together with the :func:`~quantimpy.minkowski.dilate_map` function this
+    Together with the :func:`~quantimpy.morphology.dilate_map` function this
     function computes a morphological closing map of the Numpy array
     `dilation_map`. Both 2D and 3D arrays are supported. Optionally, the
     (anisotropic) resolution of the array can be provided using the Numpy array
@@ -469,7 +870,7 @@ def close_map(dilation_map, res = None):
     Parameters
     ----------
     dilation_map : ndarray, float
-        Dilation can be either a 2D or 3D array of data type `float`.
+        Dilation_map can be either a 2D or 3D array of data type `float`.
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
@@ -511,10 +912,6 @@ def close_map(dilation_map, res = None):
         plt.show()
 
         plt.gray()
-        plt.imshow(dilationMap[:,:])
-        plt.show()
-
-        plt.gray()
         plt.imshow(closingMap[:,:])
         plt.show()
 
@@ -536,10 +933,6 @@ def close_map(dilation_map, res = None):
 
         plt.gray()
         plt.imshow(image[:,:,64])
-        plt.show()
-
-        plt.gray()
-        plt.imshow(dilationMap[:,:,64])
         plt.show()
 
         plt.gray()

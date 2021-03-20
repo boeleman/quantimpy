@@ -1,15 +1,16 @@
 # quantimpy
 
-Python Library for Scientific image processing 
+Welcome to QuantImPy, a Python library for scientific image processing.
 
-Cloned from https://www.ufz.de/index.php?en=39198 and added a python wrapper
+This code performs morphological operations on Numpy arrays and can compute the
+Minkowski functionals and functions.
 
-Compute Minkowski functionals and Minkowski functions from numpy arrays
+This code is inspired by and partly based on the [QuantIm
+library](https://www.ufz.de/index.php?en=39198) C/C++ library for scientific
+image processing.
 
-Install using:
+Documentation can be found on [Github.io](https://boeleman.github.io/quantimpy/)
 
-pip install quantimpy
+This library can be installed using pip:
 
-Documentation:
-
-https://boeleman.github.io/quantimpy/
+`pip install quantimpy`

@@ -816,6 +816,8 @@ def open_map(erosion_map, res = None):
         open_map = np.zeros_like(erosion_map).astype(np.uint16)
 
         for i in range(np.max(erosion_map)+1):
+            print("Open map step: ", i)
+
             dilation = np.logical_not(erosion_map >= i)
             
             dilation = edt.edt(dilation, anisotropy=(res0, res1)).astype(np.uint16)
@@ -841,6 +843,8 @@ def open_map(erosion_map, res = None):
         open_map = np.zeros_like(erosion_map).astype(np.uint16)
 
         for i in range(np.max(erosion_map)+1):
+            print("Open map step: ", i)
+
             dilation = np.logical_not(erosion_map >= i)
             
             dilation = edt.edt(dilation, anisotropy=(res0, res1, res2)).astype(np.uint16)
@@ -960,6 +964,8 @@ def close_map(dilation_map, res = None):
         dilation_map = close_map - dilation_map
 
         for i in range(np.max(dilation_map)+1):
+            print("Close map step: ", i)
+
             erosion = dilation_map < i
             
             erosion = edt.edt(erosion, anisotropy=(res0, res1)).astype(np.uint16)
@@ -986,6 +992,8 @@ def close_map(dilation_map, res = None):
         dilation_map = close_map - dilation_map
 
         for i in range(np.max(dilation_map)+1):
+            print("Close map step: ", i)
+
             erosion = dilation_map < i
             
             erosion = edt.edt(erosion, anisotropy=(res0, res1, res2)).astype(np.uint16)

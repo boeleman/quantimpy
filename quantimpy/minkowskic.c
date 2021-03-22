@@ -93,7 +93,7 @@ int c_functions_open_2d(unsigned short* opening, int dim0, int dim1, double res0
     norm = (double)(dim0-1) * (dim1-1) * res0 * res1;
 
     for (i = 0, j = min; j < max; i++, j++) {
-        printf("\r Functions step : %d \n",i);
+        printf("\rFunctions open step: %d \n",i);
         
         for (k = 0; k < dim0*dim1; k++) {
             image[k] = opening[k];
@@ -138,7 +138,7 @@ int c_functions_open_3d(unsigned short* opening, int dim0, int dim1, int dim2, d
     norm = (double)(dim0-1) * (dim1-1) * (dim2-1) * res0 * res1 * res2;
 
     for (i = 0, j = min; j < max; i++, j++) {
-        printf("\r Functions step : %d \n",i);
+        printf("\rFunctions open step: %d \n",i);
         
         for (k = 0; k < dim0*dim1*dim2; k++) {
             image[k] = opening[k];
@@ -186,7 +186,7 @@ int c_functions_close_2d(unsigned short* closing, int dim0, int dim1, double res
     norm = (double)(dim0-1)/dim0 * (dim1-1)/dim1;
 
     for (i = 0, j = max-1; j > min-1; i++, j--) {
-        printf("\r Functions step : %d \n",i+1);
+        printf("\rFunctions close step: %d \n",i+1);
         
         for (k = 0; k < dim0*dim1; k++) {
             image[k] = closing[k];
@@ -231,7 +231,7 @@ int c_functions_close_3d(unsigned short* closing, int dim0, int dim1, int dim2, 
     norm = (double)(dim0-1)/dim0 * (dim1-1)/dim1 * (dim2-1)/dim2;
 
     for (i = 0, j = max-1; j > min-1; i++, j--) {
-        printf("\r Functions step : %d \n",i+1);
+        printf("\rFunctions close step: %d \n",i+1);
         
         for (k = 0; k < dim0*dim1*dim2; k++) {
             image[k] = closing[k];

@@ -43,10 +43,12 @@ cpdef functionals(np.ndarray image, res = None):
     -------
     out : tuple, float
         In the case of a 2D image this function returns a tuple of the area,
-        length, and Euler characteristic. In the case of a 3D image this function
-        returns a tuple of the volume, surface, curvature, and Euler characteristic.
-        The return data type is `float`.
-
+        length, and the Euler\ :sub:`4` and Euler\ :sub:`8` characteristics. In
+        the case of a 3D image this function returns a tuple of the volume,
+        surface, curvature, and the Euler\ :sub:`6` and Euler\ :sub:`26`
+        characteristics. The subscript indicates how many neighboring voxels are
+        used in the calculation of the Euler characteristic. The return data
+        type is `float`.
 
     See Also
     --------
@@ -211,7 +213,7 @@ def _functionals2D(
         &area, &length, &euler4, &euler8)
 
     assert status == 0
-    return area, length, euler8
+    return area, length, euler4, euler8
 
 
 cdef extern from "minkowskic.h":
@@ -262,7 +264,7 @@ def _functionals3D(
         &euler26)
 
     assert status == 0
-    return volume, surface, curvature, euler26
+    return volume, surface, curvature, euler6, euler26
 
 # }}}
 ###############################################################################
@@ -304,11 +306,13 @@ cpdef functions_open(np.ndarray opening, res = None):
     out : tuple, ndarray, float
         In the case of a 2D image this function returns a tuple of Numpy arrays
         consisting of the distance (assuming one grayscale value is used per
-        unit of length), area, length, and Euler characteristic. In the case of a 3D image this function
+        unit of length), area, length, and the Euler\ :sub:`4` and Euler\
+        :sub:`8` characteristics. In the case of a 3D image this function
         returns a tuple of Numpy arrays consistenting of the distance, volume,
-        surface, curvature, and Euler characteristic. The return data type is
-        `float`.
-
+        surface, curvature, and the Euler\ :sub:`6` and Euler\ :sub:`26`
+        characteristics. The subscript indicates how many neighboring voxels are
+        used in the calculation of the Euler characteristic. The return data
+        type is `float`.
 
     See Also
     --------
@@ -343,7 +347,7 @@ cpdef functions_open(np.ndarray opening, res = None):
         plt.imshow(erosion_map[:,:])
         plt.show()
 
-        dist, area, length, euler = mk.functions_open(erosion_map)
+        dist, area, length, euler4, euler8 = mk.functions_open(erosion_map)
 
         plt.plot(dist,area)
         plt.show()
@@ -351,7 +355,10 @@ cpdef functions_open(np.ndarray opening, res = None):
         plt.plot(dist,length)
         plt.show()
 
-        plt.plot(dist,euler)
+        plt.plot(dist,euler4)
+        plt.show()
+
+        plt.plot(dist,euler8)
         plt.show()
 
     For a 3D image the Minkowski functionals can be computed using the following
@@ -378,7 +385,7 @@ cpdef functions_open(np.ndarray opening, res = None):
         plt.imshow(erosion_map[:,:,64])
         plt.show()
 
-        dist, volume, surface, curvature, euler = mk.functions_open(erosion_map)
+        dist, volume, surface, curvature, euler6, euler26 = mk.functions_open(erosion_map)
 
         plt.plot(dist,volume)
         plt.show()
@@ -389,7 +396,10 @@ cpdef functions_open(np.ndarray opening, res = None):
         plt.plot(dist,curvature)
         plt.show()
 
-        plt.plot(dist,euler)
+        plt.plot(dist,euler6)
+        plt.show()
+
+        plt.plot(dist,euler26)
         plt.show()
 
     References
@@ -508,7 +518,7 @@ def _FunctionsOpen2D(
         &euler8[0])
 
     assert status == 0
-    return dist, area, length, euler8
+    return dist, area, length, euler4, euler8
 
 
 cdef extern from "minkowskic.h":
@@ -569,7 +579,8 @@ def _FunctionsOpen3D(
         &euler26[0])
 
     assert status == 0
-    return dist, volume, surface, curvature, euler26
+    return dist, volume, surface, curvature, euler6, euler26
+
 
 # }}}
 ###############################################################################
@@ -611,11 +622,13 @@ cpdef functions_close(np.ndarray closing, res = None):
     out : tuple, ndarray, float
         In the case of a 2D image this function returns a tuple of Numpy arrays
         consisting of the distance (assuming one grayscale value is used per
-        unit of length), area, length, and Euler characteristic. In the case of a 3D image this function
+        unit of length), area, length, and the Euler\ :sub:`4` and Euler\
+        :sub:`8` characteristics. In the case of a 3D image this function
         returns a tuple of Numpy arrays consistenting of the distance, volume,
-        surface, curvature, and Euler characteristic. The return data type is
-        `float`.
-
+        surface, curvature, and the Euler\ :sub:`6` and Euler\ :sub:`26`
+        characteristics. The subscript indicates how many neighboring voxels are
+        used in the calculation of the Euler characteristic. The return data
+        type is `float`.
 
     See Also
     --------
@@ -650,7 +663,7 @@ cpdef functions_close(np.ndarray closing, res = None):
         plt.imshow(erosion_map[:,:])
         plt.show()
 
-        dist, area, length, euler = mk.functions_open(erosion_map)
+        dist, area, length, euler4, euler8 = mk.functions_close(erosion_map)
 
         plt.plot(dist,area)
         plt.show()
@@ -658,7 +671,10 @@ cpdef functions_close(np.ndarray closing, res = None):
         plt.plot(dist,length)
         plt.show()
 
-        plt.plot(dist,euler)
+        plt.plot(dist,euler4)
+        plt.show()
+
+        plt.plot(dist,euler8)
         plt.show()
 
     For a 3D image the Minkowski functionals can be computed using the following
@@ -685,7 +701,7 @@ cpdef functions_close(np.ndarray closing, res = None):
         plt.imshow(erosion_map[:,:,64])
         plt.show()
 
-        dist, volume, surface, curvature, euler = mk.functions_open(erosion_map)
+        dist, volume, surface, curvature, euler6, euler26 = mk.functions_close(erosion_map)
 
         plt.plot(dist,volume)
         plt.show()
@@ -696,7 +712,10 @@ cpdef functions_close(np.ndarray closing, res = None):
         plt.plot(dist,curvature)
         plt.show()
 
-        plt.plot(dist,euler)
+        plt.plot(dist,euler6)
+        plt.show()
+
+        plt.plot(dist,euler26)
         plt.show()
 
     """
@@ -785,7 +804,7 @@ def _functions_close_2d(
         &euler8[0])
 
     assert status == 0
-    return dist, area, length, euler8
+    return dist, area, length, euler4, euler8
 
 
 cdef extern from "minkowskic.h":
@@ -846,7 +865,8 @@ def _functions_close_3d(
         &euler26[0])
 
     assert status == 0
-    return dist, volume, surface, curvature, euler26
+    return dist, volume, surface, curvature, euler6, euler26
+
 
 # }}}
 ###############################################################################

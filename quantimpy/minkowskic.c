@@ -564,7 +564,8 @@ double eul6_dens_3d(long int *h, double res0, double res1, double res2) {
 	    -1, 0, -1, 0, -1, 0, 0, 0, -2, 0, -1, 0, -1, 0, 0, 0,
 	     0, 0,  0, 0,  0, 0, 1, 0, -1, 0,  0, 0,  0, 0, 1, 0,
 	};
- 
+
+// Switch to complement domain
 	for (i = 0; i < 256; i++) {
         p = i^255; 
         hi[i] = h[p];
@@ -580,6 +581,7 @@ double eul6_dens_3d(long int *h, double res0, double res1, double res2) {
 }
 
 /******************************************************************************/
+// This function is shown on page 122 of ohser 2000
 
 double eu26_dens_3d(long int *h, double res0, double res1, double res2) {
 	int i;

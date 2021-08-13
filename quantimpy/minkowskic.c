@@ -393,7 +393,7 @@ double volu_dens_3d(long int *h) {
 
 double surf_dens_3d(long int *h, double res0, double res1, double res2) {
     int i, l;
-	unsigned long sv, le=0;
+	unsigned long sv, le = 0;
 	double wi[13], r[13], Sv, Lv, *Delta, *weight;
 	int kl[13][2] = {{1,2},{1,4},{1,16},{1,8},{2,4},{1,32},{2,16},{1,64},{4,16},{1,128},{2,64},{4,32},{8,16}};
 
@@ -418,7 +418,7 @@ double surf_dens_3d(long int *h, double res0, double res1, double res2) {
 
     for (l = 0; l < 256; l++) le += h[l];
 
-    Sv = Lv =0;
+    Sv = Lv = 0;
     for (i = 0; i < 13; i++) {
         if (wi[i]) {
             sv = 0;
@@ -448,19 +448,20 @@ double curv_dens_3d(long int *h, double res0, double res1, double res2) {
  * results for the different planes are weighted by the sin of the plane to the
  * vertical axis */
     int i, k, l;
-	unsigned long iVol = 0;
+	unsigned long mc, le = 0;
   	int kr[9][4] = {{1, 2, 4,  8},{1, 2,16,32},{1, 4,16, 64},
                     {1, 2,64,128},{4,16, 8,32},{1,32, 4,128},
                     {2, 8,16, 64},{2, 4,32,64},{1,16, 8,128}};
 	int kt[8][3] = {{1,64, 32},{2,16,128},{8,64,32},{4,16,128},
 			        {2, 4,128},{8, 1, 64},{2, 4,16},{8, 1,32}};
-	double wi[13], a[13], r[13], s, mc, atr;
+	double wi[13], a[13], r[3], s, Mc, atr;
 	double r01, r02, r12;
 	double *Delta, *weight;
 
-	Delta = (double *)malloc(3*sizeof(double));
+	Delta  = (double *)malloc(3*sizeof(double));
+	weight = (double *)malloc(7*sizeof(double));
 
-	mc = 0;
+	for (i = 0; i < 7; i++) weight[i] = 0;
 
 	r[0] = Delta[0] = res0; 
 	r[1] = Delta[1] = res1; 
@@ -472,45 +473,61 @@ double curv_dens_3d(long int *h, double res0, double res1, double res2) {
 
 	s = (r01 + r02 + r12)/2;	
 
-	a[0] = r[0]*r[1]; a[1] = r[0]*r[2]; a[2] = r[1]*r[2];
-	a[3] = a[4] = r[2]*r01;
+	a[0] = r[0]*r[1]; 
+    a[1] = r[0]*r[2]; 
+    a[2] = r[1]*r[2];
+	a[3] = a[4] = r[0]*r12;
 	a[5] = a[6] = r[1]*r02;
-	a[7] = a[8] = r[0]*r12;
+	a[7] = a[8] = r[2]*r01;
 	atr = sqrt(s*(s-r01)*(s-r02)*(s-r12));
 	a[9] = a[10] = a[11] = a[12] = 2*atr;
 
-	weight=(double *)malloc(7*sizeof(double));
-
-	for (i = 0; i < 7; i++) weight[i] = 0;
-
 	weights(Delta, weight);
- 	wi[0]  = weight[0]; wi[1] = weight[1]; wi[2]  = weight[2]; wi[3]  = weight[3];
-	wi[4]  = weight[3]; wi[5] = weight[5]; wi[6]  = weight[5]; wi[7]  = weight[4];
-	wi[8]  = weight[4]; wi[9] = weight[6]; wi[10] = weight[6]; wi[11] = weight[6];
-	wi[12] = weight[6];
+ 	wi[0]  = weight[2]; 
+    wi[1]  = weight[1]; 
+    wi[2]  = weight[0]; 
 
-/* When resolution is anisotropic this code returns a slightly different answer
- * depending on the axis of the anisotropy. This could be a small bug */ 
+    wi[3]  = weight[4];
+	wi[4]  = weight[4]; 
+    wi[5]  = weight[5]; 
+    wi[6]  = weight[5]; 
+    wi[7]  = weight[3];
+	wi[8]  = weight[3]; 
 
-	for (l = 0; l < 256; l++) {
-	    iVol += h[l];
-		for (i = 0; i < 9; i++)
-		    for (k = 0; k < 4; k++)
-                mc += (double)h[l]*wi[i]/(4*a[i])
-			        * (
-                        (l==(l|kr[i][k])) * (0==(l&kr[i][(k+1)%4])) * (0==(l&kr[i][(k+2)%4])) * (0==(l&kr[i][(k+3)%4]))
-			          - (l==(l|kr[i][k])) * (l==(l|kr[i][(k+1)%4])) * (l==(l|kr[i][(k+2)%4])) * (0==(l&kr[i][(k+3)%4]))
-                      );
-		for (i = 9; i < 13; i++)
-            for (k = 0; k < 3; k++)
-                mc += (double)h[l]*wi[i]/(3*a[i])
-			        * (
-                         (l==(l|kt[i-9][k])) * (0==(l&kt[i-9][(k+1)%3])) * (0==(l&kt[i-9][(k+2)%3]))
-                      -  (l==(l|kt[i-5][k])) * (l==(l|kt[i-5][(k+1)%3])) * (0==(l&kt[i-5][(k+2)%3]))
-                      );
+    wi[9]  = weight[6]; 
+    wi[10] = weight[6]; 
+    wi[11] = weight[6];
+    wi[12] = weight[6];
+
+    for (l = 0; l < 256; l++) le += h[l];
+
+    Mc = 0;
+    for (i = 0; i < 9; i++) {
+        mc = 0;
+	    for (l = 0; l < 256; l++) {
+		    for (k = 0; k < 4; k++) {
+                mc += h[l] * (l==(l|kr[i][k])) * (0==(l&kr[i][(k+1)%4])) * (0==(l&kr[i][(k+2)%4])) * (0==(l&kr[i][(k+3)%4]));
+			    mc -= h[l] * (l==(l|kr[i][k])) * (l==(l|kr[i][(k+1)%4])) * (l==(l|kr[i][(k+2)%4])) * (0==(l&kr[i][(k+3)%4]));
+            }
+        }
+	    Mc += wi[i]/(4*a[i])*(double)mc;
     }
 
-    return (double)mc/(double)(iVol) * 2.0/M_PI;
+    for (i = 9; i < 13; i++) {
+        mc = 0;
+	    for (l = 0; l < 256; l++) {
+            for (k = 0; k < 3; k++) {
+                mc += h[l] * (l==(l|kt[i-9][k])) * (0==(l&kt[i-9][(k+1)%3])) * (0==(l&kt[i-9][(k+2)%3]));
+                mc -= h[l] * (l==(l|kt[i-5][k])) * (l==(l|kt[i-5][(k+1)%3])) * (0==(l&kt[i-5][(k+2)%3]));
+            }
+        }
+	    Mc += wi[i]/(3*a[i])*(double)mc;
+    }
+
+	free(Delta);
+	free(weight);
+
+    return (double)Mc/(double)(le) * 2.0/M_PI;
 }
 
 // }}}

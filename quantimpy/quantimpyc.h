@@ -5,6 +5,13 @@
 
 /******************************************************************************/
 
+// Define M_PI for Compilation on Windows
+#ifndef M_PI
+    #define M_PI 3.14159265358979323846
+#endif
+
+/******************************************************************************/
+
 unsigned short r_pixel_2d(int x, int y       , unsigned short* image, int dim1          );
 unsigned short r_pixel_3d(int x, int y, int z, unsigned short* image, int dim1, int dim2);
 

@@ -210,7 +210,7 @@ def _functionals2D(
         &area, &length, &euler4, &euler8)
 
     assert status == 0
-    return area, length, euler4, euler8
+    return area, length, euler8
 
 
 cdef extern from "minkowskic.h":

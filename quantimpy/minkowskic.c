@@ -360,14 +360,14 @@ double eul4_dens_2d(long int *h, double res0, double res1) {
 double eul8_dens_2d(long int *h, double res0, double res1) {
 	int i;
 	long int iChi = 0, iVol = 0;
-	int iu[16] = {0, 0, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, -1, 0};
+	int iu[16] = {0, 3, 3, 0, 3, 0,  6, -3, 3, 6, 0, -3, 0, -3, -3, 0};
  
  	for(i = 0; i < 16; i++) {
 		iChi += iu[i]*h[i];
 		iVol += h[i];
 	}
 
-    return (double)iChi/((double)iVol*res0*res1)/M_PI;
+    return (double)iChi/((double)iVol*res0*res1)/(12*M_PI);
 }
 
 // }}}

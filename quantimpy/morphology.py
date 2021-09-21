@@ -37,7 +37,8 @@ def erode(image, dist, res = None):
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
-        dilation array.
+        dilation array and all elements of the resolution array need to be
+        larger than or equal to one.
 
     Returns
     -------
@@ -99,6 +100,10 @@ def erode(image, dist, res = None):
         plt.show()
 
     """
+
+    if not (res is None):
+        if (np.any(res < 1.0)):
+            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
     
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
@@ -160,7 +165,8 @@ def dilate(image, dist, res = None):
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
-        dilation array.
+        dilation array and all elements of the resolution array need to be
+        larger than or equal to one.
 
     Returns
     -------
@@ -222,6 +228,10 @@ def dilate(image, dist, res = None):
         plt.show()
 
     """
+
+    if not (res is None):
+        if (np.any(res < 1.0)):
+            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
     
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
@@ -283,7 +293,8 @@ def open(erosion, dist, res = None):
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
-        dilation array.
+        dilation array and all elements of the resolution array need to be
+        larger than or equal to one.
 
     Returns
     -------
@@ -377,7 +388,8 @@ def close(dilation, dist, res = None):
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
-        dilation array.
+        dilation array and all elements of the resolution array need to be
+        larger than or equal to one.
 
     Returns
     -------
@@ -468,7 +480,8 @@ def erode_map(image, res = None):
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in
         all directions. If a resolution is provided it needs to be of the same
-        dimension as the dilation array.
+        dimension as the dilation array and all elements of the resolution array need to be
+        larger than or equal to one.
 
     Returns
     -------
@@ -530,6 +543,10 @@ def erode_map(image, res = None):
         plt.show()
 
     """
+
+    if not (res is None):
+        if (np.any(res < 1.0)):
+            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
     
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
@@ -586,7 +603,8 @@ def dilate_map(image, res = None):
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
-        dilation array.
+        dilation array and all elements of the resolution array need to be
+        larger than or equal to one.
 
     Returns
     -------
@@ -648,6 +666,10 @@ def dilate_map(image, res = None):
         plt.show()
     
     """
+
+    if not (res is None):
+        if (np.any(res < 1.0)):
+            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
     
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
@@ -706,7 +728,8 @@ def open_map(erosion_map, res = None):
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
-        dilation array.
+        dilation array and all elements of the resolution array need to be
+        larger than or equal to one.
 
     Returns
     -------
@@ -797,6 +820,10 @@ def open_map(erosion_map, res = None):
     .. _10.1109/MCSE.2007.55: https://doi.org/10.1109/MCSE.2007.55
 
     """
+
+    if not (res is None):
+        if (np.any(res < 1.0)):
+            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
     
     if (erosion_map.dtype != "uint16"):
         raise ValueError("Input image needs to be data type uint16")
@@ -878,7 +905,8 @@ def close_map(dilation_map, res = None):
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
-        dilation array.
+        dilation array and all elements of the resolution array need to be
+        larger than or equal to one.
 
     Returns
     -------
@@ -944,6 +972,10 @@ def close_map(dilation_map, res = None):
         plt.show()
 
     """
+
+    if not (res is None):
+        if (np.any(res < 1.0)):
+            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
     
     if (dilation_map.dtype != "uint16"):
         raise ValueError("Input image needs to be data type uint16")

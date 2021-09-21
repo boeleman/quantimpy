@@ -25,10 +25,10 @@ np.import_array()
 cpdef functionals(np.ndarray image, res = None):
     r"""Compute the Minkowski functionals in 2D or 3D.
 
-    This function computes the Minkowski functionals for Numpy array `image`. Both
+    This function computes the Minkowski functionals for the Numpy array `image`. Both
     2D and 3D arrays are supported. Optionally, the (anisotropic) resolution of the
     array can be provided using the Numpy array `res`. When a resolution array is
-    provided it needs to be the same dimension as the image array.
+    provided it needs to be of the same dimension as the image array.
 
     Parameters
     ----------
@@ -37,7 +37,8 @@ cpdef functionals(np.ndarray image, res = None):
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
-        image array.
+        image array and all elements of the resolution array need to be
+        larger than or equal to one.
 
     Returns
     -------
@@ -141,11 +142,19 @@ cpdef functionals(np.ndarray image, res = None):
 
     """
 
+    if not (res is None):
+        if (np.any(res < 1.0)):
+            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
+
     if (image.dtype == 'bool'):
         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
     else:
         raise ValueError('Input image needs to be binary (data type bool)')
     
+#    if (np.any(res < 1.0)):
+#        raise ValueError('All elements of the resolution array need to be \
+#            larger than or equal to one')
+
     if (image.ndim == 2):
 # Set default resolution (length/voxel)
         if (res is None):
@@ -296,7 +305,8 @@ cpdef functions_open(np.ndarray opening, res = None):
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
-        image array.
+        image array and all elements of the resolution array need to be
+        larger than or equal to one.
 
     Returns
     -------
@@ -424,6 +434,10 @@ cpdef functions_open(np.ndarray opening, res = None):
 
     """
 
+    if not (res is None):
+        if (np.any(res < 1.0)):
+            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
+    
     if not (opening.dtype == 'uint16'):
         opening = opening.astype('uint16')
     
@@ -603,7 +617,8 @@ cpdef functions_close(np.ndarray closing, res = None):
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
-        image array.
+        image array and all elements of the resolution array need to be
+        larger than or equal to one.
 
     Returns
     -------
@@ -698,6 +713,10 @@ cpdef functions_close(np.ndarray closing, res = None):
         plt.show()
 
     """
+
+    if not (res is None):
+        if (np.any(res < 1.0)):
+            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
 
     if not (closing.dtype == 'uint16'):
         closing = closing.astype('uint16')

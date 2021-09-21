@@ -7,14 +7,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>quantimpy.minkowski module &#8212; QuantImPy 0.2.1 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -62,20 +62,21 @@ image resolutions.</p>
 analysis of microstructures in materials science” by Joachim Ohser and Frank
 Mücklich <a class="footnote-reference brackets" href="#id11" id="id2">2</a>.</p>
 <dl class="py function">
-<dt id="quantimpy.minkowski.functionals">
-<code class="sig-prename descclassname">quantimpy.minkowski.</code><code class="sig-name descname">functionals</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">res</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.minkowski.functionals" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="quantimpy.minkowski.functionals">
+<span class="sig-prename descclassname"><span class="pre">quantimpy.minkowski.</span></span><span class="sig-name descname"><span class="pre">functionals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.minkowski.functionals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Minkowski functionals in 2D or 3D.</p>
-<p>This function computes the Minkowski functionals for Numpy array <cite>image</cite>. Both
+<p>This function computes the Minkowski functionals for the Numpy array <cite>image</cite>. Both
 2D and 3D arrays are supported. Optionally, the (anisotropic) resolution of the
 array can be provided using the Numpy array <cite>res</cite>. When a resolution array is
-provided it needs to be the same dimension as the image array.</p>
+provided it needs to be of the same dimension as the image array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>image</strong> (<em>ndarray</em><em>, </em><em>bool</em>) – Image can be either a 2D or 3D array of data type <cite>bool</cite>.</p></li>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
-image array.</p></li>
+image array and all elements of the resolution array need to be
+larger than or equal to one.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -170,8 +171,8 @@ example:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="quantimpy.minkowski.functions_close">
-<code class="sig-prename descclassname">quantimpy.minkowski.</code><code class="sig-name descname">functions_close</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">closing</span></em>, <em class="sig-param"><span class="n">res</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.minkowski.functions_close" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="quantimpy.minkowski.functions_close">
+<span class="sig-prename descclassname"><span class="pre">quantimpy.minkowski.</span></span><span class="sig-name descname"><span class="pre">functions_close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">closing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.minkowski.functions_close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Minkowski functions in 2D or 3D.</p>
 <p>This function computes the Minkowski functionals as function of the
 grayscale values in the Numpy array <cite>closing</cite>. Both 2D and 3D arrays are supported.
@@ -193,7 +194,8 @@ different morphological distance maps.</p>
 <li><p><strong>closing</strong> (<em>ndarray</em><em>, </em><em>float</em>) – Closing can be either a 2D or 3D array of data type <cite>float</cite>.</p></li>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
-image array.</p></li>
+image array and all elements of the resolution array need to be
+larger than or equal to one.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -286,8 +288,8 @@ example:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="quantimpy.minkowski.functions_open">
-<code class="sig-prename descclassname">quantimpy.minkowski.</code><code class="sig-name descname">functions_open</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">opening</span></em>, <em class="sig-param"><span class="n">res</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.minkowski.functions_open" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="quantimpy.minkowski.functions_open">
+<span class="sig-prename descclassname"><span class="pre">quantimpy.minkowski.</span></span><span class="sig-name descname"><span class="pre">functions_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opening</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.minkowski.functions_open" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Minkowski functions in 2D or 3D.</p>
 <p>This function computes the Minkowski functionals as function of the
 grayscale values in the Numpy array <cite>opening</cite>. Both 2D and 3D arrays are supported.
@@ -309,7 +311,8 @@ different morphological distance maps.</p>
 <li><p><strong>opening</strong> (<em>ndarray</em><em>, </em><em>float</em>) – Opening can be either a 2D or 3D array of data type <cite>float</cite>.</p></li>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
-image array.</p></li>
+image array and all elements of the resolution array need to be
+larger than or equal to one.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -463,7 +466,7 @@ doi:<a class="reference external" href="https://doi.org/10.1109/MCSE.2007.55">10
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -495,7 +498,7 @@ doi:<a class="reference external" href="https://doi.org/10.1109/MCSE.2007.55">10
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Arnout Boelens.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
     </div>
   </body>
 </html>

@@ -7,14 +7,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>quantimpy.morphology module &#8212; QuantImPy 0.2.1 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script src="../_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -56,8 +55,8 @@ resolutions.</p>
 <p>To perform morphological operations this library uses the Euclidean distance
 transform <a class="footnote-reference brackets" href="#id20" id="id2">2</a>. These transforms are computed using the <a class="reference external" href="https://pypi.org/project/edt/">MLAEDT-3D</a> library.</p>
 <dl class="py function">
-<dt id="quantimpy.morphology.close">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">close</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dilation</span></em>, <em class="sig-param"><span class="n">dist</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.close" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="quantimpy.morphology.close">
+<span class="sig-prename descclassname"><span class="pre">quantimpy.morphology.</span></span><span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dilation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Morphologically close a binary Numpy array</p>
 <p>This function is an alias for the function
 <a class="reference internal" href="#quantimpy.morphology.erode" title="quantimpy.morphology.erode"><code class="xref py py-func docutils literal notranslate"><span class="pre">erode()</span></code></a>. Together with the
@@ -74,7 +73,8 @@ array.</p>
 <li><p><strong>dist</strong> (<em>{int</em><em>, </em><em>float}</em>) – The distance away from the interface to which an array is closed.</p></li>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
-dilation array.</p></li>
+dilation array and all elements of the resolution array need to be
+larger than or equal to one.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -139,8 +139,8 @@ using the following example:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="quantimpy.morphology.close_map">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">close_map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dilation_map</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.close_map" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="quantimpy.morphology.close_map">
+<span class="sig-prename descclassname"><span class="pre">quantimpy.morphology.</span></span><span class="sig-name descname"><span class="pre">close_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dilation_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.close_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute a morphological closing map of a Numpy array</p>
 <p>Together with the <a class="reference internal" href="#quantimpy.morphology.dilate_map" title="quantimpy.morphology.dilate_map"><code class="xref py py-func docutils literal notranslate"><span class="pre">dilate_map()</span></code></a> function this
 function computes a morphological closing map of the Numpy array
@@ -154,7 +154,8 @@ dimension as the ‘dilation’ array.</p>
 <li><p><strong>dilation_map</strong> (<em>ndarray</em><em>, </em><em>float</em>) – Dilation_map can be either a 2D or 3D array of data type <cite>float</cite>.</p></li>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
-dilation array.</p></li>
+dilation array and all elements of the resolution array need to be
+larger than or equal to one.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -219,8 +220,8 @@ using the following example:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="quantimpy.morphology.dilate">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">dilate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">dist</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.dilate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="quantimpy.morphology.dilate">
+<span class="sig-prename descclassname"><span class="pre">quantimpy.morphology.</span></span><span class="sig-name descname"><span class="pre">dilate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.dilate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Morphologically dilate a binary Numpy array</p>
 <p>This function performs the morphological dilation operation on the binary
 Numpy array <cite>image</cite>. Both 2D and 3D arrays are supported. Optionally, the
@@ -234,7 +235,8 @@ dimension as the ‘image’ array.</p>
 <li><p><strong>dist</strong> (<em>{int</em><em>, </em><em>float}</em>) – The distance away from the interface to which an array is dilated.</p></li>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
-dilation array.</p></li>
+dilation array and all elements of the resolution array need to be
+larger than or equal to one.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -295,8 +297,8 @@ using the following example:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="quantimpy.morphology.dilate_map">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">dilate_map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.dilate_map" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="quantimpy.morphology.dilate_map">
+<span class="sig-prename descclassname"><span class="pre">quantimpy.morphology.</span></span><span class="sig-name descname"><span class="pre">dilate_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.dilate_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute a morphological dilation map of a Numpy array</p>
 <p>This function computes a morphological dilation map of the binary Numpy array
 <cite>image</cite>. Both 2D and 3D arrays are supported. Optionally, the (anisotropic)
@@ -309,7 +311,8 @@ resolution array is provided it needs to be of the same dimension as the
 <li><p><strong>image</strong> (<em>ndarray</em><em>, </em><em>bool</em>) – Image can be either a 2D or 3D array of data type <cite>bool</cite>.</p></li>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
-dilation array.</p></li>
+dilation array and all elements of the resolution array need to be
+larger than or equal to one.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -370,8 +373,8 @@ using the following example:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="quantimpy.morphology.erode">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">erode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">dist</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.erode" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="quantimpy.morphology.erode">
+<span class="sig-prename descclassname"><span class="pre">quantimpy.morphology.</span></span><span class="sig-name descname"><span class="pre">erode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.erode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Morphologically erode a binary Numpy array</p>
 <p>This function performs the morphological erosion on the binary
 Numpy array <cite>image</cite>. Both 2D and 3D arrays are supported. Optionally, the
@@ -385,7 +388,8 @@ dimension as the ‘image’ array.</p>
 <li><p><strong>dist</strong> (<em>{int</em><em>, </em><em>float}</em>) – The distance away from the interface to which an array is dilated.</p></li>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
-dilation array.</p></li>
+dilation array and all elements of the resolution array need to be
+larger than or equal to one.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -446,8 +450,8 @@ using the following example:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="quantimpy.morphology.erode_map">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">erode_map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.erode_map" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="quantimpy.morphology.erode_map">
+<span class="sig-prename descclassname"><span class="pre">quantimpy.morphology.</span></span><span class="sig-name descname"><span class="pre">erode_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.erode_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute a morphological erosion map of a Numpy array</p>
 <p>This function computes a morphological erosion map of the binary Numpy array
 <cite>image</cite>. Both 2D and 3D arrays are supported. Optionally, the (anisotropic)
@@ -460,7 +464,8 @@ resolution array is provided it needs to be of the same dimension as the
 <li><p><strong>image</strong> (<em>ndarray</em><em>, </em><em>bool</em>) – Image can be either a 2D or 3D array of data type <cite>bool</cite>.</p></li>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in
 all directions. If a resolution is provided it needs to be of the same
-dimension as the dilation array.</p></li>
+dimension as the dilation array and all elements of the resolution array need to be
+larger than or equal to one.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -521,8 +526,8 @@ using the following example:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="quantimpy.morphology.open">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">open</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">erosion</span></em>, <em class="sig-param"><span class="n">dist</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.open" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="quantimpy.morphology.open">
+<span class="sig-prename descclassname"><span class="pre">quantimpy.morphology.</span></span><span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">erosion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.open" title="Permalink to this definition">¶</a></dt>
 <dd><p>Morphologically open a binary Numpy array</p>
 <p>This function is an alias for the function
 <a class="reference internal" href="#quantimpy.morphology.dilate" title="quantimpy.morphology.dilate"><code class="xref py py-func docutils literal notranslate"><span class="pre">dilate()</span></code></a>. Together with the
@@ -539,7 +544,8 @@ array.</p>
 <li><p><strong>dist</strong> (<em>{int</em><em>, </em><em>float}</em>) – The distance away from the interface to which an array is opened.</p></li>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
-dilation array.</p></li>
+dilation array and all elements of the resolution array need to be
+larger than or equal to one.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -602,8 +608,8 @@ using the following example:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="quantimpy.morphology.open_map">
-<code class="sig-prename descclassname">quantimpy.morphology.</code><code class="sig-name descname">open_map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">erosion_map</span></em>, <em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.open_map" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="quantimpy.morphology.open_map">
+<span class="sig-prename descclassname"><span class="pre">quantimpy.morphology.</span></span><span class="sig-name descname"><span class="pre">open_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">erosion_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.morphology.open_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute a morphological opening map of a Numpy array</p>
 <p>Together with the <a class="reference internal" href="#quantimpy.morphology.erode_map" title="quantimpy.morphology.erode_map"><code class="xref py py-func docutils literal notranslate"><span class="pre">erode_map()</span></code></a> function this
 function computes a morphological opening map of the Numpy array
@@ -617,7 +623,8 @@ dimension as the ‘dilation’ array.</p>
 <li><p><strong>erosion_map</strong> (<em>ndarray</em><em>, </em><em>float</em>) – Erosion_map can be either a 2D or 3D array of data type <cite>float</cite>.</p></li>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
-dilation array.</p></li>
+dilation array and all elements of the resolution array need to be
+larger than or equal to one.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -732,7 +739,7 @@ doi:<a class="reference external" href="https://doi.org/10.1109/MCSE.2007.55">10
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -761,7 +768,7 @@ doi:<a class="reference external" href="https://doi.org/10.1109/MCSE.2007.55">10
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Arnout Boelens.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
     </div>
   </body>
 </html>

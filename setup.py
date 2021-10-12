@@ -19,7 +19,7 @@ extensions = [
 
 setup(
     name="quantimpy",
-    version="0.2.5",
+    version="0.2.6",
     description="This package performs morphological operations and can compute the Minkowski functionals and functions",
     long_description=README,
     long_description_content_type="text/markdown",

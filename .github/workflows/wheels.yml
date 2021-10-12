@@ -26,8 +26,8 @@ jobs:
 
       - name: Build wheel
         run: python -m cibuildwheel --output-dir dist/
-        env:
-          CIBW_BUILD: cp36-* cp37-* cp38-*
+#        env:
+#          CIBW_BUILD: cp36-* cp37-* cp38-*
 
       - uses: actions/upload-artifact@v2
         with:

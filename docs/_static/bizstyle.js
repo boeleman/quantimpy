@@ -36,6 +36,6 @@ $(window).resize(function(){
         $("li.nav-item-0 a").text("Top");
     }
     else {
-        $("li.nav-item-0 a").text("QuantImPy 0.2.5 documentation");
+        $("li.nav-item-0 a").text("QuantImPy 0.2.6 documentation");
     }
 });

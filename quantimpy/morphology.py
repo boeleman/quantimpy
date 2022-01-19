@@ -485,9 +485,9 @@ def erode_map(image, res = None):
 
     Returns
     -------
-    out : ndarray, float
+    out : ndarray, uint16
         This function returns an erosion map of a binary Numpy array. The return
-        data type is `float`.
+        data type is `uint16`.
 
     See Also
     --------
@@ -608,9 +608,9 @@ def dilate_map(image, res = None):
 
     Returns
     -------
-    out : ndarray, float
+    out : ndarray, uint16
         This function returns a dilation map of a binary Numpy array. The return
-        data type is `float`.
+        data type is `uint16`.
 
     See Also
     --------
@@ -733,9 +733,9 @@ def open_map(erosion_map, res = None):
 
     Returns
     -------
-    out : ndarray, float
+    out : ndarray, uint16
         This function returns a distance map of a morphologically closed Numpy array. The return
-        data type is `float`.
+        data type is `uint16`.
 
     See Also
     --------
@@ -910,9 +910,9 @@ def close_map(dilation_map, res = None):
 
     Returns
     -------
-    out : ndarray, float
+    out : ndarray, uint16
         This function returns a distance map of a morphologically closed Numpy array. The return
-        data type is `float`.
+        data type is `uint16`.
 
     See Also
     --------

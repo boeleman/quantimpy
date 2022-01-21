@@ -1,7 +1,10 @@
 # From https://sgoel.dev/posts/uploading-binary-wheels-to-pypi-from-github-actions/
 
 name: wheels 
-on: [push]
+on:
+  push:
+      branches:
+        - main
 jobs:
   build_wheels:
     runs-on: ${{ matrix.os }}

@@ -37,8 +37,7 @@ cpdef functionals(np.ndarray image, res = None):
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
-        image array and all elements of the resolution array need to be
-        larger than or equal to one.
+        image array.
 
     Returns
     -------
@@ -141,14 +140,14 @@ cpdef functionals(np.ndarray image, res = None):
         print(minkowski)
 
     """
+# Pre-factor is one by default
+    factor = 1.0
 
     if not (res is None):
         if (np.any(res < 1.0)):
 # Decompose resolution in number larger than one and a pre-factor
             factor = np.power(10,np.floor(np.log10(np.amin(res))))
             res = res/factor
-        else:
-            factor = 1.0
 
     if (image.dtype == 'bool'):
         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -171,7 +170,7 @@ cpdef functionals(np.ndarray image, res = None):
         else:
             raise ValueError('Input image and resolution need to be the same dimension')
 
-        return _functionals2D(image, res0, res1)
+        return _functionals2D(image, res0, res1, factor)
     elif (image.ndim == 3):
 # Set default resolution (length/voxel)
         if (res is None):
@@ -186,7 +185,7 @@ cpdef functionals(np.ndarray image, res = None):
         else:
             raise ValueError('Input image and resolution need to be the same dimension')
 
-        return _functionals3D(image, res0, res1, res2)
+        return _functionals3D(image, res0, res1, res2, factor)
     else:
         raise ValueError('Can only handle 2D or 3D images')
 
@@ -207,7 +206,8 @@ cdef extern from "minkowskic.h":
 def _functionals2D(
         np.ndarray[np.uint16_t, ndim=2, mode="c"] image, 
         double res0, 
-        double res1):
+        double res1,
+        double factor):
 
     cdef double area 
     cdef double length 
@@ -223,7 +223,7 @@ def _functionals2D(
         &area, &length, &euler4, &euler8)
 
     assert status == 0
-    return area, length, euler8
+    return area*factor**2, length*factor, euler8
 
 
 cdef extern from "minkowskic.h":
@@ -246,7 +246,8 @@ def _functionals3D(
         np.ndarray[np.uint16_t, ndim=3, mode="c"] image, 
         double res0, 
         double res1, 
-        double res2):
+        double res2,
+        double factor):
 
     cdef double volume 
     cdef double surface 
@@ -274,7 +275,7 @@ def _functionals3D(
         &euler26)
 
     assert status == 0
-    return volume, surface, curvature, euler26
+    return volume*factor**3, surface*factor**2, curvature*factor, euler26
 
 # }}}
 ###############################################################################
@@ -309,8 +310,7 @@ cpdef functions_open(np.ndarray opening, res = None):
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
-        image array and all elements of the resolution array need to be
-        larger than or equal to one.
+        image array.
 
     Returns
     -------
@@ -437,10 +437,14 @@ cpdef functions_open(np.ndarray opening, res = None):
     .. _10.1109/MCSE.2007.55: https://doi.org/10.1109/MCSE.2007.55
 
     """
+# Pre-factor is one by default
+    factor = 1.0
 
     if not (res is None):
         if (np.any(res < 1.0)):
-            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
+# Decompose resolution in number larger than one and a pre-factor
+            factor = np.power(10,np.floor(np.log10(np.amin(res))))
+            res = res/factor
     
     if not (opening.dtype == 'uint16'):
         opening = opening.astype('uint16')
@@ -457,7 +461,7 @@ cpdef functions_open(np.ndarray opening, res = None):
         else:
             raise ValueError('Input image and resolution need to be the same dimension')
 
-        return _FunctionsOpen2D(opening, res0, res1)
+        return _functions_close_2d(opening, res0, res1, factor)
     elif (opening.ndim == 3):
 # Set default resolution (length/voxel)
         if (res is None):
@@ -472,7 +476,7 @@ cpdef functions_open(np.ndarray opening, res = None):
         else:
             raise ValueError('Input image and resolution need to be the same dimension')
 
-        return _FunctionsOpen3D(opening, res0, res1, res2)
+        return _functions_close_3d(opening, res0, res1, res2, factor)
     else:
         raise ValueError('Can only handle 2D or 3D openings')
 
@@ -491,9 +495,12 @@ cdef extern from "minkowskic.h":
         double* euler8)
 
 
-def _FunctionsOpen2D(
+def _functions_close_2d(
         np.ndarray[np.uint16_t, ndim=2, mode="c"] opening, 
-        res0, res1):
+        double res0, 
+        double res1, 
+        double factor):
+
     cdef int dim3
 
     opening = np.ascontiguousarray(opening)
@@ -544,11 +551,12 @@ cdef extern from "minkowskic.h":
         double* euler26)
 
 
-def _FunctionsOpen3D(
+def _functions_close_3d(
         np.ndarray[np.uint16_t, ndim=3, mode="c"] opening, 
-        res0, 
-        res1, 
-        res2):
+        double res0, 
+        double res1, 
+        double res2,
+        double factor):
 
     cdef int dim3
 
@@ -585,7 +593,7 @@ def _FunctionsOpen3D(
         &euler26[0])
 
     assert status == 0
-    return dist, volume, surface, curvature, euler26
+    return dist*factor, volume*factor**3, surface*factor**2, curvature*factor, euler26
 
 
 # }}}
@@ -621,8 +629,7 @@ cpdef functions_close(np.ndarray closing, res = None):
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
-        image array and all elements of the resolution array need to be
-        larger than or equal to one.
+        image array.
 
     Returns
     -------
@@ -717,10 +724,14 @@ cpdef functions_close(np.ndarray closing, res = None):
         plt.show()
 
     """
+# Pre-factor is one by default
+    factor = 1.0
 
     if not (res is None):
         if (np.any(res < 1.0)):
-            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
+# Decompose resolution in number larger than one and a pre-factor
+            factor = np.power(10,np.floor(np.log10(np.amin(res))))
+            res = res/factor
 
     if not (closing.dtype == 'uint16'):
         closing = closing.astype('uint16')
@@ -737,7 +748,7 @@ cpdef functions_close(np.ndarray closing, res = None):
         else:
             raise ValueError('Input image and resolution need to be the same dimension')
 
-        return _functions_close_2d(closing, res0, res1)
+        return _functions_close_2d(closing, res0, res1, factor)
     elif (closing.ndim == 3):
 # Set default resolution (length/voxel)
         if (res is None):
@@ -752,7 +763,7 @@ cpdef functions_close(np.ndarray closing, res = None):
         else:
             raise ValueError('Input image and resolution need to be the same dimension')
 
-        return _functions_close_3d(closing, res0, res1, res2)
+        return _functions_close_3d(closing, res0, res1, res2, factor)
     else:
         raise ValueError('Can only handle 2D or 3D closings')
 
@@ -773,8 +784,9 @@ cdef extern from "minkowskic.h":
 
 def _functions_close_2d(
         np.ndarray[np.uint16_t, ndim=2, mode="c"] closing, 
-        res0, 
-        res1):
+        double res0, 
+        double res1,
+        double factor):
 
     cdef int dim3
 
@@ -828,9 +840,10 @@ cdef extern from "minkowskic.h":
 
 def _functions_close_3d(
         np.ndarray[np.uint16_t, ndim=3, mode="c"] closing, 
-        res0, 
-        res1, 
-        res2):
+        double res0, 
+        double res1, 
+        double res2,
+        double factor):
 
     cdef int dim3
 
@@ -867,7 +880,7 @@ def _functions_close_3d(
         &euler26[0])
 
     assert status == 0
-    return dist, volume, surface, curvature, euler26
+    return dist*factor, volume*factor**3, surface*factor**2, curvature*factor, euler26
 
 
 # }}}

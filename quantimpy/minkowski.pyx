@@ -144,7 +144,11 @@ cpdef functionals(np.ndarray image, res = None):
 
     if not (res is None):
         if (np.any(res < 1.0)):
-            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
+# Decompose resolution in number larger than one and a pre-factor
+            factor = np.power(10,np.floor(np.log10(np.amin(res))))
+            res = res/factor
+        else:
+            factor = 1.0
 
     if (image.dtype == 'bool'):
         image = image.astype(np.uint16)*np.iinfo(np.uint16).max

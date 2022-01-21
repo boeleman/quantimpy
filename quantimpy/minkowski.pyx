@@ -461,7 +461,7 @@ cpdef functions_open(np.ndarray opening, res = None):
         else:
             raise ValueError('Input image and resolution need to be the same dimension')
 
-        return _functions_close_2d(opening, res0, res1, factor)
+        return _functions_open_2d(opening, res0, res1, factor)
     elif (opening.ndim == 3):
 # Set default resolution (length/voxel)
         if (res is None):
@@ -476,7 +476,7 @@ cpdef functions_open(np.ndarray opening, res = None):
         else:
             raise ValueError('Input image and resolution need to be the same dimension')
 
-        return _functions_close_3d(opening, res0, res1, res2, factor)
+        return _functions_open_3d(opening, res0, res1, res2, factor)
     else:
         raise ValueError('Can only handle 2D or 3D openings')
 
@@ -495,7 +495,7 @@ cdef extern from "minkowskic.h":
         double* euler8)
 
 
-def _functions_close_2d(
+def _functions_open_2d(
         np.ndarray[np.uint16_t, ndim=2, mode="c"] opening, 
         double res0, 
         double res1, 
@@ -551,7 +551,7 @@ cdef extern from "minkowskic.h":
         double* euler26)
 
 
-def _functions_close_3d(
+def _functions_open_3d(
         np.ndarray[np.uint16_t, ndim=3, mode="c"] opening, 
         double res0, 
         double res1, 

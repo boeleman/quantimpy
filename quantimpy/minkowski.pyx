@@ -153,10 +153,6 @@ cpdef functionals(np.ndarray image, res = None):
         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
     else:
         raise ValueError('Input image needs to be binary (data type bool)')
-    
-#    if (np.any(res < 1.0)):
-#        raise ValueError('All elements of the resolution array need to be \
-#            larger than or equal to one')
 
     if (image.ndim == 2):
 # Set default resolution (length/voxel)

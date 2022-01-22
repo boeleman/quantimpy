@@ -33,7 +33,8 @@ def erode(image, dist, res = None):
     image : ndarray, bool
         Image can be either a 2D or 3D array of data type `bool`.
     dist : {int, float} 
-        The distance away from the interface to which an array is dilated.
+        The distance away from the interface to which an array is dilated in the
+        same unit of length as used in the resolution.
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
@@ -111,9 +112,9 @@ def erode(image, dist, res = None):
 
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
-  
+
 # Convert to int    
-    dist = int(dist)
+    dist = int(dist/factor)
 
     if (image.ndim == 2):
 # Set default resolution (length/voxel)
@@ -165,7 +166,8 @@ def dilate(image, dist, res = None):
     image : ndarray, bool
         Image can be either a 2D or 3D array of data type `bool`.
     dist : {int, float} 
-        The distance away from the interface to which an array is dilated.
+        The distance away from the interface to which an array is dilated in the
+        same unit of length as used in the resolution.
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
@@ -243,6 +245,9 @@ def dilate(image, dist, res = None):
 
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
+
+# Convert to int    
+    dist = int(dist/factor)
     
     if (image.ndim == 2):
 # Set default resolution (length/voxel)
@@ -297,7 +302,8 @@ def open(erosion, dist, res = None):
     erosion : ndarray, bool
         Erosion can be either a 2D or 3D array of data type `bool`.
     dist : {int, float} 
-        The distance away from the interface to which an array is opened.
+        The distance away from the interface to which an array is opened in the
+        same unit of length as used in the resolution.
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
@@ -392,7 +398,8 @@ def close(dilation, dist, res = None):
     dilation : ndarray, bool
         Dilation can be either a 2D or 3D array of data type `bool`.
     dist : {int, float} 
-        The distance away from the interface to which an array is closed.
+        The distance away from the interface to which an array is closed in the
+        same unit of length as used in the resolution.
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
@@ -559,6 +566,9 @@ def erode_map(image, res = None):
 
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
+
+# Convert to int    
+    dist = int(dist/factor)
     
     if (image.ndim == 2):
 # Set default resolution (length/voxel)
@@ -683,6 +693,9 @@ def dilate_map(image, res = None):
 
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
+
+# Convert to int    
+    dist = int(dist/factor)
     
     if (image.ndim == 2):
 # Set default resolution (length/voxel)

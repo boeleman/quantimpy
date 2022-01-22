@@ -70,7 +70,8 @@ array.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dilation</strong> (<em>ndarray</em><em>, </em><em>bool</em>) – Dilation can be either a 2D or 3D array of data type <cite>bool</cite>.</p></li>
-<li><p><strong>dist</strong> (<em>{int</em><em>, </em><em>float}</em>) – The distance away from the interface to which an array is closed.</p></li>
+<li><p><strong>dist</strong> (<em>{int</em><em>, </em><em>float}</em>) – The distance away from the interface to which an array is closed in the
+same unit of length as used in the resolution.</p></li>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
 dilation array and all elements of the resolution array need to be
@@ -232,7 +233,8 @@ dimension as the ‘image’ array.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>image</strong> (<em>ndarray</em><em>, </em><em>bool</em>) – Image can be either a 2D or 3D array of data type <cite>bool</cite>.</p></li>
-<li><p><strong>dist</strong> (<em>{int</em><em>, </em><em>float}</em>) – The distance away from the interface to which an array is dilated.</p></li>
+<li><p><strong>dist</strong> (<em>{int</em><em>, </em><em>float}</em>) – The distance away from the interface to which an array is dilated in the
+same unit of length as used in the resolution.</p></li>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
 dilation array and all elements of the resolution array need to be
@@ -385,7 +387,8 @@ dimension as the ‘image’ array.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>image</strong> (<em>ndarray</em><em>, </em><em>bool</em>) – Image can be either a 2D or 3D array of data type <cite>bool</cite>.</p></li>
-<li><p><strong>dist</strong> (<em>{int</em><em>, </em><em>float}</em>) – The distance away from the interface to which an array is dilated.</p></li>
+<li><p><strong>dist</strong> (<em>{int</em><em>, </em><em>float}</em>) – The distance away from the interface to which an array is dilated in the
+same unit of length as used in the resolution.</p></li>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
 dilation array and all elements of the resolution array need to be
@@ -541,7 +544,8 @@ array.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>erosion</strong> (<em>ndarray</em><em>, </em><em>bool</em>) – Erosion can be either a 2D or 3D array of data type <cite>bool</cite>.</p></li>
-<li><p><strong>dist</strong> (<em>{int</em><em>, </em><em>float}</em>) – The distance away from the interface to which an array is opened.</p></li>
+<li><p><strong>dist</strong> (<em>{int</em><em>, </em><em>float}</em>) – The distance away from the interface to which an array is opened in the
+same unit of length as used in the resolution.</p></li>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
 dilation array and all elements of the resolution array need to be

@@ -33,7 +33,8 @@ def erode(image, dist, res = None):
     image : ndarray, bool
         Image can be either a 2D or 3D array of data type `bool`.
     dist : {int, float} 
-        The distance away from the interface to which an array is dilated.
+        The distance away from the interface to which an array is dilated in the
+        same unit of length as used in the resolution.
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
@@ -100,16 +101,20 @@ def erode(image, dist, res = None):
         plt.show()
 
     """
+# Pre-factor is one by default
+    factor = 1.0
 
     if not (res is None):
         if (np.any(res < 1.0)):
-            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
-    
+# Decompose resolution in number larger than one and a pre-factor
+            factor = np.power(10,np.floor(np.log10(np.amin(res))))
+            res = res/factor
+
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
-  
+
 # Convert to int    
-    dist = int(dist)
+    dist = int(dist/factor)
 
     if (image.ndim == 2):
 # Set default resolution (length/voxel)
@@ -161,7 +166,8 @@ def dilate(image, dist, res = None):
     image : ndarray, bool
         Image can be either a 2D or 3D array of data type `bool`.
     dist : {int, float} 
-        The distance away from the interface to which an array is dilated.
+        The distance away from the interface to which an array is dilated in the
+        same unit of length as used in the resolution.
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
@@ -228,13 +234,20 @@ def dilate(image, dist, res = None):
         plt.show()
 
     """
+# Pre-factor is one by default
+    factor = 1.0
 
     if not (res is None):
         if (np.any(res < 1.0)):
-            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
-    
+# Decompose resolution in number larger than one and a pre-factor
+            factor = np.power(10,np.floor(np.log10(np.amin(res))))
+            res = res/factor
+
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
+
+# Convert to int    
+    dist = int(dist/factor)
     
     if (image.ndim == 2):
 # Set default resolution (length/voxel)
@@ -289,7 +302,8 @@ def open(erosion, dist, res = None):
     erosion : ndarray, bool
         Erosion can be either a 2D or 3D array of data type `bool`.
     dist : {int, float} 
-        The distance away from the interface to which an array is opened.
+        The distance away from the interface to which an array is opened in the
+        same unit of length as used in the resolution.
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
@@ -384,7 +398,8 @@ def close(dilation, dist, res = None):
     dilation : ndarray, bool
         Dilation can be either a 2D or 3D array of data type `bool`.
     dist : {int, float} 
-        The distance away from the interface to which an array is closed.
+        The distance away from the interface to which an array is closed in the
+        same unit of length as used in the resolution.
     res : ndarray, {int, float}, optional
         By default the resolution is assumed to be 1 <unit of length>/pixel in all directions.
         If a resolution is provided it needs to be of the same dimension as the
@@ -543,13 +558,17 @@ def erode_map(image, res = None):
         plt.show()
 
     """
-
     if not (res is None):
         if (np.any(res < 1.0)):
-            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
-    
+# Decompose resolution in number larger than one and a pre-factor
+            factor = np.power(10,np.floor(np.log10(np.amin(res))))
+            res = res/factor
+
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
+
+# Convert to int    
+    dist = int(dist/factor)
     
     if (image.ndim == 2):
 # Set default resolution (length/voxel)
@@ -666,13 +685,17 @@ def dilate_map(image, res = None):
         plt.show()
     
     """
-
     if not (res is None):
         if (np.any(res < 1.0)):
-            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
-    
+# Decompose resolution in number larger than one and a pre-factor
+            factor = np.power(10,np.floor(np.log10(np.amin(res))))
+            res = res/factor
+
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
+
+# Convert to int    
+    dist = int(dist/factor)
     
     if (image.ndim == 2):
 # Set default resolution (length/voxel)
@@ -820,11 +843,12 @@ def open_map(erosion_map, res = None):
     .. _10.1109/MCSE.2007.55: https://doi.org/10.1109/MCSE.2007.55
 
     """
-
     if not (res is None):
         if (np.any(res < 1.0)):
-            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
-    
+# Decompose resolution in number larger than one and a pre-factor
+            factor = np.power(10,np.floor(np.log10(np.amin(res))))
+            res = res/factor
+
     if (erosion_map.dtype != "uint16"):
         raise ValueError("Input image needs to be data type uint16")
     
@@ -972,11 +996,12 @@ def close_map(dilation_map, res = None):
         plt.show()
 
     """
-
     if not (res is None):
         if (np.any(res < 1.0)):
-            raise ValueError('All elements of the resolution array need to be larger than or equal to one')
-    
+# Decompose resolution in number larger than one and a pre-factor
+            factor = np.power(10,np.floor(np.log10(np.amin(res))))
+            res = res/factor
+
     if (dilation_map.dtype != "uint16"):
         raise ValueError("Input image needs to be data type uint16")
     

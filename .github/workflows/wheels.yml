@@ -3,8 +3,8 @@
 name: wheels 
 on:
   push:
-      branches:
-        - main
+    branches:
+      - main
 jobs:
   build_wheels:
     runs-on: ${{ matrix.os }}

@@ -22,7 +22,7 @@ np.import_array()
 # {{{ functionals
 
 @cython.binding(True)
-cpdef functionals(np.ndarray image, res = None):
+cpdef functionals(np.ndarray image, res = None, norm=False):
     r"""Compute the Minkowski functionals in 2D or 3D.
 
     This function computes the Minkowski functionals for the Numpy array `image`. Both
@@ -278,7 +278,7 @@ def _functionals3D(
 # {{{ functions_open
 
 @cython.binding(True)
-cpdef functions_open(np.ndarray opening, res = None):
+cpdef functions_open(np.ndarray opening, res = None, norm=False):
     r"""
     Compute the Minkowski functions in 2D or 3D.
 
@@ -597,7 +597,7 @@ def _functions_open_3d(
 # {{{ functions_close
 
 @cython.binding(True)
-cpdef functions_close(np.ndarray closing, res = None):
+cpdef functions_close(np.ndarray closing, res = None, norm=False):
     r"""
     Compute the Minkowski functions in 2D or 3D.
 

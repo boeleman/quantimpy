@@ -63,7 +63,7 @@ analysis of microstructures in materials science” by Joachim Ohser and Frank
 Mücklich <a class="footnote-reference brackets" href="#id11" id="id2">2</a>.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="quantimpy.minkowski.functionals">
-<span class="sig-prename descclassname"><span class="pre">quantimpy.minkowski.</span></span><span class="sig-name descname"><span class="pre">functionals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.minkowski.functionals" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">quantimpy.minkowski.</span></span><span class="sig-name descname"><span class="pre">functionals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.minkowski.functionals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Minkowski functionals in 2D or 3D.</p>
 <p>This function computes the Minkowski functionals for the Numpy array <cite>image</cite>. Both
 2D and 3D arrays are supported. Optionally, the (anisotropic) resolution of the
@@ -76,6 +76,8 @@ provided it needs to be of the same dimension as the image array.</p>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
 image array.</p></li>
+<li><p><strong>norm</strong> (<em>bool</em><em>, </em><em>defaults to False</em>) – When norm=True the functionals are normalized with the total area or
+volume of the image. Defaults to norm=False.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -171,7 +173,7 @@ example:</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="quantimpy.minkowski.functions_close">
-<span class="sig-prename descclassname"><span class="pre">quantimpy.minkowski.</span></span><span class="sig-name descname"><span class="pre">functions_close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">closing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.minkowski.functions_close" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">quantimpy.minkowski.</span></span><span class="sig-name descname"><span class="pre">functions_close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">closing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.minkowski.functions_close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Minkowski functions in 2D or 3D.</p>
 <p>This function computes the Minkowski functionals as function of the
 grayscale values in the Numpy array <cite>closing</cite>. Both 2D and 3D arrays are supported.
@@ -194,6 +196,8 @@ different morphological distance maps.</p>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
 image array.</p></li>
+<li><p><strong>norm</strong> (<em>bool</em><em>, </em><em>defaults to False</em>) – When norm=True the functions are normalized with the total area or
+volume of the image. Defaults to norm=False.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -287,7 +291,7 @@ example:</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="quantimpy.minkowski.functions_open">
-<span class="sig-prename descclassname"><span class="pre">quantimpy.minkowski.</span></span><span class="sig-name descname"><span class="pre">functions_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opening</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.minkowski.functions_open" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">quantimpy.minkowski.</span></span><span class="sig-name descname"><span class="pre">functions_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opening</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.minkowski.functions_open" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Minkowski functions in 2D or 3D.</p>
 <p>This function computes the Minkowski functionals as function of the
 grayscale values in the Numpy array <cite>opening</cite>. Both 2D and 3D arrays are supported.
@@ -310,6 +314,8 @@ different morphological distance maps.</p>
 <li><p><strong>res</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>float}</em><em>, </em><em>optional</em>) – By default the resolution is assumed to be 1 &lt;unit of length&gt;/pixel in all directions.
 If a resolution is provided it needs to be of the same dimension as the
 image array.</p></li>
+<li><p><strong>norm</strong> (<em>bool</em><em>, </em><em>defaults to False</em>) – When norm=True the functions are normalized with the total area or
+volume of the image. Defaults to norm=False.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

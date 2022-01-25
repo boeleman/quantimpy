@@ -157,7 +157,7 @@ int c_functions_close_2d(unsigned short* closing, int dim0, int dim1, double res
         if (max < closing[k]) max = closing[k];
     }
 
-    norm = (double)(dim0-1)/dim0 * (dim1-1)/dim1;
+    norm = (double)(dim0-1) * (dim1-1) * res0 * res1;
 
     for (i = 0, j = max-1; j > min-1; i++, j--) {
         printf("\rFunctions close step: %d \n",i+1);
@@ -202,7 +202,7 @@ int c_functions_close_3d(unsigned short* closing, int dim0, int dim1, int dim2, 
         if (max < closing[k]) max = closing[k];
     }
 
-    norm = (double)(dim0-1)/dim0 * (dim1-1)/dim1 * (dim2-1)/dim2;
+    norm = (double)(dim0-1) * (dim1-1) * (dim2-1) * res0 * res1 * res2;
 
     for (i = 0, j = max-1; j > min-1; i++, j--) {
         printf("\rFunctions close step: %d \n",i+1);

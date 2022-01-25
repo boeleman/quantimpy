@@ -566,9 +566,6 @@ def erode_map(image, res = None):
 
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
-
-# Convert to int    
-    dist = int(dist/factor)
     
     if (image.ndim == 2):
 # Set default resolution (length/voxel)
@@ -693,9 +690,6 @@ def dilate_map(image, res = None):
 
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
-
-# Convert to int    
-    dist = int(dist/factor)
     
     if (image.ndim == 2):
 # Set default resolution (length/voxel)

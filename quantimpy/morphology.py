@@ -101,20 +101,11 @@ def erode(image, dist, res = None):
         plt.show()
 
     """
-# Pre-factor is one by default
-    factor = 1.0
-
-    if not (res is None):
-        if (np.any(res < 1.0)):
-# Decompose resolution in number larger than one and a pre-factor
-            factor = np.power(10,np.floor(np.log10(np.amin(res))))
-            res = res/factor
-
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
 
 # Convert to int    
-    dist = int(dist/factor)
+    dist = int(dist)
 
     if (image.ndim == 2):
 # Set default resolution (length/voxel)
@@ -234,20 +225,11 @@ def dilate(image, dist, res = None):
         plt.show()
 
     """
-# Pre-factor is one by default
-    factor = 1.0
-
-    if not (res is None):
-        if (np.any(res < 1.0)):
-# Decompose resolution in number larger than one and a pre-factor
-            factor = np.power(10,np.floor(np.log10(np.amin(res))))
-            res = res/factor
-
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
 
 # Convert to int    
-    dist = int(dist/factor)
+    dist = int(dist)
     
     if (image.ndim == 2):
 # Set default resolution (length/voxel)

@@ -546,9 +546,9 @@ def _functions_open_2d(
     assert status == 0
     if norm:
         total_area = opening.shape[0]*opening.shape[1]*res0*res1
-        return dist*factor, area/(total_area), length/(total_area*factor), euler8/(total_area*factor**2)
+        return dist, area/(total_area), length/(total_area*factor), euler8/(total_area*factor**2)
     else:
-        return dist*factor, area*factor**2, length*factor, euler8
+        return dist, area*factor**2, length*factor, euler8
 
 
 cdef extern from "minkowskic.h":
@@ -613,9 +613,9 @@ def _functions_open_3d(
     assert status == 0
     if norm:
         total_volume = opening.shape[0]*opening.shape[1]*opening.shape[2]*res0*res1*res2
-        return dist*factor, volume/(total_volume), surface/(total_volume*factor), curvature/(total_volume*factor**2), euler26/(total_volume*factor**3)
+        return dist, volume/(total_volume), surface/(total_volume*factor), curvature/(total_volume*factor**2), euler26/(total_volume*factor**3)
     else:
-        return dist*factor, volume*factor**3, surface*factor**2, curvature*factor, euler26
+        return dist, volume*factor**3, surface*factor**2, curvature*factor, euler26
 
 
 # }}}
@@ -846,9 +846,9 @@ def _functions_close_2d(
     assert status == 0
     if norm:
         total_area = closing.shape[0]*closing.shape[1]*res0*res1
-        return dist*factor, area/(total_area), length/(total_area*factor), euler8/(total_area*factor**2)
+        return dist, area/(total_area), length/(total_area*factor), euler8/(total_area*factor**2)
     else:
-        return dist*factor, area*factor**2, length*factor, euler8
+        return dist, area*factor**2, length*factor, euler8
 
 
 cdef extern from "minkowskic.h":
@@ -913,9 +913,9 @@ def _functions_close_3d(
     assert status == 0
     if norm:
         total_volume = closing.shape[0]*closing.shape[1]*closing.shape[2]*res0*res1*res2
-        return dist*factor, volume/(total_volume), surface/(total_volume*factor), curvature/(total_volume*factor**2), euler26/(total_volume*factor**3)
+        return dist, volume/(total_volume), surface/(total_volume*factor), curvature/(total_volume*factor**2), euler26/(total_volume*factor**3)
     else:
-        return dist*factor, volume*factor**3, surface*factor**2, curvature*factor, euler26
+        return dist, volume*factor**3, surface*factor**2, curvature*factor, euler26
 
 
 # }}}

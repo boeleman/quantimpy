@@ -540,12 +540,6 @@ def erode_map(image, res = None):
         plt.show()
 
     """
-    if not (res is None):
-        if (np.any(res < 1.0)):
-# Decompose resolution in number larger than one and a pre-factor
-            factor = np.power(10,np.floor(np.log10(np.amin(res))))
-            res = res/factor
-
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
     
@@ -664,12 +658,6 @@ def dilate_map(image, res = None):
         plt.show()
     
     """
-    if not (res is None):
-        if (np.any(res < 1.0)):
-# Decompose resolution in number larger than one and a pre-factor
-            factor = np.power(10,np.floor(np.log10(np.amin(res))))
-            res = res/factor
-
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
     
@@ -819,12 +807,6 @@ def open_map(erosion_map, res = None):
     .. _10.1109/MCSE.2007.55: https://doi.org/10.1109/MCSE.2007.55
 
     """
-    if not (res is None):
-        if (np.any(res < 1.0)):
-# Decompose resolution in number larger than one and a pre-factor
-            factor = np.power(10,np.floor(np.log10(np.amin(res))))
-            res = res/factor
-
     if (erosion_map.dtype != "uint16"):
         raise ValueError("Input image needs to be data type uint16")
     
@@ -972,12 +954,6 @@ def close_map(dilation_map, res = None):
         plt.show()
 
     """
-    if not (res is None):
-        if (np.any(res < 1.0)):
-# Decompose resolution in number larger than one and a pre-factor
-            factor = np.power(10,np.floor(np.log10(np.amin(res))))
-            res = res/factor
-
     if (dilation_map.dtype != "uint16"):
         raise ValueError("Input image needs to be data type uint16")
     

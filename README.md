@@ -11,7 +11,8 @@ image processing.
 
 Documentation can be found on [Github.io](https://boeleman.github.io/quantimpy/)
 
-This library can be installed using pip:
+This library is available on [pypi.org](https://pypi.org/project/quantimpy/) and
+can be installed using pip:
 
 `pip install quantimpy`
 

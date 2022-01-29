@@ -41,17 +41,17 @@ ext3 = [0, image3.shape[0]*res3[0], 0, image3.shape[1]*res3[1]]
 #plt.imshow(image3[:,:,128],extent=ext3)
 #plt.show()
 
-erosion0 = mp.erode(image0,15,res0)
-opening0  = mp.close(erosion0,15,res0)
+erosion0 = mp.erode(image0,12,res0)
+opening0  = mp.open(erosion0,12,res0)
 
-erosion1 = mp.erode(image1,15)
-opening1  = mp.close(erosion1,15)
+erosion1 = mp.erode(image1,12)
+opening1  = mp.open(erosion1,12)
 
-erosion2 = mp.erode(image2,15,res2)
-opening2  = mp.close(erosion2,15,res2)
+erosion2 = mp.erode(image2,12,res2)
+opening2  = mp.open(erosion2,12,res2)
 
-erosion3 = mp.erode(image3,15,res3)
-opening3  = mp.close(erosion3,15,res3)
+erosion3 = mp.erode(image3,12,res3)
+opening3  = mp.open(erosion3,12,res3)
 
 #plt.gray()
 #plt.imshow(erosion0[:,:,32],extent=ext0)
@@ -70,6 +70,27 @@ opening3  = mp.close(erosion3,15,res3)
 #plt.show()
 
 # These images should be the same (exept difference caused by resolution)
+plt.gray()
+plt.imshow(opening0[:,:,32],extent=ext0)
+plt.show()
+
+plt.gray()
+plt.imshow(opening1[:,:,64])
+plt.show()
+
+plt.gray()
+plt.imshow(opening2[:,:,128],extent=ext2)
+plt.show()
+
+plt.gray()
+plt.imshow(opening3[:,:,128],extent=ext3)
+plt.show()
+
+opening0 = ~np.logical_and(image0,~opening0)
+opening1 = ~np.logical_and(image1,~opening1)
+opening2 = ~np.logical_and(image2,~opening2)
+opening3 = ~np.logical_and(image3,~opening3)
+
 plt.gray()
 plt.imshow(opening0[:,:,32],extent=ext0)
 plt.show()

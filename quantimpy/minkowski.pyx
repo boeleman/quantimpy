@@ -143,14 +143,11 @@ cpdef functionals(np.ndarray image, res = None, norm=False):
         print(minkowski)
 
     """
-# Pre-factor is one by default
-    factor = 1.0
-
-    if not (res is None):
-        if (np.any(res < 1.0)):
 # Decompose resolution in number larger than one and a pre-factor
-            factor = np.power(10,np.floor(np.log10(np.amin(res))))
-            res = res/factor
+    factor = 1.0
+    if not (res is None):
+        factor = np.amin(res)
+        res = res/factor
 
     if (image.dtype == 'bool'):
         image = image.astype(np.uint16)*np.iinfo(np.uint16).max
@@ -449,14 +446,11 @@ cpdef functions_open(np.ndarray opening, res = None, norm=False):
     .. _10.1109/MCSE.2007.55: https://doi.org/10.1109/MCSE.2007.55
 
     """
-# Pre-factor is one by default
-    factor = 1.0
-
-    if not (res is None):
-        if (np.any(res < 1.0)):
 # Decompose resolution in number larger than one and a pre-factor
-            factor = np.power(10,np.floor(np.log10(np.amin(res))))
-            res = res/factor
+    factor = 1.0        
+    if not (res is None):
+        factor = np.amin(res)
+        res = res/factor
     
     if not (opening.dtype == 'uint16'):
         opening = opening.astype('uint16')
@@ -546,9 +540,9 @@ def _functions_open_2d(
     assert status == 0
     if norm:
         total_area = opening.shape[0]*opening.shape[1]*res0*res1
-        return dist, area/(total_area), length/(total_area*factor), euler8/(total_area*factor**2)
+        return dist*factor, area/(total_area), length/(total_area*factor), euler8/(total_area*factor**2)
     else:
-        return dist, area*factor**2, length*factor, euler8
+        return dist*factor, area*factor**2, length*factor, euler8
 
 
 cdef extern from "minkowskic.h":
@@ -613,9 +607,9 @@ def _functions_open_3d(
     assert status == 0
     if norm:
         total_volume = opening.shape[0]*opening.shape[1]*opening.shape[2]*res0*res1*res2
-        return dist, volume/(total_volume), surface/(total_volume*factor), curvature/(total_volume*factor**2), euler26/(total_volume*factor**3)
+        return dist*factor, volume/(total_volume), surface/(total_volume*factor), curvature/(total_volume*factor**2), euler26/(total_volume*factor**3)
     else:
-        return dist, volume*factor**3, surface*factor**2, curvature*factor, euler26
+        return dist*factor, volume*factor**3, surface*factor**2, curvature*factor, euler26
 
 
 # }}}
@@ -749,14 +743,11 @@ cpdef functions_close(np.ndarray closing, res = None, norm=False):
         plt.show()
 
     """
-# Pre-factor is one by default
-    factor = 1.0
-
-    if not (res is None):
-        if (np.any(res < 1.0)):
 # Decompose resolution in number larger than one and a pre-factor
-            factor = np.power(10,np.floor(np.log10(np.amin(res))))
-            res = res/factor
+    factor = 1.0
+    if not (res is None):
+        factor = np.amin(res)
+        res = res/factor
 
     if not (closing.dtype == 'uint16'):
         closing = closing.astype('uint16')
@@ -846,9 +837,9 @@ def _functions_close_2d(
     assert status == 0
     if norm:
         total_area = closing.shape[0]*closing.shape[1]*res0*res1
-        return dist, area/(total_area), length/(total_area*factor), euler8/(total_area*factor**2)
+        return dist*factor, area/(total_area), length/(total_area*factor), euler8/(total_area*factor**2)
     else:
-        return dist, area*factor**2, length*factor, euler8
+        return dist*factor, area*factor**2, length*factor, euler8
 
 
 cdef extern from "minkowskic.h":
@@ -913,9 +904,9 @@ def _functions_close_3d(
     assert status == 0
     if norm:
         total_volume = closing.shape[0]*closing.shape[1]*closing.shape[2]*res0*res1*res2
-        return dist, volume/(total_volume), surface/(total_volume*factor), curvature/(total_volume*factor**2), euler26/(total_volume*factor**3)
+        return dist*factor, volume/(total_volume), surface/(total_volume*factor), curvature/(total_volume*factor**2), euler26/(total_volume*factor**3)
     else:
-        return dist, volume*factor**3, surface*factor**2, curvature*factor, euler26
+        return dist*factor, volume*factor**3, surface*factor**2, curvature*factor, euler26
 
 
 # }}}

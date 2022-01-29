@@ -41,10 +41,10 @@ ext3 = [0, image3.shape[0]*res3[0], 0, image3.shape[1]*res3[1]]
 #plt.imshow(image3[:,:],extent=ext3)
 #plt.show()
 
-dilation0 = mp.dilate(image0,15,res0)
-dilation1 = mp.dilate(image1,15)
-dilation2 = mp.dilate(image2,15,res2)
-dilation3 = mp.dilate(image3,15,res3)
+dilation0 = mp.dilate(image0,12,res0)
+dilation1 = mp.dilate(image1,12)
+dilation2 = mp.dilate(image2,12,res2)
+dilation3 = mp.dilate(image3,12,res3)
 
 # These images should be the same (exept difference caused by resolution)
 plt.gray()

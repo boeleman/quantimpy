@@ -104,8 +104,11 @@ def erode(image, dist, res = None):
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
 
-# Convert to int    
-    dist = int(dist)
+# Rescale resolution
+    factor = 1.0
+    if not (res is None):
+        factor = np.amin(res)
+        res = res/factor
 
     if (image.ndim == 2):
 # Set default resolution (length/voxel)
@@ -119,7 +122,7 @@ def erode(image, dist, res = None):
         else:
             raise ValueError("Input image and resolution need to be the same dimension")
 
-        return edt.edt(image, anisotropy=(res0, res1)).astype(np.uint16) >= dist
+        return edt.edt(image, anisotropy=(res0, res1)) >= dist/factor
     elif (image.ndim == 3):
 # Set default resolution (length/voxel)
         if (res is None):
@@ -134,7 +137,7 @@ def erode(image, dist, res = None):
         else:
             raise ValueError("Input image and resolution need to be the same dimension")
 
-        return edt.edt(image, anisotropy=(res0, res1, res2)).astype(np.uint16) >= dist
+        return edt.edt(image, anisotropy=(res0, res1, res2)) >= dist/factor
     else:
         raise ValueError("Only 2D and 3D images are supported")
 
@@ -228,8 +231,11 @@ def dilate(image, dist, res = None):
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
 
-# Convert to int    
-    dist = int(dist)
+# Rescale resolution
+    factor = 1.0
+    if not (res is None):
+        factor = np.amin(res)
+        res = res/factor
     
     if (image.ndim == 2):
 # Set default resolution (length/voxel)
@@ -243,7 +249,7 @@ def dilate(image, dist, res = None):
         else:
             raise ValueError("Input image and resolution need to be the same dimension")
 
-        return edt.edt(np.logical_not(image), anisotropy=(res0, res1)).astype(np.uint16) < dist
+        return edt.edt(np.logical_not(image), anisotropy=(res0, res1)) < dist/factor
     elif (image.ndim == 3):
 # Set default resolution (length/voxel)
         if (res is None):
@@ -258,7 +264,7 @@ def dilate(image, dist, res = None):
         else:
             raise ValueError("Input image and resolution need to be the same dimension")
 
-        return edt.edt(np.logical_not(image), anisotropy=(res0, res1, res2)).astype(np.uint16) < dist
+        return edt.edt(np.logical_not(image), anisotropy=(res0, res1, res2)) < dist/factor
     else:
         raise ValueError("Only 2D and 3D images are supported")
 
@@ -542,7 +548,12 @@ def erode_map(image, res = None):
     """
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
-    
+
+# Rescale resolution
+    if not (res is None):
+        factor = np.amin(res)
+        res = res/factor
+
     if (image.ndim == 2):
 # Set default resolution (length/voxel)
         if (res is None):
@@ -660,6 +671,11 @@ def dilate_map(image, res = None):
     """
     if (image.dtype != "bool"):
         raise ValueError("Input image needs to be binary (data type bool)")
+
+# Rescale resolution
+    if not (res is None):
+        factor = np.amin(res)
+        res = res/factor
     
     if (image.ndim == 2):
 # Set default resolution (length/voxel)
@@ -809,6 +825,11 @@ def open_map(erosion_map, res = None):
     """
     if (erosion_map.dtype != "uint16"):
         raise ValueError("Input image needs to be data type uint16")
+
+# Rescale resolution
+    if not (res is None):
+        factor = np.amin(res)
+        res = res/factor
     
     if (erosion_map.ndim == 2):
 # Set default resolution (length/voxel)
@@ -956,6 +977,11 @@ def close_map(dilation_map, res = None):
     """
     if (dilation_map.dtype != "uint16"):
         raise ValueError("Input image needs to be data type uint16")
+
+# Rescale resolution
+    if not (res is None):
+        factor = np.amin(res)
+        res = res/factor
     
     if (dilation_map.ndim == 2):
 # Set default resolution (length/voxel)

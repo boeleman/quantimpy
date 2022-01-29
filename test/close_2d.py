@@ -45,17 +45,17 @@ ext3 = [0, image3.shape[0]*res3[0], 0, image3.shape[1]*res3[1]]
 #plt.imshow(image3[:,:],extent=ext3)
 #plt.show()
 
-dilation0 = mp.dilate(image0,15,res0)
-closing0  = mp.close(dilation0,15,res0)
+dilation0 = mp.dilate(image0,12,res0)
+closing0  = mp.close(dilation0,12,res0)
 
-dilation1 = mp.dilate(image1,15)
-closing1  = mp.close(dilation1,15)
+dilation1 = mp.dilate(image1,12)
+closing1  = mp.close(dilation1,12)
 
-dilation2 = mp.dilate(image2,15,res2)
-closing2  = mp.close(dilation2,15,res2)
+dilation2 = mp.dilate(image2,12,res2)
+closing2  = mp.close(dilation2,12,res2)
 
-dilation3 = mp.dilate(image3,15,res3)
-closing3  = mp.close(dilation3,15,res3)
+dilation3 = mp.dilate(image3,12,res3)
+closing3  = mp.close(dilation3,12,res3)
 
 #plt.gray()
 #plt.imshow(dilation0[:,:],extent=ext0)
@@ -74,6 +74,27 @@ closing3  = mp.close(dilation3,15,res3)
 #plt.show()
 
 # These images should be the same (exept difference caused by resolution)
+plt.gray()
+plt.imshow(closing0[:,:],extent=ext0)
+plt.show()
+
+plt.gray()
+plt.imshow(closing1[:,:])
+plt.show()
+
+plt.gray()
+plt.imshow(closing2[:,:],extent=ext2)
+plt.show()
+
+plt.gray()
+plt.imshow(closing3[:,:],extent=ext3)
+plt.show()
+
+closing0 = ~np.logical_and(~image0,closing0)
+closing1 = ~np.logical_and(~image1,closing1)
+closing2 = ~np.logical_and(~image2,closing2)
+closing3 = ~np.logical_and(~image3,closing3)
+
 plt.gray()
 plt.imshow(closing0[:,:],extent=ext0)
 plt.show()

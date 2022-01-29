@@ -41,10 +41,10 @@ ext3 = [0, image3.shape[0]*res3[0], 0, image3.shape[1]*res3[1]]
 #plt.imshow(image3[:,:],extent=ext3)
 #plt.show()
 
-erosion0 = mp.erode(image0,15,res0)
-erosion1 = mp.erode(image1,15)
-erosion2 = mp.erode(image2,15,res2)
-erosion3 = mp.erode(image3,15,res3)
+erosion0 = mp.erode(image0,12,res0)
+erosion1 = mp.erode(image1,12)
+erosion2 = mp.erode(image2,12,res2)
+erosion3 = mp.erode(image3,12,res3)
 
 # These images should be the same (exept difference caused by resolution)
 plt.gray()

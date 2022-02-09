@@ -15,6 +15,10 @@ extensions = [
         name="quantimpy.minkowski",
         sources=["quantimpy/minkowski.pyx", "quantimpy/quantimpyc.c", "quantimpy/minkowskic.c"],
     ),
+    Extension(
+        name="quantimpy.filters",
+        sources=["quantimpy/filters.pyx"],
+    ),
 ]
 
 setup(

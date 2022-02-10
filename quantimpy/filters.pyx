@@ -40,7 +40,7 @@ cimport numpy as np
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-cpdef _anisodiff2D(np.ndarray[np.double_t, ndim=2] image, int option, int iteration, float K, float gamma):
+cpdef _anisodiff2D(np.ndarray[np.double_t, ndim=2] image, int option, int niter, float K, float gamma):
 
     cdef int i
     cdef int j
@@ -48,7 +48,7 @@ cpdef _anisodiff2D(np.ndarray[np.double_t, ndim=2] image, int option, int iterat
     cdef np.ndarray[np.double_t, ndim=2] flux
     cdef np.ndarray[np.double_t, ndim=2] image_tmp
 
-    for j in range(iteration):
+    for j in range(niter):
         image_tmp = np.zeros_like(image)
 # Loop over dimensions        
         for i in range(image.ndim):
@@ -78,7 +78,7 @@ cpdef _anisodiff2D(np.ndarray[np.double_t, ndim=2] image, int option, int iterat
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-cpdef _anisodiff3D(np.ndarray[np.double_t, ndim=3] image, int option, int iteration, float K, float gamma):
+cpdef _anisodiff3D(np.ndarray[np.double_t, ndim=3] image, int option, int niter, float K, float gamma):
 
     cdef int i
     cdef int j
@@ -86,7 +86,7 @@ cpdef _anisodiff3D(np.ndarray[np.double_t, ndim=3] image, int option, int iterat
     cdef np.ndarray[np.double_t, ndim=3] flux
     cdef np.ndarray[np.double_t, ndim=3] image_tmp
 
-    for j in range(iteration):
+    for j in range(niter):
         image_tmp = np.zeros_like(image)
 # Loop over dimensions        
         for i in range(image.ndim):
@@ -114,10 +114,10 @@ cpdef _anisodiff3D(np.ndarray[np.double_t, ndim=3] image, int option, int iterat
 
     return image
 
-cpdef anisodiff(np.ndarray image, option=1, iteration=1, K=50, gamma=0.1):
+cpdef anisodiff(np.ndarray image, option=1, niter=1, K=50, gamma=0.1):
     if (image.ndim == 2):
-        return _anisodiff2D(image.astype(np.double), option, iteration, K, gamma)
+        return _anisodiff2D(image.astype(np.double), option, niter, K, gamma)
     elif (image.ndim == 3):
-        return _anisodiff3D(image.astype(np.double), option, iteration, K, gamma)
+        return _anisodiff3D(image.astype(np.double), option, niter, K, gamma)
     else:
         raise ValueError('Cannot handle more than three dimensions')

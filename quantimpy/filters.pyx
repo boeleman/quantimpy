@@ -2,8 +2,8 @@ import cython
 import numpy as np
 cimport numpy as np
 
-cpdef anisodiff(np.ndarray image, iteration=1, K=50, gamma=0.1):
-
+###############################################################################
+#
 #Original Matlab code:
 #
 #@incollection{perona1994,
@@ -35,11 +35,20 @@ cpdef anisodiff(np.ndarray image, iteration=1, K=50, gamma=0.1):
 #    outimage = outimage + lambda * 
 #    (fluxN - fluxN(rowS,colC) + fluxE - fluxE(rowC,colW));
 #end;
+#
+###############################################################################
 
-    cdef np.ndarray flux
-    cdef np.ndarray image_tmp
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cpdef _anisodiff2D(np.ndarray[np.double_t, ndim=2] image, int option, int iteration, float K, float gamma):
 
-    for _ in range(iteration):
+    cdef int i
+    cdef int j
+
+    cdef np.ndarray[np.double_t, ndim=2] flux
+    cdef np.ndarray[np.double_t, ndim=2] image_tmp
+
+    for j in range(iteration):
         image_tmp = np.zeros_like(image)
 # Loop over dimensions        
         for i in range(image.ndim):
@@ -47,18 +56,68 @@ cpdef anisodiff(np.ndarray image, iteration=1, K=50, gamma=0.1):
 # Adiabatic boundary condition
             index = [slice(None)]*flux.ndim
             index[i] = 0
-            flux[index] = 0
-    
+            flux[tuple(index)] = 0
+
 #            flux = flux * np.exp(-1/K * np.abs(flux))
-            flux = flux * np.exp(-(flux/K)**2)
+            if (option == 1):
+                flux = flux * np.exp(-(flux/K)**2.)
+            elif (option == 2):
+                flux = flux / (1. + (flux/K)**2.)
+
             flux = np.diff(flux, axis=i, append=0) 
 # Adiabatic boundary condition
             index = [slice(None)]*flux.ndim
-            index[i] = -1
-            flux[index] = 0
+            index[i] = flux.shape[i]-1
+            flux[tuple(index)] = 0
 
             image_tmp = image_tmp + gamma*flux
 
         image = image + image_tmp 
-    
+
     return image
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cpdef _anisodiff3D(np.ndarray[np.double_t, ndim=3] image, int option, int iteration, float K, float gamma):
+
+    cdef int i
+    cdef int j
+
+    cdef np.ndarray[np.double_t, ndim=3] flux
+    cdef np.ndarray[np.double_t, ndim=3] image_tmp
+
+    for j in range(iteration):
+        image_tmp = np.zeros_like(image)
+# Loop over dimensions        
+        for i in range(image.ndim):
+            flux = np.diff(image, axis=i, prepend=0)
+# Adiabatic boundary condition
+            index = [slice(None)]*flux.ndim
+            index[i] = 0
+            flux[tuple(index)] = 0
+
+#            flux = flux * np.exp(-1/K * np.abs(flux))
+            if (option == 1):
+                flux = flux * np.exp(-(flux/K)**2.)
+            elif (option == 2):
+                flux = flux / (1. + (flux/K)**2.)
+
+            flux = np.diff(flux, axis=i, append=0) 
+# Adiabatic boundary condition
+            index = [slice(None)]*flux.ndim
+            index[i] = flux.shape[i]-1
+            flux[tuple(index)] = 0
+
+            image_tmp = image_tmp + gamma*flux
+
+        image = image + image_tmp 
+
+    return image
+
+cpdef anisodiff(np.ndarray image, option=1, iteration=1, K=50, gamma=0.1):
+    if (image.ndim == 2):
+        return _anisodiff2D(image.astype(np.double), option, iteration, K, gamma)
+    elif (image.ndim == 3):
+        return _anisodiff3D(image.astype(np.double), option, iteration, K, gamma)
+    else:
+        raise ValueError('Cannot handle more than three dimensions')

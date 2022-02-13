@@ -39,14 +39,22 @@ from libc.math cimport exp
 #
 ###############################################################################
 
+# Scikit image data types
+#uint8
+#uint16
+#uint32
+#float
+#int8
+#int16
+#int32
 ctypedef fused my_type:
     unsigned char
     unsigned short
     unsigned int
     double
-    char
-    short
-    int
+    signed char
+    signed short
+    signed int
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
@@ -55,7 +63,7 @@ def _anisodiff2D(my_type[:,::1] image, int option, int niter, double K, double g
     cdef int i, j
     cdef int x_max, y_max
 
-    cdef double Kinv = 1./K**2
+    cdef double K_inv = 1./K**2
 
     cdef np.ndarray[np.float64_t, ndim=2] flux
     cdef np.ndarray[np.float64_t, ndim=2] result
@@ -63,6 +71,30 @@ def _anisodiff2D(my_type[:,::1] image, int option, int niter, double K, double g
     
     result = np.asarray(image, dtype=np.float64) 
     result_tmp = np.zeros_like(result)
+
+    dtype = None
+    cdef double dtype_inv = 1.0 
+    if my_type == "unsigned char":
+        dtype = np.uint8
+        dtype_inv = 1.0/(np.iinfo(dtype).max)
+    elif my_type == "unsigned short":
+        dtype = np.uint16
+        dtype_inv = 1.0/(np.iinfo(dtype).max)
+    elif my_type == "unsigned int":
+        dtype = np.uint32
+        dtype_inv = 1.0/(np.iinfo(dtype).max)
+    elif my_type == "double":
+        dtype = np.float64
+        dtype_inv = 1.0 
+    elif my_type == "signed char":
+        dtype = np.int8
+        dtype_inv = 1.0/(np.iinfo(dtype).max)
+    elif my_type == "signed short":
+        dtype = np.int16
+        dtype_inv = 1.0/(np.iinfo(dtype).max)
+    elif my_type == "signed int":
+        dtype = np.int32
+        dtype_inv = 1.0/(np.iinfo(dtype).max)
 
     for j in range(niter):
         result_tmp[:,:] = 0
@@ -75,9 +107,9 @@ def _anisodiff2D(my_type[:,::1] image, int option, int niter, double K, double g
             flux[tuple(index)] = 0
 
             if (option == 1):
-                flux = flux * np.exp(-flux*flux*Kinv)
+                flux = flux * np.exp(-flux*flux*K_inv)
             elif (option == 2):
-                flux = flux / (1. + (flux*flux*Kinv))
+                flux = flux / (1. + (flux*flux*K_inv))
 
             flux = np.diff(flux, axis=i, append=0) 
 # Adiabatic boundary condition
@@ -90,7 +122,7 @@ def _anisodiff2D(my_type[:,::1] image, int option, int niter, double K, double g
         result = result + result_tmp
 
 # Normalize between -1 and 1
-    return result/np.amax(np.abs(result))
+    return result*dtype_inv
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
@@ -99,7 +131,7 @@ def _anisodiff3D(my_type[:,:,::1] image, int option, int niter, double K, double
     cdef int i, j
     cdef int x_max, y_max
 
-    cdef double Kinv = 1./K**2
+    cdef double K_inv = 1./K**2
 
     cdef np.ndarray[np.float64_t, ndim=3] flux
     cdef np.ndarray[np.float64_t, ndim=3] result
@@ -107,6 +139,30 @@ def _anisodiff3D(my_type[:,:,::1] image, int option, int niter, double K, double
     
     result = np.asarray(image, dtype=np.float64) 
     result_tmp = np.zeros_like(result)
+
+    dtype = None
+    cdef double dtype_inv = 1.0 
+    if my_type == "unsigned char":
+        dtype = np.uint8
+        dtype_inv = 1.0/(np.iinfo(dtype).max)
+    elif my_type == "unsigned short":
+        dtype = np.uint16
+        dtype_inv = 1.0/(np.iinfo(dtype).max)
+    elif my_type == "unsigned int":
+        dtype = np.uint32
+        dtype_inv = 1.0/(np.iinfo(dtype).max)
+    elif my_type == "double":
+        dtype = np.float64
+        dtype_inv = 1.0 
+    elif my_type == "signed char":
+        dtype = np.int8
+        dtype_inv = 1.0/(np.iinfo(dtype).max)
+    elif my_type == "signed short":
+        dtype = np.int16
+        dtype_inv = 1.0/(np.iinfo(dtype).max)
+    elif my_type == "signed int":
+        dtype = np.int32
+        dtype_inv = 1.0/(np.iinfo(dtype).max)
 
     for j in range(niter):
         result_tmp[:,:,:] = 0.0
@@ -119,9 +175,9 @@ def _anisodiff3D(my_type[:,:,::1] image, int option, int niter, double K, double
             flux[tuple(index)] = 0
 
             if (option == 1):
-                flux = flux * np.exp(-flux*flux*Kinv)
+                flux = flux * np.exp(-flux*flux*K_inv)
             elif (option == 2):
-                flux = flux / (1. + (flux*flux*Kinv))
+                flux = flux / (1. + (flux*flux*K_inv))
 
             flux = np.diff(flux, axis=i, append=0) 
 # Adiabatic boundary condition
@@ -133,8 +189,8 @@ def _anisodiff3D(my_type[:,:,::1] image, int option, int niter, double K, double
 
         result = result + result_tmp
 
-# Normalize between -1 and 1
-    return result/np.amax(np.abs(result))
+# Normalize
+    return result*dtype_inv
 
 cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
     image = np.ascontiguousarray(image)

@@ -43,25 +43,25 @@ ctypedef fused my_type:
     unsigned char
     unsigned short
     unsigned int
-    float
+    double
     char
     short
     int
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def _anisodiff2D(my_type[:,::1] image, int option, int niter, float K, float gamma):
+def _anisodiff2D(my_type[:,::1] image, int option, int niter, double K, double gamma):
 
     cdef int i, j
     cdef int x_max, y_max
 
-    cdef float Kinv = 1./K**2
+    cdef double Kinv = 1./K**2
 
-    cdef np.ndarray[np.float_t, ndim=2] flux
-    cdef np.ndarray[np.float_t, ndim=2] result
-    cdef np.ndarray[np.float_t, ndim=2] result_tmp
+    cdef np.ndarray[np.float64_t, ndim=2] flux
+    cdef np.ndarray[np.float64_t, ndim=2] result
+    cdef np.ndarray[np.float64_t, ndim=2] result_tmp
     
-    result = np.asarray(image, dtype=np.float) 
+    result = np.asarray(image, dtype=np.float64) 
     result_tmp = np.zeros_like(result)
 
     for j in range(niter):
@@ -94,18 +94,18 @@ def _anisodiff2D(my_type[:,::1] image, int option, int niter, float K, float gam
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def _anisodiff3D(my_type[:,:,::1] image, int option, int niter, float K, float gamma):
+def _anisodiff3D(my_type[:,:,::1] image, int option, int niter, double K, double gamma):
 
     cdef int i, j
     cdef int x_max, y_max
 
-    cdef float Kinv = 1./K**2
+    cdef double Kinv = 1./K**2
 
-    cdef np.ndarray[np.float_t, ndim=3] flux
-    cdef np.ndarray[np.float_t, ndim=3] result
-    cdef np.ndarray[np.float_t, ndim=3] result_tmp
+    cdef np.ndarray[np.float64_t, ndim=3] flux
+    cdef np.ndarray[np.float64_t, ndim=3] result
+    cdef np.ndarray[np.float64_t, ndim=3] result_tmp
     
-    result = np.asarray(image, dtype=np.float) 
+    result = np.asarray(image, dtype=np.float64) 
     result_tmp = np.zeros_like(result)
 
     for j in range(niter):

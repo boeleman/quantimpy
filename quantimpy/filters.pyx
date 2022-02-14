@@ -1,3 +1,9 @@
+r"""Filters for image processing
+
+This module contains filters and other functions for image processing and
+thresholding on both 2D and 3D Numpy [1]_ arrays.
+"""
+
 import cython
 import numpy as np
 cimport numpy as np
@@ -63,7 +69,8 @@ def _anisodiff2D(my_type[:,::1] image, int option, int niter, double K, double g
     cdef int i, j
     cdef int x_max, y_max
 
-    cdef double K_inv = 1./K**2
+    cdef double K_inv = 1./K
+    cdef double K2_inv = 1./K**2
 
     cdef np.ndarray[np.float64_t, ndim=2] flux
     cdef np.ndarray[np.float64_t, ndim=2] result
@@ -106,10 +113,12 @@ def _anisodiff2D(my_type[:,::1] image, int option, int niter, double K, double g
             index[i] = 0
             flux[tuple(index)] = 0
 
-            if (option == 1):
-                flux = flux * np.exp(-flux*flux*K_inv)
+            if (option == 0):
+                flux = flux * np.exp(-np.abs(flux)*K_inv)
+            elif (option == 1):
+                flux = flux * np.exp(-flux**2*K2_inv)
             elif (option == 2):
-                flux = flux / (1. + (flux*flux*K_inv))
+                flux = flux / (1. + (flux**2*K2_inv))
 
             flux = np.diff(flux, axis=i, append=0) 
 # Adiabatic boundary condition
@@ -121,7 +130,7 @@ def _anisodiff2D(my_type[:,::1] image, int option, int niter, double K, double g
 
         result = result + result_tmp
 
-# Normalize between -1 and 1
+# Normalize between -1 and 1 or 0 and 1
     return result*dtype_inv
 
 @cython.boundscheck(False)
@@ -131,7 +140,8 @@ def _anisodiff3D(my_type[:,:,::1] image, int option, int niter, double K, double
     cdef int i, j
     cdef int x_max, y_max
 
-    cdef double K_inv = 1./K**2
+    cdef double K_inv = 1./K
+    cdef double K2_inv = 1./K**2
 
     cdef np.ndarray[np.float64_t, ndim=3] flux
     cdef np.ndarray[np.float64_t, ndim=3] result
@@ -174,10 +184,12 @@ def _anisodiff3D(my_type[:,:,::1] image, int option, int niter, double K, double
             index[i] = 0
             flux[tuple(index)] = 0
 
-            if (option == 1):
-                flux = flux * np.exp(-flux*flux*K_inv)
+            if (option == 0):
+                flux = flux * np.exp(-np.abs(flux)*K_inv)
+            elif (option == 1):
+                flux = flux * np.exp(-flux**2*K2_inv)
             elif (option == 2):
-                flux = flux / (1. + (flux*flux*K_inv))
+                flux = flux / (1. + (flux**2*K2_inv))
 
             flux = np.diff(flux, axis=i, append=0) 
 # Adiabatic boundary condition
@@ -189,10 +201,31 @@ def _anisodiff3D(my_type[:,:,::1] image, int option, int niter, double K, double
 
         result = result + result_tmp
 
-# Normalize
+# Normalize between -1 and 1 or 0 and 1
     return result*dtype_inv
 
 cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
+    r"""
+    Anisotropic diffusion filter
+
+    [2]_
+    
+    References
+    ----------
+    .. [1] Charles R. Harris, K. Jarrod Millman, Stéfan J. van der Walt et al.,
+        "Array programming with NumPy", Nature, vol. 585, pp 357-362, 2020,
+        doi:`10.1038/s41586-020-2649-2`_
+
+    .. _10.1038/s41586-020-2649-2: https://doi.org/10.1038/s41586-020-2649-2
+
+    .. [2] Pietro Perona and Jitendra Malik. "Scale-space and edge detection
+        using anisotropic diffusion", IEEE Transactions on pattern analysis and
+        machine intelligence, vol. 12, no. 7, pp 629-639, 1990, doi:`10.1109/34.56205`_
+
+    .. _10.1109/34.56205: https://doi.org/10.1109/34.56205
+
+
+    """
     image = np.ascontiguousarray(image)
     if (image.ndim == 2):
         return _anisodiff2D(image, option, niter, K, gamma)

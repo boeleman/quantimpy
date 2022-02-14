@@ -9,7 +9,6 @@ To perform morphological operations this library uses the Euclidean distance
 transform [2]_. These transforms are computed using the `MLAEDT-3D`_ library.
 
 .. _MLAEDT-3D: https://pypi.org/project/edt/
-
 """
 
 import numpy as np
@@ -821,7 +820,6 @@ def open_map(erosion_map, res = None):
         doi:`10.1109/MCSE.2007.55`_
 
     .. _10.1109/MCSE.2007.55: https://doi.org/10.1109/MCSE.2007.55
-
     """
     if (erosion_map.dtype != "uint16"):
         raise ValueError("Input image needs to be data type uint16")

@@ -12,5 +12,6 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
+   quantimpy.filters
    quantimpy.minkowski
    quantimpy.morphology

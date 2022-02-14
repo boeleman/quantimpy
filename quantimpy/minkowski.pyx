@@ -9,7 +9,6 @@ Notes
 More information about the used algorithm can be found in the book "Statistical
 analysis of microstructures in materials science" by Joachim Ohser and Frank
 Mücklich [2]_.
-
 """
 
 import cython

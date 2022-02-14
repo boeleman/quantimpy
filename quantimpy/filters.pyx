@@ -208,7 +208,78 @@ cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
     r"""
     Anisotropic diffusion filter
 
-    [2]_
+    This function applies an anisotropic diffusion filter to the 2D and 3D Numpy
+    array `image`. This is also known as Perona Malik diffusion [2]_. This is an
+    edge preserving noise reduction method. The code is based on a Matlab code
+    by Perona, Shiota, and Malik [3]_.
+
+    Parameters
+    ----------
+    image : ndarray, {int, uint, float}
+        Either 2D or 3D grayscale input image.
+    option : int, defaults to 1
+        The `option` parameter selects the conduction coefficient used by the
+        filter. `option=0` selects the following conduction coefficient: 
+
+        .. math:: g (\nabla I) = \exp{(-\frac{||\nabla I||}{K})},
+
+        where :math:`\nabla I` is the image brightness gradient, and :math:`K`
+        is a constant. The above equation is used in a Matlab code by Perona,
+        Shiota, and Malik [3]_. `option=1` selects the conduction coefficient: 
+
+        .. math:: g (\nabla I) = \exp{(-\left(\frac{||\nabla I||}{K}\right)^{2})},
+
+        and `option=2` selects the coefficient: 
+
+        .. math:: g (\nabla I) = \frac{1}{1 + (\frac{||\nabla I||}{K})^{2}}.
+
+        Option one privileges high-contrast edges over low-contrast ones, while
+        the second option privileges wide regions over smaller ones [2]_.
+    niter : int, defaults to 1
+        The number of iterations that the filter is applied.
+    K : float, defaults to 50
+        The value of constant :math:`K` in the above equations.
+    gamma : float, defaults to 0.1
+        Sets the diffusion "time" step size. When :math:`\gamma \leq 0.25`,
+        stability is ensured. 
+            
+    Returns
+    -------
+    out : ndarray, float
+        The noise reduced 2D or 3D output image. The return data type is float
+        and the image is normalized betweeen 0 and 1 or -1 and 1.
+
+    See Also
+    --------
+
+    Examples
+    --------
+    This example use the scikit-image Python package [4]_, the Matplotlib Python
+    package [5]_, and the SciPy Python package [6]_.
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from scipy import misc
+        from skimage.util import random_noise
+        from quantimpy import filters
+
+        # Create image with noise
+        image = misc.ascent()
+        image = random_noise(image, mode='speckle', mean=0.1)
+
+        # Filter image
+        result = filters.anisodiff(image, niter=5)
+
+        # Show results
+        fig = plt.figure()
+        plt.gray()  # show the filtered result in grayscale
+        ax1 = fig.add_subplot(121)  # left side
+        ax2 = fig.add_subplot(122)  # right side
+        ax1.imshow(image)
+        ax2.imshow(result)
+        plt.show()
     
     References
     ----------
@@ -218,13 +289,34 @@ cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
 
     .. _10.1038/s41586-020-2649-2: https://doi.org/10.1038/s41586-020-2649-2
 
-    .. [2] Pietro Perona and Jitendra Malik. "Scale-space and edge detection
+    .. [2] Pietro Perona and Jitendra Malik, "Scale-space and edge detection
         using anisotropic diffusion", IEEE Transactions on pattern analysis and
         machine intelligence, vol. 12, no. 7, pp 629-639, 1990, doi:`10.1109/34.56205`_
 
     .. _10.1109/34.56205: https://doi.org/10.1109/34.56205
 
+    .. [3] Pietro Perona, Takahiro Shiota, and Jitendra Malik, "Anisotropic
+        diffusion", in "Geometry-driven diffusion in computer vision", ed. Bart
+        M. ter Haar Romeny, pp 73-92, 1994, isbn: 9789401716994
 
+    .. [4] Stéfan van der Walt, Johannes L. Schönberger, Juan Nunez-Iglesias,
+        François Boulogne, Joshua D. Warner, Neil Yager, Emmanuelle Gouillart,
+        Tony Yu and the scikit-image contributors. "scikit-image: Image
+        processing in Python." PeerJ 2:e453 (2014) doi: `10.7717/peerj.453`_
+
+    .. _10.7717/peerj.453: https://doi.org/10.7717/peerj.453
+
+    .. [5] John D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in
+        Science & Engineering, vol. 9, no. 3, pp. 90-95, 2007.
+        doi:`10.1109/MCSE.2007.55`_
+
+    .. _10.1109/MCSE.2007.55: https://doi.org/10.1109/MCSE.2007.55
+
+    .. [6] Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, et al., "SciPy
+        1.0: Fundamental Algorithms for Scientific Computing in Python", Nature
+        Methods, vol. 17, pp 261-272, 2020, doi:`10.1038/s41592-019-0686-2`_
+    
+    .. _10.1038/s41592-019-0686-2: https://doi.org/10.1038/s41592-019-0686-2
     """
     image = np.ascontiguousarray(image)
     if (image.ndim == 2):

@@ -90,7 +90,7 @@ cpdef functionals(np.ndarray image, res = None, norm=False):
 
     Examples
     --------
-    These examples use the skimage Python package [4]_ and the Matplotlib Python
+    These examples use the scikit-image Python package [4]_ and the Matplotlib Python
     package [5]_. For a 2D image the Minkowski functionals can be computed using
     the following example:
 
@@ -338,7 +338,7 @@ cpdef functions_open(np.ndarray opening, res = None, norm=False):
 
     Examples
     --------
-    These examples use the skimage Python package [4]_ and the Matplotlib Python
+    These examples use the Skimage Python package [4]_ and the Matplotlib Python
     package [5]_. For a 2D image the Minkowski functions can be computed using
     the following example:
 
@@ -443,7 +443,6 @@ cpdef functions_open(np.ndarray opening, res = None, norm=False):
         doi:`10.1109/MCSE.2007.55`_
 
     .. _10.1109/MCSE.2007.55: https://doi.org/10.1109/MCSE.2007.55
-
     """
 # Decompose resolution in number larger than one and a pre-factor
     factor = 1.0        
@@ -667,7 +666,7 @@ cpdef functions_close(np.ndarray closing, res = None, norm=False):
 
     Examples
     --------
-    These examples use the skimage Python package [4]_ and the Matplotlib Python
+    These examples use the scikit-image Python package [4]_ and the Matplotlib Python
     package [5]_. For a 2D image the Minkowski functions can be computed using
     the following example:
 

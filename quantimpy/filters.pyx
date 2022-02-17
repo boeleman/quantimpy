@@ -217,7 +217,7 @@ cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
 
     Examples
     --------
-    This example use the scikit-image Python package [4]_, the Matplotlib Python
+    This example uses the scikit-image Python package [4]_, the Matplotlib Python
     package [5]_, and the SciPy Python package [6]_.
 
     .. code-block:: python
@@ -282,8 +282,8 @@ def histogram(image, int bits=8):
 
     Examples
     --------
-    This example use the scikit-image Python package [4]_, the Matplotlib Python
-    package [5]_, and the SciPy Python package [6]_.
+    This example uses the Matplotlib Python package [5]_, and the SciPy Python
+    package [6]_.
 
     .. code-block:: python
 

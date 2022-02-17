@@ -244,7 +244,65 @@ cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
         ax1.imshow(image)
         ax2.imshow(result)
         plt.show()
+    """
+    image = np.ascontiguousarray(image)
+    if (image.ndim == 2):
+        return _anisodiff2D(image, option, niter, K, gamma)
+    elif (image.ndim == 3):
+        return _anisodiff3D(image, option, niter, K, gamma)
+    else:
+        raise ValueError('Cannot handle more than three dimensions')
+
+def histogram(image, int bits=8):
+    r"""
+    Create an image histogram
+
+    This function creates an histogram for the 2D or 3D Numpy array `image`. The
+    histogram is 8-bit (:math:`2^8` bins) by default. The function is coded
+    around the `numpy.histogram` function. However, the functions returns the
+    center locations of the bins instead of the edges. For `float` or 16-bit
+    images the bin size is scaled accordingly.
+
+    Parameters
+    ----------
+    image : ndarray, {int, uint, float}
+        Either 2D or 3D grayscale input image.
+    bits : int, defaults to 8
+        :math:`2^{\text{bits}}` bins are used for the histogram. Defaults to 8
+        bits or 256 bins.
     
+    Returns
+    -------
+    out : tuple, float
+        Returns two ndarrays: one with the histogram and one with the bin
+        centers.    
+    
+    See Also
+    --------
+
+    Examples
+    --------
+    This example use the scikit-image Python package [4]_, the Matplotlib Python
+    package [5]_, and the SciPy Python package [6]_.
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from scipy import misc
+        from quantimpy import filters
+
+        # Create image
+        image = misc.ascent()
+        image = image.astype(np.uint8) # Fix data type
+
+        # Compute histpgram
+        hist, bins = filters.histogram(image)
+        
+        # Plot histogram
+        plt.bar(bins,hist)
+        plt.show()
+
     References
     ----------
     .. [1] Charles R. Harris, K. Jarrod Millman, Stéfan J. van der Walt et al.,
@@ -282,20 +340,10 @@ cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
     
     .. _10.1038/s41592-019-0686-2: https://doi.org/10.1038/s41592-019-0686-2
     """
-    image = np.ascontiguousarray(image)
-    if (image.ndim == 2):
-        return _anisodiff2D(image, option, niter, K, gamma)
-    elif (image.ndim == 3):
-        return _anisodiff3D(image, option, niter, K, gamma)
-    else:
-        raise ValueError('Cannot handle more than three dimensions')
-
-def histogram(image):
-    r"""
-    """
     cdef double dtype_min
     cdef double dtype_max
-    cdef int bits = 256
+    
+    bits = 2**bits
 
     if (image.dtype == "float64"):
         if (np.amin(image) < 0.0):

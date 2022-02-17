@@ -7,43 +7,6 @@ thresholding on both 2D and 3D Numpy [1]_ arrays.
 import cython
 import numpy as np
 cimport numpy as np
-from libc.math cimport exp
-
-###############################################################################
-#
-#Original Matlab code:
-#
-#@incollection{perona1994,
-#	author = {Perona, Pietro and Shiota, Takahiro and Malik, Jitendra},
-#	booktitle = {{Geometry-driven diffusion in computer vision}},
-#	editor = {{ter Haar Romeny}, Bart M.},
-#	isbn = {9789401716994},
-#	pages = {73--92},
-#	publisher = {Springer},
-#	title = {{Anisotropic diffusion}},
-#	year = {1994}
-#}
-#
-#function [outimage] = anisodiff(inimage,iteration,K)
-#
-#lambda = 0.25;
-#outimage = inimage;     [m,n] = size(inimage);
-#
-#rowC = [1:m];           rowN = [1 1:m-1];           rowS = [2:m m];
-#colC = [1:n];           colE = [1 1:n-1];           colW = [2:n n];
-#
-#for i=1:iterations,
-#    deltaN = outimage(rowN,colC) - outimage(rowC,colC);
-#    deltaE = outimage(rowC,colE) - outimage(rowC,colC);
-#
-#    fluxN = deltaN .* exp( - (1/K) * abs(deltaN) );
-#    fluxE = deltaE .* exp( - (1/K) * abs(deltaE) );
-#
-#    outimage = outimage + lambda * 
-#    (fluxN - fluxN(rowS,colC) + fluxE - fluxE(rowC,colW));
-#end;
-#
-###############################################################################
 
 # Scikit image data types
 #uint8
@@ -267,6 +230,7 @@ cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
 
         # Create image with noise
         image = misc.ascent()
+        image = image.astype(np.uint8) # Fix data type
         image = random_noise(image, mode='speckle', mean=0.1)
 
         # Filter image
@@ -325,3 +289,35 @@ cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
         return _anisodiff3D(image, option, niter, K, gamma)
     else:
         raise ValueError('Cannot handle more than three dimensions')
+
+def histogram(image):
+    r"""
+    """
+    cdef double dtype_min
+    cdef double dtype_max
+    cdef int bits = 256
+
+    if (image.dtype == "float64"):
+        if (np.amin(image) < 0.0):
+            dtype_min = -1.0 - 1.0/float(bits-1)
+            dtype_max =  1.0 + 1.0/float(bits-1)
+        else:
+            dtype_min = 0.0 - 0.5/float(bits-1)
+            dtype_max = 1.0 + 0.5/float(bits-1)
+    else:                    
+        dtype_min = np.iinfo(image.dtype).min
+        dtype_max = np.iinfo(image.dtype).max
+        dtype_delta = dtype_max - dtype_min
+        if (dtype_min < 0.0):
+            dtype_max = dtype_min + (float(bits) - 0.5) * float(dtype_delta)/float(bits-1)
+            dtype_min = dtype_min - 0.5 * float(dtype_delta)/float(bits-1)
+        else:
+            dtype_min = dtype_min - 0.5*dtype_max/float(bits-1)
+            dtype_max = dtype_max + 0.5*dtype_max/float(bits-1)
+
+# Compute 8 bit histogram
+    hist, bins = np.histogram(image, range=(dtype_min, dtype_max), bins=bits)
+# Find middle values
+    bins = 0.5*(bins[1:] + bins[:-1])
+
+    return hist, bins

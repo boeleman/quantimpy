@@ -108,6 +108,7 @@ package <a class="footnote-reference brackets" href="#id14" id="id7">5</a>, and 
 
 <span class="c1"># Create image with noise</span>
 <span class="n">image</span> <span class="o">=</span> <span class="n">misc</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span> <span class="c1"># Fix data type</span>
 <span class="n">image</span> <span class="o">=</span> <span class="n">random_noise</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;speckle&#39;</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 
 <span class="c1"># Filter image</span>
@@ -166,6 +167,11 @@ Methods, vol. 17, pp 261-272, 2020, doi:<a class="reference external" href="http
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="quantimpy.filters.histogram">
+<span class="sig-prename descclassname"><span class="pre">quantimpy.filters.</span></span><span class="sig-name descname"><span class="pre">histogram</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.filters.histogram" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 

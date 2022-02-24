@@ -6,6 +6,7 @@ thresholding on both 2D and 3D Numpy [1]_ arrays.
 
 import cython
 import numpy as np
+from numpy.linalg import norm
 cimport numpy as np
 
 # Scikit image data types
@@ -167,6 +168,7 @@ def _anisodiff3D(my_type[:,:,::1] image, int option, int niter, double K, double
 # Normalize between -1 and 1 or 0 and 1
     return result*dtype_inv
 
+@cython.binding(True)
 cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
     r"""
     Anisotropic diffusion filter
@@ -222,7 +224,6 @@ cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
 
     .. code-block:: python
 
-        import numpy as np
         import matplotlib.pyplot as plt
         from scipy import misc
         from skimage.util import random_noise
@@ -230,7 +231,7 @@ cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
 
         # Create image with noise
         image = misc.ascent()
-        image = image.astype(np.uint8) # Fix data type
+        image = image.astype("uint8") # Fix data type
         image = random_noise(image, mode='speckle', mean=0.1)
 
         # Filter image
@@ -253,6 +254,7 @@ cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
     else:
         raise ValueError('Cannot handle more than three dimensions')
 
+@cython.binding(True)
 def histogram(image, int bits=8):
     r"""
     Create an image histogram
@@ -276,9 +278,10 @@ def histogram(image, int bits=8):
     out : tuple, float
         Returns two ndarrays: one with the histogram and one with the bin
         centers.    
-    
+
     See Also
     --------
+    ~quantimpy.filters.unimodal
 
     Examples
     --------
@@ -287,20 +290,109 @@ def histogram(image, int bits=8):
 
     .. code-block:: python
 
-        import numpy as np
         import matplotlib.pyplot as plt
         from scipy import misc
         from quantimpy import filters
 
         # Create image
         image = misc.ascent()
-        image = image.astype(np.uint8) # Fix data type
+        image = image.astype("uint8") # Fix data type
 
         # Compute histpgram
         hist, bins = filters.histogram(image)
         
         # Plot histogram
         plt.bar(bins,hist)
+        plt.show()
+
+    """
+    cdef double dtype_min
+    cdef double dtype_max
+    
+    bits = 2**bits
+
+    if (image.dtype == "float64"):
+        if (np.amin(image) < 0.0):
+            dtype_min = -1.0 - 1.0/float(bits-1)
+            dtype_max =  1.0 + 1.0/float(bits-1)
+        else:
+            dtype_min = 0.0 - 0.5/float(bits-1)
+            dtype_max = 1.0 + 0.5/float(bits-1)
+    else:                    
+        dtype_min = np.iinfo(image.dtype).min
+        dtype_max = np.iinfo(image.dtype).max
+        dtype_delta = dtype_max - dtype_min
+        if (dtype_min < 0.0):
+            dtype_max = dtype_min + (float(bits) - 0.5) * float(dtype_delta)/float(bits-1)
+            dtype_min = dtype_min - 0.5 * float(dtype_delta)/float(bits-1)
+        else:
+            dtype_min = dtype_min - 0.5*dtype_max/float(bits-1)
+            dtype_max = dtype_max + 0.5*dtype_max/float(bits-1)
+
+# Compute 8 bit histogram
+    hist, bins = np.histogram(image, range=(dtype_min, dtype_max), bins=bits)
+# Find middle values
+    bins = 0.5*(bins[1:] + bins[:-1])
+
+    return hist, bins
+
+@cython.binding(True)
+def unimodal(np.ndarray[np.int64_t, ndim=1] hist):
+    r"""
+    Compute unimodal threshold
+
+    Using image histogram `hist`, this function computes the unimodal threshold
+    [7]_. This algorithms is slightly modified modified from the original
+    method. Instead of defining the end of the distribution as the point where
+    the histogram is zero, this algorithm takes the point that contains 99.7% of
+    the observations. This is equivalent to three times the standard deviation
+    for a Gaussian distribution.
+    
+    Parameters
+    ----------
+    hist : ndarray, int
+        Histogram computed by the function :func:`~quantimpy.filters.histogram`.
+    
+    Returns
+    -------
+    out : int
+        Index of the unimodal threshold value in input array `hist`.
+
+    See Also
+    --------
+    ~quantimpy.filters.histogram
+
+    Examples
+    --------
+    This example uses the Matplotlib Python package [5]_, and the SciPy Python
+    package [6]_.
+
+    .. code-block:: python
+
+        import matplotlib.pyplot as plt
+        from scipy import misc
+        from scipy import ndimage
+        from quantimpy import filters
+
+        # Create 8uint image
+        image = misc.ascent()
+        image = image.astype("uint8") # Fix data type
+
+        # Filter image
+        result = filters.anisodiff(image)
+
+        # Edge detection
+        laplace = ndimage.laplace(result)
+
+        # Compute histpgram
+        hist, bins = filters.histogram(laplace)
+
+        # Compute unimodal threshold
+        thrshld = filters.unimodal(hist)
+
+        # Plot histogram
+        plt.bar(bins, hist, width=5e-3)
+        plt.scatter(bins[thrshld], hist[thrshld])
         plt.show()
 
     References
@@ -339,33 +431,67 @@ def histogram(image, int bits=8):
         Methods, vol. 17, pp 261-272, 2020, doi:`10.1038/s41592-019-0686-2`_
     
     .. _10.1038/s41592-019-0686-2: https://doi.org/10.1038/s41592-019-0686-2
+
+    .. [7] Paul Rosin, "Unimodal thresholding", Pattern recognition, vol. 34,
+        no. 11, pp 2083-2096, 2001, doi:`10.1016/S0031-3203(00)00136-9`_
+
+    .. _10.1016/S0031-3203(00)00136-9: https://doi.org/10.1016/S0031-3203(00)00136-9
+
     """
-    cdef double dtype_min
-    cdef double dtype_max
+    cdef int idx
+    cdef int idx_min
+    cdef int idx_max
+    cdef int idx_dist = 0
     
-    bits = 2**bits
+    cdef long long hst_min
+    cdef long long hst_max
+    cdef long long cross_ab
+    
+    cdef double sum_hist
+    cdef double dist
+    cdef double dist_max = 0.0
 
-    if (image.dtype == "float64"):
-        if (np.amin(image) < 0.0):
-            dtype_min = -1.0 - 1.0/float(bits-1)
-            dtype_max =  1.0 + 1.0/float(bits-1)
+    cdef np.ndarray[np.int64_t, ndim=1] p0
+    cdef np.ndarray[np.int64_t, ndim=1] p1
+    cdef np.ndarray[np.int64_t, ndim=1] a
+    cdef np.ndarray[np.int64_t, ndim=1] b
+
+# Copy data    
+    hist = hist.copy()
+
+# Select maximum
+    idx_max = np.argmax(hist)
+    hst_max = hist[idx_max]
+    
+    p0 = np.array([idx_max, hst_max])
+
+# Disregard data left from maximum
+    hist[0:idx_max] = 0.
+
+# All observations within 3 sigma (in case of normal distribution)
+    sum_hist = 0.997*np.sum(hist)
+
+# Find tail end
+    for idx in range(hist.size):
+        sum_hist = sum_hist - hist[idx]
+        if (sum_hist > 0.):
+            idx_min = idx
+            hst_min = hist[idx]
         else:
-            dtype_min = 0.0 - 0.5/float(bits-1)
-            dtype_max = 1.0 + 0.5/float(bits-1)
-    else:                    
-        dtype_min = np.iinfo(image.dtype).min
-        dtype_max = np.iinfo(image.dtype).max
-        dtype_delta = dtype_max - dtype_min
-        if (dtype_min < 0.0):
-            dtype_max = dtype_min + (float(bits) - 0.5) * float(dtype_delta)/float(bits-1)
-            dtype_min = dtype_min - 0.5 * float(dtype_delta)/float(bits-1)
-        else:
-            dtype_min = dtype_min - 0.5*dtype_max/float(bits-1)
-            dtype_max = dtype_max + 0.5*dtype_max/float(bits-1)
+            break
 
-# Compute 8 bit histogram
-    hist, bins = np.histogram(image, range=(dtype_min, dtype_max), bins=bits)
-# Find middle values
-    bins = 0.5*(bins[1:] + bins[:-1])
+    p1 = np.array([idx_min, hst_min])
 
-    return hist, bins
+# Compute maximum distance and location 
+    for idx in range(idx_max,idx_min):
+        hst = hist[idx]
+
+        a = p0 - p1
+        b = np.array([idx, hst]) - p1
+        cross_ab = a[0]*b[1]-b[0]*a[1]
+        dist = abs(cross_ab)/norm(a)
+        if (dist > dist_max):
+            idx_dist = idx
+            dist_max = dist
+
+    return idx_dist

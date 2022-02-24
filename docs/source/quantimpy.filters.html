@@ -55,15 +55,15 @@
 <span id="quantimpy-filters-module"></span><h1>quantimpy.filters module<a class="headerlink" href="#module-quantimpy.filters" title="Permalink to this headline">¶</a></h1>
 <p>Filters for image processing</p>
 <p>This module contains filters and other functions for image processing and
-thresholding on both 2D and 3D Numpy <a class="footnote-reference brackets" href="#id12" id="id1">1</a> arrays.</p>
+thresholding on both 2D and 3D Numpy <a class="footnote-reference brackets" href="#id14" id="id1">1</a> arrays.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="quantimpy.filters.anisodiff">
-<span class="sig-prename descclassname"><span class="pre">quantimpy.filters.</span></span><span class="sig-name descname"><span class="pre">anisodiff</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.filters.anisodiff" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">quantimpy.filters.</span></span><span class="sig-name descname"><span class="pre">anisodiff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">option</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">niter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.filters.anisodiff" title="Permalink to this definition">¶</a></dt>
 <dd><p>Anisotropic diffusion filter</p>
 <p>This function applies an anisotropic diffusion filter to the 2D and 3D Numpy
-array <cite>image</cite>. This is also known as Perona Malik diffusion <a class="footnote-reference brackets" href="#id13" id="id2">2</a>. This is an
+array <cite>image</cite>. This is also known as Perona Malik diffusion <a class="footnote-reference brackets" href="#id15" id="id2">2</a>. This is an
 edge preserving noise reduction method. The code is based on a Matlab code
-by Perona, Shiota, and Malik <a class="footnote-reference brackets" href="#id15" id="id3">3</a>.</p>
+by Perona, Shiota, and Malik <a class="footnote-reference brackets" href="#id17" id="id3">3</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -74,14 +74,14 @@ filter. <cite>option=0</cite> selects the following conduction coefficient:</p>
 \[g (\nabla I) = \exp{(-\frac{||\nabla I||}{K})},\]</div>
 <p>where <span class="math notranslate nohighlight">\(\nabla I\)</span> is the image brightness gradient, and <span class="math notranslate nohighlight">\(K\)</span>
 is a constant. The above equation is used in a Matlab code by Perona,
-Shiota, and Malik <a class="footnote-reference brackets" href="#id15" id="id4">3</a>. <cite>option=1</cite> selects the conduction coefficient:</p>
+Shiota, and Malik <a class="footnote-reference brackets" href="#id17" id="id4">3</a>. <cite>option=1</cite> selects the conduction coefficient:</p>
 <div class="math notranslate nohighlight">
 \[g (\nabla I) = \exp{(-\left(\frac{||\nabla I||}{K}\right)^{2})},\]</div>
 <p>and <cite>option=2</cite> selects the coefficient:</p>
 <div class="math notranslate nohighlight">
 \[g (\nabla I) = \frac{1}{1 + (\frac{||\nabla I||}{K})^{2}}.\]</div>
 <p>Option one privileges high-contrast edges over low-contrast ones, while
-the second option privileges wide regions over smaller ones <a class="footnote-reference brackets" href="#id13" id="id5">2</a>.</p>
+the second option privileges wide regions over smaller ones <a class="footnote-reference brackets" href="#id15" id="id5">2</a>.</p>
 </p></li>
 <li><p><strong>niter</strong> (<em>int</em><em>, </em><em>defaults to 1</em>) – The number of iterations that the filter is applied.</p></li>
 <li><p><strong>K</strong> (<em>float</em><em>, </em><em>defaults to 50</em>) – The value of constant <span class="math notranslate nohighlight">\(K\)</span> in the above equations.</p></li>
@@ -98,17 +98,16 @@ and the image is normalized betweeen 0 and 1 or -1 and 1.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<p>This example use the scikit-image Python package <a class="footnote-reference brackets" href="#id16" id="id6">4</a>, the Matplotlib Python
-package <a class="footnote-reference brackets" href="#id17" id="id7">5</a>, and the SciPy Python package <a class="footnote-reference brackets" href="#id18" id="id8">6</a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<p>This example uses the scikit-image Python package <a class="footnote-reference brackets" href="#id18" id="id6">4</a>, the Matplotlib Python
+package <a class="footnote-reference brackets" href="#id19" id="id7">5</a>, and the SciPy Python package <a class="footnote-reference brackets" href="#id20" id="id8">6</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">misc</span>
 <span class="kn">from</span> <span class="nn">skimage.util</span> <span class="kn">import</span> <span class="n">random_noise</span>
 <span class="kn">from</span> <span class="nn">quantimpy</span> <span class="kn">import</span> <span class="n">filters</span>
 
 <span class="c1"># Create image with noise</span>
 <span class="n">image</span> <span class="o">=</span> <span class="n">misc</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span> <span class="c1"># Fix data type</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span> <span class="c1"># Fix data type</span>
 <span class="n">image</span> <span class="o">=</span> <span class="n">random_noise</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;speckle&#39;</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 
 <span class="c1"># Filter image</span>
@@ -128,7 +127,7 @@ package <a class="footnote-reference brackets" href="#id17" id="id7">5</a>, and 
 
 <dl class="py function">
 <dt class="sig sig-object py" id="quantimpy.filters.histogram">
-<span class="sig-prename descclassname"><span class="pre">quantimpy.filters.</span></span><span class="sig-name descname"><span class="pre">histogram</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.filters.histogram" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">quantimpy.filters.</span></span><span class="sig-name descname"><span class="pre">histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.filters.histogram" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an image histogram</p>
 <p>This function creates an histogram for the 2D or 3D Numpy array <cite>image</cite>. The
 histogram is 8-bit (<span class="math notranslate nohighlight">\(2^8\)</span> bins) by default. The function is coded
@@ -151,17 +150,20 @@ centers.</p>
 <dd class="field-odd"><p>tuple, float</p>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#quantimpy.filters.unimodal" title="quantimpy.filters.unimodal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unimodal</span></code></a></p>
+</div>
 <p class="rubric">Examples</p>
-<p>This example use the scikit-image Python package <a class="footnote-reference brackets" href="#id16" id="id9">4</a>, the Matplotlib Python
-package <a class="footnote-reference brackets" href="#id17" id="id10">5</a>, and the SciPy Python package <a class="footnote-reference brackets" href="#id18" id="id11">6</a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<p>This example uses the Matplotlib Python package <a class="footnote-reference brackets" href="#id19" id="id9">5</a>, and the SciPy Python
+package <a class="footnote-reference brackets" href="#id20" id="id10">6</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">misc</span>
 <span class="kn">from</span> <span class="nn">quantimpy</span> <span class="kn">import</span> <span class="n">filters</span>
 
 <span class="c1"># Create image</span>
 <span class="n">image</span> <span class="o">=</span> <span class="n">misc</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span> <span class="c1"># Fix data type</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span> <span class="c1"># Fix data type</span>
 
 <span class="c1"># Compute histpgram</span>
 <span class="n">hist</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
@@ -171,28 +173,85 @@ package <a class="footnote-reference brackets" href="#id17" id="id10">5</a>, and
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="quantimpy.filters.unimodal">
+<span class="sig-prename descclassname"><span class="pre">quantimpy.filters.</span></span><span class="sig-name descname"><span class="pre">unimodal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.filters.unimodal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute unimodal threshold</p>
+<p>Using image histogram <cite>hist</cite>, this function computes the unimodal threshold
+<a class="footnote-reference brackets" href="#id21" id="id11">7</a>. This algorithms is slightly modified modified from the original
+method. Instead of defining the end of the distribution as the point where
+the histogram is zero, this algorithm takes the point that contains 99.7% of
+the observations. This is equivalent to three times the standard deviation
+for a Gaussian distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hist</strong> (<em>ndarray</em><em>, </em><em>int</em>) – Histogram computed by the function <a class="reference internal" href="#quantimpy.filters.histogram" title="quantimpy.filters.histogram"><code class="xref py py-func docutils literal notranslate"><span class="pre">histogram()</span></code></a>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out</strong> – Index of the unimodal threshold value in input array <cite>hist</cite>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#quantimpy.filters.histogram" title="quantimpy.filters.histogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">histogram</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>This example uses the Matplotlib Python package <a class="footnote-reference brackets" href="#id19" id="id12">5</a>, and the SciPy Python
+package <a class="footnote-reference brackets" href="#id20" id="id13">6</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">misc</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span>
+<span class="kn">from</span> <span class="nn">quantimpy</span> <span class="kn">import</span> <span class="n">filters</span>
+
+<span class="c1"># Create 8uint image</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">misc</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span> <span class="c1"># Fix data type</span>
+
+<span class="c1"># Filter image</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">anisodiff</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+<span class="c1"># Edge detection</span>
+<span class="n">laplace</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">laplace</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="c1"># Compute histpgram</span>
+<span class="n">hist</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">laplace</span><span class="p">)</span>
+
+<span class="c1"># Compute unimodal threshold</span>
+<span class="n">thrshld</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">unimodal</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
+
+<span class="c1"># Plot histogram</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">hist</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">5e-3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">bins</span><span class="p">[</span><span class="n">thrshld</span><span class="p">],</span> <span class="n">hist</span><span class="p">[</span><span class="n">thrshld</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>Charles R. Harris, K. Jarrod Millman, Stéfan J. van der Walt et al.,
 “Array programming with NumPy”, Nature, vol. 585, pp 357-362, 2020,
 doi:<a class="reference external" href="https://doi.org/10.1038/s41586-020-2649-2">10.1038/s41586-020-2649-2</a></p>
 </dd>
 </dl>
 <dl class="footnote brackets">
-<dt class="label" id="id13"><span class="brackets">2</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id5">2</a>)</span></dt>
+<dt class="label" id="id15"><span class="brackets">2</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id5">2</a>)</span></dt>
 <dd><p>Pietro Perona and Jitendra Malik, “Scale-space and edge detection
 using anisotropic diffusion”, IEEE Transactions on pattern analysis and
 machine intelligence, vol. 12, no. 7, pp 629-639, 1990, doi:<a class="reference external" href="https://doi.org/10.1109/34.56205">10.1109/34.56205</a></p>
 </dd>
 </dl>
 <dl class="footnote brackets">
-<dt class="label" id="id15"><span class="brackets">3</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id4">2</a>)</span></dt>
+<dt class="label" id="id17"><span class="brackets">3</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id4">2</a>)</span></dt>
 <dd><p>Pietro Perona, Takahiro Shiota, and Jitendra Malik, “Anisotropic
 diffusion”, in “Geometry-driven diffusion in computer vision”, ed. Bart
 M. ter Haar Romeny, pp 73-92, 1994, isbn: 9789401716994</p>
 </dd>
-<dt class="label" id="id16"><span class="brackets">4</span><span class="fn-backref">(<a href="#id6">1</a>,<a href="#id9">2</a>)</span></dt>
+<dt class="label" id="id18"><span class="brackets"><a class="fn-backref" href="#id6">4</a></span></dt>
 <dd><p>Stéfan van der Walt, Johannes L. Schönberger, Juan Nunez-Iglesias,
 François Boulogne, Joshua D. Warner, Neil Yager, Emmanuelle Gouillart,
 Tony Yu and the scikit-image contributors. “scikit-image: Image
@@ -200,17 +259,23 @@ processing in Python.” PeerJ 2:e453 (2014) doi: <a class="reference external" 
 </dd>
 </dl>
 <dl class="footnote brackets">
-<dt class="label" id="id17"><span class="brackets">5</span><span class="fn-backref">(<a href="#id7">1</a>,<a href="#id10">2</a>)</span></dt>
+<dt class="label" id="id19"><span class="brackets">5</span><span class="fn-backref">(<a href="#id7">1</a>,<a href="#id9">2</a>,<a href="#id12">3</a>)</span></dt>
 <dd><p>John D. Hunter, “Matplotlib: A 2D Graphics Environment”, Computing in
 Science &amp; Engineering, vol. 9, no. 3, pp. 90-95, 2007.
 doi:<a class="reference external" href="https://doi.org/10.1109/MCSE.2007.55">10.1109/MCSE.2007.55</a></p>
 </dd>
 </dl>
 <dl class="footnote brackets">
-<dt class="label" id="id18"><span class="brackets">6</span><span class="fn-backref">(<a href="#id8">1</a>,<a href="#id11">2</a>)</span></dt>
+<dt class="label" id="id20"><span class="brackets">6</span><span class="fn-backref">(<a href="#id8">1</a>,<a href="#id10">2</a>,<a href="#id13">3</a>)</span></dt>
 <dd><p>Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, et al., “SciPy
 1.0: Fundamental Algorithms for Scientific Computing in Python”, Nature
 Methods, vol. 17, pp 261-272, 2020, doi:<a class="reference external" href="https://doi.org/10.1038/s41592-019-0686-2">10.1038/s41592-019-0686-2</a></p>
+</dd>
+</dl>
+<dl class="footnote brackets">
+<dt class="label" id="id21"><span class="brackets"><a class="fn-backref" href="#id11">7</a></span></dt>
+<dd><p>Paul Rosin, “Unimodal thresholding”, Pattern recognition, vol. 34,
+no. 11, pp 2083-2096, 2001, doi:<a class="reference external" href="https://doi.org/10.1016/S0031-3203(00)00136-9">10.1016/S0031-3203(00)00136-9</a></p>
 </dd>
 </dl>
 </dd></dl>

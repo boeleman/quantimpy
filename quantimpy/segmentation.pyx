@@ -1,7 +1,7 @@
 r"""Filters for image processing
 
 This module contains filters and other functions for image processing and
-thresholding on both 2D and 3D Numpy [1]_ arrays.
+segmentation of both 2D and 3D Numpy [1]_ arrays.
 """
 
 import cython
@@ -28,148 +28,6 @@ ctypedef fused my_type:
     signed char
     signed short
     signed int
-
-@cython.boundscheck(False)
-@cython.wraparound(False)
-def _anisodiff_2d(my_type[:,::1] image, int option, int niter, double K, double gamma):
-
-    cdef int i, j
-    cdef int x_max, y_max
-
-    cdef double K_inv = 1./K
-    cdef double K2_inv = 1./K**2
-
-    cdef np.ndarray[np.float64_t, ndim=2] flux
-    cdef np.ndarray[np.float64_t, ndim=2] result
-    cdef np.ndarray[np.float64_t, ndim=2] result_tmp
-    
-    result = np.asarray(image, dtype=np.float64) 
-    result_tmp = np.zeros_like(result)
-
-    dtype = None
-    cdef double dtype_inv = 1.0 
-    if my_type == "unsigned char":
-        dtype = np.uint8
-        dtype_inv = 1.0/(np.iinfo(dtype).max)
-    elif my_type == "unsigned short":
-        dtype = np.uint16
-        dtype_inv = 1.0/(np.iinfo(dtype).max)
-    elif my_type == "unsigned int":
-        dtype = np.uint32
-        dtype_inv = 1.0/(np.iinfo(dtype).max)
-    elif my_type == "double":
-        dtype = np.float64
-        dtype_inv = 1.0 
-    elif my_type == "signed char":
-        dtype = np.int8
-        dtype_inv = 1.0/(np.iinfo(dtype).max)
-    elif my_type == "signed short":
-        dtype = np.int16
-        dtype_inv = 1.0/(np.iinfo(dtype).max)
-    elif my_type == "signed int":
-        dtype = np.int32
-        dtype_inv = 1.0/(np.iinfo(dtype).max)
-
-    for j in range(niter):
-        result_tmp[:,:] = 0
-# Loop over dimensions        
-        for i in range(2):
-            flux = np.diff(result, axis=i, prepend=0)
-# Adiabatic boundary condition
-            index = [slice(None)]*flux.ndim
-            index[i] = 0
-            flux[tuple(index)] = 0
-
-            if (option == 0):
-                flux = flux * np.exp(-np.abs(flux)*K_inv)
-            elif (option == 1):
-                flux = flux * np.exp(-flux**2*K2_inv)
-            elif (option == 2):
-                flux = flux / (1. + (flux**2*K2_inv))
-
-            flux = np.diff(flux, axis=i, append=0) 
-# Adiabatic boundary condition
-            index = [slice(None)]*flux.ndim
-            index[i] = flux.shape[i]-1
-            flux[tuple(index)] = 0
-
-            result_tmp = result_tmp + gamma*flux
-
-        result = result + result_tmp
-
-# Normalize between -1 and 1 or 0 and 1
-    return result*dtype_inv
-
-@cython.boundscheck(False)
-@cython.wraparound(False)
-def _anisodiff_3d(my_type[:,:,::1] image, int option, int niter, double K, double gamma):
-
-    cdef int i, j
-    cdef int x_max, y_max
-
-    cdef double K_inv = 1./K
-    cdef double K2_inv = 1./K**2
-
-    cdef np.ndarray[np.float64_t, ndim=3] flux
-    cdef np.ndarray[np.float64_t, ndim=3] result
-    cdef np.ndarray[np.float64_t, ndim=3] result_tmp
-    
-    result = np.asarray(image, dtype=np.float64) 
-    result_tmp = np.zeros_like(result)
-
-    dtype = None
-    cdef double dtype_inv = 1.0 
-    if my_type == "unsigned char":
-        dtype = np.uint8
-        dtype_inv = 1.0/(np.iinfo(dtype).max)
-    elif my_type == "unsigned short":
-        dtype = np.uint16
-        dtype_inv = 1.0/(np.iinfo(dtype).max)
-    elif my_type == "unsigned int":
-        dtype = np.uint32
-        dtype_inv = 1.0/(np.iinfo(dtype).max)
-    elif my_type == "double":
-        dtype = np.float64
-        dtype_inv = 1.0 
-    elif my_type == "signed char":
-        dtype = np.int8
-        dtype_inv = 1.0/(np.iinfo(dtype).max)
-    elif my_type == "signed short":
-        dtype = np.int16
-        dtype_inv = 1.0/(np.iinfo(dtype).max)
-    elif my_type == "signed int":
-        dtype = np.int32
-        dtype_inv = 1.0/(np.iinfo(dtype).max)
-
-    for j in range(niter):
-        result_tmp[:,:,:] = 0.0
-# Loop over dimensions        
-        for i in range(3):
-            flux = np.diff(result, axis=i, prepend=0)
-# Adiabatic boundary condition
-            index = [slice(None)]*flux.ndim
-            index[i] = 0
-            flux[tuple(index)] = 0
-
-            if (option == 0):
-                flux = flux * np.exp(-np.abs(flux)*K_inv)
-            elif (option == 1):
-                flux = flux * np.exp(-flux**2*K2_inv)
-            elif (option == 2):
-                flux = flux / (1. + (flux**2*K2_inv))
-
-            flux = np.diff(flux, axis=i, append=0) 
-# Adiabatic boundary condition
-            index = [slice(None)]*flux.ndim
-            index[i] = flux.shape[i]-1
-            flux[tuple(index)] = 0
-
-            result_tmp = result_tmp + gamma*flux
-
-        result = result + result_tmp
-
-# Normalize between -1 and 1 or 0 and 1
-    return result*dtype_inv
 
 @cython.binding(True)
 cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
@@ -249,13 +107,107 @@ cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
         ax2.imshow(result)
         plt.show()
     """
-    image = np.ascontiguousarray(image)
+    if (~np.issubdtype(image.dtype, np.floating)):
+        image = image.astype(np.float64)/(np.iinfo(image.dtype).max)
+
     if (image.ndim == 2):
         return _anisodiff_2d(image, option, niter, K, gamma)
     elif (image.ndim == 3):
         return _anisodiff_3d(image, option, niter, K, gamma)
     else:
         raise ValueError('Cannot handle more than three dimensions')
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cdef _anisodiff_2d(np.ndarray[np.float64_t, ndim=2] image, int option, int niter, double K, double gamma):
+
+    cdef int i, j
+    cdef int x_max, y_max
+
+    cdef double K_inv = 1./K
+    cdef double K2_inv = 1./K**2
+
+    cdef np.ndarray[np.float64_t, ndim=2] flux
+    cdef np.ndarray[np.float64_t, ndim=2] result
+    cdef np.ndarray[np.float64_t, ndim=2] result_tmp
+
+    result = image.copy()
+    result_tmp = np.zeros_like(result)
+    
+    for j in range(niter):
+        result_tmp[:,:] = 0
+# Loop over dimensions        
+        for i in range(2):
+            flux = np.diff(result, axis=i, prepend=0)
+# Adiabatic boundary condition
+            index = [slice(None)]*flux.ndim
+            index[i] = 0
+            flux[tuple(index)] = 0
+
+            if (option == 0):
+                flux = flux * np.exp(-np.abs(flux)*K_inv)
+            elif (option == 1):
+                flux = flux * np.exp(-flux**2*K2_inv)
+            elif (option == 2):
+                flux = flux / (1. + (flux**2*K2_inv))
+
+            flux = np.diff(flux, axis=i, append=0) 
+# Adiabatic boundary condition
+            index = [slice(None)]*flux.ndim
+            index[i] = flux.shape[i]-1
+            flux[tuple(index)] = 0
+
+            result_tmp = result_tmp + gamma*flux
+
+        result = result + result_tmp
+
+    return result
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cdef _anisodiff_3d(np.ndarray[np.float64_t, ndim=3] image, int option, int niter, double K, double gamma):
+
+    cdef int i, j
+    cdef int x_max, y_max
+
+    cdef double K_inv = 1./K
+    cdef double K2_inv = 1./K**2
+
+    cdef np.ndarray[np.float64_t, ndim=3] flux
+    cdef np.ndarray[np.float64_t, ndim=3] result
+    cdef np.ndarray[np.float64_t, ndim=3] result_tmp
+    
+    result = image.copy()
+    result_tmp = np.zeros_like(result)
+
+    for j in range(niter):
+        result_tmp[:,:,:] = 0.0
+# Loop over dimensions        
+        for i in range(3):
+            flux = np.diff(result, axis=i, prepend=0)
+# Adiabatic boundary condition
+            index = [slice(None)]*flux.ndim
+            index[i] = 0
+            flux[tuple(index)] = 0
+
+            if (option == 0):
+                flux = flux * np.exp(-np.abs(flux)*K_inv)
+            elif (option == 1):
+                flux = flux * np.exp(-flux**2*K2_inv)
+            elif (option == 2):
+                flux = flux / (1. + (flux**2*K2_inv))
+
+            flux = np.diff(flux, axis=i, append=0) 
+# Adiabatic boundary condition
+            index = [slice(None)]*flux.ndim
+            index[i] = flux.shape[i]-1
+            flux[tuple(index)] = 0
+
+            result_tmp = result_tmp + gamma*flux
+
+        result = result + result_tmp
+
+    return result
 
 @cython.binding(True)
 def histogram(image, int bits=8):

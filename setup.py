@@ -16,8 +16,8 @@ extensions = [
         sources=["quantimpy/minkowski.pyx", "quantimpy/quantimpyc.c", "quantimpy/minkowskic.c"],
     ),
     Extension(
-        name="quantimpy.filters",
-        sources=["quantimpy/filters.pyx"],
+        name="quantimpy.segmentation",
+        sources=["quantimpy/segmentation.pyx"],
     ),
 ]
 
@@ -32,6 +32,8 @@ setup(
     author_email="boelens@stanford.edu",
     install_requires=[
         "numpy",
+        "scipy",
+        "matplotlib",
         "edt",
     ],
     ext_modules=cythonize(extensions, language_level=3),

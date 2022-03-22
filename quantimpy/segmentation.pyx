@@ -1,7 +1,7 @@
-r"""Filters for image processing
+r"""Functions for image segmentation
 
-This module contains filters and other functions for image processing and
-segmentation of both 2D and 3D Numpy [1]_ arrays.
+This module contains various functions for the image segmentation of both 2D and 3D NumPy [1]_ arrays.
+
 """
 
 import cython
@@ -34,15 +34,15 @@ cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
     r"""
     Anisotropic diffusion filter
 
-    This function applies an anisotropic diffusion filter to the 2D and 3D Numpy
-    array `image`. This is also known as Perona Malik diffusion [2]_. This is an
+    This function applies an anisotropic diffusion filter to the 2D or 3D NumPy
+    array `image`. This is also known as Perona Malik diffusion [2]_ and is an
     edge preserving noise reduction method. The code is based on a Matlab code
     by Perona, Shiota, and Malik [3]_.
 
     Parameters
     ----------
     image : ndarray, {int, uint, float}
-        Either 2D or 3D grayscale input image.
+        2D or 3D grayscale input image.
     option : int, defaults to 1
         The `option` parameter selects the conduction coefficient used by the
         filter. `option=0` selects the following conduction coefficient: 
@@ -50,7 +50,7 @@ cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
         .. math:: g (\nabla I) = \exp{(-\frac{||\nabla I||}{K})},
 
         where :math:`\nabla I` is the image brightness gradient, and :math:`K`
-        is a constant. The above equation is used in a Matlab code by Perona,
+        is a constant. This equation is used in a Matlab code by Perona,
         Shiota, and Malik [3]_. `option=1` selects the conduction coefficient: 
 
         .. math:: g (\nabla I) = \exp{(-\left(\frac{||\nabla I||}{K}\right)^{2})},
@@ -60,7 +60,7 @@ cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
         .. math:: g (\nabla I) = \frac{1}{1 + (\frac{||\nabla I||}{K})^{2}}.
 
         Option one privileges high-contrast edges over low-contrast ones, while
-        the second option privileges wide regions over smaller ones [2]_.
+        option two privileges wide regions over smaller ones [2]_.
     niter : int, defaults to 1
         The number of iterations that the filter is applied.
     K : float, defaults to 50
@@ -72,40 +72,38 @@ cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
     Returns
     -------
     out : ndarray, float
-        The noise reduced 2D or 3D output image. The return data type is float
-        and the image is normalized betweeen 0 and 1 or -1 and 1.
+        Noise reduced 2D or 3D output image. The return data type is float and
+        the image is normalized betweeen 0 and 1 or -1 and 1.
 
     See Also
     --------
 
     Examples
     --------
-    This example uses the scikit-image Python package [4]_, the Matplotlib Python
-    package [5]_, and the SciPy Python package [6]_.
+    This example uses the NumPy [1]_, and Matplotlib Python packages [4]_. The
+    NumPy data file "`rock_2d.npy`_" is available on Github [9]_ [10]_. 
 
     .. code-block:: python
 
+        import numpy as np
         import matplotlib.pyplot as plt
-        from scipy import misc
-        from skimage.util import random_noise
-        from quantimpy import filters
+        from quantimpy import segmentation as sg
 
-        # Create image with noise
-        image = misc.ascent()
-        image = image.astype("uint8") # Fix data type
-        image = random_noise(image, mode='speckle', mean=0.1)
+        # Load data
+        image = np.load("rock_2d.npy")
 
-        # Filter image
-        result = filters.anisodiff(image, niter=5)
+        # Apply anisotropic diffusion filter
+        diffusion = sg.anisodiff(image, niter=5)
 
         # Show results
         fig = plt.figure()
-        plt.gray()  # show the filtered result in grayscale
+        plt.gray()
         ax1 = fig.add_subplot(121)  # left side
         ax2 = fig.add_subplot(122)  # right side
         ax1.imshow(image)
-        ax2.imshow(result)
+        ax2.imshow(diffusion)
         plt.show()
+
     """
     if (~np.issubdtype(image.dtype, np.floating)):
         image = image.astype(np.float64)/(np.iinfo(image.dtype).max)
@@ -214,16 +212,16 @@ def histogram(image, int bits=8):
     r"""
     Create an image histogram
 
-    This function creates an histogram for the 2D or 3D Numpy array `image`. The
+    This function creates an histogram for the 2D or 3D NumPy array `image`. The
     histogram is 8-bit (:math:`2^8` bins) by default. The function is coded
-    around the `numpy.histogram` function. However, the functions returns the
+    around the `numpy.histogram` function. However, this functions returns the
     center locations of the bins instead of the edges. For `float` or 16-bit
     images the bin size is scaled accordingly.
 
     Parameters
     ----------
     image : ndarray, {int, uint, float}
-        Either 2D or 3D grayscale input image.
+        2D or 3D grayscale input image.
     bits : int, defaults to 8
         :math:`2^{\text{bits}}` bins are used for the histogram. Defaults to 8
         bits or 256 bins.
@@ -236,30 +234,32 @@ def histogram(image, int bits=8):
 
     See Also
     --------
-    ~quantimpy.filters.unimodal
+    ~quantimpy.segmentation.unimodal
 
     Examples
     --------
-    This example uses the Matplotlib Python package [5]_, and the SciPy Python
-    package [6]_.
+    This example uses the NumPy [1]_, and Matplotlib Python packages [4]_. The
+    NumPy data file "`rock_3d.npy`_" is available on Github [9]_ [10]_. 
 
     .. code-block:: python
 
+        import numpy as np
         import matplotlib.pyplot as plt
-        from scipy import misc
-        from quantimpy import filters
+        from quantimpy import segmentation as sg
 
-        # Create image
-        image = misc.ascent()
-        image = image.astype("uint8") # Fix data type
+        # Load data uint16
+        image = np.load("rock_3d.npy")
 
         # Compute histpgram
-        hist, bins = filters.histogram(image)
-        
-        # Plot histogram
-        plt.bar(bins,hist)
-        plt.show()
+        hist, bins = sg.histogram(image, bits=8)
+        width = bins[1] - bins[0]
 
+        print(bins[0],bins[-1])
+
+        # Plot histogram
+        plt.bar(bins,hist,width=width)
+        plt.show()
+    
     """
     cdef double dtype_min
     cdef double dtype_max
@@ -297,7 +297,7 @@ def unimodal(np.ndarray[np.int64_t, ndim=1] hist, side="right"):
     Compute unimodal threshold
 
     Using image histogram `hist`, this function computes the unimodal threshold
-    [7]_. This algorithms is slightly modified modified from the original
+    [6]_. This algorithms is slightly modified modified from the original
     method. Instead of defining the end of the distribution as the point where
     the histogram is zero, this algorithm takes the point that contains 99.7% of
     the observations. This is equivalent to three times the standard deviation
@@ -306,7 +306,7 @@ def unimodal(np.ndarray[np.int64_t, ndim=1] hist, side="right"):
     Parameters
     ----------
     hist : ndarray, int
-        Histogram computed by the function :func:`~quantimpy.filters.histogram`.
+        Histogram computed by the function :func:`~quantimpy.segmentation.histogram`.
     side : string, defaults to "right"
         Whether to compute the unimodal threshold on the left or right side of
         the histogram maximum. Defaults to "right".
@@ -318,40 +318,49 @@ def unimodal(np.ndarray[np.int64_t, ndim=1] hist, side="right"):
 
     See Also
     --------
-    ~quantimpy.filters.histogram
+    ~quantimpy.segmentation.histogram
 
     Examples
     --------
-    This example uses the Matplotlib Python package [5]_, and the SciPy Python
-    package [6]_.
+    This example uses the NumPy [1]_, Matplotlib [4]_, and SciPy Python packages
+    [5]_. NumPy data file "`rock_2d.npy`_" is available on Github [9]_ [10]_. 
 
     .. code-block:: python
 
+        import numpy as np
         import matplotlib.pyplot as plt
-        from scipy import misc
         from scipy import ndimage
         from quantimpy import filters
 
-        # Create 8uint image
-        image = misc.ascent()
-        image = image.astype("uint8") # Fix data type
+        # Load data
+        image = np.load("rock_2d.npy")
 
         # Filter image
-        result = filters.anisodiff(image)
+        result = filters.anisodiff(image, niter=3)
 
         # Edge detection
         laplace = ndimage.laplace(result)
 
         # Compute histpgram
         hist, bins = filters.histogram(laplace)
+        width = bins[1] - bins[0]
 
         # Compute unimodal threshold
         thrshld = filters.unimodal(hist)
 
         # Plot histogram
-        plt.bar(bins, hist, width=5e-3)
+        plt.bar(bins, hist,width=width)
         plt.scatter(bins[thrshld], hist[thrshld])
         plt.show()
+
+        # Compute unimodal threshold
+        thrshld = filters.unimodal(hist, side="left")
+
+        # Plot histogram
+        plt.bar(bins, hist, width=width)
+        plt.scatter(bins[thrshld], hist[thrshld])
+        plt.show()
+
 
     References
     ----------
@@ -371,30 +380,55 @@ def unimodal(np.ndarray[np.int64_t, ndim=1] hist, side="right"):
         diffusion", in "Geometry-driven diffusion in computer vision", ed. Bart
         M. ter Haar Romeny, pp 73-92, 1994, isbn: 9789401716994
 
-    .. [4] Stéfan van der Walt, Johannes L. Schönberger, Juan Nunez-Iglesias,
-        François Boulogne, Joshua D. Warner, Neil Yager, Emmanuelle Gouillart,
-        Tony Yu and the scikit-image contributors. "scikit-image: Image
-        processing in Python." PeerJ 2:e453 (2014) doi: `10.7717/peerj.453`_
-
-    .. _10.7717/peerj.453: https://doi.org/10.7717/peerj.453
-
-    .. [5] John D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in
+    .. [4] John D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in
         Science & Engineering, vol. 9, no. 3, pp. 90-95, 2007.
         doi:`10.1109/MCSE.2007.55`_
 
     .. _10.1109/MCSE.2007.55: https://doi.org/10.1109/MCSE.2007.55
 
-    .. [6] Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, et al., "SciPy
+    .. [5] Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, et al., "SciPy
         1.0: Fundamental Algorithms for Scientific Computing in Python", Nature
         Methods, vol. 17, pp 261-272, 2020, doi:`10.1038/s41592-019-0686-2`_
     
     .. _10.1038/s41592-019-0686-2: https://doi.org/10.1038/s41592-019-0686-2
 
-    .. [7] Paul Rosin, "Unimodal thresholding", Pattern recognition, vol. 34,
+    .. [6] Paul Rosin, "Unimodal thresholding", Pattern recognition, vol. 34,
         no. 11, pp 2083-2096, 2001, doi:`10.1016/S0031-3203(00)00136-9`_
 
     .. _10.1016/S0031-3203(00)00136-9: https://doi.org/10.1016/S0031-3203(00)00136-9
 
+    .. [7] Hans-Jörg Vogel and Andre Kretzschmar, "Topological characterization of
+        pore space in soil---sample preparation and digital image-processing",
+        Geoderma, vol. 73, no. 1-2, pp 23--38, 1996, doi:`10.1016/0016-7061(96)00043-2`_
+
+    .. _10.1016/0016-7061(96)00043-2: https://doi.org/10.1016/0016-7061(96)00043-2
+
+
+    .. [8] Steffen Schlüter, Ulrich Weller, and Hans-Jörg Vogel, "Segmentation
+        of X-ray microtomography images of soil using gradient masks", Computers
+        & Geosciences, vol. 36, no. 10, pp 1246--1251, 2010, doi:`10.1016/j.cageo.2010.02.007`_
+
+    .. _10.1016/j.cageo.2010.02.007: https://doi.org/10.1016/j.cageo.2010.02.007
+
+    .. [9] Catherine Spurin, Tom Bultreys, Maja Rücker, et al., "The
+        development of intermittent multiphase fluid flow pathways through a
+        porous rock", Advances in Water Resources, vol. 150, 2021,
+        doi:`10.1016/j.advwatres.2021.103868`_
+
+    .. _10.1016/j.advwatres.2021.103868: https://doi.org/10.1016/j.advwatres.2021.103868
+
+    .. [10] Catherine Spurin, Tom Bultreys, Maja Rücker, et al., "Real-Time
+        Imaging Reveals Distinct Pore-Scale Dynamics During Transient and
+        Equilibrium Subsurface Multiphase Flow", Water Resources Research, vol.
+        56, no. 12, 2020, doi:`10.1029/2020WR028287`_
+
+    .. _10.1029/2020WR028287: https://doi.org/10.1029/2020WR028287
+
+
+    .. _rock_2d.npy: https://raw.githubusercontent.com/boeleman/rock_2d.npy
+
+    .. _rock_3d.npy: https://raw.githubusercontent.com/boeleman/rock_3d.npy
+    
     """
     cdef int idx
     cdef int idx_min
@@ -466,7 +500,71 @@ def unimodal(np.ndarray[np.int64_t, ndim=1] hist, side="right"):
 @cython.binding(True)
 def bilevel(np.ndarray image, thres_min, thres_max, output=False):
     r"""
-    Compute bi-level threshold
+    Compute bi-level image segmentation
+
+    This function computes the bi-level binary segmentation of the 2D or 3D
+    NumPy array `image` [7]_. First, an initial segmentation is computed using
+    the minimum threshold value `thres_min`. Then, iteratively, this initial
+    segmented image is dilated and all voxels that are below the maximum
+    threshold value `thres_max` are added to the segmented image. This continues
+    untill no more changes to the segmented image are observed.
+
+    Parameters
+    ----------
+    image : ndarray, {int, uint, float}
+        2D or 3D grayscale input image.
+    thres_min : float
+        Minimum threshold value for bi-level segmentation.
+    thres_max : float
+        Maximum threshold value for bi-level segmentation.
+    output : bool, defaults to "False"
+        When this parameter is set to "True", (cross sections of) all the
+        intermediate segmentation images are written to disk. The default is
+        "False".
+
+    Returns
+    -------
+    out : ndarray, bool
+        Returns either a 2D or 3D boolean ndarray of the segmented image.
+
+    See Also
+    --------
+    ~quantimpy.segmentation.gradient
+
+    Examples
+    --------
+    This example uses the NumPy [1]_, and Matplotlib Python packages [4]_. The
+    NumPy data file "`rock_3d.npy`_" is available on Github [9]_ [10]_. 
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from quantimpy import segmentation as sg
+
+        # Load data
+        image = np.load("rock_3d.npy")
+
+        # Apply anisotropic diffusion filter
+        diffusion = sg.anisodiff(image, niter=3)
+
+        # Compute minimum and maximum thresholds
+        thrshld_min, thrshld_max = sg.gradient(diffusion, alpha=1.5)
+
+        # Apply bi-level segmentation
+        binary = sg.bilevel(diffusion, thrshld_min, thrshld_max)
+
+        # Show results
+        fig = plt.figure()
+        plt.gray()  # show the result in grayscale
+        ax1 = fig.add_subplot(131)
+        ax2 = fig.add_subplot(132)
+        ax3 = fig.add_subplot(133)
+        ax1.imshow(image[50,:,:])
+        ax2.imshow(diffusion[50,:,:])
+        ax3.imshow(binary[50,:,:])
+        plt.show()
+
     """
 
     if (image.ndim == 2):
@@ -598,6 +696,63 @@ def _bilevel_3d(my_type[:,:,::1] image_in, double thres_min, double thres_max, b
 def gradient(np.ndarray image, alpha=1.25, output=False):
     r"""
     Compute thresholds for bi-level segmentation using gradient masks
+
+    This function computes the minimum and maximum threshold values for the 2D
+    or 3D NumPy array `image`  using gradient masks [8]_. These threshold
+    values, in turn, can be used as inputs for the bi-level segmentation
+    function, :func:`~quantimpy.segmentation.bilevel`. The gradient masks are
+    computed using Sobel and Laplace edge detection filters combined with the
+    unimodal thresholding function, :func:`~quantimpy.segmentation.unimodal`.
+
+    Parameters
+    ----------
+    image : ndarray, {int, uint, float}
+        2D or 3D grayscale input image.
+    alpha : float, defaults to 1.25
+        The parameter :math:`\alpha > 1` is used to compute the minimum
+        threshold value using the formula:
+        
+        .. math:: T_{\text{min}} = x_{\text{mode}} - \alpha (x_{\text{mode}} -
+            T_{\text{max}}),
+
+        where :math:`T_{\text{min}}` is the minimum threshold value,
+        :math:`x_{\text{mode}}` is the mode of the histogram of `image`, and
+        :math:`T_{\text{max}}` is the maximum threshold value. The less noise
+        `image` contains, the closer :math:`\alpha` can be set to one. 
+    output : bool, defaults to "False"
+        When this parameter is set to "True", filtered images, masks, and
+        histrograms are written to disk. The default is "False".
+
+    Returns
+    -------
+    out : tuple, float
+        Returns minimum and maximum threshold values                                                         
+
+    See Also
+    --------
+    ~quantimpy.segmentation.bilevel
+
+    Examples
+    --------
+    This example uses the NumPy package [1]_. The NumPy data file "`rock_2d.npy`_" is available on Github [9]_ [10]_. 
+
+    .. code-block:: python
+
+        import numpy as np
+        from quantimpy import segmentation as sg
+
+        # Load data
+        image = np.load("rock_2d.npy")
+
+        # Apply anisotropic diffusion filter
+        diffusion = sg.anisodiff(image, niter=5)
+
+        # Compute minimum and maximum thresholds
+        thrshld_min, thrshld_max = sg.gradient(diffusion)
+
+        # Print results 
+        print(thrshld_min, thrshld_max) 
+                          
     """
 
     if (image.ndim == 2):
@@ -607,11 +762,23 @@ def gradient(np.ndarray image, alpha=1.25, output=False):
     else:
         raise ValueError('Can only handle 2D or 3D images')
 
-@cython.binding(True)
+@cython.boundscheck(False)
+@cython.wraparound(False)
 def _gradient_2d(np.ndarray image, alpha, output):
-    r"""
-    Compute thresholds for bi-level segmentation using gradient masks
-    """
+
+    cdef int thres_imag
+    cdef int thres_sobel
+    cdef int thres_laplace
+
+    cdef double thres_max_sobel
+    cdef double thres_max_laplace
+    cdef double thres_max
+    cdef double thres_min
+
+    cdef np.ndarray[np.float64_t, ndim=2] sobel
+    cdef np.ndarray[np.float64_t, ndim=2] laplace
+    cdef np.ndarray[np.uint8_t, ndim=2, cast=True] mask_sobel
+    cdef np.ndarray[np.uint8_t, ndim=2, cast=True] mask_laplace
 
 # Apply edge detection filters
     sobel = ndimage.sobel(image)
@@ -692,11 +859,23 @@ def _gradient_2d(np.ndarray image, alpha, output):
 
     return thres_min, thres_max
 
-@cython.binding(True)
+@cython.boundscheck(False)
+@cython.wraparound(False)
 def _gradient_3d(np.ndarray image, alpha, output):
-    r"""
-    Compute thresholds for bi-level segmentation using gradient masks
-    """
+
+    cdef int thres_imag
+    cdef int thres_sobel
+    cdef int thres_laplace
+
+    cdef double thres_max_sobel
+    cdef double thres_max_laplace
+    cdef double thres_max
+    cdef double thres_min
+
+    cdef np.ndarray[np.float64_t, ndim=3] sobel
+    cdef np.ndarray[np.float64_t, ndim=3] laplace
+    cdef np.ndarray[np.uint8_t, ndim=3, cast=True] mask_sobel
+    cdef np.ndarray[np.uint8_t, ndim=3, cast=True] mask_laplace
 
 # Apply edge detection filters
     sobel = ndimage.sobel(image)

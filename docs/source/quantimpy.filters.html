@@ -177,7 +177,7 @@ package <a class="footnote-reference brackets" href="#id20" id="id10">6</a>.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="quantimpy.filters.unimodal">
-<span class="sig-prename descclassname"><span class="pre">quantimpy.filters.</span></span><span class="sig-name descname"><span class="pre">unimodal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.filters.unimodal" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">quantimpy.filters.</span></span><span class="sig-name descname"><span class="pre">unimodal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'right'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.filters.unimodal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute unimodal threshold</p>
 <p>Using image histogram <cite>hist</cite>, this function computes the unimodal threshold
 <a class="footnote-reference brackets" href="#id21" id="id11">7</a>. This algorithms is slightly modified modified from the original
@@ -187,7 +187,11 @@ the observations. This is equivalent to three times the standard deviation
 for a Gaussian distribution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>hist</strong> (<em>ndarray</em><em>, </em><em>int</em>) – Histogram computed by the function <a class="reference internal" href="#quantimpy.filters.histogram" title="quantimpy.filters.histogram"><code class="xref py py-func docutils literal notranslate"><span class="pre">histogram()</span></code></a>.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hist</strong> (<em>ndarray</em><em>, </em><em>int</em>) – Histogram computed by the function <a class="reference internal" href="#quantimpy.filters.histogram" title="quantimpy.filters.histogram"><code class="xref py py-func docutils literal notranslate"><span class="pre">histogram()</span></code></a>.</p></li>
+<li><p><strong>side</strong> (<em>string</em><em>, </em><em>defaults to &quot;right&quot;</em>) – Whether to compute the unimodal threshold on the left or right side of
+the histogram maximum. Defaults to “right”.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>out</strong> – Index of the unimodal threshold value in input array <cite>hist</cite>.</p>

@@ -425,9 +425,9 @@ def unimodal(np.ndarray[np.int64_t, ndim=1] hist, side="right"):
     .. _10.1029/2020WR028287: https://doi.org/10.1029/2020WR028287
 
 
-    .. _rock_2d.npy: https://raw.githubusercontent.com/boeleman/rock_2d.npy
+    .. _rock_2d.npy: https://github.com/boeleman/quantimpy/raw/thresholding/test/rock_2d.npy
 
-    .. _rock_3d.npy: https://raw.githubusercontent.com/boeleman/rock_3d.npy
+    .. _rock_3d.npy: https://github.com/boeleman/quantimpy/raw/thresholding/test/rock_3d.npy
     
     """
     cdef int idx

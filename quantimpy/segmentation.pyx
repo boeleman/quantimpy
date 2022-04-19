@@ -567,6 +567,9 @@ def bilevel(np.ndarray image, thres_min, thres_max, output=False):
 
     """
 
+    if (~image.flags['C_CONTIGUOUS']):
+        image = np.ascontiguousarray(image)
+
     if (image.ndim == 2):
         return _bilevel_2d(image, thres_min, thres_max, output)
     elif (image.ndim == 3):
@@ -587,7 +590,7 @@ def _bilevel_2d(my_type[:,::1] image_in, double thres_min, double thres_max, bin
     cdef np.ndarray[np.uint8_t, ndim=2, cast=True] binary
     cdef np.ndarray[np.uint8_t, ndim=2, cast=True] binary_old
     
-    image = np.asarray(image_in, dtype=np.float64) 
+    image = np.asarray(image_in, dtype=np.float64)
 
     dtype = None
     if my_type == "unsigned char":

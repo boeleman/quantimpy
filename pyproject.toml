@@ -1,6 +1,5 @@
 [build-system]
 requires = [
-    "pathlib",
     "setuptools",
     "Cython",
     "oldest-supported-numpy",

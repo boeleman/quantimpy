@@ -5,7 +5,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>quantimpy.segmentation module &#8212; QuantImPy 0.4.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
@@ -47,7 +48,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-quantimpy.segmentation">
+  <section id="module-quantimpy.segmentation">
 <span id="quantimpy-segmentation-module"></span><h1>quantimpy.segmentation module<a class="headerlink" href="#module-quantimpy.segmentation" title="Permalink to this headline">¶</a></h1>
 <p>Functions for image segmentation</p>
 <p>This module contains various functions for the image segmentation of both 2D and 3D NumPy <a class="footnote-reference brackets" href="#id29" id="id1">1</a> arrays.</p>
@@ -119,7 +120,7 @@ NumPy data file “<a class="reference external" href="https://github.com/boelem
 
 <dl class="py function">
 <dt class="sig sig-object py" id="quantimpy.segmentation.bilevel">
-<span class="sig-prename descclassname"><span class="pre">quantimpy.segmentation.</span></span><span class="sig-name descname"><span class="pre">bilevel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thres_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thres_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.segmentation.bilevel" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">quantimpy.segmentation.</span></span><span class="sig-name descname"><span class="pre">bilevel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thres_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thres_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.segmentation.bilevel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute bi-level image segmentation</p>
 <p>This function computes the bi-level binary segmentation of the 2D or 3D
 NumPy array <cite>image</cite> <a class="footnote-reference brackets" href="#id36" id="id10">7</a>. First, an initial segmentation is computed using
@@ -133,9 +134,10 @@ untill no more changes to the segmented image are observed.</p>
 <li><p><strong>image</strong> (<em>ndarray</em><em>, </em><em>{int</em><em>, </em><em>uint</em><em>, </em><em>float}</em>) – 2D or 3D grayscale input image.</p></li>
 <li><p><strong>thres_min</strong> (<em>float</em>) – Minimum threshold value for bi-level segmentation.</p></li>
 <li><p><strong>thres_max</strong> (<em>float</em>) – Maximum threshold value for bi-level segmentation.</p></li>
-<li><p><strong>output</strong> (<em>bool</em><em>, </em><em>defaults to &quot;False&quot;</em>) – When this parameter is set to “True”, (cross sections of) all the
+<li><p><strong>debug</strong> (<em>bool</em><em>, </em><em>defaults to &quot;False&quot;</em>) – When this parameter is set to “True”, (cross sections of) all the
 intermediate segmentation images are written to disk. The default is
 “False”.</p></li>
+<li><p><strong>debug_dir</strong> (<em>str</em><em>, </em><em>defaults to &quot;./&quot;</em>) – Sets the output directory for debugging images. Defaults to “./”.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -184,7 +186,7 @@ NumPy data file “<a class="reference external" href="https://github.com/boelem
 
 <dl class="py function">
 <dt class="sig sig-object py" id="quantimpy.segmentation.gradient">
-<span class="sig-prename descclassname"><span class="pre">quantimpy.segmentation.</span></span><span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.segmentation.gradient" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">quantimpy.segmentation.</span></span><span class="sig-name descname"><span class="pre">gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.segmentation.gradient" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute thresholds for bi-level segmentation using gradient masks</p>
 <p>This function computes the minimum and maximum threshold values for the 2D
 or 3D NumPy array <cite>image</cite>  using gradient masks <a class="footnote-reference brackets" href="#id38" id="id15">8</a>. These threshold
@@ -206,8 +208,9 @@ T_{\text{max}}),\]</div>
 <span class="math notranslate nohighlight">\(T_{\text{max}}\)</span> is the maximum threshold value. The less noise
 <cite>image</cite> contains, the closer <span class="math notranslate nohighlight">\(\alpha\)</span> can be set to one.</p>
 </p></li>
-<li><p><strong>output</strong> (<em>bool</em><em>, </em><em>defaults to &quot;False&quot;</em>) – When this parameter is set to “True”, filtered images, masks, and
+<li><p><strong>debug</strong> (<em>bool</em><em>, </em><em>defaults to &quot;False&quot;</em>) – When this parameter is set to “True”, filtered images, masks, and
 histrograms are written to disk. The default is “False”.</p></li>
+<li><p><strong>debug_dir</strong> (<em>str</em><em>, </em><em>defaults to &quot;./&quot;</em>) – Sets the output directory for debugging images. Defaults to “./”.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -432,7 +435,7 @@ Equilibrium Subsurface Multiphase Flow”, Water Resources Research, vol.
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -441,9 +444,11 @@ Equilibrium Subsurface Multiphase Flow”, Water Resources Research, vol.
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="quantimpy.morphology.html"
-                        title="previous chapter">quantimpy.morphology module</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="quantimpy.morphology.html"
+                          title="previous chapter">quantimpy.morphology module</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -484,7 +489,7 @@ Equilibrium Subsurface Multiphase Flow”, Water Resources Research, vol.
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Arnout Boelens.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     </div>
   </body>
 </html>

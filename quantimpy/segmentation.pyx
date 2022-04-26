@@ -840,9 +840,11 @@ def _gradient_2d(np.ndarray image, alpha, debug, debug_dir):
         plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
         plt.clf()
 
+        name = debug_dir + "hist_laplace.png"
+
         plt.bar(bins_laplace, hist_laplace, width=width_laplace)
         plt.scatter(bins_laplace[thres_laplace], hist_laplace[thres_laplace])
-        plt.savefig("hist_laplace.png", bbox_inches="tight", pad_inches=0, dpi=300)
+        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
         plt.clf()
 
 # Create masks

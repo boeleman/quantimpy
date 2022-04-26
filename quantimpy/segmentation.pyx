@@ -498,7 +498,7 @@ def unimodal(np.ndarray[np.int64_t, ndim=1] hist, side="right"):
     return idx_dist
 
 @cython.binding(True)
-def bilevel(np.ndarray image, thres_min, thres_max, debug=False, debug_dir="./"):
+def bilevel(np.ndarray image, thres_min, thres_max, debug=None):
     r"""
     Compute bi-level image segmentation
 
@@ -517,12 +517,10 @@ def bilevel(np.ndarray image, thres_min, thres_max, debug=False, debug_dir="./")
         Minimum threshold value for bi-level segmentation.
     thres_max : float
         Maximum threshold value for bi-level segmentation.
-    debug : bool, defaults to "False"
-        When this parameter is set to "True", (cross sections of) all the
-        intermediate segmentation images are written to disk. The default is
-        "False".
-    debug_dir : str, defaults to "./"
-        Sets the output directory for debugging images. Defaults to "./".
+    debug : str, defaults to "None"
+        Output directory for debugging images. When this parameter is set,
+        filtered images, masks, and histrograms are written to disk. Set to "./"
+        to write to the working directory. The default is "None".
 
     Returns
     -------
@@ -573,15 +571,15 @@ def bilevel(np.ndarray image, thres_min, thres_max, debug=False, debug_dir="./")
         image = np.ascontiguousarray(image)
 
     if (image.ndim == 2):
-        return _bilevel_2d(image, thres_min, thres_max, debug, debug_dir)
+        return _bilevel_2d(image, thres_min, thres_max, debug)
     elif (image.ndim == 3):
-        return _bilevel_3d(image, thres_min, thres_max, debug, debug_dir)
+        return _bilevel_3d(image, thres_min, thres_max, debug)
     else:
         raise ValueError('Can only handle 2D or 3D images')
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def _bilevel_2d(my_type[:,::1] image_in, double thres_min, double thres_max, bint debug, str debug_dir):
+def _bilevel_2d(my_type[:,::1] image_in, double thres_min, double thres_max, str debug):
     
     cdef int idx
 
@@ -621,8 +619,8 @@ def _bilevel_2d(my_type[:,::1] image_in, double thres_min, double thres_max, bin
         dilated = image*mp.dilate(binary,1.00001)
         binary = (dilated < thres_max) & (dilated > 0.0)
 
-        if debug:
-            name = debug_dir + "binary_" + str(idx) + ".png"
+        if (debug is not None):
+            name = debug + "binary_" + str(idx) + ".png"
 
             plt.gray()
             plt.imshow(binary)
@@ -640,7 +638,7 @@ def _bilevel_2d(my_type[:,::1] image_in, double thres_min, double thres_max, bin
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def _bilevel_3d(my_type[:,:,::1] image_in, double thres_min, double thres_max, bint debug, str debug_dir):
+def _bilevel_3d(my_type[:,:,::1] image_in, double thres_min, double thres_max, str debug):
     
     cdef int idx
 
@@ -680,8 +678,8 @@ def _bilevel_3d(my_type[:,:,::1] image_in, double thres_min, double thres_max, b
         dilated = image*mp.dilate(binary,1.00001)
         binary = (dilated < thres_max) & (dilated > 0.0)
 
-        if debug:
-            name = debug_dir + "binary_" + str(idx) + ".png"
+        if (debug is not None):
+            name = debug + "binary_" + str(idx) + ".png"
 
             plt.gray()
             plt.imshow(binary[int(0.5*binary.shape[0]),:,:])
@@ -698,7 +696,7 @@ def _bilevel_3d(my_type[:,:,::1] image_in, double thres_min, double thres_max, b
     return binary
 
 @cython.binding(True)
-def gradient(np.ndarray image, alpha=1.25, debug=False, debug_dir="./"):
+def gradient(np.ndarray image, alpha=1.25, debug=None):
     r"""
     Compute thresholds for bi-level segmentation using gradient masks
 
@@ -724,11 +722,10 @@ def gradient(np.ndarray image, alpha=1.25, debug=False, debug_dir="./"):
         :math:`x_{\text{mode}}` is the mode of the histogram of `image`, and
         :math:`T_{\text{max}}` is the maximum threshold value. The less noise
         `image` contains, the closer :math:`\alpha` can be set to one. 
-    debug : bool, defaults to "False"
-        When this parameter is set to "True", filtered images, masks, and
-        histrograms are written to disk. The default is "False".
-    debug_dir : str, defaults to "./"
-        Sets the output directory for debugging images. Defaults to "./".
+    debug : str, defaults to "None"
+        Output directory for debugging images. When this parameter is set,
+        filtered images, masks, and histrograms are written to disk. Set to "./"
+        to write to the working directory. The default is "None".
 
     Returns
     -------
@@ -763,15 +760,15 @@ def gradient(np.ndarray image, alpha=1.25, debug=False, debug_dir="./"):
     """
 
     if (image.ndim == 2):
-        return _gradient_2d(image, alpha, debug, debug_dir)
+        return _gradient_2d(image, alpha, debug)
     elif (image.ndim == 3):
-        return _gradient_3d(image, alpha, debug, debug_dir)
+        return _gradient_3d(image, alpha, debug)
     else:
         raise ValueError('Can only handle 2D or 3D images')
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def _gradient_2d(np.ndarray image, alpha, debug, debug_dir):
+def _gradient_2d(np.ndarray image, alpha, debug):
 
     cdef int thres_imag
     cdef int thres_sobel
@@ -793,8 +790,8 @@ def _gradient_2d(np.ndarray image, alpha, debug, debug_dir):
     laplace = ndimage.laplace(image)
 
 # Plot filtered images
-    if debug:
-        name = debug_dir + "sobel.png"
+    if (debug is not None):
+        name = debug + "sobel.png"
 
         plt.gray()
         plt.imshow(sobel)
@@ -802,7 +799,7 @@ def _gradient_2d(np.ndarray image, alpha, debug, debug_dir):
         plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
         plt.clf()
         
-        name = debug_dir + "laplace.png"
+        name = debug + "laplace.png"
 
         plt.gray()
         plt.imshow(laplace)
@@ -821,26 +818,26 @@ def _gradient_2d(np.ndarray image, alpha, debug, debug_dir):
     thres_laplace = unimodal(hist_laplace)
 
 # Plot histograms
-    if debug:
+    if (debug is not None):
         width_imag = 0.9*(bins_imag[1] - bins_imag[0])
         width_sobel = 0.9*(bins_sobel[1] - bins_sobel[0])
         width_laplace = 0.9*(bins_laplace[1] - bins_laplace[0])
 
-        name = debug_dir + "hist_imag.png"
+        name = debug + "hist_imag.png"
 
         plt.bar(bins_imag, hist_imag, width=width_imag)
         plt.scatter(bins_imag[thres_imag], hist_imag[thres_imag])
         plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
         plt.clf()
 
-        name = debug_dir + "hist_sobel.png"
+        name = debug + "hist_sobel.png"
 
         plt.bar(bins_sobel, hist_sobel, width=width_sobel)
         plt.scatter(bins_sobel[thres_sobel], hist_sobel[thres_sobel])
         plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
         plt.clf()
 
-        name = debug_dir + "hist_laplace.png"
+        name = debug + "hist_laplace.png"
 
         plt.bar(bins_laplace, hist_laplace, width=width_laplace)
         plt.scatter(bins_laplace[thres_laplace], hist_laplace[thres_laplace])
@@ -853,8 +850,8 @@ def _gradient_2d(np.ndarray image, alpha, debug, debug_dir):
     mask_laplace = laplace >= bins_laplace[thres_laplace]
 
 # Plot masks
-    if debug:
-        name = debug_dir + "mask_sobel.png"
+    if (debug is not None):
+        name = debug + "mask_sobel.png"
 
         plt.gray()
         plt.imshow(mask_sobel)
@@ -862,7 +859,7 @@ def _gradient_2d(np.ndarray image, alpha, debug, debug_dir):
         plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
         plt.clf()
 
-        name = debug_dir + "mask_laplace.png"
+        name = debug + "mask_laplace.png"
 
         plt.gray()
         plt.imshow(mask_laplace)
@@ -882,7 +879,7 @@ def _gradient_2d(np.ndarray image, alpha, debug, debug_dir):
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def _gradient_3d(np.ndarray image, alpha, debug, debug_dir):
+def _gradient_3d(np.ndarray image, alpha, debug):
 
     cdef int thres_imag
     cdef int thres_sobel
@@ -904,8 +901,8 @@ def _gradient_3d(np.ndarray image, alpha, debug, debug_dir):
     laplace = ndimage.laplace(image)
 
 # Plot filtered images
-    if debug:
-        name = debug_dir + "sobel.png"
+    if (debug is not None):
+        name = debug + "sobel.png"
 
         plt.gray()
         plt.imshow(sobel[int(0.5*sobel.shape[0]),:,:])
@@ -913,7 +910,7 @@ def _gradient_3d(np.ndarray image, alpha, debug, debug_dir):
         plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
         plt.clf()
         
-        name = debug_dir + "laplace.png"
+        name = debug + "laplace.png"
 
         plt.gray()
         plt.imshow(laplace[int(0.5*laplace.shape[0]),:,:])
@@ -932,19 +929,19 @@ def _gradient_3d(np.ndarray image, alpha, debug, debug_dir):
     thres_laplace = unimodal(hist_laplace)
 
 # Plot histograms
-    if debug:
+    if (debug is not None):
         width_imag = 0.9*(bins_imag[1] - bins_imag[0])
         width_sobel = 0.9*(bins_sobel[1] - bins_sobel[0])
         width_laplace = 0.9*(bins_laplace[1] - bins_laplace[0])
 
-        name = debug_dir + "hist_imag.png"
+        name = debug + "hist_imag.png"
 
         plt.bar(bins_imag, hist_imag, width=width_imag)
         plt.scatter(bins_imag[thres_imag], hist_imag[thres_imag])
         plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
         plt.clf()
 
-        name = debug_dir + "hist_sobel.png"
+        name = debug + "hist_sobel.png"
 
         plt.bar(bins_sobel, hist_sobel, width=width_sobel)
         plt.scatter(bins_sobel[thres_sobel], hist_sobel[thres_sobel])
@@ -962,8 +959,8 @@ def _gradient_3d(np.ndarray image, alpha, debug, debug_dir):
     mask_laplace = laplace >= bins_laplace[thres_laplace]
 
 # Plot masks
-    if debug:
-        name = debug_dir + "mask_sobel.png"
+    if (debug is not None):
+        name = debug + "mask_sobel.png"
 
         plt.gray()
         plt.imshow(mask_sobel[int(0.5*mask_sobel.shape[0]),:,:])
@@ -971,7 +968,7 @@ def _gradient_3d(np.ndarray image, alpha, debug, debug_dir):
         plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
         plt.clf()
 
-        name = debug_dir + "mask_laplace.png"
+        name = debug + "mask_laplace.png"
 
         plt.gray()
         plt.imshow(mask_laplace[int(0.5*mask_laplace.shape[0]),:,:])

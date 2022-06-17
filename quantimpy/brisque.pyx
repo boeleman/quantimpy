@@ -1,1022 +1,578 @@
-r"""Functions for BRISQUE Image Quality Analysis (IQA)
+r"""Functions for the BRISQUE no-reference image quality assesment (NR-IQA)
 
-This module contains various functions for the image segmentation of both 2D and 3D NumPy [1]_ arrays.
+This module contains various functions for the computation of the BRISQUE [1]_
+no-reference image quality assesment (NR-IQA) for both 2D and 3D NumPy [2]_ arrays.
 
 """
 
 import cython
 import numpy as np
+import scipy.optimize as op
+import scipy.special as sc
 from scipy.ndimage import gaussian_filter
-#from numpy.linalg import norm
-#import matplotlib.pyplot as plt
+from scipy.stats import gennorm
+from scipy.stats import rv_continuous
+import matplotlib.pyplot as plt
 #from scipy import ndimage
 #from quantimpy import morphology as mp
 cimport numpy as np
 
-@cython.binding(True)
-cpdef mscn(image, patch=7, trunc=3.0):
+# single and double precision
+#float
+ctypedef fused my_type:
+    cython.float
+    cython.double
+
+#    float
+#    double
+
+class asgennorm_gen(rv_continuous):
     r"""
-    mean subtracted contrast normalized (MSCN) coefficients
+    Asymmetric generalized normal continuous random variable
+
+    This is an asymmetric generalized Gaussian distribution (AGGD) class based
+    on the SciPy [3]_ `scipy.stats.rv_continuous` class.
+
+
+    The probability density function for `asgennorm` is [4]_:
+
+    .. math:: f(x, \alpha, \beta) = \frac{\beta}{(1 + a)
+        \Gamma{(\frac{1}{\beta})}} \exp{(-|\frac{x}{a}|^{\beta})}
+
+    where :math:`a = \alpha` if :math:`x < 0` and :math:`a = 1` if  :math:`x \ge
+    0`. :math:`\Gamma` is the gamma function (`scipy.special.gamma`).
+    :math:`\beta` is the shape parameter. For :math:`\beta = 1`, it is identical
+    to a Laplace distribution and for  :math:`\beta = 2`, it is identical to a
+    normal distribution. :math:`\alpha` is a measure for the standard deviation.
+
+    Some of the methods of this class include:
+    
+    Methods
+    -------
+    pdf(x, alpha, beta)
+        Probability distribution function
+    cdf(x, alpha, beta)
+        Cumulative distribution function
+    fit(data)    
+        Fitting the probability distribution function 
+
+    See Also
+    --------
+    ~quantimpy.brisque.brisque
+    
+    Examples
+    --------
+    This example uses the NumPy [2]_, and Matplotlib [5]_ packages.
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from quantimpy.brisque import asgennorm
+
+        # Create dataset following the asymmetric generalized Gaussian distribution 
+        data = asgennorm.rvs(2,1,size=10000)
+
+        # Fit the dataset    
+        alpha, beta, loc, scale = asgennorm.fit(data)
+
+        x = np.linspace(
+            asgennorm.ppf(0.001, alpha, beta, loc=loc, scale=scale),
+            asgennorm.ppf(0.999, alpha, beta, loc=loc, scale=scale), 101)
+        
+        # Plot both the dataset and fit
+        plt.plot(x, asgennorm.pdf(x, alpha, beta, loc=loc, scale=scale), 'r-')
+        plt.hist(data, density=True, bins=51)
+        plt.show()
+    
+    """
+    def _pdf(self, x, alpha, beta):
+        return np.exp(self._logpdf(x, alpha, beta))
+
+    def _logpdf(self, x, alpha, beta):
+# Beta depends on the sign of x                
+        coef = np.log(beta) - np.log(alpha + 1.0) - sc.gammaln(1.0/beta)
+        f = lambda x, a: coef - (np.abs(x/a))**beta
+        return np.where(x < 0, f(x, alpha), f(x, 1.0))
+
+    def _fitstart(self,data):
+        def estimate_phi(beta):
+            numerator = sc.gamma(2 / beta) ** 2
+            denominator = sc.gamma(1 / beta) * sc.gamma(3 / beta)
+            return numerator / denominator
+
+        def estimate_r_hat(x):
+            size = np.prod(x.shape)
+            return (np.sum(np.abs(x)) / size) ** 2 / (np.sum(x ** 2) / size)
+
+        def estimate_R_hat(r_hat, gamma):
+            numerator = (gamma ** 3 + 1) * (gamma + 1)
+            denominator = (gamma ** 2 + 1) ** 2
+            return r_hat * numerator / denominator
+
+        def mean_squares_sum(x, filter = lambda z: z == z):
+            filtered_values = x[filter(x)]
+            squares_sum = np.sum(filtered_values ** 2)
+            return squares_sum / ((filtered_values.shape))
+
+        def estimate_gamma(x):
+            left_squares = mean_squares_sum(x, lambda z: z < 0)
+            right_squares = mean_squares_sum(x, lambda z: z >= 0)
+
+            return np.sqrt(left_squares) / np.sqrt(right_squares)
+
+        def estimate_beta(x):
+            r_hat = estimate_r_hat(x)
+            gamma = estimate_gamma(x)
+            R_hat = estimate_R_hat(r_hat, gamma)
+
+            solution = op.root(lambda z: estimate_phi(z) - R_hat, [0.2]).x
+
+            return solution[0]
+
+        def estimate_sigma(x, beta, filter = lambda z: z < 0):
+            return np.sqrt(mean_squares_sum(x, filter))
+        
+        def estimate_mean(beta, sigma_l, sigma_r):
+            return (sigma_r - sigma_l) * constant * (sc.gamma(2 / beta) / sc.gamma(1 / beta))
+        
+        beta = estimate_beta(data)
+        sigma_l = estimate_sigma(data, beta, lambda z: z < 0)
+        sigma_r = estimate_sigma(data, beta, lambda z: z >= 0)
+        
+        constant = np.sqrt(sc.gamma(1 / beta) / sc.gamma(3 / beta))
+        mean = estimate_mean(beta, sigma_l, sigma_r)
+        alpha = sigma_l/sigma_r
+        sigma = sigma_r
+
+        return alpha, beta, mean, sigma
+
+    def _cdf(self, x, alpha, beta):
+        c = 0.5 * np.sign(x)
+        f = lambda x, a: (0.5 + c) - c * sc.gammaincc(1.0/beta, abs(x/a)**beta)
+        return np.where(x < 0, f(x, alpha), f(x, 1.0))
+
+    def _sf(self, x, alpha, beta):
+        return self._cdf(-x, alpha, beta)
+
+asgennorm = asgennorm_gen(name='asgennorm')
+
+@cython.binding(True)
+cpdef mscn(image, patch=7, trunc=3.0, debug=None):
+    r"""
+    Mean subtracted contrast normalized (MSCN) coefficients
+
+    Compute the mean subtracted contrast normalized (MSCN) coefficients [1]_ for
+    the 2D or 3D NumPy array `image`. The MSCN coefficients, :math:`\hat{I}`,
+    are defined as: 
+
+    .. math:: \hat{I} = \frac{I - \mu}{\sigma}
+
+    where :math:`I` is the original image, :math:`\mu` is the local mean field,
+    and :math:`\sigma` is the local variance field. The MSCN coefficients serve
+    as input for the function :func:`~quantimpy.brisque.coeff`. When the `debug`
+    parameter is set, images of the local mean field and local variance field
+    are also returned.
+
+    Parameters
+    ----------
+    image : ndarray, {int, uint, float}
+        2D or 3D grayscale input image.
+    patch : int, defaults to 7
+        Size of the patch used to compute the local mean field and local
+        variance field. Defaults to 7.
+    trunc : float, defaults to 3.0
+        Value at which to truncate the normal distribution used to calculate the
+        local mean field and local variance field. Defaults to 3.0. 
+    debug : str, defaults to "None"
+        Output directory for debugging images. When this parameter is set,
+        images of the local mean field and local variance field are are written
+        to disk. Set to "./" to write to the working directory. The default is
+        "None".
+    
+    Returns
+    -------
+    out : ndarray, float
+        The 2D or 3D MSCN coefficients. The return data type is float and the
+        image is normalized betweeen 0 and 1 or -1 and 1.
+
+    See Also
+    --------
+    ~quantimpy.brisque.coeff
+
+    Examples
+    --------
+    This example uses the NumPy package [2]_. The NumPy data file
+    "`rock_2d.npy`_" is available on Github [6]_ [7]_.
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from quantimpy import brisque as bq
+
+        # Load data
+        image = np.load("rock_2d.npy")
+
+        # Compute MSCN coefficients
+        mscn = bq.mscn(image)
+
+        # Show coefficients
+        plt.gray()
+        plt.imshow(mscn[:,:])
+        plt.show()
+
     """
 # Check that patch size is odd    
     if (patch % 2) == 0:
         raise ValueError("patch should be an odd number")
 
-# Convert to float
+# Convert to float and normalize
     if not np.issubdtype(image.dtype, np.floating):
         image = image.astype(np.float64)/(np.iinfo(image.dtype).max)
 
 # Apply Gaussian filter in patch of 7x7(x7) with sigma=7/6=1.166666667
     mu = gaussian_filter(image, patch/(2.0*trunc), truncate=trunc)
-    sigma = gaussian_filter(image*image, patch/(2.0*trunc), truncate=trunc)
+    sigma = gaussian_filter(np.asarray(image)*np.asarray(image), patch/(2.0*trunc), truncate=trunc)
     sigma = np.sqrt(sigma - mu*mu)
     sigma = sigma + 1.0e-16 # Avoid devision by zero
 
+    if (debug is not None):
+        if (image.ndim == 2):
+            name = debug + "mu.png"
+
+            plt.gray()
+            plt.imshow(mu)
+            plt.axis("off")
+            plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
+            plt.clf()
+
+            name = debug + "sigma.png"
+
+            plt.gray()
+            plt.imshow(sigma)
+            plt.axis("off")
+            plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
+            plt.clf()
+        elif (image.ndim == 3):
+            name = debug + "mu.png"
+
+            plt.gray()
+            plt.imshow(mu[int(0.5*mu.shape[0]),:,:])
+            plt.axis("off")
+            plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
+            plt.clf()
+
+            name = debug + "sigma.png"
+
+            plt.gray()
+            plt.imshow(sigma[int(0.5*sigma.shape[0]),:,:])
+            plt.axis("off")
+            plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
+            plt.clf()
+        else:
+            raise ValueError('Can only handle 2D or 3D images')
+
     return (image - mu)/sigma
 
-##sigma = sigma + 1/max_val # Avoid devision by zero
-#sigma = sigma + 1./65535. # Avoid devision by zero
-#
-#plt.gray()
-#plt.imshow(sigma[250,:,:])
-#plt.axis("off")
-##plt.savefig("im01g.png", bbox_inches="tight", pad_inches=0, dpi=300)
-#plt.show()
-#plt.clf()
-#
-#img_hat = (img - mu)/sigma
+@cython.binding(True)
+cpdef coeff(mscn, sample_size=500000, debug=None):
+    r"""
+    Coefficients of pairwise products of neighboring MSCN coefficients
+    """
+    if (mscn.ndim == 2):
+        return _coeff_2d(mscn, sample_size, debug)
+    elif (mscn.ndim == 3):
+        return _coeff_3d(mscn, sample_size, debug)
+    else:
+        raise ValueError('Cannot handle more than three dimensions')
+
+    
+cpdef _coeff_2d(np.ndarray[np.float64_t, ndim=2] mscn, int sample_size, str debug):
+
+    coefficients = np.zeros(19)
+
+# MSCN
+# reduce dataset size for faster processing 
+    data = np.random.choice(mscn.flatten(), size=sample_size)
+    coefficients[0:3] = np.asarray(gennorm.fit(data))
+
+    if (debug is not None):
+        name = debug + "mscn.png"
+
+        beta = coefficients[0]
+        loc = coefficients[1]
+        scale = coefficients[2]
+
+        x = np.linspace(gennorm.ppf(0.001, beta, loc=loc, scale=scale), 
+            gennorm.ppf(0.999, beta, loc=loc, scale=scale), 101)
+        plt.plot(x, gennorm.pdf(x, beta, loc=loc, scale=scale), 'r-')
+        plt.hist(data, 50, density=True, facecolor='g')
+        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
+        plt.clf()
+
+# Edges
+    pair = mscn[:,:-1]*mscn[:,1:],
+    data0 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[3:7] = np.asarray(asgennorm.fit(data0))
+
+    pair = mscn[:-1,:]*mscn[1:,:],
+    data1 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[7:11] = np.asarray(asgennorm.fit(data1))
+    
+    if (debug is not None):
+        name = debug + "edge_0.png"
+        _plot(name, data0, coefficients[3:7])
+    
+        name = debug + "edge_1.png"
+        _plot(name, data1, coefficients[7:11])
+
+# Diagonals
+    pair = mscn[:-1,:-1]*mscn[1:,1:]
+    data0 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[11:15] = np.asarray(asgennorm.fit(data0))
+
+    pair = mscn[1:,:-1]*mscn[:-1,1:]
+    data1 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[15:19] = np.asarray(asgennorm.fit(data1))
+
+    if (debug is not None):
+        name = debug + "diagonal_0.png"
+        _plot(name, data0, coefficients[11:15])
+
+        name = debug + "diagonal_1.png"
+        _plot(name, data1, coefficients[15:19])
+
+    return coefficients
+
+cpdef _coeff_3d(np.ndarray[np.float64_t, ndim=3] mscn, int sample_size, str debug):
+
+    coefficients = np.zeros(55)
+
+# MSCN
+# reduce dataset size for faster processing 
+    data = np.random.choice(mscn.flatten(), size=sample_size)
+    coefficients[0:3] = np.asarray(gennorm.fit(data))
+
+    if (debug is not None):
+        name = debug + "mscn.png"
+
+        beta = coefficients[0]
+        loc = coefficients[1]
+        scale = coefficients[2]
+
+        x = np.linspace(gennorm.ppf(0.001, beta, loc=loc, scale=scale), 
+            gennorm.ppf(0.999, beta, loc=loc, scale=scale), 101)
+        plt.plot(x, gennorm.pdf(x, beta, loc=loc, scale=scale), 'r-')
+        plt.hist(data, 50, density=True, facecolor='g')
+        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
+        plt.clf()
+
+# Edges
+    pair = mscn[:-1,:,:]*mscn[1:,:,:]
+    data0 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[3:7] = np.asarray(asgennorm.fit(data0))
+
+    pair = mscn[:,:-1,:]*mscn[:,1:,:]
+    data1 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[7:11] = np.asarray(asgennorm.fit(data1))
+
+    pair = mscn[:,:,:-1]*mscn[:,:,1:]
+    data2 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[11:15] = np.asarray(asgennorm.fit(data2))
+    
+    if (debug is not None):
+        name = debug + "edge_0.png"
+        _plot(name, data0, coefficients[3:7])
+    
+        name = debug + "edge_1.png"
+        _plot(name, data1, coefficients[7:11])
+    
+        name = debug + "edge_2.png"
+        _plot(name, data2, coefficients[11:15])
+
+# Face diagonals
+    pair = mscn[:-1,:-1,:]*mscn[1:,1:,:]
+    data0 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[15:19] = np.asarray(asgennorm.fit(data0))
+
+    pair = mscn[:-1,1:,:]*mscn[1:,:-1,:]
+    data1 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[19:23] = np.asarray(asgennorm.fit(data1))
+
+    pair = mscn[:-1,:,:-1]*mscn[1:,:,1:]
+    data2 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[23:27] = np.asarray(asgennorm.fit(data2))
+
+    pair = mscn[:-1,:,1:]*mscn[1:,:,:-1]
+    data3 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[27:31] = np.asarray(asgennorm.fit(data3))
+
+    pair = mscn[:,:-1,:-1]*mscn[:,1:,1:]
+    data4 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[31:35] = np.asarray(asgennorm.fit(data4))
+
+    pair = mscn[:,:-1,1:]*mscn[:,1:,:-1]
+    data5 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[35:39] = np.asarray(asgennorm.fit(data5))
+
+    if (debug is not None):
+        name = debug + "face_diagonal_0.png"
+        _plot(name, data0, coefficients[15:19])
+
+        name = debug + "face_diagonal_1.png"
+        _plot(name, data1, coefficients[19:23])
+
+        name = debug + "face_diagonal_2.png"
+        _plot(name, data2, coefficients[23:27])
+
+        name = debug + "face_diagonal_3.png"
+        _plot(name, data3, coefficients[27:31])
+
+        name = debug + "face_diagonal_4.png"
+        _plot(name, data4, coefficients[31:35])
+
+        name = debug + "face_diagonal_5.png"
+        _plot(name, data5, coefficients[35:39])
+
+# Body diagonals
+    pair = mscn[:-1,:-1,:-1]*mscn[1:,1:,1:]
+    data0 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[39:43] = np.asarray(asgennorm.fit(data0))
+
+    pair = mscn[:-1,:-1,1:]*mscn[1:,1:,:-1]
+    data1 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[43:47] = np.asarray(asgennorm.fit(data1))
+
+    pair = mscn[:-1,1:,1:]*mscn[1:,:-1,:-1]
+    data2 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[47:51] = np.asarray(asgennorm.fit(data2))
+
+    pair = mscn[:-1,1:,:-1]*mscn[1:,:-1,1:]
+    data3 = np.random.choice(pair.flatten(), size=sample_size)
+    coefficients[51:55] = np.asarray(asgennorm.fit(data3))
+
+    if (debug is not None):
+        name = debug + "body_diagonal_0.png"
+        _plot(name, data0, coefficients[39:43])
+
+        name = debug + "body_diagonal_1.png"
+        _plot(name, data1, coefficients[43:47])
+
+        name = debug + "body_diagonal_2.png"
+        _plot(name, data2, coefficients[47:51])
+
+        name = debug + "body_diagonal_3.png"
+        _plot(name, data3, coefficients[51:55])
+
+    return coefficients
+
+cpdef _plot(name, data, coefficients):
+
+    alpha = coefficients[0]
+    beta = coefficients[1]
+    loc = coefficients[2]
+    scale = coefficients[3]
+
+    x = np.linspace(asgennorm.ppf(0.001, alpha, beta, loc=loc, scale=scale), 
+        asgennorm.ppf(0.999, alpha, beta, loc=loc, scale=scale), 101)
+    plt.plot(x, asgennorm.pdf(x, alpha, beta, loc=loc, scale=scale), 'r-')
+    plt.hist(data, 50, density=True, facecolor='g')
+    plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
+    plt.clf()
+
+@cython.binding(True)
+cpdef to_float32(image):
+    r"""
 
 
-## Scikit image data types
-##uint8
-##uint16
-##uint32
-##float
-##int8
-##int16
-##int32
-#ctypedef fused my_type:
-#    unsigned char
-#    unsigned short
-#    unsigned int
-#    double
-#    signed char
-#    signed short
-#    signed int
-#
+
+    References
+    ----------
+    
+    .. [1] Anish Mittal, Anush Moorthy, and Alan Bovik, "No-reference image
+        quality assessment in the spatial domain", IEEE Transactions on image
+        processing, vol. 21, no. 12, pp 4695-4708, 2012,
+        doi:`10.1109/TIP.2012.2214050`_
+
+    .. _10.1109/TIP.2012.2214050: https://doi.org/10.1109/TIP.2012.2214050
+    
+    .. [2] Charles R. Harris, K. Jarrod Millman, Stéfan J. van der Walt et al.,
+        "Array programming with NumPy", Nature, vol. 585, pp 357-362, 2020,
+        doi:`10.1038/s41586-020-2649-2`_
+
+    .. _10.1038/s41586-020-2649-2: https://doi.org/10.1038/s41586-020-2649-2
+
+    .. [3] Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, et al., "SciPy
+        1.0: Fundamental Algorithms for Scientific Computing in Python", Nature
+        Methods, vol. 17, pp 261-272, 2020, doi:`10.1038/s41592-019-0686-2`_
+    
+    .. _10.1038/s41592-019-0686-2: https://doi.org/10.1038/s41592-019-0686-2
+
+    .. [4] Nour-Eddine Lasmar, Youssef Stitou, and Yannick Berthoumieu,
+        "Multiscale skewed heavy tailed model for texture analysis", 16th IEEE
+        International Conference on Image Processing (ICIP), pp 2281-2284, 2009,
+        doi:`10.1109/ICIP.2009.5414404`_
+
+    .. _10.1109/ICIP.2009.5414404: https://doi.org/10.1109/ICIP.2009.5414404
+
+    .. [5] John D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in
+        Science & Engineering, vol. 9, no. 3, pp. 90-95, 2007.
+        doi:`10.1109/MCSE.2007.55`_
+
+    .. _10.1109/MCSE.2007.55: https://doi.org/10.1109/MCSE.2007.55
+
+    .. [6] Catherine Spurin, Tom Bultreys, Maja Rücker, et al., "The
+        development of intermittent multiphase fluid flow pathways through a
+        porous rock", Advances in Water Resources, vol. 150, 2021,
+        doi:`10.1016/j.advwatres.2021.103868`_
+
+    .. _10.1016/j.advwatres.2021.103868: https://doi.org/10.1016/j.advwatres.2021.103868
+
+    .. [7] Catherine Spurin, Tom Bultreys, Maja Rücker, et al., "Real-Time
+        Imaging Reveals Distinct Pore-Scale Dynamics During Transient and
+        Equilibrium Subsurface Multiphase Flow", Water Resources Research, vol.
+        56, no. 12, 2020, doi:`10.1029/2020WR028287`_
+
+    .. _10.1029/2020WR028287: https://doi.org/10.1029/2020WR028287
+
+
+
+
+
+    .. _rock_2d.npy: https://github.com/boeleman/quantimpy/raw/thresholding/test/rock_2d.npy
+
+    .. _rock_3d.npy: https://github.com/boeleman/quantimpy/raw/thresholding/test/rock_3d.npy
+
+    """
+# Convert float to np.float32
+    if np.issubdtype(image.dtype, np.floating):
+        image = image.astype(np.float32)
+# Convert non-float to float32 and normalize
+    elif np.issubdtype(image.dtype, np.floating):
+        image = image.astype(np.float32)/(np.iinfo(image.dtype).max)
+
 #@cython.binding(True)
-#cpdef anisodiff(image, option=1, niter=1, K=50, gamma=0.1):
+#cpdef brisque(image, patch=7, trunc=3.0, debug=None):
 #    r"""
-#    Anisotropic diffusion filter
-#
-#    This function applies an anisotropic diffusion filter to the 2D or 3D NumPy
-#    array `image`. This is also known as Perona Malik diffusion [2]_ and is an
-#    edge preserving noise reduction method. The code is based on a Matlab code
-#    by Perona, Shiota, and Malik [3]_.
-#
-#    Parameters
-#    ----------
-#    image : ndarray, {int, uint, float}
-#        2D or 3D grayscale input image.
-#    option : int, defaults to 1
-#        The `option` parameter selects the conduction coefficient used by the
-#        filter. `option=0` selects the following conduction coefficient: 
-#
-#        .. math:: g (\nabla I) = \exp{(-\frac{||\nabla I||}{K})},
-#
-#        where :math:`\nabla I` is the image brightness gradient, and :math:`K`
-#        is a constant. This equation is used in a Matlab code by Perona,
-#        Shiota, and Malik [3]_. `option=1` selects the conduction coefficient: 
-#
-#        .. math:: g (\nabla I) = \exp{(-\left(\frac{||\nabla I||}{K}\right)^{2})},
-#
-#        and `option=2` selects the coefficient: 
-#
-#        .. math:: g (\nabla I) = \frac{1}{1 + (\frac{||\nabla I||}{K})^{2}}.
-#
-#        Option one privileges high-contrast edges over low-contrast ones, while
-#        option two privileges wide regions over smaller ones [2]_.
-#    niter : int, defaults to 1
-#        The number of iterations that the filter is applied.
-#    K : float, defaults to 50
-#        The value of constant :math:`K` in the above equations.
-#    gamma : float, defaults to 0.1
-#        Sets the diffusion "time" step size. When :math:`\gamma \leq 0.25`,
-#        stability is ensured. 
-#            
-#    Returns
-#    -------
-#    out : ndarray, float
-#        Noise reduced 2D or 3D output image. The return data type is float and
-#        the image is normalized betweeen 0 and 1 or -1 and 1.
-#
-#    See Also
-#    --------
-#
-#    Examples
-#    --------
-#    This example uses the NumPy [1]_, and Matplotlib Python packages [4]_. The
-#    NumPy data file "`rock_2d.npy`_" is available on Github [9]_ [10]_. 
-#
-#    .. code-block:: python
-#
-#        import numpy as np
-#        import matplotlib.pyplot as plt
-#        from quantimpy import segmentation as sg
-#
-#        # Load data
-#        image = np.load("rock_2d.npy")
-#
-#        # Apply anisotropic diffusion filter
-#        diffusion = sg.anisodiff(image, niter=5)
-#
-#        # Show results
-#        fig = plt.figure()
-#        plt.gray()
-#        ax1 = fig.add_subplot(121)  # left side
-#        ax2 = fig.add_subplot(122)  # right side
-#        ax1.imshow(image)
-#        ax2.imshow(diffusion)
-#        plt.show()
-#
-#    """
-#    if (~np.issubdtype(image.dtype, np.floating)):
-#        image = image.astype(np.float64)/(np.iinfo(image.dtype).max)
-#
-#    if (image.ndim == 2):
-#        return _anisodiff_2d(image, option, niter, K, gamma)
-#    elif (image.ndim == 3):
-#        return _anisodiff_3d(image, option, niter, K, gamma)
-#    else:
-#        raise ValueError('Cannot handle more than three dimensions')
-#
-#@cython.boundscheck(False)
-#@cython.wraparound(False)
-#cdef _anisodiff_2d(np.ndarray[np.float64_t, ndim=2] image, int option, int niter, double K, double gamma):
-#
-#    cdef int i, j
-#    cdef int x_max, y_max
-#
-#    cdef double K_inv = 1./K
-#    cdef double K2_inv = 1./K**2
-#
-#    cdef np.ndarray[np.float64_t, ndim=2] flux
-#    cdef np.ndarray[np.float64_t, ndim=2] result
-#    cdef np.ndarray[np.float64_t, ndim=2] result_tmp
-#
-#    result = image.copy()
-#    result_tmp = np.zeros_like(result)
-#    
-#    for j in range(niter):
-#        result_tmp[:,:] = 0
-## Loop over dimensions        
-#        for i in range(2):
-#            flux = np.diff(result, axis=i, prepend=0)
-## Adiabatic boundary condition
-#            index = [slice(None)]*flux.ndim
-#            index[i] = 0
-#            flux[tuple(index)] = 0
-#
-#            if (option == 0):
-#                flux = flux * np.exp(-np.abs(flux)*K_inv)
-#            elif (option == 1):
-#                flux = flux * np.exp(-flux**2*K2_inv)
-#            elif (option == 2):
-#                flux = flux / (1. + (flux**2*K2_inv))
-#
-#            flux = np.diff(flux, axis=i, append=0) 
-## Adiabatic boundary condition
-#            index = [slice(None)]*flux.ndim
-#            index[i] = flux.shape[i]-1
-#            flux[tuple(index)] = 0
-#
-#            result_tmp = result_tmp + gamma*flux
-#
-#        result = result + result_tmp
-#
-#    return result
-#
-#@cython.boundscheck(False)
-#@cython.wraparound(False)
-#cdef _anisodiff_3d(np.ndarray[np.float64_t, ndim=3] image, int option, int niter, double K, double gamma):
-#
-#    cdef int i, j
-#    cdef int x_max, y_max
-#
-#    cdef double K_inv = 1./K
-#    cdef double K2_inv = 1./K**2
-#
-#    cdef np.ndarray[np.float64_t, ndim=3] flux
-#    cdef np.ndarray[np.float64_t, ndim=3] result
-#    cdef np.ndarray[np.float64_t, ndim=3] result_tmp
-#    
-#    result = image.copy()
-#    result_tmp = np.zeros_like(result)
-#
-#    for j in range(niter):
-#        result_tmp[:,:,:] = 0.0
-## Loop over dimensions        
-#        for i in range(3):
-#            flux = np.diff(result, axis=i, prepend=0)
-## Adiabatic boundary condition
-#            index = [slice(None)]*flux.ndim
-#            index[i] = 0
-#            flux[tuple(index)] = 0
-#
-#            if (option == 0):
-#                flux = flux * np.exp(-np.abs(flux)*K_inv)
-#            elif (option == 1):
-#                flux = flux * np.exp(-flux**2*K2_inv)
-#            elif (option == 2):
-#                flux = flux / (1. + (flux**2*K2_inv))
-#
-#            flux = np.diff(flux, axis=i, append=0) 
-## Adiabatic boundary condition
-#            index = [slice(None)]*flux.ndim
-#            index[i] = flux.shape[i]-1
-#            flux[tuple(index)] = 0
-#
-#            result_tmp = result_tmp + gamma*flux
-#
-#        result = result + result_tmp
-#
-#    return result
-#
-#@cython.binding(True)
-#def histogram(image, int bits=8):
-#    r"""
-#    Create an image histogram
-#
-#    This function creates an histogram for the 2D or 3D NumPy array `image`. The
-#    histogram is 8-bit (:math:`2^8` bins) by default. The function is coded
-#    around the `numpy.histogram` function. However, this functions returns the
-#    center locations of the bins instead of the edges. For `float` or 16-bit
-#    images the bin size is scaled accordingly.
-#
-#    Parameters
-#    ----------
-#    image : ndarray, {int, uint, float}
-#        2D or 3D grayscale input image.
-#    bits : int, defaults to 8
-#        :math:`2^{\text{bits}}` bins are used for the histogram. Defaults to 8
-#        bits or 256 bins.
-#    
-#    Returns
-#    -------
-#    out : tuple, float
-#        Returns two ndarrays: one with the histogram and one with the bin
-#        centers.    
-#
-#    See Also
-#    --------
-#    ~quantimpy.segmentation.unimodal
-#
-#    Examples
-#    --------
-#    This example uses the NumPy [1]_, and Matplotlib Python packages [4]_. The
-#    NumPy data file "`rock_3d.npy`_" is available on Github [9]_ [10]_. 
-#
-#    .. code-block:: python
-#
-#        import numpy as np
-#        import matplotlib.pyplot as plt
-#        from quantimpy import segmentation as sg
-#
-#        # Load data uint16
-#        image = np.load("rock_3d.npy")
-#
-#        # Compute histpgram
-#        hist, bins = sg.histogram(image, bits=8)
-#        width = bins[1] - bins[0]
-#
-#        print(bins[0],bins[-1])
-#
-#        # Plot histogram
-#        plt.bar(bins,hist,width=width)
-#        plt.show()
-#    
-#    """
-#    cdef double dtype_min
-#    cdef double dtype_max
-#    
-#    bits = 2**bits
-#
-#    if (image.dtype == "float64"):
-#        if (np.amin(image) < 0.0):
-#            dtype_min = -1.0 - 1.0/float(bits-1)
-#            dtype_max =  1.0 + 1.0/float(bits-1)
-#        else:
-#            dtype_min = 0.0 - 0.5/float(bits-1)
-#            dtype_max = 1.0 + 0.5/float(bits-1)
-#    else:                    
-#        dtype_min = np.iinfo(image.dtype).min
-#        dtype_max = np.iinfo(image.dtype).max
-#        dtype_delta = dtype_max - dtype_min
-#        if (dtype_min < 0.0):
-#            dtype_max = dtype_min + (float(bits) - 0.5) * float(dtype_delta)/float(bits-1)
-#            dtype_min = dtype_min - 0.5 * float(dtype_delta)/float(bits-1)
-#        else:
-#            dtype_min = dtype_min - 0.5*dtype_max/float(bits-1)
-#            dtype_max = dtype_max + 0.5*dtype_max/float(bits-1)
-#
-## Compute 8 bit histogram
-#    hist, bins = np.histogram(image, range=(dtype_min, dtype_max), bins=bits)
-## Find middle values
-#    bins = 0.5*(bins[1:] + bins[:-1])
-#
-#    return hist, bins
-#
-#@cython.binding(True)
-#def unimodal(np.ndarray[np.int64_t, ndim=1] hist, side="right"):
-#    r"""
-#    Compute unimodal threshold
-#
-#    Using image histogram `hist`, this function computes the unimodal threshold
-#    [6]_. This algorithms is slightly modified modified from the original
-#    method. Instead of defining the end of the distribution as the point where
-#    the histogram is zero, this algorithm takes the point that contains 99.7% of
-#    the observations. This is equivalent to three times the standard deviation
-#    for a Gaussian distribution.
-#    
-#    Parameters
-#    ----------
-#    hist : ndarray, int
-#        Histogram computed by the function :func:`~quantimpy.segmentation.histogram`.
-#    side : string, defaults to "right"
-#        Whether to compute the unimodal threshold on the left or right side of
-#        the histogram maximum. Defaults to "right".
-#    
-#    Returns
-#    -------
-#    out : int
-#        Index of the unimodal threshold value in input array `hist`.
-#
-#    See Also
-#    --------
-#    ~quantimpy.segmentation.histogram
-#
-#    Examples
-#    --------
-#    This example uses the NumPy [1]_, Matplotlib [4]_, and SciPy Python packages
-#    [5]_. NumPy data file "`rock_2d.npy`_" is available on Github [9]_ [10]_. 
-#
-#    .. code-block:: python
-#
-#        import numpy as np
-#        import matplotlib.pyplot as plt
-#        from scipy import ndimage
-#        from quantimpy import filters
-#
-#        # Load data
-#        image = np.load("rock_2d.npy")
-#
-#        # Filter image
-#        result = filters.anisodiff(image, niter=3)
-#
-#        # Edge detection
-#        laplace = ndimage.laplace(result)
-#
-#        # Compute histpgram
-#        hist, bins = filters.histogram(laplace)
-#        width = bins[1] - bins[0]
-#
-#        # Compute unimodal threshold
-#        thrshld = filters.unimodal(hist)
-#
-#        # Plot histogram
-#        plt.bar(bins, hist,width=width)
-#        plt.scatter(bins[thrshld], hist[thrshld])
-#        plt.show()
-#
-#        # Compute unimodal threshold
-#        thrshld = filters.unimodal(hist, side="left")
-#
-#        # Plot histogram
-#        plt.bar(bins, hist, width=width)
-#        plt.scatter(bins[thrshld], hist[thrshld])
-#        plt.show()
-#
-#
-#    References
-#    ----------
-#    .. [1] Charles R. Harris, K. Jarrod Millman, Stéfan J. van der Walt et al.,
-#        "Array programming with NumPy", Nature, vol. 585, pp 357-362, 2020,
-#        doi:`10.1038/s41586-020-2649-2`_
-#
-#    .. _10.1038/s41586-020-2649-2: https://doi.org/10.1038/s41586-020-2649-2
-#
-#    .. [2] Pietro Perona and Jitendra Malik, "Scale-space and edge detection
-#        using anisotropic diffusion", IEEE Transactions on pattern analysis and
-#        machine intelligence, vol. 12, no. 7, pp 629-639, 1990, doi:`10.1109/34.56205`_
-#
-#    .. _10.1109/34.56205: https://doi.org/10.1109/34.56205
-#
-#    .. [3] Pietro Perona, Takahiro Shiota, and Jitendra Malik, "Anisotropic
-#        diffusion", in "Geometry-driven diffusion in computer vision", ed. Bart
-#        M. ter Haar Romeny, pp 73-92, 1994, isbn: 9789401716994
-#
-#    .. [4] John D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in
-#        Science & Engineering, vol. 9, no. 3, pp. 90-95, 2007.
-#        doi:`10.1109/MCSE.2007.55`_
-#
-#    .. _10.1109/MCSE.2007.55: https://doi.org/10.1109/MCSE.2007.55
-#
-#    .. [5] Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, et al., "SciPy
-#        1.0: Fundamental Algorithms for Scientific Computing in Python", Nature
-#        Methods, vol. 17, pp 261-272, 2020, doi:`10.1038/s41592-019-0686-2`_
-#    
-#    .. _10.1038/s41592-019-0686-2: https://doi.org/10.1038/s41592-019-0686-2
-#
-#    .. [6] Paul Rosin, "Unimodal thresholding", Pattern recognition, vol. 34,
-#        no. 11, pp 2083-2096, 2001, doi:`10.1016/S0031-3203(00)00136-9`_
-#
-#    .. _10.1016/S0031-3203(00)00136-9: https://doi.org/10.1016/S0031-3203(00)00136-9
-#
-#    .. [7] Hans-Jörg Vogel and Andre Kretzschmar, "Topological characterization of
-#        pore space in soil---sample preparation and digital image-processing",
-#        Geoderma, vol. 73, no. 1-2, pp 23--38, 1996, doi:`10.1016/0016-7061(96)00043-2`_
-#
-#    .. _10.1016/0016-7061(96)00043-2: https://doi.org/10.1016/0016-7061(96)00043-2
-#
-#
-#    .. [8] Steffen Schlüter, Ulrich Weller, and Hans-Jörg Vogel, "Segmentation
-#        of X-ray microtomography images of soil using gradient masks", Computers
-#        & Geosciences, vol. 36, no. 10, pp 1246--1251, 2010, doi:`10.1016/j.cageo.2010.02.007`_
-#
-#    .. _10.1016/j.cageo.2010.02.007: https://doi.org/10.1016/j.cageo.2010.02.007
-#
-#    .. [9] Catherine Spurin, Tom Bultreys, Maja Rücker, et al., "The
-#        development of intermittent multiphase fluid flow pathways through a
-#        porous rock", Advances in Water Resources, vol. 150, 2021,
-#        doi:`10.1016/j.advwatres.2021.103868`_
-#
-#    .. _10.1016/j.advwatres.2021.103868: https://doi.org/10.1016/j.advwatres.2021.103868
-#
-#    .. [10] Catherine Spurin, Tom Bultreys, Maja Rücker, et al., "Real-Time
-#        Imaging Reveals Distinct Pore-Scale Dynamics During Transient and
-#        Equilibrium Subsurface Multiphase Flow", Water Resources Research, vol.
-#        56, no. 12, 2020, doi:`10.1029/2020WR028287`_
-#
-#    .. _10.1029/2020WR028287: https://doi.org/10.1029/2020WR028287
-#
-#
-#    .. _rock_2d.npy: https://github.com/boeleman/quantimpy/raw/thresholding/test/rock_2d.npy
-#
-#    .. _rock_3d.npy: https://github.com/boeleman/quantimpy/raw/thresholding/test/rock_3d.npy
-#    
-#    """
-#    cdef int idx
-#    cdef int idx_min
-#    cdef int idx_max
-#    cdef int idx_dist = 0
-#    
-#    cdef long long hst_min
-#    cdef long long hst_max
-#    cdef long long cross_ab
-#    
-#    cdef double sum_hist
-#    cdef double dist
-#    cdef double dist_max = 0.0
-#
-#    cdef np.ndarray[np.int64_t, ndim=1] p0
-#    cdef np.ndarray[np.int64_t, ndim=1] p1
-#    cdef np.ndarray[np.int64_t, ndim=1] a
-#    cdef np.ndarray[np.int64_t, ndim=1] b
-#
-## Flip array depending on side
-#    if (side == "left"):
-#        hist = np.flip(hist.copy())
-#    elif (side == "right"):
-#        hist = hist.copy()
-#    else:
-#        raise ValueError("side variable should be left or right")
-#
-## Select maximum
-#    idx_max = np.argmax(hist)
-#    hst_max = hist[idx_max]
-#    
-#    p0 = np.array([idx_max, hst_max])
-#
-## Disregard data left from maximum
-#    hist[0:idx_max] = 0.
-#
-## All observations within 3 sigma (in case of normal distribution)
-#    sum_hist = 0.997*np.sum(hist)
-#
-## Find tail end
-#    for idx in range(hist.size):
-#        sum_hist = sum_hist - hist[idx]
-#        if (sum_hist > 0.):
-#            idx_min = idx
-#            hst_min = hist[idx]
-#        else:
-#            break
-#
-#    p1 = np.array([idx_min, hst_min])
-#
-## Compute maximum distance and location 
-#    for idx in range(idx_max,idx_min):
-#        hst = hist[idx]
-#
-#        a = p0 - p1
-#        b = np.array([idx, hst]) - p1
-#        cross_ab = a[0]*b[1]-b[0]*a[1]
-#        dist = abs(cross_ab)/norm(a)
-#        if (dist > dist_max):
-#            idx_dist = idx
-#            dist_max = dist
-#
-## Flip array 
-#    if (side == "left"):
-#        idx_dist = hist.size - 1 - idx_dist
-#
-#    return idx_dist
-#
-#@cython.binding(True)
-#def bilevel(np.ndarray image, thres_min, thres_max, debug=None):
-#    r"""
-#    Compute bi-level image segmentation
-#
-#    This function computes the bi-level binary segmentation of the 2D or 3D
-#    NumPy array `image` [7]_. First, an initial segmentation is computed using
-#    the minimum threshold value `thres_min`. Then, iteratively, this initial
-#    segmented image is dilated and all voxels that are below the maximum
-#    threshold value `thres_max` are added to the segmented image. This continues
-#    untill no more changes to the segmented image are observed.
-#
-#    Parameters
-#    ----------
-#    image : ndarray, {int, uint, float}
-#        2D or 3D grayscale input image.
-#    thres_min : float
-#        Minimum threshold value for bi-level segmentation.
-#    thres_max : float
-#        Maximum threshold value for bi-level segmentation.
-#    debug : str, defaults to "None"
-#        Output directory for debugging images. When this parameter is set,
-#        filtered images, masks, and histrograms are written to disk. Set to "./"
-#        to write to the working directory. The default is "None".
-#
-#    Returns
-#    -------
-#    out : ndarray, bool
-#        Returns either a 2D or 3D boolean ndarray of the segmented image.
-#
-#    See Also
-#    --------
-#    ~quantimpy.segmentation.gradient
-#
-#    Examples
-#    --------
-#    This example uses the NumPy [1]_, and Matplotlib Python packages [4]_. The
-#    NumPy data file "`rock_3d.npy`_" is available on Github [9]_ [10]_. 
-#
-#    .. code-block:: python
-#
-#        import numpy as np
-#        import matplotlib.pyplot as plt
-#        from quantimpy import segmentation as sg
-#
-#        # Load data
-#        image = np.load("rock_3d.npy")
-#
-#        # Apply anisotropic diffusion filter
-#        diffusion = sg.anisodiff(image, niter=3)
-#
-#        # Compute minimum and maximum thresholds
-#        thrshld_min, thrshld_max = sg.gradient(diffusion, alpha=1.5)
-#
-#        # Apply bi-level segmentation
-#        binary = sg.bilevel(diffusion, thrshld_min, thrshld_max)
-#
-#        # Show results
-#        fig = plt.figure()
-#        plt.gray()  # show the result in grayscale
-#        ax1 = fig.add_subplot(131)
-#        ax2 = fig.add_subplot(132)
-#        ax3 = fig.add_subplot(133)
-#        ax1.imshow(image[50,:,:])
-#        ax2.imshow(diffusion[50,:,:])
-#        ax3.imshow(binary[50,:,:])
-#        plt.show()
-#
+#    Test
 #    """
 #
-#    if (~image.flags['C_CONTIGUOUS']):
-#        image = np.ascontiguousarray(image)
-#
-#    if (image.ndim == 2):
-#        return _bilevel_2d(image, thres_min, thres_max, debug)
-#    elif (image.ndim == 3):
-#        return _bilevel_3d(image, thres_min, thres_max, debug)
-#    else:
-#        raise ValueError('Can only handle 2D or 3D images')
-#
-#@cython.boundscheck(False)
-#@cython.wraparound(False)
-#def _bilevel_2d(my_type[:,::1] image_in, double thres_min, double thres_max, str debug):
+#    image_hat = mscn(image, patch=patch, trunc=trunc)
 #    
-#    cdef int idx
-#
-#    cdef bint cont = True
-#
-#    cdef np.ndarray[np.float64_t, ndim=2] image
-#    cdef np.ndarray[np.float64_t, ndim=2] dilated
-#    cdef np.ndarray[np.uint8_t, ndim=2, cast=True] binary
-#    cdef np.ndarray[np.uint8_t, ndim=2, cast=True] binary_old
-#    
-#    image = np.asarray(image_in, dtype=np.float64)
-#
-#    dtype = None
-#    if my_type == "unsigned char":
-#        dtype = np.uint8
-#    elif my_type == "unsigned short":
-#        dtype = np.uint16
-#    elif my_type == "unsigned int":
-#        dtype = np.uint32
-#    elif my_type == "double":
-#        dtype = np.float64
-#    elif my_type == "signed char":
-#        dtype = np.int8
-#    elif my_type == "signed short":
-#        dtype = np.int16
-#    elif my_type == "signed int":
-#        dtype = np.int32
-#
-#    binary = image < thres_min
-#    
-#    idx = 0
-#    while cont:
-#        print("Bi-level thresholding step: " + str(idx))
-#
-#        binary_old = binary
-#    
-#        dilated = image*mp.dilate(binary,1.00001)
-#        binary = (dilated < thres_max) & (dilated > 0.0)
-#
-#        if (debug is not None):
-#            name = debug + "binary_" + str(idx) + ".png"
-#
-#            plt.gray()
-#            plt.imshow(binary)
-#            plt.axis("off")
-#            plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-#            plt.clf()
-#    
-## Stop when masks are the same    
-#        if np.array_equal(binary, binary_old):
-#            cont = False
-#    
-#        idx = idx + 1
-#
-#    return binary        
-#
-#@cython.boundscheck(False)
-#@cython.wraparound(False)
-#def _bilevel_3d(my_type[:,:,::1] image_in, double thres_min, double thres_max, str debug):
-#    
-#    cdef int idx
-#
-#    cdef bint cont = True
-#
-#    cdef np.ndarray[np.float64_t, ndim=3] image
-#    cdef np.ndarray[np.float64_t, ndim=3] dilated
-#    cdef np.ndarray[np.uint8_t, ndim=3, cast=True] binary
-#    cdef np.ndarray[np.uint8_t, ndim=3, cast=True] binary_old
-#    
-#    image = np.asarray(image_in, dtype=np.float64)
-#
-#    dtype = None
-#    if my_type == "unsigned char":
-#        dtype = np.uint8
-#    elif my_type == "unsigned short":
-#        dtype = np.uint16
-#    elif my_type == "unsigned int":
-#        dtype = np.uint32
-#    elif my_type == "double":
-#        dtype = np.float64
-#    elif my_type == "signed char":
-#        dtype = np.int8
-#    elif my_type == "signed short":
-#        dtype = np.int16
-#    elif my_type == "signed int":
-#        dtype = np.int32
-#
-#    binary = image < thres_min
-#    
-#    idx = 0
-#    while cont:
-#        print("Bi-level thresholding step: " + str(idx))
-#
-#        binary_old = binary
-#    
-#        dilated = image*mp.dilate(binary,1.00001)
-#        binary = (dilated < thres_max) & (dilated > 0.0)
-#
-#        if (debug is not None):
-#            name = debug + "binary_" + str(idx) + ".png"
-#
-#            plt.gray()
-#            plt.imshow(binary[int(0.5*binary.shape[0]),:,:])
-#            plt.axis("off")
-#            plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-#            plt.clf()
-#    
-## Stop when masks are the same    
-#        if np.array_equal(binary, binary_old):
-#            cont = False
-#    
-#        idx = idx + 1
-#
-#    return binary
-#
-#@cython.binding(True)
-#def gradient(np.ndarray image, alpha=1.25, debug=None):
-#    r"""
-#    Compute thresholds for bi-level segmentation using gradient masks
-#
-#    This function computes the minimum and maximum threshold values for the 2D
-#    or 3D NumPy array `image`  using gradient masks [8]_. These threshold
-#    values, in turn, can be used as inputs for the bi-level segmentation
-#    function, :func:`~quantimpy.segmentation.bilevel`. The gradient masks are
-#    computed using Sobel and Laplace edge detection filters combined with the
-#    unimodal thresholding function, :func:`~quantimpy.segmentation.unimodal`.
-#
-#    Parameters
-#    ----------
-#    image : ndarray, {int, uint, float}
-#        2D or 3D grayscale input image.
-#    alpha : float, defaults to 1.25
-#        The parameter :math:`\alpha > 1` is used to compute the minimum
-#        threshold value using the formula:
-#        
-#        .. math:: T_{\text{min}} = x_{\text{mode}} - \alpha (x_{\text{mode}} -
-#            T_{\text{max}}),
-#
-#        where :math:`T_{\text{min}}` is the minimum threshold value,
-#        :math:`x_{\text{mode}}` is the mode of the histogram of `image`, and
-#        :math:`T_{\text{max}}` is the maximum threshold value. The less noise
-#        `image` contains, the closer :math:`\alpha` can be set to one. 
-#    debug : str, defaults to "None"
-#        Output directory for debugging images. When this parameter is set,
-#        filtered images, masks, and histrograms are written to disk. Set to "./"
-#        to write to the working directory. The default is "None".
-#
-#    Returns
-#    -------
-#    out : tuple, float
-#        Returns minimum and maximum threshold values                                                         
-#
-#    See Also
-#    --------
-#    ~quantimpy.segmentation.bilevel
-#
-#    Examples
-#    --------
-#    This example uses the NumPy package [1]_. The NumPy data file "`rock_2d.npy`_" is available on Github [9]_ [10]_. 
-#
-#    .. code-block:: python
-#
-#        import numpy as np
-#        from quantimpy import segmentation as sg
-#
-#        # Load data
-#        image = np.load("rock_2d.npy")
-#
-#        # Apply anisotropic diffusion filter
-#        diffusion = sg.anisodiff(image, niter=5)
-#
-#        # Compute minimum and maximum thresholds
-#        thrshld_min, thrshld_max = sg.gradient(diffusion)
-#
-#        # Print results 
-#        print(thrshld_min, thrshld_max) 
-#                          
-#    """
-#
-#    if (image.ndim == 2):
-#        return _gradient_2d(image, alpha, debug)
-#    elif (image.ndim == 3):
-#        return _gradient_3d(image, alpha, debug)
-#    else:
-#        raise ValueError('Can only handle 2D or 3D images')
-#
-#@cython.boundscheck(False)
-#@cython.wraparound(False)
-#def _gradient_2d(np.ndarray image, alpha, debug):
-#
-#    cdef int thres_imag
-#    cdef int thres_sobel
-#    cdef int thres_laplace
-#
-#    cdef double thres_max_sobel
-#    cdef double thres_max_laplace
-#    cdef double thres_max
-#    cdef double thres_min
-#
-#    cdef np.ndarray[np.float64_t, ndim=2] sobel
-#    cdef np.ndarray[np.float64_t, ndim=2] laplace
-#    cdef np.ndarray[np.uint8_t, ndim=2, cast=True] mask_sobel
-#    cdef np.ndarray[np.uint8_t, ndim=2, cast=True] mask_laplace
-#
-## Apply edge detection filters
-#    sobel = ndimage.sobel(image)
-#    sobel = np.abs(sobel)
-#    laplace = ndimage.laplace(image)
-#
-## Plot filtered images
-#    if (debug is not None):
-#        name = debug + "sobel.png"
-#
-#        plt.gray()
-#        plt.imshow(sobel)
-#        plt.axis("off")
-#        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-#        plt.clf()
-#        
-#        name = debug + "laplace.png"
-#
-#        plt.gray()
-#        plt.imshow(laplace)
-#        plt.axis("off")
-#        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-#        plt.clf()
-#
-## Compute histograms
-#    hist_imag, bins_imag = histogram(image)
-#    hist_sobel, bins_sobel = histogram(sobel)
-#    hist_laplace, bins_laplace = histogram(laplace)
-#
-## Compute thresholds
-#    thres_imag = np.argmax(hist_imag)
-#    thres_sobel = unimodal(hist_sobel)
-#    thres_laplace = unimodal(hist_laplace)
-#
-## Plot histograms
-#    if (debug is not None):
-#        width_imag = 0.9*(bins_imag[1] - bins_imag[0])
-#        width_sobel = 0.9*(bins_sobel[1] - bins_sobel[0])
-#        width_laplace = 0.9*(bins_laplace[1] - bins_laplace[0])
-#
-#        name = debug + "hist_imag.png"
-#
-#        plt.bar(bins_imag, hist_imag, width=width_imag)
-#        plt.scatter(bins_imag[thres_imag], hist_imag[thres_imag])
-#        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-#        plt.clf()
-#
-#        name = debug + "hist_sobel.png"
-#
-#        plt.bar(bins_sobel, hist_sobel, width=width_sobel)
-#        plt.scatter(bins_sobel[thres_sobel], hist_sobel[thres_sobel])
-#        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-#        plt.clf()
-#
-#        name = debug + "hist_laplace.png"
-#
-#        plt.bar(bins_laplace, hist_laplace, width=width_laplace)
-#        plt.scatter(bins_laplace[thres_laplace], hist_laplace[thres_laplace])
-#        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-#        plt.clf()
-#
-## Create masks
-#    mask_sobel = sobel >= bins_sobel[thres_sobel]
-#    mask_sobel = mp.erode(mask_sobel,1.001)
-#    mask_laplace = laplace >= bins_laplace[thres_laplace]
-#
-## Plot masks
-#    if (debug is not None):
-#        name = debug + "mask_sobel.png"
-#
-#        plt.gray()
-#        plt.imshow(mask_sobel)
-#        plt.axis("off")
-#        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-#        plt.clf()
-#
-#        name = debug + "mask_laplace.png"
-#
-#        plt.gray()
-#        plt.imshow(mask_laplace)
-#        plt.axis("off")
-#        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-#        plt.clf()
-#
-## Compute maximum threshold
-#    thres_max_sobel = np.sum(image*sobel*mask_sobel)/np.sum(sobel*mask_sobel)
-#    thres_max_laplace = np.sum(image*laplace*mask_laplace)/np.sum(laplace*mask_laplace)
-#    thres_max = 0.5*(thres_max_sobel + thres_max_laplace)
-#
-## Compute minimum threshold
-#    thres_min = bins_imag[thres_imag] - alpha*(bins_imag[thres_imag] - thres_max)
-#
-#    return thres_min, thres_max
-#
-#@cython.boundscheck(False)
-#@cython.wraparound(False)
-#def _gradient_3d(np.ndarray image, alpha, debug):
-#
-#    cdef int thres_imag
-#    cdef int thres_sobel
-#    cdef int thres_laplace
-#
-#    cdef double thres_max_sobel
-#    cdef double thres_max_laplace
-#    cdef double thres_max
-#    cdef double thres_min
-#
-#    cdef np.ndarray[np.float64_t, ndim=3] sobel
-#    cdef np.ndarray[np.float64_t, ndim=3] laplace
-#    cdef np.ndarray[np.uint8_t, ndim=3, cast=True] mask_sobel
-#    cdef np.ndarray[np.uint8_t, ndim=3, cast=True] mask_laplace
-#
-## Apply edge detection filters
-#    sobel = ndimage.sobel(image)
-#    sobel = np.abs(sobel)
-#    laplace = ndimage.laplace(image)
-#
-## Plot filtered images
-#    if (debug is not None):
-#        name = debug + "sobel.png"
-#
-#        plt.gray()
-#        plt.imshow(sobel[int(0.5*sobel.shape[0]),:,:])
-#        plt.axis("off")
-#        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-#        plt.clf()
-#        
-#        name = debug + "laplace.png"
-#
-#        plt.gray()
-#        plt.imshow(laplace[int(0.5*laplace.shape[0]),:,:])
-#        plt.axis("off")
-#        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-#        plt.clf()
-#
-## Compute histograms
-#    hist_imag, bins_imag = histogram(image)
-#    hist_sobel, bins_sobel = histogram(sobel)
-#    hist_laplace, bins_laplace = histogram(laplace)
-#
-## Compute thresholds
-#    thres_imag = np.argmax(hist_imag)
-#    thres_sobel = unimodal(hist_sobel)
-#    thres_laplace = unimodal(hist_laplace)
-#
-## Plot histograms
-#    if (debug is not None):
-#        width_imag = 0.9*(bins_imag[1] - bins_imag[0])
-#        width_sobel = 0.9*(bins_sobel[1] - bins_sobel[0])
-#        width_laplace = 0.9*(bins_laplace[1] - bins_laplace[0])
-#
-#        name = debug + "hist_imag.png"
-#
-#        plt.bar(bins_imag, hist_imag, width=width_imag)
-#        plt.scatter(bins_imag[thres_imag], hist_imag[thres_imag])
-#        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-#        plt.clf()
-#
-#        name = debug + "hist_sobel.png"
-#
-#        plt.bar(bins_sobel, hist_sobel, width=width_sobel)
-#        plt.scatter(bins_sobel[thres_sobel], hist_sobel[thres_sobel])
-#        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-#        plt.clf()
-#
-#        plt.bar(bins_laplace, hist_laplace, width=width_laplace)
-#        plt.scatter(bins_laplace[thres_laplace], hist_laplace[thres_laplace])
-#        plt.savefig("hist_laplace.png", bbox_inches="tight", pad_inches=0, dpi=300)
-#        plt.clf()
-#
-## Create masks
-#    mask_sobel = sobel >= bins_sobel[thres_sobel]
-#    mask_sobel = mp.erode(mask_sobel,1.001)
-#    mask_laplace = laplace >= bins_laplace[thres_laplace]
-#
-## Plot masks
-#    if (debug is not None):
-#        name = debug + "mask_sobel.png"
-#
-#        plt.gray()
-#        plt.imshow(mask_sobel[int(0.5*mask_sobel.shape[0]),:,:])
-#        plt.axis("off")
-#        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-#        plt.clf()
-#
-#        name = debug + "mask_laplace.png"
-#
-#        plt.gray()
-#        plt.imshow(mask_laplace[int(0.5*mask_laplace.shape[0]),:,:])
-#        plt.axis("off")
-#        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-#        plt.clf()
-#
-## Compute maximum threshold
-#    thres_max_sobel = np.sum(image*sobel*mask_sobel)/np.sum(sobel*mask_sobel)
-#    thres_max_laplace = np.sum(image*laplace*mask_laplace)/np.sum(laplace*mask_laplace)
-#    thres_max = 0.5*(thres_max_sobel + thres_max_laplace)
-#
-## Compute minimum threshold
-#    thres_min = bins_imag[thres_imag] - alpha*(bins_imag[thres_imag] - thres_max)
-#
-#    return thres_min, thres_max
+#    coeff(image_hat, debug=debug)
+
+# What is structure going to look like?
+
+# End up with one function that gives "score" for both 2D AND 3D images
+
+# Steps
+# * Compute MSCN for both full resolution and half resolution
+# * Compute pairwise products
+# * Fit Asymetric Generalized Gaussian Distribution
+# * Compute score from coefficients
+
+# Compute pairwise products and compute fit in serial to reduce memory usage
+
+# TODO 
+# * Exactly define score

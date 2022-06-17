@@ -1,4 +1,4 @@
-r"""Functions for the BRISQUE no-reference image quality assesment (NR-IQA)
+r"""Functions for BRISQUE no-reference image quality assesment (NR-IQA)
 
 This module contains various functions for the computation of the BRISQUE [1]_
 no-reference image quality assesment (NR-IQA) for both 2D and 3D NumPy [2]_ arrays.
@@ -20,19 +20,18 @@ class asgennorm_gen(rv_continuous):
     Asymmetric generalized normal continuous random variable
 
     This is an asymmetric generalized Gaussian distribution (AGGD) class based
-    on the SciPy [3]_ `scipy.stats.rv_continuous` class.
-
-
-    The probability density function for `asgennorm` is [4]_:
+    on the SciPy [3]_ `scipy.stats.rv_continuous` class. The probability density
+    function for `asgennorm` is [4]_:
 
     .. math:: f(x, \alpha, \beta) = \frac{\beta}{(1 + a)
         \Gamma{(\frac{1}{\beta})}} \exp{(-|\frac{x}{a}|^{\beta})}
 
     where :math:`a = \alpha` if :math:`x < 0` and :math:`a = 1` if  :math:`x \ge
-    0`. :math:`\Gamma` is the gamma function (`scipy.special.gamma`).
-    :math:`\beta` is the shape parameter. For :math:`\beta = 1`, it is identical
-    to a Laplace distribution and for  :math:`\beta = 2`, it is identical to a
-    normal distribution. :math:`\alpha` is a measure for the standard deviation.
+    0`, :math:`\alpha` is a measure for the standard deviation, :math:`\Gamma`
+    is the gamma function (`scipy.special.gamma`), and :math:`\beta` is the
+    shape parameter. For :math:`\beta = 1`, it is identical to a Laplace
+    distribution and for  :math:`\beta = 2`, it is identical to a normal
+    distribution.
 
     Some of the methods of this class include:
     
@@ -47,7 +46,7 @@ class asgennorm_gen(rv_continuous):
 
     See Also
     --------
-    ~quantimpy.brisque.brisque
+    ~quantimpy.brisque.coeff
     
     Examples
     --------
@@ -197,7 +196,6 @@ cpdef mscn(image, patch=7, trunc=3.0, debug=None):
     .. code-block:: python
 
         import numpy as np
-        import matplotlib.pyplot as plt
         from quantimpy import brisque as bq
 
         # Load data
@@ -206,10 +204,7 @@ cpdef mscn(image, patch=7, trunc=3.0, debug=None):
         # Compute MSCN coefficients
         mscn = bq.mscn(image)
 
-        # Show coefficients
-        plt.gray()
-        plt.imshow(mscn[:,:])
-        plt.show()
+        print(bq.coeff(mscn))
 
     References
     ----------
@@ -348,6 +343,60 @@ def _mscn_3d(np.ndarray[cython.floating, ndim=3] image, int patch, double trunc,
 cpdef coeff(mscn, sample_size=500000, debug=None):
     r"""
     Coefficients of pairwise products of neighboring MSCN coefficients
+
+    Compute the fitting coefficients of the MSCN coefficients and the pairwise
+    products of neighboring MSCN coefficients. The MSCN coefficients are fitted
+    with the generalized Gaussian distribution and the pairwise products with
+    the asymetric generalized Gausian distribution. The input 2D or 3D MSCN
+    coefficients can be computed using function :func:`~quantimpy.brisque.mscn`.
+    When the `debug` parameter is set, images of the distributions and their fit
+    are also returned.
+
+    Parameters
+    ----------
+    mscn : ndarray, float
+        2D or 3D MSCN coefficients.
+    sample_size : int, defaults to 500000
+        To reduce computational resources, the distributions can be fitted to a
+        randomly selected subset of the  MSCN coefficients. `sample_size` gives
+        the size of this subset. When -1 is passed, the whole dataset is used.
+        Defaults to 500000. 
+    debug : str, defaults to "None"
+        Output directory for debugging images. When this parameter is set,
+        images of the distributions and their fit are written to disk. Set to
+        "./" to write to the working directory. The default is "None".
+    
+    Returns
+    -------
+    out : ndarray, float
+        2D or 3D fitting parameters.
+
+    See Also
+    --------
+    ~quantimpy.brisque.mscn
+
+    Examples
+    --------
+    This example uses the NumPy [2]_, and Matplotlib [5]_ packages. The NumPy
+    data file "`rock_2d.npy`_" is available on Github [6]_ [7]_.
+
+    .. code-block:: python
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from quantimpy import brisque as bq
+
+        # Load data
+        image = np.load("rock_2d.npy")
+
+        # Compute MSCN coefficients
+        mscn = bq.mscn(image)
+
+        # Show coefficients
+        plt.gray()
+        plt.imshow(mscn)
+        plt.show()
+
     """
     if (mscn.ndim == 2):
         return _coeff_2d(mscn, sample_size, debug)

@@ -6,6 +6,8 @@ from quantimpy import brisque as bq
 # Load data
 image = np.load("rock_2d.npy")
 
+image = image.astype(np.float32)
+
 # Compute MSCN coefficients
 mscn = bq.mscn(image)
 

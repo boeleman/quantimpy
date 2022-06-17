@@ -55,25 +55,24 @@
   <section id="module-quantimpy.brisque">
 <span id="quantimpy-brisque-module"></span><h1>quantimpy.brisque module<a class="headerlink" href="#module-quantimpy.brisque" title="Permalink to this headline">¶</a></h1>
 <p>Functions for the BRISQUE no-reference image quality assesment (NR-IQA)</p>
-<p>This module contains various functions for the computation of the BRISQUE <a class="footnote-reference brackets" href="#id16" id="id1">1</a>
-no-reference image quality assesment (NR-IQA) for both 2D and 3D NumPy <a class="footnote-reference brackets" href="#id17" id="id2">2</a> arrays.</p>
+<p>This module contains various functions for the computation of the BRISQUE <a class="footnote-reference brackets" href="#id11" id="id1">1</a>
+no-reference image quality assesment (NR-IQA) for both 2D and 3D NumPy <a class="footnote-reference brackets" href="#id12" id="id2">2</a> arrays.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="quantimpy.brisque.asgennorm_gen">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">quantimpy.brisque.</span></span><span class="sig-name descname"><span class="pre">asgennorm_gen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">momtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xtol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">badvalue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shapes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extradoc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.brisque.asgennorm_gen" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats._distn_infrastructure.rv_continuous</span></code></p>
 <p>Asymmetric generalized normal continuous random variable</p>
 <p>This is an asymmetric generalized Gaussian distribution (AGGD) class based
-on the SciPy <a class="footnote-reference brackets" href="#id18" id="id3">3</a> <cite>scipy.stats.rv_continuous</cite> class. The probability density
-function for <cite>asgennorm</cite> is <a class="footnote-reference brackets" href="#id19" id="id4">4</a>:</p>
+on the SciPy <a class="footnote-reference brackets" href="#id13" id="id3">3</a> <cite>scipy.stats.rv_continuous</cite> class.</p>
+<p>The probability density function for <cite>asgennorm</cite> is <a class="footnote-reference brackets" href="#id14" id="id4">4</a>:</p>
 <div class="math notranslate nohighlight">
 \[f(x, \alpha, \beta) = \frac{\beta}{(1 + a)
 \Gamma{(\frac{1}{\beta})}} \exp{(-|\frac{x}{a}|^{\beta})}\]</div>
 <p>where <span class="math notranslate nohighlight">\(a = \alpha\)</span> if <span class="math notranslate nohighlight">\(x &lt; 0\)</span> and <span class="math notranslate nohighlight">\(a = 1\)</span> if  <span class="math notranslate nohighlight">\(x \ge
-0\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span> is a measure for the standard deviation, <span class="math notranslate nohighlight">\(\Gamma\)</span>
-is the gamma function (<cite>scipy.special.gamma</cite>), and <span class="math notranslate nohighlight">\(\beta\)</span> is the
-shape parameter. For <span class="math notranslate nohighlight">\(\beta = 1\)</span>, it is identical to a Laplace
-distribution and for  <span class="math notranslate nohighlight">\(\beta = 2\)</span>, it is identical to a normal
-distribution.</p>
+0\)</span>. <span class="math notranslate nohighlight">\(\Gamma\)</span> is the gamma function (<cite>scipy.special.gamma</cite>).
+<span class="math notranslate nohighlight">\(\beta\)</span> is the shape parameter. For <span class="math notranslate nohighlight">\(\beta = 1\)</span>, it is identical
+to a Laplace distribution and for  <span class="math notranslate nohighlight">\(\beta = 2\)</span>, it is identical to a
+normal distribution. <span class="math notranslate nohighlight">\(\alpha\)</span> is a measure for the standard deviation.</p>
 <p>Some of the methods of this class include:</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="quantimpy.brisque.asgennorm_gen.pdf">
@@ -95,10 +94,10 @@ distribution.</p>
 
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#quantimpy.brisque.coeff" title="quantimpy.brisque.coeff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeff</span></code></a></p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">brisque</span></code></p>
 </div>
 <p class="rubric">Examples</p>
-<p>This example uses the NumPy <a class="footnote-reference brackets" href="#id17" id="id5">2</a> and Matplotlib <a class="footnote-reference brackets" href="#id20" id="id6">5</a> packages.</p>
+<p>This example uses the NumPy <a class="footnote-reference brackets" href="#id12" id="id5">2</a>, and Matplotlib <a class="footnote-reference brackets" href="#id15" id="id6">5</a> packages.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">quantimpy.brisque</span> <span class="kn">import</span> <span class="n">asgennorm</span>
@@ -125,63 +124,13 @@ distribution.</p>
 <dt class="sig sig-object py" id="quantimpy.brisque.coeff">
 <span class="sig-prename descclassname"><span class="pre">quantimpy.brisque.</span></span><span class="sig-name descname"><span class="pre">coeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mscn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.brisque.coeff" title="Permalink to this definition">¶</a></dt>
 <dd><p>Coefficients of pairwise products of neighboring MSCN coefficients</p>
-<p>Compute the fitting coefficients of the MSCN coefficients and of the
-pairwise products of neighboring MSCN coefficients. These coefficients are
-the fit of the generalized Gaussian distribution and the asymmetric
-generalized Gaussian distribution respectively. The MSCN coefficients are
-computed using the function <a class="reference internal" href="#quantimpy.brisque.mscn" title="quantimpy.brisque.mscn"><code class="xref py py-func docutils literal notranslate"><span class="pre">mscn()</span></code></a>. When the
-<cite>debug</cite> parameter is set, images of the distributions are written do disk.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mscn</strong> (<em>ndarray</em><em>, </em><em>float</em>) – 2D or 3D MSCN coefficients.</p></li>
-<li><p><strong>sample_size</strong> (<em>int</em><em>, </em><em>defaults to 5000000</em>) – To reduce computational resources, instead of using the full mscn array
-a randomly selected subset is used. The size of this subset is set by
-<cite>sample_size</cite>. To use the full data set, use a value of -1.</p></li>
-<li><p><strong>debug</strong> (<em>str</em><em>, </em><em>defaults to &quot;None&quot;</em>) – Output directory for debugging images. When this parameter is set,
-images of the distributions are are written to disk. Set to “./” to
-write to the working directory. The default is “None”.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>out</strong> – Fitting coefficients of the MSCN coefficients and of the pairwise
-products of neighboring MSCN coefficients. The return data type is float
-and the image is normalized betweeen 0 and 1 or -1 and 1.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ndarray, float</p>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#quantimpy.brisque.coeff" title="quantimpy.brisque.coeff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeff</span></code></a></p>
-</div>
-<p class="rubric">Examples</p>
-<p>This example uses the NumPy <a class="footnote-reference brackets" href="#id17" id="id7">2</a> and Matplotlib <a class="footnote-reference brackets" href="#id20" id="id8">5</a> packages. The NumPy data file
-“<a class="reference external" href="https://github.com/boeleman/quantimpy/raw/thresholding/test/rock_2d.npy">rock_2d.npy</a>” is available on Github <a class="footnote-reference brackets" href="#id21" id="id9">6</a> <a class="footnote-reference brackets" href="#id22" id="id10">7</a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">quantimpy</span> <span class="kn">import</span> <span class="n">brisque</span> <span class="k">as</span> <span class="n">bq</span>
-
-<span class="c1"># Load data</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;rock_2d.npy&quot;</span><span class="p">)</span>
-
-<span class="c1"># Compute MSCN coefficients</span>
-<span class="n">mscn</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">mscn</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-
-<span class="c1"># Show coefficients</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mscn</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="quantimpy.brisque.mscn">
 <span class="sig-prename descclassname"><span class="pre">quantimpy.brisque.</span></span><span class="sig-name descname"><span class="pre">mscn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trunc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantimpy.brisque.mscn" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mean subtracted contrast normalized (MSCN) coefficients</p>
-<p>Compute the mean subtracted contrast normalized (MSCN) coefficients <a class="footnote-reference brackets" href="#id16" id="id11">1</a> for
+<p>Compute the mean subtracted contrast normalized (MSCN) coefficients <a class="footnote-reference brackets" href="#id11" id="id7">1</a> for
 the 2D or 3D NumPy array <cite>image</cite>. The MSCN coefficients, <span class="math notranslate nohighlight">\(\hat{I}\)</span>,
 are defined as:</p>
 <div class="math notranslate nohighlight">
@@ -218,8 +167,8 @@ image is normalized betweeen 0 and 1 or -1 and 1.</p>
 <p><a class="reference internal" href="#quantimpy.brisque.coeff" title="quantimpy.brisque.coeff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coeff</span></code></a></p>
 </div>
 <p class="rubric">Examples</p>
-<p>This example uses the NumPy <a class="footnote-reference brackets" href="#id17" id="id12">2</a> and Matplotlib <a class="footnote-reference brackets" href="#id20" id="id13">5</a> packages. The NumPy data file
-“<a class="reference external" href="https://github.com/boeleman/quantimpy/raw/thresholding/test/rock_2d.npy">rock_2d.npy</a>” is available on Github <a class="footnote-reference brackets" href="#id21" id="id14">6</a> <a class="footnote-reference brackets" href="#id22" id="id15">7</a>.</p>
+<p>This example uses the NumPy package <a class="footnote-reference brackets" href="#id12" id="id8">2</a>. The NumPy data file
+“<a class="reference external" href="https://github.com/boeleman/quantimpy/raw/thresholding/test/rock_2d.npy">rock_2d.npy</a>” is available on Github <a class="footnote-reference brackets" href="#id16" id="id9">6</a> <a class="footnote-reference brackets" href="#id17" id="id10">7</a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">quantimpy</span> <span class="kn">import</span> <span class="n">brisque</span> <span class="k">as</span> <span class="n">bq</span>
@@ -232,13 +181,13 @@ image is normalized betweeen 0 and 1 or -1 and 1.</p>
 
 <span class="c1"># Show coefficients</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mscn</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mscn</span><span class="p">[:,:])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id16"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id11">2</a>)</span></dt>
+<dt class="label" id="id11"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id7">2</a>)</span></dt>
 <dd><p>Anish Mittal, Anush Moorthy, and Alan Bovik, “No-reference image
 quality assessment in the spatial domain”, IEEE Transactions on image
 processing, vol. 21, no. 12, pp 4695-4708, 2012,
@@ -246,21 +195,21 @@ doi:<a class="reference external" href="https://doi.org/10.1109/TIP.2012.2214050
 </dd>
 </dl>
 <dl class="footnote brackets">
-<dt class="label" id="id17"><span class="brackets">2</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id5">2</a>,<a href="#id7">3</a>,<a href="#id12">4</a>)</span></dt>
+<dt class="label" id="id12"><span class="brackets">2</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id5">2</a>,<a href="#id8">3</a>)</span></dt>
 <dd><p>Charles R. Harris, K. Jarrod Millman, Stéfan J. van der Walt et al.,
 “Array programming with NumPy”, Nature, vol. 585, pp 357-362, 2020,
 doi:<a class="reference external" href="https://doi.org/10.1038/s41586-020-2649-2">10.1038/s41586-020-2649-2</a></p>
 </dd>
 </dl>
 <dl class="footnote brackets">
-<dt class="label" id="id18"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
 <dd><p>Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, et al., “SciPy
 1.0: Fundamental Algorithms for Scientific Computing in Python”, Nature
 Methods, vol. 17, pp 261-272, 2020, doi:<a class="reference external" href="https://doi.org/10.1038/s41592-019-0686-2">10.1038/s41592-019-0686-2</a></p>
 </dd>
 </dl>
 <dl class="footnote brackets">
-<dt class="label" id="id19"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
 <dd><p>Nour-Eddine Lasmar, Youssef Stitou, and Yannick Berthoumieu,
 “Multiscale skewed heavy tailed model for texture analysis”, 16th IEEE
 International Conference on Image Processing (ICIP), pp 2281-2284, 2009,
@@ -268,14 +217,14 @@ doi:<a class="reference external" href="https://doi.org/10.1109/ICIP.2009.541440
 </dd>
 </dl>
 <dl class="footnote brackets">
-<dt class="label" id="id20"><span class="brackets">5</span><span class="fn-backref">(<a href="#id6">1</a>,<a href="#id8">2</a>,<a href="#id13">3</a>)</span></dt>
+<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id6">5</a></span></dt>
 <dd><p>John D. Hunter, “Matplotlib: A 2D Graphics Environment”, Computing in
 Science &amp; Engineering, vol. 9, no. 3, pp. 90-95, 2007.
 doi:<a class="reference external" href="https://doi.org/10.1109/MCSE.2007.55">10.1109/MCSE.2007.55</a></p>
 </dd>
 </dl>
 <dl class="footnote brackets">
-<dt class="label" id="id21"><span class="brackets">6</span><span class="fn-backref">(<a href="#id9">1</a>,<a href="#id14">2</a>)</span></dt>
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id9">6</a></span></dt>
 <dd><p>Catherine Spurin, Tom Bultreys, Maja Rücker, et al., “The
 development of intermittent multiphase fluid flow pathways through a
 porous rock”, Advances in Water Resources, vol. 150, 2021,
@@ -283,7 +232,7 @@ doi:<a class="reference external" href="https://doi.org/10.1016/j.advwatres.2021
 </dd>
 </dl>
 <dl class="footnote brackets">
-<dt class="label" id="id22"><span class="brackets">7</span><span class="fn-backref">(<a href="#id10">1</a>,<a href="#id15">2</a>)</span></dt>
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id10">7</a></span></dt>
 <dd><p>Catherine Spurin, Tom Bultreys, Maja Rücker, et al., “Real-Time
 Imaging Reveals Distinct Pore-Scale Dynamics During Transient and
 Equilibrium Subsurface Multiphase Flow”, Water Resources Research, vol.

@@ -19,6 +19,10 @@ extensions = [
         name="quantimpy.segmentation",
         sources=["quantimpy/segmentation.pyx"],
     ),
+    Extension(
+        name="quantimpy.brisque",
+        sources=["quantimpy/brisque.pyx"],
+    ),
 ]
 
 setup(

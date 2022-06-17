@@ -13,18 +13,7 @@ from scipy.ndimage import gaussian_filter
 from scipy.stats import gennorm
 from scipy.stats import rv_continuous
 import matplotlib.pyplot as plt
-#from scipy import ndimage
-#from quantimpy import morphology as mp
 cimport numpy as np
-
-# single and double precision
-#float
-ctypedef fused my_type:
-    cython.float
-    cython.double
-
-#    float
-#    double
 
 class asgennorm_gen(rv_continuous):
     r"""
@@ -222,6 +211,59 @@ cpdef mscn(image, patch=7, trunc=3.0, debug=None):
         plt.imshow(mscn[:,:])
         plt.show()
 
+    References
+    ----------
+    
+    .. [1] Anish Mittal, Anush Moorthy, and Alan Bovik, "No-reference image
+        quality assessment in the spatial domain", IEEE Transactions on image
+        processing, vol. 21, no. 12, pp 4695-4708, 2012,
+        doi:`10.1109/TIP.2012.2214050`_
+
+    .. _10.1109/TIP.2012.2214050: https://doi.org/10.1109/TIP.2012.2214050
+    
+    .. [2] Charles R. Harris, K. Jarrod Millman, Stéfan J. van der Walt et al.,
+        "Array programming with NumPy", Nature, vol. 585, pp 357-362, 2020,
+        doi:`10.1038/s41586-020-2649-2`_
+
+    .. _10.1038/s41586-020-2649-2: https://doi.org/10.1038/s41586-020-2649-2
+
+    .. [3] Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, et al., "SciPy
+        1.0: Fundamental Algorithms for Scientific Computing in Python", Nature
+        Methods, vol. 17, pp 261-272, 2020, doi:`10.1038/s41592-019-0686-2`_
+    
+    .. _10.1038/s41592-019-0686-2: https://doi.org/10.1038/s41592-019-0686-2
+
+    .. [4] Nour-Eddine Lasmar, Youssef Stitou, and Yannick Berthoumieu,
+        "Multiscale skewed heavy tailed model for texture analysis", 16th IEEE
+        International Conference on Image Processing (ICIP), pp 2281-2284, 2009,
+        doi:`10.1109/ICIP.2009.5414404`_
+
+    .. _10.1109/ICIP.2009.5414404: https://doi.org/10.1109/ICIP.2009.5414404
+
+    .. [5] John D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in
+        Science & Engineering, vol. 9, no. 3, pp. 90-95, 2007.
+        doi:`10.1109/MCSE.2007.55`_
+
+    .. _10.1109/MCSE.2007.55: https://doi.org/10.1109/MCSE.2007.55
+
+    .. [6] Catherine Spurin, Tom Bultreys, Maja Rücker, et al., "The
+        development of intermittent multiphase fluid flow pathways through a
+        porous rock", Advances in Water Resources, vol. 150, 2021,
+        doi:`10.1016/j.advwatres.2021.103868`_
+
+    .. _10.1016/j.advwatres.2021.103868: https://doi.org/10.1016/j.advwatres.2021.103868
+
+    .. [7] Catherine Spurin, Tom Bultreys, Maja Rücker, et al., "Real-Time
+        Imaging Reveals Distinct Pore-Scale Dynamics During Transient and
+        Equilibrium Subsurface Multiphase Flow", Water Resources Research, vol.
+        56, no. 12, 2020, doi:`10.1029/2020WR028287`_
+
+    .. _10.1029/2020WR028287: https://doi.org/10.1029/2020WR028287
+
+    .. _rock_2d.npy: https://github.com/boeleman/quantimpy/raw/thresholding/test/rock_2d.npy
+
+    .. _rock_3d.npy: https://github.com/boeleman/quantimpy/raw/thresholding/test/rock_3d.npy
+
     """
 # Check that patch size is odd    
     if (patch % 2) == 0:
@@ -230,6 +272,20 @@ cpdef mscn(image, patch=7, trunc=3.0, debug=None):
 # Convert to float and normalize
     if not np.issubdtype(image.dtype, np.floating):
         image = image.astype(np.float64)/(np.iinfo(image.dtype).max)
+    
+    if (image.ndim == 2):
+        return _mscn_2d(image, patch, trunc, debug)
+    elif (image.ndim == 3):
+        return _mscn_3d(image, patch, trunc, debug)
+    else:
+        raise ValueError('Cannot handle more than three dimensions')
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def _mscn_2d(np.ndarray[cython.floating, ndim=2] image, int patch, double trunc, str debug):
+
+    cdef np.ndarray[cython.floating, ndim=2] mu
+    cdef np.ndarray[cython.floating, ndim=2] sigma
 
 # Apply Gaussian filter in patch of 7x7(x7) with sigma=7/6=1.166666667
     mu = gaussian_filter(image, patch/(2.0*trunc), truncate=trunc)
@@ -238,40 +294,53 @@ cpdef mscn(image, patch=7, trunc=3.0, debug=None):
     sigma = sigma + 1.0e-16 # Avoid devision by zero
 
     if (debug is not None):
-        if (image.ndim == 2):
-            name = debug + "mu.png"
+        name = debug + "mu.png"
 
-            plt.gray()
-            plt.imshow(mu)
-            plt.axis("off")
-            plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-            plt.clf()
+        plt.gray()
+        plt.imshow(mu)
+        plt.axis("off")
+        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
+        plt.clf()
 
-            name = debug + "sigma.png"
+        name = debug + "sigma.png"
 
-            plt.gray()
-            plt.imshow(sigma)
-            plt.axis("off")
-            plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-            plt.clf()
-        elif (image.ndim == 3):
-            name = debug + "mu.png"
+        plt.gray()
+        plt.imshow(sigma)
+        plt.axis("off")
+        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
+        plt.clf()
 
-            plt.gray()
-            plt.imshow(mu[int(0.5*mu.shape[0]),:,:])
-            plt.axis("off")
-            plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-            plt.clf()
+    return (image - mu)/sigma
 
-            name = debug + "sigma.png"
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def _mscn_3d(np.ndarray[cython.floating, ndim=3] image, int patch, double trunc, str debug):
 
-            plt.gray()
-            plt.imshow(sigma[int(0.5*sigma.shape[0]),:,:])
-            plt.axis("off")
-            plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
-            plt.clf()
-        else:
-            raise ValueError('Can only handle 2D or 3D images')
+    cdef np.ndarray[cython.floating, ndim=3] mu
+    cdef np.ndarray[cython.floating, ndim=3] sigma
+
+# Apply Gaussian filter in patch of 7x7(x7) with sigma=7/6=1.166666667
+    mu = gaussian_filter(image, patch/(2.0*trunc), truncate=trunc)
+    sigma = gaussian_filter(np.asarray(image)*np.asarray(image), patch/(2.0*trunc), truncate=trunc)
+    sigma = np.sqrt(sigma - mu*mu)
+    sigma = sigma + 1.0e-16 # Avoid devision by zero
+
+    if (debug is not None):
+        name = debug + "mu.png"
+
+        plt.gray()
+        plt.imshow(mu[int(0.5*mu.shape[0]),:,:])
+        plt.axis("off")
+        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
+        plt.clf()
+
+        name = debug + "sigma.png"
+
+        plt.gray()
+        plt.imshow(sigma[int(0.5*sigma.shape[0]),:,:])
+        plt.axis("off")
+        plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
+        plt.clf()
 
     return (image - mu)/sigma
 
@@ -287,14 +356,19 @@ cpdef coeff(mscn, sample_size=500000, debug=None):
     else:
         raise ValueError('Cannot handle more than three dimensions')
 
-    
-cpdef _coeff_2d(np.ndarray[np.float64_t, ndim=2] mscn, int sample_size, str debug):
+@cython.boundscheck(False)
+def _coeff_2d(np.ndarray[cython.floating, ndim=2] mscn, int sample_size, str debug):
+
+    cdef np.ndarray[cython.floating, ndim=2] pair
 
     coefficients = np.zeros(19)
 
-# MSCN
-# reduce dataset size for faster processing 
-    data = np.random.choice(mscn.flatten(), size=sample_size)
+    if (sample_size == -1):
+        data = mscn.flatten()
+    else:
+# reduce dataset size for faster processing
+        data = np.random.choice(mscn.flatten(), size=sample_size)
+
     coefficients[0:3] = np.asarray(gennorm.fit(data))
 
     if (debug is not None):
@@ -312,11 +386,11 @@ cpdef _coeff_2d(np.ndarray[np.float64_t, ndim=2] mscn, int sample_size, str debu
         plt.clf()
 
 # Edges
-    pair = mscn[:,:-1]*mscn[:,1:],
+    pair = mscn[:,:-1]*mscn[:,1:]
     data0 = np.random.choice(pair.flatten(), size=sample_size)
     coefficients[3:7] = np.asarray(asgennorm.fit(data0))
 
-    pair = mscn[:-1,:]*mscn[1:,:],
+    pair = mscn[:-1,:]*mscn[1:,:]
     data1 = np.random.choice(pair.flatten(), size=sample_size)
     coefficients[7:11] = np.asarray(asgennorm.fit(data1))
     
@@ -345,13 +419,19 @@ cpdef _coeff_2d(np.ndarray[np.float64_t, ndim=2] mscn, int sample_size, str debu
 
     return coefficients
 
-cpdef _coeff_3d(np.ndarray[np.float64_t, ndim=3] mscn, int sample_size, str debug):
+@cython.boundscheck(False)
+def _coeff_3d(np.ndarray[cython.floating, ndim=3] mscn, int sample_size, str debug):
+
+    cdef np.ndarray[cython.floating, ndim=3] pair
 
     coefficients = np.zeros(55)
+    
+    if (sample_size == -1):
+        data = mscn.flatten()
+    else:
+# reduce dataset size for faster processing
+        data = np.random.choice(mscn.flatten(), size=sample_size)
 
-# MSCN
-# reduce dataset size for faster processing 
-    data = np.random.choice(mscn.flatten(), size=sample_size)
     coefficients[0:3] = np.asarray(gennorm.fit(data))
 
     if (debug is not None):
@@ -467,6 +547,7 @@ cpdef _coeff_3d(np.ndarray[np.float64_t, ndim=3] mscn, int sample_size, str debu
 
     return coefficients
 
+# Help function for plotting fitting coefficients
 cpdef _plot(name, data, coefficients):
 
     alpha = coefficients[0]
@@ -481,76 +562,18 @@ cpdef _plot(name, data, coefficients):
     plt.savefig(name, bbox_inches="tight", pad_inches=0, dpi=300)
     plt.clf()
 
-@cython.binding(True)
-cpdef to_float32(image):
-    r"""
-
-
-
-    References
-    ----------
-    
-    .. [1] Anish Mittal, Anush Moorthy, and Alan Bovik, "No-reference image
-        quality assessment in the spatial domain", IEEE Transactions on image
-        processing, vol. 21, no. 12, pp 4695-4708, 2012,
-        doi:`10.1109/TIP.2012.2214050`_
-
-    .. _10.1109/TIP.2012.2214050: https://doi.org/10.1109/TIP.2012.2214050
-    
-    .. [2] Charles R. Harris, K. Jarrod Millman, Stéfan J. van der Walt et al.,
-        "Array programming with NumPy", Nature, vol. 585, pp 357-362, 2020,
-        doi:`10.1038/s41586-020-2649-2`_
-
-    .. _10.1038/s41586-020-2649-2: https://doi.org/10.1038/s41586-020-2649-2
-
-    .. [3] Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, et al., "SciPy
-        1.0: Fundamental Algorithms for Scientific Computing in Python", Nature
-        Methods, vol. 17, pp 261-272, 2020, doi:`10.1038/s41592-019-0686-2`_
-    
-    .. _10.1038/s41592-019-0686-2: https://doi.org/10.1038/s41592-019-0686-2
-
-    .. [4] Nour-Eddine Lasmar, Youssef Stitou, and Yannick Berthoumieu,
-        "Multiscale skewed heavy tailed model for texture analysis", 16th IEEE
-        International Conference on Image Processing (ICIP), pp 2281-2284, 2009,
-        doi:`10.1109/ICIP.2009.5414404`_
-
-    .. _10.1109/ICIP.2009.5414404: https://doi.org/10.1109/ICIP.2009.5414404
-
-    .. [5] John D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in
-        Science & Engineering, vol. 9, no. 3, pp. 90-95, 2007.
-        doi:`10.1109/MCSE.2007.55`_
-
-    .. _10.1109/MCSE.2007.55: https://doi.org/10.1109/MCSE.2007.55
-
-    .. [6] Catherine Spurin, Tom Bultreys, Maja Rücker, et al., "The
-        development of intermittent multiphase fluid flow pathways through a
-        porous rock", Advances in Water Resources, vol. 150, 2021,
-        doi:`10.1016/j.advwatres.2021.103868`_
-
-    .. _10.1016/j.advwatres.2021.103868: https://doi.org/10.1016/j.advwatres.2021.103868
-
-    .. [7] Catherine Spurin, Tom Bultreys, Maja Rücker, et al., "Real-Time
-        Imaging Reveals Distinct Pore-Scale Dynamics During Transient and
-        Equilibrium Subsurface Multiphase Flow", Water Resources Research, vol.
-        56, no. 12, 2020, doi:`10.1029/2020WR028287`_
-
-    .. _10.1029/2020WR028287: https://doi.org/10.1029/2020WR028287
-
-
-
-
-
-    .. _rock_2d.npy: https://github.com/boeleman/quantimpy/raw/thresholding/test/rock_2d.npy
-
-    .. _rock_3d.npy: https://github.com/boeleman/quantimpy/raw/thresholding/test/rock_3d.npy
-
-    """
-# Convert float to np.float32
-    if np.issubdtype(image.dtype, np.floating):
-        image = image.astype(np.float32)
-# Convert non-float to float32 and normalize
-    elif np.issubdtype(image.dtype, np.floating):
-        image = image.astype(np.float32)/(np.iinfo(image.dtype).max)
+#@cython.binding(True)
+#cpdef to_float32(image):
+#    r"""
+#
+#
+#    """
+## Convert float to np.float32
+#    if np.issubdtype(image.dtype, np.floating):
+#        return image.astype(np.float32)
+## Convert non-float to float32 and normalize
+#    elif not np.issubdtype(image.dtype, np.floating):
+#        return image.astype(np.float32)/(np.iinfo(image.dtype).max)
 
 #@cython.binding(True)
 #cpdef brisque(image, patch=7, trunc=3.0, debug=None):

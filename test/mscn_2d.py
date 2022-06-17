@@ -12,5 +12,5 @@ mscn = bq.mscn(image)
 
 # Show coefficients
 plt.gray()
-plt.imshow(mscn[:,:])
+plt.imshow(mscn)
 plt.show()
